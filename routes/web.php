@@ -58,6 +58,14 @@ Route::group(['middleware' => 'checkUser'], function () {
     Route::get('doChangeStatusBuyLead', 'BuyLeadController@doChangeStatusBuyLead');
 });
 
+Route::group(['middleware' => 'checkUser','checkSales'],function(){
+    Route::get('buy-lead-list','BuyLeadController@listBuyLead');
+    Route::get('item/{id}','BuyLeadController@showItem');
+    Route::get('acceptBuyLead/{id}','BuyLeadController@acceptBuyLead');
+    Route::post('createQuotation','BuyLeadController@createQuotation');
+    Route::post('assignUser/{id}','BuyLeadController@assignUser');
+});
+
 Route::group(['middleware' => 'checkAdmin'], function () {
     Route::get('dash_home', 'PageController@dashHome');
     Route::get('logoutAdmin', 'PageController@logoutAdmin');

@@ -275,16 +275,21 @@ class CompanyController extends Controller
 
     public function profile() {
         $packageData = Package::all();
-        
+        $userid = session()->get('userSession')[0]->id;
         if (session()->get('userSession')[0]->role_id == 2) {
-            $user = UserPreDefine::leftjoin('user_role','user.id' ,'=','user_role.user_id')->leftjoin('role','role.id','=','user_role.role_id')->where('id_company',session()->get('companySession')[0]->id)->where('role.id','<>',2)->select('user.*','role.name as role_name')->get();
+            $user = UserPreDefine::leftjoin('user_role','user.id' ,'=','user_role.user_id')->leftjoin('role','role.id','=','user_role.role_id')->where('id_company',session()->get('companySession')[0]->id)->where('created_by','=',$userid)->select('user.*','role.name as role_name')->get();
             $role= Role::whereIn('id',[3,5])->get();
             return view('cust-auth.profile',compact('packageData','user','role'));
         }
 
-        if (session()->get('userSession')[0]->role_id == 3) {
-            $user = UserPreDefine::leftjoin('user_role','user.id' ,'=','user_role.user_id')->leftjoin('role','role.id','=','user_role.role_id')->where('id_company',session()->get('companySession')[0]->id)->where('role.id',4)->select('user.*','role.name as role_name')->get();
+        if (session()->get('userSession')[0]->role_id == 3 ) {
+            $user = UserPreDefine::leftjoin('user_role','user.id' ,'=','user_role.user_id')->leftjoin('role','role.id','=','user_role.role_id')->where('id_company',session()->get('companySession')[0]->id)->where('created_by','=',$userid)->select('user.*','role.name as role_name')->get();
             $role= Role::whereIn('id',[4])->get();
+            return view('post-buy-lead.procurement-manager.profile',compact('user','role'));
+        }
+        if (session()->get('userSession')[0]->role_id == 5 ) {
+            $user = UserPreDefine::leftjoin('user_role','user.id' ,'=','user_role.user_id')->leftjoin('role','role.id','=','user_role.role_id')->where('id_company',session()->get('companySession')[0]->id)->where('created_by','=',$userid)->select('user.*','role.name as role_name')->get();
+            $role= Role::whereIn('id',[6])->get();
             return view('post-buy-lead.procurement-manager.profile',compact('user','role'));
         }
     }

@@ -163,7 +163,15 @@ class PageController extends Controller
 
     public function home()
     {
-        return view('post-buy-lead.procurement-staff.home');
+        if (session()->get('userSession')[0]->role_id == 5) {
+            return view('search-buy-lead.sales-manager.home');
+        }
+        else if (session()->get('userSession')[0]->role_id == 6) {
+            return view('search-buy-lead.sales-staff.home');
+        }
+        else{
+            return view('post-buy-lead.procurement-staff.home');
+        }
     }
 
     public function home_login()

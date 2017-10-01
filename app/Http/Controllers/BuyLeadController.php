@@ -140,34 +140,77 @@ class BuyLeadController extends Controller
     public function listBuyLead(request $request)
     {
         $userid = session()->get('userSession')[0]->id;
-        $buylead = BuyLead::leftjoin('shipping_term','buy_lead.id_shipping_item','=','shipping_term.id')->leftjoin('user','buy_lead.id_user','=','user.id')->leftjoin('company','user.id_company','=','company.id')->leftjoin('quotation','quotation.id_buy_lead','=','buy_lead.id')->leftjoin('quotation_status','quotation_status.id_quotation','=','quotation.id')->leftjoin('status','quotation_status.id_status','status.id')->whereNull('quotation.id')->orWhere('quotation.id_user', $userid);
+        $buylead = BuyLead::leftjoin('shipping_term','buy_lead.id_shipping_item','=','shipping_term.id')
+            ->leftjoin('user','buy_lead.id_user','=','user.id')
+            ->leftjoin('company','user.id_company','=','company.id')
+            ->leftjoin('quotation','quotation.id_buy_lead','=','buy_lead.id')
+            ->leftjoin('quotation_status','quotation_status.id_quotation','=','quotation.id')
+            ->leftjoin('status','quotation_status.id_status','status.id')
+            ->leftjoin('buy_lead_user','buy_lead_user.id_buy_lead','=','buy_lead.id')
+            ->leftjoin(DB::Raw('(select buy_lead_user.id_user, buy_lead_user.status, buy_lead_user.id_buy_lead from buy_lead left join buy_lead_user on buy_lead.id = buy_lead_user.id_buy_lead where linked_for = 0)tablea'),'tablea.id_buy_lead','=','buy_lead.id')
+            ->whereNull('quotation.id')
+            ->orWhere('quotation.id_user', $userid)
+            ->groupby('buy_lead.id');
+
         if(session()->get('userSession')[0]->role_id == 5)
         {
-            $buylead = $buylead->leftjoin('buy_lead_user','buy_lead_user.id_buy_lead','=','buy_lead.id')->leftjoin(DB::Raw('(select buy_lead_user.id_user, buy_lead_user.status, buy_lead_user.id_buy_lead from buy_lead left join buy_lead_user on buy_lead.id = buy_lead_user.id_buy_lead where linked_for = 0)tablea'),'tablea.id_buy_lead','=','buy_lead.id')->select('buy_lead.*', 'shipping_term.name as st_name','company.name as c_name', 'company.business_entity as c_entity','quotation.id as q_id','status.name','tablea.id_user as user_assign','tablea.status as assign_status')->get();
-            /*return $buylead*/;
+            $buylead = $buylead->leftjoin(DB::raw('(select count(buy_lead_user.id) as count, buy_lead_user.id_buy_lead, buy_lead_user.status as request_status from buy_lead left join buy_lead_user on buy_lead.id = buy_lead_user.id_buy_lead where linked_for = 1 group by buy_lead.id)tableb'),'tableb.id_buy_lead','=','buy_lead.id')
+                ->select('buy_lead.*', 'shipping_term.name as st_name','company.name as c_name', 'company.business_entity as c_entity','quotation.id as q_id','status.name','tablea.id_user as user_assign','tablea.status as assign_status', 'tableb.count','tableb.request_status')
+                ->get();
+
             return view('search-buy-lead.sales-manager.buy-lead-list', compact('buylead'));
         }
         else if(session()->get('userSession')[0]->role_id == 6)
         {
-            $buylead = $buylead->leftjoin('buy_lead_user','buy_lead_user.id_buy_lead','=','buy_lead.id')->leftjoin(DB::Raw('(select buy_lead_user.id_user, buy_lead_user.status, buy_lead_user.id_buy_lead from buy_lead left join buy_lead_user on buy_lead.id = buy_lead_user.id_buy_lead where linked_for = 0)tablea'),'tablea.id_buy_lead','=','buy_lead.id')->select('buy_lead.*', 'shipping_term.name as st_name','company.name as c_name', 'company.business_entity as c_entity','quotation.id as q_id','status.name', 'tablea.id_user as user_assign', 'tablea.status as assign_status')->get();
+            $buylead = $buylead->leftjoin(DB::raw('(select count(buy_lead_user.id) as count, buy_lead_user.id_buy_lead, buy_lead_user.status as request_status from buy_lead left join buy_lead_user on buy_lead.id = buy_lead_user.id_buy_lead where linked_for = 1 and buy_lead_user.id_user ='.$userid.' group by buy_lead_user.id)tableb'),'tableb.id_buy_lead','=','buy_lead.id')
+                ->select('buy_lead.*', 'shipping_term.name as st_name','company.name as c_name', 'company.business_entity as c_entity','quotation.id as q_id','status.name', 'tablea.id_user as user_assign', 'tablea.status as assign_status','tableb.count','tableb.request_status')
+                ->get();
+
             return view('search-buy-lead.sales-staff.buy-lead-list', compact('buylead'));
+            return $buylead;
         }
     }
 
     public function showItem(Request $request, $id)
     {
-        $buylead = BuyLead::leftjoin('shipping_term','buy_lead.id_shipping_item','=','shipping_term.id')->leftjoin('user','buy_lead.id_user','=','user.id')->leftjoin('company','user.id_company','=','company.id')->leftjoin('indonesia_cities','buy_lead.id_city','=','indonesia_cities.id')->leftjoin('unit','buy_lead.id_unit','=','unit.id')->leftjoin('indonesia_provinces','indonesia_cities.province_id','=','indonesia_provinces.id')->leftjoin('area','buy_lead.id_area','=','area.id')->select('buy_lead.*', 'shipping_term.name as st_name','company.name as c_name','indonesia_cities.name as city_name', 'unit.name as unit' ,'indonesia_provinces.name as province_name','area.name as a_name')->where('buy_lead.id',$id)->get();
-        $buyleaduserassign = BuyLead::leftjoin('buy_lead_user','buy_lead_user.id_buy_lead','=','buy_lead.id')->leftjoin('user','user.id','=','buy_lead_user.id_user')->where('buy_lead.id',$id)->where('linked_for',0)->select('buy_lead.id','buy_lead_user.*','user.first_name','user.last_name')->first();
+        $buylead = BuyLead::leftjoin('shipping_term','buy_lead.id_shipping_item','=','shipping_term.id')
+            ->leftjoin('user','buy_lead.id_user','=','user.id')
+            ->leftjoin('company','user.id_company','=','company.id')
+            ->leftjoin('indonesia_cities','buy_lead.id_city','=','indonesia_cities.id')
+            ->leftjoin('unit','buy_lead.id_unit','=','unit.id')
+            ->leftjoin('indonesia_provinces','indonesia_cities.province_id','=','indonesia_provinces.id')
+            ->leftjoin('area','buy_lead.id_area','=','area.id')
+            ->select('buy_lead.*', 'shipping_term.name as st_name','company.name as c_name','indonesia_cities.name as city_name', 'unit.name as unit' ,'indonesia_provinces.name as province_name','area.name as a_name')
+            ->where('buy_lead.id',$id)
+            ->get();
+        $buyleaduserassign = BuyLead::leftjoin('buy_lead_user','buy_lead_user.id_buy_lead','=','buy_lead.id')
+            ->leftjoin('user','user.id','=','buy_lead_user.id_user')
+            ->where('buy_lead.id',$id)
+            ->where('linked_for',0)
+            ->select('buy_lead.id','buy_lead_user.*','user.first_name','user.last_name')
+            ->first();
+
+        $buyleaduserrequest = BuyLead::leftjoin('buy_lead_user','buy_lead_user.id_buy_lead','=','buy_lead.id')
+            ->leftjoin('user','user.id','=','buy_lead_user.id_user')
+            ->where('buy_lead.id',$id)
+            ->where('linked_for',1)
+            ->select('buy_lead.id','buy_lead_user.*','user.first_name','user.last_name');
+
         $area = Area::all();
         $shippingterm = ShippingTerm::all();
         if(session()->get('userSession')[0]->role_id == 5)
         {
             $userid = session()->get('userSession')[0]->id;
             $user = UserPreDefine::where('created_by', $userid)->get();
-            return view('search-buy-lead.sales-manager.item', compact('buylead','area','shippingterm','user','buyleaduserassign'));
+            $buyleaduserrequest = $buyleaduserrequest->get();
+/*            return $buyleaduserrequest;
+*/            return view('search-buy-lead.sales-manager.item', compact('buylead','area','shippingterm','user','buyleaduserassign','buyleaduserrequest'));
         }
-        else{
-            return view('search-buy-lead.sales-staff.item', compact('buylead','area','shippingterm','buyleaduserassign'));
+        else if(session()->get('userSession')[0]->role_id == 6){
+            $userid = session()->get('userSession')[0]->id;
+            $buyleaduserrequest = $buyleaduserrequest->where('buy_lead_user.id_user', $userid)->first();
+            /*return $buyleaduserrequest;*/
+            return view('search-buy-lead.sales-staff.item', compact('buylead','area','shippingterm','buyleaduserassign','buyleaduserrequest'));
         }
     }
 
@@ -229,6 +272,26 @@ class BuyLeadController extends Controller
             'status' => 'inactive',
             ]);
         }
+        return back();
+    }
+
+    public function requestBuyLead(Request $request, $id)
+    {
+        $userid = session()->get('userSession')[0]->id;
+        BuyLeadUser::create([
+            'id_buy_lead' => $id,
+            'id_user' => $userid,
+            'linked_for' => 1, //0 for assign
+            'status' => 'inactive',
+        ]);
+        return back();
+    }
+    public function acceptRequest(Request $request, $buylead, $user)
+    {
+        BuyLeadUser::where('id_buy_lead',$buylead)->where('id_user',$user)->where('linked_for','=','1')->update([
+            'status' => 'active',
+        ]);
+        BuyLeadUser::where('id_buy_lead',$buylead)->where('id_user','<>',$user)->where('linked_for','=','1')->delete();
         return back();
     }
 

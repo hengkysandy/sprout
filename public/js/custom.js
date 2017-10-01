@@ -1054,6 +1054,15 @@ $(document).ready(function(){
     $(this).closest('.row').find('.btnToggleGroup').attr('disabled','true');
   });
 
+  $('body').on('click', '.accept-request' ,function(event){
+    event.preventDefault();
+    name = $(this).closest('.user-row').find('.user-name').html();
+    id = $(this).closest('.user-row').find('.user-id').html();
+    link = $('#req-link').attr('href')+'/'+id;
+    $('#req-link').attr('href',link)
+    $('#user-req').html(name);
+  });
+
     $('body').on('click','.btn-add-assign', function (event) {
       console.log('test');
       var $initNumber = $(".assign-row").length;

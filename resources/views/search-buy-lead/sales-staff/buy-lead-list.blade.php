@@ -26,6 +26,16 @@
         <i class="fa fa-exclamation-circle"></i>
       </span>
       <span style="display: none;">Assign Accepted</span>
+      @elseif($value->request_status == "active")
+      <span class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Request Accepted">
+        <i class="fa fa-exclamation-circle"></i>
+      </span>
+      <span style="display: none;">Request Accepted</span>
+      @elseif($value->count == 1)
+      <span class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="Pending">
+        <i class="fa fa-clock-o"></i>
+      </span>
+      <span style="display: none;">Pending</span>
       @else
       <span class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Available">
         <i class="fa fa-question"></i>

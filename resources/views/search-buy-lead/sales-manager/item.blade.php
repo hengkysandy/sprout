@@ -1,5 +1,11 @@
 @extends('search-buy-lead.item-master')
 @section('item-content')
+@php $active = false; $req = ''; @endphp
+@foreach($buyleaduserrequest as $key => $value)
+    @if($value->status == "active")
+      @php $active = true; $req = $value->first_name; @endphp
+    @endif
+  @endforeach
 <div class="table-responsive">
   <table class="table responsive dt-responsive table-bordered table-middle" cellspacing="0" width="100%">
     <thead class="bg-white">
@@ -26,6 +32,8 @@
         <td>
           @if($buyleaduserassign)
           {{$buyleaduserassign->first_name}}
+          @elseif($active == true)
+          {{$req}}
           @else
           -
           @endif
@@ -41,16 +49,18 @@
   </table>
 </div>
 <div class="margin-bottom">
+  @if($active == false)
   <a href="#reviseQuote" data-toggle="modal" class="btn btn-sm btn-primary">Submit Quotation</a>
   <a href="#assignTo" data-toggle="modal" class="btn btn-sm btn-success">Assign To</a>
   <a href="#viewAllRequest" data-toggle="modal" class="btn btn-sm btn-default">View All Request</a>
+  @endif
 </div>
 <div class="row">
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="panel panel-white post">
       <div class="post-heading col-md-12 col-sm-12 col-xs-12">
         <div class="col-md-2 col-sm-2 col-xs-3 no-padding image">
-          <img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image">
+          <img src="http://bootdey.com/img/Content/user_1.jpg" class="img -circle avatar" alt="user profile image">
         </div>
         <div class="col-md-8 col-sm-8 col-xs-8 meta no-padding">
           <div class="title h5">
@@ -248,31 +258,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Stf-001</td>
-              <td>Junadi</td>
-              <td><a href="#" class="btn btn-sm btn-primary accept-request">Accept Request</a></td>
+            @foreach($buyleaduserrequest as $key => $value)
+            <tr class="user-row">
+              <td class="user-id">{{$value->id_user}}</td>
+              <td class="user-name">{{$value->first_name.' '.$value->last_name}}</td>
+              <td><a href="#acceptRequest" data-toggle="modal" class="btn btn-sm btn-primary accept-request">Accept Request</a></td>
             </tr>
-            <tr>
-              <td>Stf-002</td>
-              <td>Faturahman</td>
-              <td><a href="#" class="btn btn-sm btn-primary accept-request">Accept Request</a></td>
-            </tr>
-            <tr>
-              <td>Stf-003</td>
-              <td>Juki</td>
-              <td><a href="#" class="btn btn-sm btn-primary accept-request">Accept Request</a></td>
-            </tr>
-            <tr>
-              <td>Stf-004</td>
-              <td>Dizah</td>
-              <td><a href="#" class="btn btn-sm btn-primary accept-request">Accept Request</a></td>
-            </tr>
-            <tr>
-              <td>Stf-005</td>
-              <td>Siti</td>
-              <td><a href="#" class="btn btn-sm btn-primary accept-request">Accept Request</a></td>
-            </tr>
+            @endforeach
           </tbody>
         </table>
       </div>
@@ -393,6 +385,21 @@
         </div>
       </div>
     </form>
+  </div>
+</div>
+
+<div id="acceptRequest" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Are you sure want to Accept <span id="user-req"></span> request for buy lead?</h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <a id="req-link" href="{{url('/acceptRequest/'.$buylead[0]->id)}}" class="btn btn-success">Yes</a>
+      </div>
+    </div>
   </div>
 </div>
 @endsection

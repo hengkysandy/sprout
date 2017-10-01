@@ -37,14 +37,22 @@
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
       @if($buyleaduserassign)
-      @if($buyleaduserassign->id_user = session()->get('userSession')[0]->id && $buyleaduserassign->status == "active")
-      <a href="#reviseQuote" data-toggle='modal' class="btn btn-sm btn-primary">Submit Quotation</a>
-      @elseif($buyleaduserassign->id_user = session()->get('userSession')[0]->id && $buyleaduserassign->status == "inactive")
-      <a href="#accBuyLead" data-toggle="modal" class="btn btn-sm btn-success">Accept Buy Lead</a>
-      <a href="#rejectQuote" data-toggle="modal" class="btn btn-sm btn-danger">Reject Buy Lead</a>
-      @endif
+        @if($buyleaduserassign->id_user = session()->get('userSession')[0]->id && $buyleaduserassign->status == "active" )
+          <a href="#reviseQuote" data-toggle='modal' class="btn btn-sm btn-primary">Submit Quotation</a>
+        @elseif($buyleaduserassign->id_user = session()->get('userSession')[0]->id && $buyleaduserassign->status == "inactive")
+          <a href="#accBuyLead" data-toggle="modal" class="btn btn-sm btn-success">Accept Buy Lead</a>
+          <a href="#rejectQuote" data-toggle="modal" class="btn btn-sm btn-danger">Reject Buy Lead</a>
+        @endif
       @else
-      <a href="#" class="btn btn-sm btn-primary">Request Job</a>
+        @if($buyleaduserrequest)
+          @if($buyleaduserrequest->status == "active")
+          <a href="#reviseQuote" data-toggle='modal' class="btn btn-sm btn-primary">Submit Quotation</a>
+          @elseif($buyleaduserrequest->status == "inactive")
+          <a data-toggle="modal" class="btn btn-sm btn-primary" disabled>Request Job</a>
+          @endif
+        @else
+          <a href="#reqBuyLead" data-toggle="modal" class="btn btn-sm btn-primary">Request Job</a>
+        @endif
       @endif
     </div>
   </div>
@@ -417,6 +425,21 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
         <a href="{{url('/acceptBuyLead/'.$buylead[0]->id)}}" class="btn btn-success">Yes</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="reqBuyLead" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Are you sure want to request this buy lead?</h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <a href="{{url('/requestBuyLead/'.$buylead[0]->id)}}" class="btn btn-success">Yes</a>
       </div>
     </div>
   </div>

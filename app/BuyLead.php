@@ -38,4 +38,29 @@ class BuyLead extends Model
     {
     	return $this->hasOne(BuyLeadStatus::class,'id_buy_lead','id');
     }
+
+    public function User()
+    {
+    	return $this->belongsTo(UserPreDefine::class,'id_user','id');
+    }
+
+    public function City()
+    {
+    	return $this->belongsTo('Laravolt\Indonesia\Models\City','id_city','id');
+    }
+
+    public function Province()
+    {
+        return $this->belongsTo('Laravolt\Indonesia\Models\Province','id_province','id');
+    }
+
+    public function Unit()
+    {
+        return $this->belongsTo(Unit::class,'id_unit','id');
+    }
+
+    public function Area()
+    {
+        return $this->belongsTo(Area::class,'id_area','id');
+    }
 }

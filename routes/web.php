@@ -12,9 +12,7 @@
 */
 
 Route::get('/', 'PageController@login_company');
-
 Route::get('download/file','CloudinaryController@download');
-
 Route::post('upload', 'CloudinaryController@upload');
 
 Route::get('regis_1', 'CompanyController@register_1');
@@ -53,7 +51,7 @@ Route::group(['middleware' => 'checkUser'], function () {
     Route::get('doDeleteUnit', 'UnitController@delete');
     Route::get('getUnitDataAjax/{id}', 'UnitController@ajax');
     
-    Route::get('post_buy_lead', 'BuyLeadController@postBuyLead');
+    Route::get('post-buy-lead', 'BuyLeadController@postBuyLead');
     Route::post('doInsertBuyLead', 'BuyLeadController@doInsertBuyLead');
     Route::get('doChangeStatusBuyLead', 'BuyLeadController@doChangeStatusBuyLead');
 });
@@ -61,10 +59,15 @@ Route::group(['middleware' => 'checkUser'], function () {
 Route::group(['middleware' => 'checkUser','checkSales'],function(){
     Route::get('buy-lead-list','BuyLeadController@listBuyLead');
     Route::get('item/{id}','BuyLeadController@showItem');
+    Route::get('detailItem/{id}','BuyLeadController@detailItem');
     Route::get('acceptRequest/{buylead}/{user}','BuyLeadController@acceptRequest');
     Route::get('requestBuyLead/{id}','BuyLeadController@requestBuyLead');
     Route::post('createQuotation','BuyLeadController@createQuotation');
     Route::post('assignUser/{id}','BuyLeadController@assignUser');
+
+    Route::post('doCreateRevise','BuyLeadController@doCreateRevise');
+    Route::get('getQuotationDataAjax/{id}','BuyLeadController@getQuotationDataAjax');
+
 }); 
 
 Route::group(['middleware' => 'checkAdmin'], function () {

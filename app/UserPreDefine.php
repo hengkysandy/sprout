@@ -20,4 +20,9 @@ class UserPreDefine extends Model
 		'new_password',
 		'status',
     ];
+
+    public function Company()
+    {
+    	return $this->belongsTo(Company::class,'id_company','id');
+    }
 }

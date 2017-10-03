@@ -5,10 +5,10 @@
     <div id="main" class="container-fluid">
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12 ">
-          <h1 class="main-title no-margin-top"><strong>Plate Material - Rp50.000.000</strong></h1>
+          <h1 class="main-title no-margin-top"><strong>{{$buyLead->item}} - Rp{{number_format($buyLead->total_price)}}</strong></h1>
           <div class="no-margin-top">
-            <h4><strong>Delivery Time: 30 Days</strong></h4>
-            <h4><strong>Shipping Term: FOB at Jakarta</strong></h4>
+            <h4><strong>Delivery Time: {{$buyLead->delivery_day}} Days</strong></h4>
+            <h4><strong>Shipping Term: {{$buyLead->ShippingTerm()->first()->name}} at {{$buyLead->City()->first()->name}}</strong></h4>
           </div>
           <br>
           <h4>Quotation :</h4>
@@ -33,108 +33,18 @@
                 </tr>
               </thead>
               <tbody>
+                @foreach($quotation as $qData)
                 <tr>
-                  <td>BY001-AGU-Q01</td>
+                  <td>{{$qData->BuyLead()->first()->buy_lead_code}}</td>
                   <td>PT Sindang Mulia</td>
-                  <td>20 Days</td>
-                  <td>EXW</td>
-                  <td>Rp 59.000.000</td>
+                  <td>{{$qData->delivery_day}} Days</td>
+                  <td>{{$qData->ShippingTerm()->first()->name}}</td>
+                  <td>Rp {{number_format($qData->total_price)}}</td>
                   <td>
-                    <a href="detail-item.html" class="btn btn-default btn-sm">Detail</a>
+                    <a href="{{url('detailItem/'.$qData->id)}}" class="btn btn-default btn-sm">Detail</a>
                   </td>
                 </tr>
-                <tr>
-                  <td>BY001-GUN-Q01</td>
-                  <td>PT Sindang Mulia</td>
-                  <td>20 Days</td>
-                  <td>FCA</td>
-                  <td>Rp 56.000.000</td>
-                  <td>
-                    <a href="detail-item.html" class="btn btn-default btn-sm">Detail</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>BY001-AKU-Q01</td>
-                  <td>PT Sindang Mulia</td>
-                  <td>20 Days</td>
-                  <td>FAS</td>
-                  <td>Rp 55.900.000</td>
-                  <td>
-                    <a href="detail-item.html" class="btn btn-default btn-sm">Detail</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>BY001-SUK-Q01</td>
-                  <td>PT Sindang Mulia</td>
-                  <td>20 Days</td>
-                  <td>FOB</td>
-                  <td>Rp 55.800.000</td>
-                  <td>
-                    <a href="detail-item.html" class="btn btn-default btn-sm">Detail</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>BY001-CIN-Q01</td>
-                  <td>PT Sindang Mulia</td>
-                  <td>20 Days</td>
-                  <td>CFR</td>
-                  <td>Rp 55.700.000</td>
-                  <td>
-                    <a href="detail-item.html" class="btn btn-default btn-sm">Detail</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>BY001-SEJ-Q01</td>
-                  <td>PT Sindang Mulia</td>
-                  <td>20 Days</td>
-                  <td>CIF</td>
-                  <td>Rp 55.600.000</td>
-                  <td>
-                    <a href="detail-item.html" class="btn btn-default btn-sm">Detail</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>BY001-SIM-Q01</td>
-                  <td>PT Sindang Mulia</td>
-                  <td>20 Days</td>
-                  <td>CPT</td>
-                  <td>Rp 55.500.000</td>
-                  <td>
-                    <a href="detail-item.html" class="btn btn-default btn-sm">Detail</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>BY001-BAI-Q01</td>
-                  <td>PT Sindang Mulia</td>
-                  <td>20 Days</td>
-                  <td>CIP</td>
-                  <td>Rp 55.400.000</td>
-                  <td>
-                    <a href="detail-item.html" class="btn btn-default btn-sm">Detail</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>BY001-GUN-Q01</td>
-                  <td>PT Sindang Mulia</td>
-                  <td>20 Days</td>
-                  <td>DAF</td>
-                  <td>Rp 55.300.000</td>
-                  <td>
-                    <a href="detail-item.html" class="btn btn-default btn-sm">Detail</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>BY001-SIN-Q01</td>
-                  <td>PT Sindang Mulia</td>
-                  <td>20 Days</td>
-                  <td>DES</td>
-                  <td>Rp 53.000.000</td>
-                  <td>
-                    <a href="detail-item.html" class="btn btn-default btn-sm">Detail</a>
-                    <!--<a href="#" class="btn btn-success btn-sm accept-item">Accept</a>-->
-                    <!--<a href="#rejectOffer" data-toggle="modal" class="btn btn-danger btn-sm">Reject</a>-->
-                  </td>
-                </tr>
+                @endforeach
               </tbody>
             </table>
           </div>
@@ -181,41 +91,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-3 col-sm-12 col-xs-12 hide-on-med-and-down">
-          <ul class="no-ul-style menu-wrapper">
-            <li>
-              <a href="home.html" class="btn btn-orange btn-lg padding-transition no-border-radius">
-                <i class="pull-left fa fa-home padding-top-2px padding-right-8px"></i> <span>Home</span>
-              </a>
-            </li>
-            <li>
-              <a href="post-buy-lead.html" class="btn btn-orange btn-lg padding-transition active-orange no-border-radius">
-                <i class="pull-left fa fa-pencil-square padding-top-2px padding-right-8px"></i> <span>Post Buy Lead</span>
-              </a>
-            </li>
-            <li>
-              <a href="company-database.html" class="btn btn-orange btn-lg padding-transition no-border-radius">
-                <i class="pull-left fa fa-building padding-top-2px padding-right-8px"></i> <span>Company Database</span>
-              </a>
-            </li>
-            <li>
-              <a href="meeting-schedule.html" class="btn btn-orange btn-lg padding-transition no-border-radius">
-                <i class="pull-left fa fa-calendar padding-top-2px padding-right-8px"></i> <span>Meeting Schedule</span>
-              </a>
-            </li>
-            <li>
-              <a href="profile.html" class="btn btn-orange btn-lg padding-transition no-border-radius">
-                <i class="pull-left fa fa-gear padding-top-2px padding-right-8px"></i> <span>Profile</span>
-              </a>
-            </li>
-            <li>
-              <a href="../home-login.html" class="btn btn-orange btn-lg padding-transition no-border-radius">
-                <i class="pull-left fa fa-power-off padding-top-2px padding-right-8px"></i> <span>Logout</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
+        @include('layouts.user.side-nav')
 
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">

@@ -310,7 +310,7 @@
               </a>
             </li>
             <li>
-              <a href="post_buy_lead" class="btn btn-orange btn-lg padding-transition no-border-radius">
+              <a href="post-buy-lead" class="btn btn-orange btn-lg padding-transition no-border-radius">
                 <i class="pull-left fa fa-pencil-square padding-top-2px padding-right-8px"></i> <span>Post Buy Lead</span>
               </a>
             </li>
@@ -347,28 +347,5 @@
       </div>
     </a>
 
-    <div id="mySidenav" class="sidenav hide-on-large-only">
-      <div class="menu-content">
-        <a href="home">
-          <i class="fa fa-home"></i> Home
-        </a>
-        <a href="post_buy_lead">
-          <i class="fa fa-pencil-square"></i> Post Buy Lead
-        </a>
-        <a href="company-database">
-          <i class="fa fa-building"></i> Company Database
-        </a>
-        <a href="meeting-schedule">
-          <i class="fa fa-calendar"></i> Meeting Schedule
-        </a>
-        <a href="profile">
-          <i class="fa fa-gear"></i> Profile
-        </a>
-        <a href="../home-login">
-          <i class="fa fa-power-off"></i> Logout
-        </a>
-        <a href="javascript:void(0)" id="nav-btn-close" onclick="closeNav()"><i class="fa fa-close"></i></a>
-      </div>
-    </div>
   @include('layouts.user.mobile-menu')
 @endsection

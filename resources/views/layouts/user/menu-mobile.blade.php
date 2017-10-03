@@ -1,21 +1,21 @@
 <div id="mySidenav" class="sidenav hide-on-large-only">
   <div class="menu-content">  
-    <a href="../home-login.html">
+    <a href="{{url('logoutUser')}}">
       <i class="fa fa-power-off"></i> Logout
     </a>
-    <a href="profile.html">
+    <a href="{{url('profile')}}">
       <i class="fa fa-gear"></i> Profile
     </a>
-    <a href="meeting-schedule.html">
+    <a href="{{url('meeting-schedule')}}">
       <i class="fa fa-calendar"></i> Meeting Schedule
     </a>
-    <a href="company-database.html">
+    <a href="{{url('company-database')}}">
       <i class="fa fa-building"></i> Company Database
     </a>
-    <a href="post-buy-lead.html">
+    <a href="{{url('post-buy-lead')}}">
       <i class="fa fa-pencil-square"></i> Post Buy Lead
     </a>
-    <a href="home.html">
+    <a href="{{url('home')}}">
       <i class="fa fa-home"></i> Home
     </a>
     <a href="javascript:void(0)" id="nav-btn-close" onclick="closeNav()"><i class="fa fa-close"></i></a>

@@ -7,20 +7,21 @@ use App\BusinessCategory;
 use App\BuyLead;
 use App\BuyLeadBusinessCategory;
 use App\BuyLeadCompany;
-use App\BuyLeadUser;
 use App\BuyLeadStatus;
+use App\BuyLeadUser;
 use App\CloudinaryMapping;
 use App\Company;
-use App\Quotation;
-use App\QuotationStatus;
 use App\Division;
 use App\Group;
+use App\Quotation;
+use App\QuotationStatus;
+use App\Revise;
 use App\Section;
 use App\ShippingTerm;
-use App\UserPreDefine;
 use App\Unit;
-use DB;
+use App\UserPreDefine;
 use Carbon\Carbon;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use JD\Cloudder\Facades\Cloudder;
@@ -59,21 +60,23 @@ class BuyLeadController extends Controller
         $code = $company_id.$dateNow.$buyLeadId;
         $vendor = $request->has('vendorCbx') == false ? 'no' : 'yes';
 
-        $maskingFile = file_get_contents('images/masking.png');
-        $images = file_get_contents($request->document->path());
-        $originalName = $request->file('document')->getClientOriginalName();        
-        $newPath = 'cache/'.strtotime(date('c')).'.'.$originalName.'.png';
-        $newBLI = $maskingFile."".$images;
-        file_put_contents($newPath, $newBLI);
-        $response = Cloudder::upload(public_path()."/".$newPath)->getResult();
-        $imageURL = $response['url'];
-        unlink($newPath);
+        // $maskingFile = file_get_contents('images/masking.png');
+        // $images = file_get_contents($request->document->path());
+        // $originalName = $request->document->getClientOriginalName();   
 
-        $cm = new CloudinaryMapping();
-        $cm->url = $response['url'];
-        $cm->original_filename = $originalName;
-        $cm->save();
-        
+        // $newPath = 'cache/'.strtotime(date('c')).'.'.$originalName.'.png';
+        // $newBLI = $maskingFile."".$images;
+        // file_put_contents($newPath, $newBLI);
+        // $response = Cloudder::upload(public_path()."/".$newPath)->getResult();
+        // $imageURL = $response['url'];
+        // unlink($newPath);
+
+        // $cm = new CloudinaryMapping();
+        // $cm->url = $response['url'];
+        // $cm->original_filename = $originalName;
+        // $cm->save();
+
+        $maskedFileUrl = $this->cloudinaryMaskingFile($request->document);
 
         $currBuyLead = BuyLead::create([
             'buy_lead_code' => $code,
@@ -91,7 +94,7 @@ class BuyLeadController extends Controller
             'payment_term' => $request->paymentTerm,
             'closed_date' => $request->closedDate,
             'delivery_day' => $request->deliveryDays,
-            'document' => $imageURL,
+            'document' => $maskedFileUrl,
             'approved_vendor_only' => $vendor,
             'status' => 'pending',
         ]);
@@ -195,7 +198,6 @@ class BuyLeadController extends Controller
             ->where('buy_lead.id',$id)
             ->where('linked_for',1)
             ->select('buy_lead.id','buy_lead_user.*','user.first_name','user.last_name');
-
         $area = Area::all();
         $shippingterm = ShippingTerm::all();
         if(session()->get('userSession')[0]->role_id == 5)
@@ -211,7 +213,75 @@ class BuyLeadController extends Controller
             $buyleaduserrequest = $buyleaduserrequest->where('buy_lead_user.id_user', $userid)->first();
             /*return $buyleaduserrequest;*/
             return view('search-buy-lead.sales-staff.item', compact('buylead','area','shippingterm','buyleaduserassign','buyleaduserrequest'));
+        }else if(session()->get('userSession')[0]->role_id == 3){ //procurement manager
+            $data['quotation'] = Quotation::where('id_buy_lead',$id)->get();
+            $data['buyLead'] = BuyLead::find($id);
+            // $data['quotation'][0]->BuyLead()->first();
+            return view('post-buy-lead.procurement-staff.item', $data);
         }
+        return 'tidak ada view untuk role ini';
+    }
+
+    public function detailItem($id)
+    {
+        $data['quotation'] = Quotation::where('id',$id)->latest('created_at')->first();
+        $data['buyLead'] = BuyLead::find($data['quotation']->id_buy_lead);
+        $data['revise'] = Revise::where('id_quotation',$data['quotation']->id)->orderBy('created_at','ASC')->get();
+        $data['shippingTerm'] = ShippingTerm::all();
+
+        $indo = new Indonesia();
+        $data['city'] = $indo->allCities();
+
+        $data['area'] = Area::all();
+
+
+        return view('post-buy-lead.procurement-staff.detail-item', $data);
+    }
+
+    public function doCreateRevise(Request $request)
+    {
+        // quotation_id: "5",1
+        // amount: "20",1
+        // totalPrice: "50000000",1
+        // city: "Kota Jakarta Barat",1
+        // shippingTerm: "1",1
+        // delivery_day: "1",1
+        // area: "2", not used
+        // paymentTerm: "Down Payment 50%, Installment 6 Months", not used
+        // quotationDocument: { }1
+        $maskedFileUrl = $this->cloudinaryMaskingFile($request->quotationDocument);
+
+        $currQuotation = Quotation::find($request->quotation_id);
+
+        Revise::create([
+            'id_quotation' => $currQuotation->id,
+            'id_user' => $currQuotation->id_user,
+            'total_price' => $currQuotation->total_price,
+            'document' => $currQuotation->document,
+            'status' => 'active',
+            'city' => $currQuotation->city,
+            'id_shipping_term' => $currQuotation->id_shipping_term,
+            'delivery_day' => $currQuotation->delivery_day,
+        ]);
+
+        $currQuotation->amount = $request->amount;
+        $currQuotation->total_price = $request->totalPrice;
+        $currQuotation->city = $request->city;
+        $currQuotation->amount = $request->amount;
+        $currQuotation->id_shipping_term = $request->shippingTerm;
+        $currQuotation->delivery_day = $request->delivery_day;
+        $currQuotation->document = $maskedFileUrl;
+        $currQuotation->id_user = session()->get('userSession')[0]->id;
+        $currQuotation->amount = $request->amount;
+        $currQuotation->save();
+
+        return back();
+    }
+
+    public function getQuotationDataAjax($id)
+    {
+        // $data = 
+        return $data;
     }
 
     public function acceptBuyLead(Request $request, $id)

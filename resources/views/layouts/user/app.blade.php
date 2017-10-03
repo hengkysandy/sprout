@@ -24,10 +24,11 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 </head>
 <body>
-
+  <script src="{{ asset('js/jquery.min.js') }}"></script>
   @yield('content')
   
-  <script src="{{ asset('js/jquery.min.js') }}"></script>
+
+  
   <script src="{{ asset('js/myscript/company.js') }}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
   <script src="{{ asset('js/underscore.js') }}"></script>

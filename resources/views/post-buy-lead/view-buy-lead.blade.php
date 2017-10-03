@@ -27,7 +27,7 @@
                     <span style="display: none;"></span>
                   </td>
                   <td>
-                    <a href="item" class="btn btn-default btn-sm">Detail</a>
+                    <a href="item/{{$blData->id}}" class="btn btn-default btn-sm">Detail</a>
 
                     @if(session()->get('userSession')[0]->role_id == 3)
                     <button value="{{$blData->id}}|2" data-target="#confirmRelease" class="btn btn-default btn-sm chooseConfirmation" data-toggle="modal">Release</button>
@@ -45,7 +45,7 @@
                       <span style="display: none;">Done</span>
                     </td>
                     <td>
-                      <a href="item" class="btn btn-default btn-sm">Detail</a>
+                      <a href="item/{{$blData->id}}" class="btn btn-default btn-sm">Detail</a>
                       <a href="#" class="btn btn-default btn-sm" disabled="disabled">Approved</a>
                     </td>
                   @else
@@ -56,7 +56,7 @@
                       <span style="display: none;">Done</span>
                     </td>
                     <td>
-                      <a href="item" class="btn btn-default btn-sm">Detail</a>
+                      <a href="item/{{$blData->id}}" class="btn btn-default btn-sm">Detail</a>
                       <a href="#" class="btn btn-default btn-sm" disabled="disabled">Approved</a>
                     </td>
                   @endif

@@ -23,11 +23,11 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>PT Agung Aja</td>
-                  <td>30 Days</td>
-                  <td>Franco</td>
-                  <td>Jakarta</td>
-                  <td>Rp 900.000.000</td>
+                  <td>{{$buyLead->User()->first()->Company()->first()->name}}</td>
+                  <td>{{$buyLead->delivery_day}} Days</td>
+                  <td>{{$buyLead->ShippingTerm()->first()->name}}</td>
+                  <td>{{$buyLead->city()->first()->name}}</td>
+                  <td>Rp {{number_format($buyLead->total_price)}}</td>
                   <td>
                     <a href="#detailPbl" data-toggle="modal" class="btn btn-sm btn-default">Detail</a>
                   </td>
@@ -55,11 +55,11 @@
               </thead>
               <tbody>
                 <tr class="bg-success">
-                  <td>PT Sindang Mulia</td>
-                  <td>20 Days</td>
-                  <td>FOB</td>
-                  <td>Jakarta</td>
-                  <td>Rp52.850.000</td>
+                  <td>{{$quotation->User()->first()->Company()->first()->name}}</td>
+                  <td>{{$quotation->delivery_day}} Days</td>
+                  <td>{{$quotation->ShippingTerm()->first()->name}}</td>
+                  <td>{{$quotation->city}}</td>
+                  <td>Rp {{number_format($quotation->total_price)}}</td>
                   <td>
                     <a href="#detailQuotation" data-toggle="modal" class="btn btn-default btn-sm">Detail</a>
                     <a href="#confirmApprove" data-toggle="modal" class="btn btn-success btn-sm">Approve</a>
@@ -84,44 +84,35 @@
               <div id="collapse1" class="panel-collapse collapse">
                 <div class="panel-body">
                   <div class="table-responsive">
-                    <table class="table responsive dt-responsive table-bordered table-middle" cellspacing="0" width="100%">
-                      <thead class="bg-white">
-                        <tr>
-                          <th>Revision</th>
-                          <th>Buyer Name</th>
-                          <th>Delivery Time</th>
-                          <th>Shipping Term</th>
-                          <th>City</th>
-                          <th>Total Price</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>PT Agung Aja</td>
-                          <td>20 Days</td>
-                          <td>FOB</td>
-                          <td>Jakarta</td>
-                          <td>Rp 53.000.000</td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>PT Agung Aja</td>
-                          <td>20 Days</td>
-                          <td>FOB</td>
-                          <td>Jakarta</td>
-                          <td>Rp 52.900.000</td>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td>PT Agung Aja</td>
-                          <td>20 Days</td>
-                          <td>FOB</td>
-                          <td>Jakarta</td>
-                          <td>Rp 52.850.000</td>
-                        </tr>
-                      </tbody>
-                    </table>
+                    @if(count($revise) == 0)
+                      <span>There's No Revise Yet.</span>
+                    @else
+                      <table class="table responsive dt-responsive table-bordered table-middle" cellspacing="0" width="100%">
+                        <thead class="bg-white">
+                          <tr>
+                            <th>Revision</th>
+                            <th>Buyer Name</th>
+                            <th>Delivery Time</th>
+                            <th>Shipping Term</th>
+                            <th>City</th>
+                            <th>Total Price</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          @foreach($revise as $rKey => $rData)
+                          <tr>
+                            <td>{{++$rKey}}</td>
+                            <td>{{$quotation->User()->first()->Company()->first()->name}}</td>
+                            <td>{{$rData->ShippingTerm()->first()->name}}</td>
+                            <td>{{$rData->delivery_day}} Days</td>
+                            <td>{{$rData->city}}</td>
+                            <td>Rp {{number_format($rData->total_price)}}</td>
+                          </tr>
+                          @endforeach
+                        </tbody>
+                      </table>
+                    @endif
+                    
                   </div>
                 </div>
               </div>
@@ -146,8 +137,19 @@
               <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <div class="btn-group">
+                    @if(session()->get('userSession')[0]->role_id == 3 || session()->get('userSession')[0]->role_id == 4)
+
                     <a href="#uploadPO" data-toggle="modal" class="btn btn-sm btn-default">Upload Purchase Order</a>
                     <a href="#editPbl" data-toggle="modal" class="btn btn-sm btn-default">Revise Buy Lead</a>
+
+                    @elseif(session()->get('userSession')[0]->role_id == 5 || session()->get('userSession')[0]->role_id == 6)
+
+                    <a href="#" class="btn btn-sm btn-default">Download Purchase Order</a>
+                    <button value="{{$quotation->id}}" data-target="#reviseQuote" data-toggle="modal" class="btn btn-sm btn-default chooseReviseQuote">Revise Quotation</button>
+                    @include('revise-quotation-pop-up')
+
+                    @endif
+                    
                     <a href="meeting-summary.html" class="btn btn-sm btn-default">Meeting Summary</a>
                   </div>
                 </div>
@@ -249,41 +251,7 @@
             </form>
           </div>
         </div>
-        <div class="col-md-3 col-sm-12 col-xs-12 hide-on-med-and-down">
-          <ul class="no-ul-style menu-wrapper">
-            <li>
-              <a href="home.html" class="btn btn-orange btn-lg padding-transition no-border-radius">
-                <i class="pull-left fa fa-home padding-top-2px padding-right-8px"></i> <span>Home</span>
-              </a>
-            </li>
-            <li>
-              <a href="post-buy-lead.html" class="btn btn-orange btn-lg padding-transition active-orange no-border-radius">
-                <i class="pull-left fa fa-pencil-square padding-top-2px padding-right-8px"></i> <span>Post Buy Lead</span>
-              </a>
-            </li>
-            <li>
-              <a href="company-database.html" class="btn btn-orange btn-lg padding-transition no-border-radius">
-                <i class="pull-left fa fa-building padding-top-2px padding-right-8px"></i> <span>Company Database</span>
-              </a>
-            </li>
-            <li>
-              <a href="meeting-schedule.html" class="btn btn-orange btn-lg padding-transition no-border-radius">
-                <i class="pull-left fa fa-calendar padding-top-2px padding-right-8px"></i> <span>Meeting Schedule</span>
-              </a>
-            </li>
-            <li>
-              <a href="profile.html" class="btn btn-orange btn-lg padding-transition no-border-radius">
-                <i class="pull-left fa fa-gear padding-top-2px padding-right-8px"></i> <span>Profile</span>
-              </a>
-            </li>
-            <li>
-              <a href="../home-login.html" class="btn btn-orange btn-lg padding-transition no-border-radius">
-                <i class="pull-left fa fa-power-off padding-top-2px padding-right-8px"></i> <span>Logout</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
+        @include('layouts.user.side-nav')
 
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12 margin-top">
@@ -569,180 +537,10 @@
       </div>
     </div>
 
-    <!-- Detail Post Buy Lead -->
-    <div class="modal fade" id="detailPbl" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Detail Post Buy Lead</h4>
-          </div>
-          <div class="modal-body">
-            <table class="table table-condensed no-border-table table-middle">
-              <tr>
-                <th>Item</th>
-                <td>:</td>
-                <td>Plate Material</td>
-              </tr>
-              <tr>
-                <th>Amount</th>
-                <td>:</td>
-                <td>10 Ton</td>
-              </tr>
-              <tr>
-                <th>Broadcasted</th>
-                <td>:</td>
-                <td>
-                  <a href="#broadcastComp" data-toggle="modal" class="btn btn-primary btn-xs">View List</a>
-                </td>
-              </tr>
-              <tr>
-                <th>Short Description</th>
-                <td>:</td>
-                <td>Ini barang harus berkualitas bagus</td>
-              </tr>
-              <tr>
-                <th>Business Category 1</th>
-                <td>:</td>
-                <td><a href="#bc1" data-toggle="modal" class="btn btn-primary btn-xs">View List</a></td>
-              </tr>
-              <tr>
-                <th>Business Category 2</th>
-                <td>:</td>
-                <td><a href="#bc2" data-toggle="modal" class="btn btn-primary btn-xs">View List</a></td>
-              </tr>
-              <tr>
-                <th>Unit</th>
-                <td>:</td>
-                <td>Ton</td>
-              </tr>
-              <tr>
-                <th>Total Price</th>
-                <td>:</td>
-                <td>Rp50.000.000</td>
-              </tr>
-              <tr>
-                <th>Payment Term</th>
-                <td>:</td>
-                <td>Down Payment 50%, Installment 6 Months</td>
-              </tr>
-              <tr>
-                <th>Shipping Term</th>
-                <td>:</td>
-                <td>FOB at Jakarta</td>
-              </tr>
-              <tr>
-                <th>Province</th>
-                <td>:</td>
-                <td>Banten</td>
-              </tr>
-              <tr>
-                <th>City</th>
-                <td>:</td>
-                <td>Serang</td>
-              </tr>
-              <tr>
-                <th>Closed Date</th>
-                <td>:</td>
-                <td>11 April 2017</td>
-              </tr>
-              <tr>
-                <th>Delivery Time</th>
-                <td>:</td>
-                <td>30 Days</td>
-              </tr>
-              <tr>
-                <th>Area</th>
-                <td>:</td>
-                <td>Soekarno Hatta Airport</td>
-              </tr>
-              <tr>
-                <th>Status</th>
-                <td>:</td>
-                <td><span class="text-success"><strong>Released</strong></span></td>
-              </tr>
-              <tr>
-                <th>Document</th>
-                <td>:</td>
-                <td><a href="../../storage/sample.pdf" class="btn btn-primary btn-xs">Download Document</a></td>
-              </tr>
-            </table>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    @include('post-buy-lead.detail-post-buy-lead-pop-up')
 
-    <!-- Detail Quotation -->
-    <div class="modal fade" id="detailQuotation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Detail Quotation</h4>
-          </div>
-          <div class="modal-body">
-            <table class="table table-condensed no-border-table table-middle">
-              <tr>
-                <th>Item</th>
-                <td>:</td>
-                <td>Plate Material</td>
-              </tr>
-              <tr>
-                <th>Amount</th>
-                <td>:</td>
-                <td>10 Ton</td>
-              </tr>
-              <tr>
-                <th>Unit</th>
-                <td>:</td>
-                <td>Kg</td>
-              </tr>
-              <tr>
-                <th>Total Price</th>
-                <td>:</td>
-                <td>Rp 50.000.000</td>
-              </tr>
-              <tr>
-                <th>City</th>
-                <td>:</td>
-                <td>Jakarta</td>
-              </tr>
-              <tr>
-                <th>Shipping Term</th>
-                <td>:</td>
-                <td>FOB at Jakarta</td>
-              </tr>
-              <tr>
-                <th>Delivery Time</th>
-                <td>:</td>
-                <td>30 Days</td>
-              </tr>
-              <tr>
-                <th>Area</th>
-                <td>:</td>
-                <td>Soekarno Hatta Airport (CGK)</td>
-              </tr>
-              <tr>
-                <th>Payment Term</th>
-                <td>:</td>
-                <td>Masih cicil 3x bayar</td>
-              </tr>
-              <tr>
-                <th>Document</th>
-                <td>:</td>
-                <td><a href="../../storage/sample.pdf" class="btn btn-primary btn-xs">Download Document</a></td>
-              </tr>
-            </table>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    @include('post-buy-lead.detail-quotation-pop-up')
+    
 
     <!-- Add Meeting Summary -->
     <div class="modal fade" id="addMs" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -1137,28 +935,11 @@
       </div>
     </a>
 
-    <div id="mySidenav" class="sidenav hide-on-large-only">
-      <div class="menu-content">
-        <a href="home.html">
-          <i class="fa fa-home"></i> Home
-        </a>
-        <a href="post-buy-lead.html">
-          <i class="fa fa-pencil-square"></i> Post Buy Lead
-        </a>
-        <a href="company-database.html">
-          <i class="fa fa-building"></i> Company Database
-        </a>
-        <a href="meeting-schedule.html">
-          <i class="fa fa-calendar"></i> Meeting Schedule
-        </a>
-        <a href="profile.html">
-          <i class="fa fa-gear"></i> Profile
-        </a>
-        <a href="../home-login.html">
-          <i class="fa fa-power-off"></i> Logout
-        </a>
-        <a href="javascript:void(0)" id="nav-btn-close" onclick="closeNav()"><i class="fa fa-close"></i></a>
-      </div>
-    </div>
+    
+    <script type="text/javascript">
+      var quotation = {!! $quotation !!}
+      var buyLead = {!! $buyLead !!}
+    </script>
+    <script type="text/javascript" src="{{asset('js/myscript/detail-item.js')}}"></script>
   @include('layouts.user.mobile-menu')
 @endsection

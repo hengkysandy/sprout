@@ -5,22 +5,22 @@
 <div id="main-mobile-menu" class="main-mobile-menu fade in">
   <ul class="ul-menu-mobile">
     <li class="vertical-menu">
-      <a href="new_member_request">
+      <a href="{{url('new_member_request')}}">
         <i class="fa fa-address-card my-float"></i>
       </a>
     </li>
     <li class="vertical-menu">
-      <a href="shipping_term">
+      <a href="{{url('shipping_term')}}">
         <i class="fa fa-archive my-float"></i>
       </a>
     </li>
     <li class="vertical-menu">
-      <a href="city_area">
+      <a href="{{url('city_area')}}">
         <i class="fa fa-plane my-float"></i>
       </a>
     </li>
     <li class="vertical-menu">
-      <a href="logoutAdmin">
+      <a href="{{url('logoutAdmin')}}">
         <i class="fa fa-power-off my-float"></i>
       </a>
     </li>
@@ -28,22 +28,22 @@
 
   <ul class="ul-menu-compaq">
     <li class="horizontal-menu">
-      <a href="dash_home">
+      <a href="{{url('dash_home')}}">
         <i class="fa fa-home my-float"></i>
       </a>
     </li>
     <li class="horizontal-menu">
-      <a href="company_membership">
+      <a href="{{url('company_membership')}}">
         <i class="fa fa-group my-float"></i>
       </a>
     </li>
     <li class="horizontal-menu">
-      <a href="rfq">
+      <a href="{{url('rfq')}}">
         <i class="fa fa-list-alt my-float"></i>
       </a>
     </li>
     <li class="horizontal-menu">
-      <a href="business_category">
+      <a href="{{url('business_category')}}">
         <i class="fa fa-briefcase my-float"></i>
       </a>
     </li>

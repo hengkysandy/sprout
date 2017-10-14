@@ -62,7 +62,9 @@
                   <td>Rp {{number_format($quotation->total_price)}}</td>
                   <td>
                     <a href="#detailQuotation" data-toggle="modal" class="btn btn-default btn-sm">Detail</a>
-                    <a href="#confirmApprove" data-toggle="modal" class="btn btn-success btn-sm">Approve</a>
+                    @if($quotation->QuotationStatus()->first()->id_status == 14)
+                      <button value="{{$quotation->id}}" data-target="#confirmApprove" data-toggle="modal" class="btn btn-success btn-sm chooseApproveQuotation">Approve</button>
+                    @endif
                     <a href="#addMs" data-toggle="modal" class="btn btn-primary btn-sm">Meeting Request</a>
                     <a href="#" class="btn btn-warning btn-sm">Download Quote</a>
                   </td>
@@ -861,8 +863,7 @@
             <h4 class="modal-title" id="myModalLabel">Are you sure want to approve this?</h4>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-            <button type="button" class="btn btn-success accept-item" data-dismiss="modal">Yes</button>
+            <div id="btn-confirmation-approve"></div>
           </div>
         </div>
       </div>
@@ -935,7 +936,7 @@
       </div>
     </a>
 
-    
+    <meta name="base_url" content="{{ URL::to('/') }}">
     <script type="text/javascript">
       var quotation = {!! $quotation !!}
       var buyLead = {!! $buyLead !!}

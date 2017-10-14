@@ -19,6 +19,9 @@ class Quotation extends Model
 		'delivery_day',
 		'document',
 		'status',
+        'id_area',
+        'payment_term',
+        'id_province'
     ];
 
     public function ShippingTerm()
@@ -44,6 +47,11 @@ class Quotation extends Model
     public function Unit()
     {
         return $this->belongsTo(Unit::class,'id_unit','id');
+    }
+
+    public function Area()
+    {
+        return $this->belongsTo(Area::class,'id_area','id');
     }
 
    

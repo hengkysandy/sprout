@@ -4,6 +4,7 @@ $(function() {
       // console.log(buyLead);
       var q = quotation;
       var b = buyLead;
+      var fullpathUrl = $('meta[name="base_url"]').attr('content');
 
 	$(document).on('click','.chooseReviseQuote',function(){
 		console.log(b.id_area);
@@ -46,6 +47,17 @@ $(function() {
 		url = "doDeleteUnit?id="+$(this).val();
 	    cell2 = "<button type='button' style='margin:0px 5px' class='btn btn-default' data-dismiss='modal'>Close</button>";
 	    cell1 = "<a href="+url+"><button type='button' style='margin:0px 5px' class='btn btn-danger delete-unit'>Delete</button></a>";
+
+	    dataHandler.html(cell2+cell1);
+	});
+
+	$(document).on('click','.chooseApproveQuotation',function(){
+		var dataHandler = $("#btn-confirmation-approve");
+    	var cell1,cell2,url = "";
+		
+		url = fullpathUrl+"/doApproveQuotation?id="+$(this).val();
+	    cell2 = "<button type='button' style='margin:0px 5px' class='btn btn-default' data-dismiss='modal'>No</button>";
+	    cell1 = "<a href="+url+"><button type='button' style='margin:0px 5px' class='btn btn-success'>Yes</button></a>";
 
 	    dataHandler.html(cell2+cell1);
 	});

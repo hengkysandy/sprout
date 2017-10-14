@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 03, 2017 at 02:11 PM
+-- Generation Time: Oct 14, 2017 at 08:44 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -151,6 +151,7 @@ CREATE TABLE `buy_lead` (
   `closed_date` timestamp NULL DEFAULT NULL,
   `delivery_day` int(11) DEFAULT NULL,
   `document` varchar(200) NOT NULL,
+  `po_document` varchar(200) DEFAULT NULL,
   `approved_vendor_only` varchar(200) NOT NULL,
   `status` varchar(200) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -162,12 +163,12 @@ CREATE TABLE `buy_lead` (
 -- Dumping data for table `buy_lead`
 --
 
-INSERT INTO `buy_lead` (`id`, `buy_lead_code`, `admin_id`, `id_user`, `id_city`, `id_province`, `id_unit`, `id_shipping_item`, `id_area`, `item`, `amount`, `short_description`, `total_price`, `payment_term`, `closed_date`, `delivery_day`, `document`, `approved_vendor_only`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(3, '150924171', NULL, 3, 1101, 11, 3, 1, 2, 'Plate Material', 11, 'Ini harganya harus bisa murah dan kualitas bagus', 50000000, 'Down Payment 50%, Installment 6 Months', '2017-09-23 17:00:00', 4, 'http://res.cloudinary.com/stts/image/upload/v1506192380/ffauwpdwxqzx2s4blq6n.png', 'yes', 'pending', '2017-09-23 18:46:22', '2017-09-23 18:46:22', NULL),
-(4, '150928172', NULL, 4, 3174, 31, 4, 3, 2, 'Alumunium', 20, 'Deskripsi', 50000000, 'Down Payment 50%, Installment 6 Months', '2017-09-26 17:00:00', 1, 'http://res.cloudinary.com/stts/image/upload/v1506572363/irif6a3m2c3mojnvvpsy.png', 'yes', 'pending', '2017-09-28 04:19:27', '2017-09-28 04:19:27', NULL),
-(5, '150930173', NULL, 4, 1101, 11, 4, 3, 2, 'Frying Pan', 11, 'Ini harganya harus bisa murah dan kualitas bagus', 50000000, 'Down Payment 50%, Installment 6 Months', '2017-10-19 17:00:00', 20, 'http://res.cloudinary.com/stts/image/upload/v1506707847/vxekl9tmgxqldkktlg6m.png', 'no', 'pending', '2017-09-29 17:57:28', '2017-09-29 17:57:28', NULL),
-(6, '150930174', NULL, 4, 1101, 11, 4, 1, 2, 'Water Purifier', 50, 'Ini harganya harus bisa murah dan kualitas bagus', 50000000, 'Down Payment 50%, Installment 6 Months', '2017-10-27 17:00:00', 30, 'http://res.cloudinary.com/stts/image/upload/v1506707923/h4dgy7pykcedcbtnpq3f.png', 'no', 'pending', '2017-09-29 17:58:45', '2017-09-29 17:58:45', NULL),
-(7, '151002175', NULL, 3, 1101, 11, 4, 1, 2, 'Plate Material2', 112, 'Ini harganya harus bisa murah dan kualitas bagus', 52000000, 'Down Payment 50%, Installment 6 Months', '2017-10-01 17:00:00', 2, 'http://res.cloudinary.com/stts/image/upload/v1506934383/fnnps9rpisp3en3gep1j.png', 'yes', 'pending', '2017-10-02 08:53:03', '2017-10-02 08:53:03', NULL);
+INSERT INTO `buy_lead` (`id`, `buy_lead_code`, `admin_id`, `id_user`, `id_city`, `id_province`, `id_unit`, `id_shipping_item`, `id_area`, `item`, `amount`, `short_description`, `total_price`, `payment_term`, `closed_date`, `delivery_day`, `document`, `po_document`, `approved_vendor_only`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(3, '150924171', NULL, 3, 1101, 11, 3, 1, 2, 'Plate Material', 11, 'Ini harganya harus bisa murah dan kualitas bagus', 50000000, 'Down Payment 50%, Installment 6 Months', '2017-09-23 17:00:00', 4, 'http://res.cloudinary.com/stts/image/upload/v1506192380/ffauwpdwxqzx2s4blq6n.png', NULL, 'yes', 'pending', '2017-09-23 18:46:22', '2017-09-23 18:46:22', NULL),
+(4, '150928172', NULL, 4, 3174, 31, 4, 3, 2, 'Alumunium', 20, 'Deskripsi', 50000000, 'Down Payment 50%, Installment 6 Months', '2017-09-26 17:00:00', 1, 'http://res.cloudinary.com/stts/image/upload/v1506572363/irif6a3m2c3mojnvvpsy.png', NULL, 'yes', 'pending', '2017-09-28 04:19:27', '2017-09-28 04:19:27', NULL),
+(5, '150930173', NULL, 4, 1101, 11, 4, 3, 2, 'Frying Pan', 11, 'Ini harganya harus bisa murah dan kualitas bagus', 50000000, 'Down Payment 50%, Installment 6 Months', '2017-10-19 17:00:00', 20, 'http://res.cloudinary.com/stts/image/upload/v1506707847/vxekl9tmgxqldkktlg6m.png', NULL, 'no', 'pending', '2017-09-29 17:57:28', '2017-09-29 17:57:28', NULL),
+(6, '150930174', NULL, 4, 1101, 11, 4, 1, 2, 'Water Purifier', 50, 'Ini harganya harus bisa murah dan kualitas bagus', 50000000, 'Down Payment 50%, Installment 6 Months', '2017-10-27 17:00:00', 30, 'http://res.cloudinary.com/stts/image/upload/v1506707923/h4dgy7pykcedcbtnpq3f.png', NULL, 'no', 'pending', '2017-09-29 17:58:45', '2017-09-29 17:58:45', NULL),
+(7, '151002175', NULL, 3, 1101, 11, 4, 1, 2, 'Plate Material2', 112, 'Ini harganya harus bisa murah dan kualitas bagus', 52000000, 'Down Payment 50%, Installment 6 Months', '2017-10-01 17:00:00', 2, 'http://res.cloudinary.com/stts/image/upload/v1506934383/fnnps9rpisp3en3gep1j.png', NULL, 'yes', 'pending', '2017-10-02 08:53:03', '2017-10-02 08:53:03', NULL);
 
 -- --------------------------------------------------------
 
@@ -466,6 +467,17 @@ CREATE TABLE `company_business_category` (
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `company_business_category`
+--
+
+INSERT INTO `company_business_category` (`id`, `id_company`, `id_business_category`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 14, 1, 'active', '2017-10-13 04:51:06', '2017-10-13 04:51:06', NULL),
+(2, 13, 1, 'active', '2017-10-13 05:12:16', '2017-10-13 05:12:16', NULL),
+(3, 15, 4, 'active', '2017-10-13 05:14:46', '2017-10-13 05:14:46', NULL),
+(4, 15, 5, 'active', '2017-10-13 05:14:58', '2017-10-13 05:14:58', NULL),
+(5, 16, 4, 'active', '2017-10-13 05:22:39', '2017-10-13 05:22:39', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -607,13 +619,22 @@ INSERT INTO `company_required_document` (`id`, `id_company`, `business_license_i
 
 CREATE TABLE `company_status` (
   `id` int(11) NOT NULL,
-  `id_company` int(11) NOT NULL,
+  `id_company_by` int(11) NOT NULL,
+  `id_company_for` int(11) DEFAULT NULL,
   `id_status` int(11) NOT NULL,
   `status` varchar(200) NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `company_status`
+--
+
+INSERT INTO `company_status` (`id`, `id_company_by`, `id_company_for`, `id_status`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 15, 16, 6, 'active', '2017-10-14 01:02:50', '2017-10-14 05:50:11', NULL),
+(2, 15, 16, 6, 'active', '2017-10-14 05:48:32', '2017-10-14 05:48:32', NULL);
 
 -- --------------------------------------------------------
 
@@ -628,7 +649,8 @@ CREATE TABLE `discussion` (
   `status` varchar(200) NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `type` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -669,7 +691,14 @@ CREATE TABLE `division` (
 --
 
 INSERT INTO `division` (`id`, `section_id`, `name`, `description`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(5, 1, 'div123', 'vivididv1231', 'active', '2017-09-07 10:07:17', '2017-09-19 07:26:39', NULL);
+(5, 1, 'div123', 'vivididv1231', 'active', '2017-09-07 10:07:17', '2017-09-19 07:26:39', NULL),
+(6, 1, 'div321', 'vivividsdf131', 'active', '2017-10-12 11:23:01', NULL, NULL),
+(7, 4, 'div111', 'diviviviv', 'active', '2017-10-13 05:12:37', '2017-10-13 05:12:37', NULL),
+(8, 4, 'vivivii', 'isiasifasidf', 'active', '2017-10-13 05:12:45', '2017-10-13 05:12:45', NULL),
+(9, 4, 'asfasf', 'asfdasdfasf', 'active', '2017-10-13 05:12:49', '2017-10-13 05:12:49', NULL),
+(10, 5, 'asdfasf', 'asdfasdf', 'active', '2017-10-13 05:12:57', '2017-10-13 05:12:57', NULL),
+(11, 5, 'asdfsaf', 'asdfasdf', 'active', '2017-10-13 05:13:02', '2017-10-13 05:13:02', NULL),
+(12, 5, 'asfdsaf', 'asdfasfas', 'active', '2017-10-13 05:13:06', '2017-10-13 05:13:06', NULL);
 
 -- --------------------------------------------------------
 
@@ -90682,16 +90711,19 @@ CREATE TABLE `quotation` (
   `status` varchar(200) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `id_area` int(11) DEFAULT NULL,
+  `payment_term` varchar(200) DEFAULT NULL,
+  `id_province` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `quotation`
 --
 
-INSERT INTO `quotation` (`id`, `id_buy_lead`, `id_user`, `id_shipping_term`, `city`, `amount`, `total_price`, `delivery_day`, `document`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 3, 6, 1, 'KABUPATEN SIMEULUE', 11, 50000000, 4, 'http://res.cloudinary.com/stts/image/upload/v1506608909/xueuwjwlukvxoiudunkc.png', 'submitted', '2017-09-28 14:28:30', '2017-09-28 14:28:30', NULL),
-(5, 4, 6, 1, 'Kota Jakarta Timur', 12, 41000000, 4, 'http://res.cloudinary.com/stts/image/upload/v1507017061/lv8cxw2bjdfeqzuhhe4k.png', 'submitted', '2017-10-03 07:51:01', '2017-10-03 07:51:01', NULL);
+INSERT INTO `quotation` (`id`, `id_buy_lead`, `id_user`, `id_shipping_term`, `city`, `amount`, `total_price`, `delivery_day`, `document`, `status`, `created_at`, `updated_at`, `deleted_at`, `id_area`, `payment_term`, `id_province`) VALUES
+(1, 3, 6, 1, 'KABUPATEN SIMEULUE', 11, 50000000, 4, 'http://res.cloudinary.com/stts/image/upload/v1506608909/xueuwjwlukvxoiudunkc.png', 'submitted', '2017-10-12 10:07:05', '2017-09-28 14:28:30', NULL, 2, 'asfdadsf', NULL),
+(5, 4, 6, 1, 'Kota Jakarta Timur', 12, 41000000, 4, 'http://res.cloudinary.com/stts/image/upload/v1507017061/lv8cxw2bjdfeqzuhhe4k.png', 'submitted', '2017-10-12 10:07:11', '2017-10-03 07:51:01', NULL, 2, 'afdasdfasdf', NULL);
 
 -- --------------------------------------------------------
 
@@ -90715,7 +90747,7 @@ CREATE TABLE `quotation_status` (
 
 INSERT INTO `quotation_status` (`id`, `id_quotation`, `id_status`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 1, 14, 'active', '2017-09-29 02:59:25', NULL, NULL),
-(2, 5, 14, 'active', '2017-09-29 20:16:12', '2017-09-29 20:16:12', NULL);
+(2, 5, 6, 'active', '2017-09-29 20:16:12', '2017-10-07 05:27:15', NULL);
 
 -- --------------------------------------------------------
 
@@ -90735,16 +90767,20 @@ CREATE TABLE `revise` (
   `deleted_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `city` varchar(200) DEFAULT NULL,
   `id_shipping_term` int(11) DEFAULT NULL,
-  `delivery_day` int(11) DEFAULT NULL
+  `delivery_day` int(11) DEFAULT NULL,
+  `id_area` int(11) DEFAULT NULL,
+  `payment_term` varchar(200) DEFAULT NULL,
+  `id_province` int(11) DEFAULT NULL,
+  `amount` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `revise`
 --
 
-INSERT INTO `revise` (`id`, `id_quotation`, `id_user`, `total_price`, `document`, `status`, `created_at`, `updated_at`, `deleted_at`, `city`, `id_shipping_term`, `delivery_day`) VALUES
-(2, 5, 6, 45000000, 'http://res.cloudinary.com/stts/image/upload/v1507015553/kjlxyzvvfmgllavazrzr.png', 'active', '2017-10-03 07:46:11', '2017-10-03 07:34:00', '0000-00-00 00:00:00', 'Kota Jakarta Pusat', 3, 4),
-(3, 5, 6, 43000000, 'http://res.cloudinary.com/stts/image/upload/v1507016040/hlsylh5zmdozjse5evhl.png', 'active', '2017-10-03 07:51:01', '2017-10-03 07:51:01', '0000-00-00 00:00:00', 'Kota Jakarta Pusat', 4, 3);
+INSERT INTO `revise` (`id`, `id_quotation`, `id_user`, `total_price`, `document`, `status`, `created_at`, `updated_at`, `deleted_at`, `city`, `id_shipping_term`, `delivery_day`, `id_area`, `payment_term`, `id_province`, `amount`) VALUES
+(2, 5, 6, 45000000, 'http://res.cloudinary.com/stts/image/upload/v1507015553/kjlxyzvvfmgllavazrzr.png', 'active', '2017-10-03 07:46:11', '2017-10-03 07:34:00', '0000-00-00 00:00:00', 'Kota Jakarta Pusat', 3, 4, NULL, NULL, NULL, NULL),
+(3, 5, 6, 43000000, 'http://res.cloudinary.com/stts/image/upload/v1507016040/hlsylh5zmdozjse5evhl.png', 'active', '2017-10-03 07:51:01', '2017-10-03 07:51:01', '0000-00-00 00:00:00', 'Kota Jakarta Pusat', 4, 3, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -90855,7 +90891,8 @@ INSERT INTO `status` (`id`, `name`, `status`, `created_at`, `updated_at`, `delet
 (11, 'asssigned to', 'active', '2017-09-08 03:07:18', NULL, NULL),
 (12, 'available', 'active', '2017-09-29 02:13:19', NULL, NULL),
 (13, 'request', 'active', '2017-09-29 02:13:19', NULL, NULL),
-(14, 'submitted', 'active', '2017-09-29 02:55:30', NULL, NULL);
+(14, 'submitted', 'active', '2017-09-29 02:55:30', NULL, NULL),
+(15, 'unfavourite', 'active', '2017-10-14 05:20:55', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -91358,7 +91395,7 @@ ALTER TABLE `company_add_on`
 -- AUTO_INCREMENT for table `company_business_category`
 --
 ALTER TABLE `company_business_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `company_interested_program`
 --
@@ -91388,7 +91425,7 @@ ALTER TABLE `company_required_document`
 -- AUTO_INCREMENT for table `company_status`
 --
 ALTER TABLE `company_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `discussion`
 --
@@ -91403,7 +91440,7 @@ ALTER TABLE `discussion_detail`
 -- AUTO_INCREMENT for table `division`
 --
 ALTER TABLE `division`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `groups`
 --
@@ -91478,7 +91515,7 @@ ALTER TABLE `shipping_term`
 -- AUTO_INCREMENT for table `status`
 --
 ALTER TABLE `status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `unit`
 --

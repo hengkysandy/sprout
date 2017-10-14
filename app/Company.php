@@ -25,5 +25,10 @@ class Company extends Model
 		'status'
     ];
 
+    public function City()
+    {
+    	return $this->belongsTo('Laravolt\Indonesia\Models\City','city_id','id');
+    }
+
     
 }

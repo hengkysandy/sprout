@@ -46,12 +46,12 @@
               <tr>
                 <th>Area</th>
                 <td>:</td>
-                <td>tidak ada area di table quotation</td>
+                <td>{{$quotation->Area()->first()->name}}</td>
               </tr>
               <tr>
                 <th>Payment Term</th>
                 <td>:</td>
-                <td>tidak ada payment term di table quotation</td>
+                <td>{{$quotation->payment_term}}</td>
               </tr>
               <tr>
                 <th>Document</th>

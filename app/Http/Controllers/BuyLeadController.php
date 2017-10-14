@@ -11,6 +11,8 @@ use App\BuyLeadStatus;
 use App\BuyLeadUser;
 use App\CloudinaryMapping;
 use App\Company;
+use App\CompanyStatus;
+use App\CompanyBusinessCategory;
 use App\Division;
 use App\Group;
 use App\Quotation;
@@ -41,10 +43,10 @@ class BuyLeadController extends Controller
         $data['shippingData'] = ShippingTerm::all();
         $data['buyLeadData'] = BuyLead::latest('created_at')->get();
 
-        return view('post-buy-lead.procurement-staff.post-buy-lead', $data);
+        return view('post-buy-lead.post-buy-lead', $data);
 
         // if (session()->get('userSession')[0]->role_id == 2) {
-        //     return view('post-buy-lead.procurement-staff.post-buy-lead', $data);
+        //     return view('post-buy-lead.post-buy-lead', $data);
         // }else if (session()->get('userSession')[0]->role_id == 3) {
         //     return view('post-buy-lead.procurement-manager.post-buy-lead', $data);
         // }
@@ -217,7 +219,7 @@ class BuyLeadController extends Controller
             $data['quotation'] = Quotation::where('id_buy_lead',$id)->get();
             $data['buyLead'] = BuyLead::find($id);
             // $data['quotation'][0]->BuyLead()->first();
-            return view('post-buy-lead.procurement-staff.item', $data);
+            return view('post-buy-lead.item', $data);
         }
         return 'tidak ada view untuk role ini';
     }
@@ -235,7 +237,7 @@ class BuyLeadController extends Controller
         $data['area'] = Area::all();
 
 
-        return view('post-buy-lead.procurement-staff.detail-item', $data);
+        return view('post-buy-lead.detail-item', $data);
     }
 
     public function doCreateRevise(Request $request)
@@ -246,9 +248,10 @@ class BuyLeadController extends Controller
         // city: "Kota Jakarta Barat",1
         // shippingTerm: "1",1
         // delivery_day: "1",1
-        // area: "2", not used
-        // paymentTerm: "Down Payment 50%, Installment 6 Months", not used
+        // area: "2", 
+        // paymentTerm: "Down Payment 50%, Installment 6 Months",
         // quotationDocument: { }1
+
         $maskedFileUrl = $this->cloudinaryMaskingFile($request->quotationDocument);
 
         $currQuotation = Quotation::find($request->quotation_id);
@@ -262,6 +265,10 @@ class BuyLeadController extends Controller
             'city' => $currQuotation->city,
             'id_shipping_term' => $currQuotation->id_shipping_term,
             'delivery_day' => $currQuotation->delivery_day,
+            'id_area' => $currQuotation->id_area,
+            'payment_term' => $currQuotation->payment_term,
+            // 'id_province' => $currQuotation->id_province, //gak ada province di form
+            'amount' => $currQuotation->amount
         ]);
 
         $currQuotation->amount = $request->amount;
@@ -272,16 +279,12 @@ class BuyLeadController extends Controller
         $currQuotation->delivery_day = $request->delivery_day;
         $currQuotation->document = $maskedFileUrl;
         $currQuotation->id_user = session()->get('userSession')[0]->id;
-        $currQuotation->amount = $request->amount;
+        $currQuotation->id_area = $request->area;
+        // $currQuotation->id_province = $request->amount; //gak ada province di form
+        $currQuotation->payment_term = $request->paymentTerm;
         $currQuotation->save();
 
         return back();
-    }
-
-    public function getQuotationDataAjax($id)
-    {
-        // $data = 
-        return $data;
     }
 
     public function acceptBuyLead(Request $request, $id)
@@ -289,6 +292,14 @@ class BuyLeadController extends Controller
         $userid = session()->get('userSession')[0]->id;
         BuyLeadUser::where('id_user',$userid)->where('id_buy_lead',$id)->update([
             'status' => 'active',
+            ]);
+        return back();
+    }
+
+    public function doApproveQuotation(Request $request)
+    {
+        QuotationStatus::where('id_quotation',$request->id)->update([
+            'id_status' => 6, //approved
             ]);
         return back();
     }
@@ -363,6 +374,85 @@ class BuyLeadController extends Controller
         ]);
         BuyLeadUser::where('id_buy_lead',$buylead)->where('id_user','<>',$user)->where('linked_for','=','1')->delete();
         return back();
+    }
+
+    public function companyDatabase()
+    {
+        $procurementRoleArr = [3,4];
+        $salesRoleArr = [5,6];
+        $procurementStatusArr = [5,6,7];
+        $salesStatusArr = [4,15];
+        
+        if(in_array(session()->get('userSession')[0]->role_id, $procurementRoleArr)){
+            $usedArr = $procurementStatusArr;
+        }else if(in_array(session()->get('userSession')[0]->role_id, $salesRoleArr)){
+            $usedArr = $salesStatusArr;
+        }
+
+        $currCompanyCategoryEloquent = CompanyBusinessCategory::where('id_company', session()->get('userSession')[0]->id_company)->get();
+        $listOfCompanyCategory = [];
+        foreach ($currCompanyCategoryEloquent as $val) {
+            $listOfCompanyCategory[] = $val->id_business_category;
+        }
+
+         $r['companyBC'] = CompanyBusinessCategory::whereIn('id_business_category', $listOfCompanyCategory)
+            ->where('id_company','!=',session()->get('userSession')[0]->id_company)
+            ->get();
+
+        $response = [];
+        foreach ($r['companyBC'] as $val) {
+            $r['company'] = $val->Company()->first();
+
+            $r['company_city'] = $r['company']->City()->first()->name;
+
+            $r['section'] = Section::find($r['companyBC'][0]->id_business_category);
+
+            $r['company_status'] = CompanyStatus::where('id_company_for',$r['company']->id)
+                                    ->where('id_company_by', session()->get('userSession')[0]->id_company)
+                                    ->whereIn('id_status',$usedArr)
+                                    ->first();
+
+            $response[] = $r;
+        }
+        // return $response;
+
+        return view('post-buy-lead.company-database')->with('response',$response);
+        // return view('post-buy-lead.company-database')->with('response',json_decode(json_encode($response)));
+    }
+
+    public function doChangeCompanyStatus(Request $request)
+    {
+        $procurementRoleArr = [3,4];
+        $salesRoleArr = [5,6];
+        $procurementStatusArr = [5,6,7];
+        $salesStatusArr = [4,15];
+        if(in_array(session()->get('userSession')[0]->role_id, $procurementRoleArr)){
+            $usedArr = $procurementStatusArr;
+        }else if(in_array(session()->get('userSession')[0]->role_id, $salesRoleArr)){
+            $usedArr = $salesStatusArr;
+        }
+
+        $checkData = CompanyStatus::where('id_company_for',$request->id)
+                                    ->where('id_company_by', session()->get('userSession')[0]->id_company)
+                                    ->whereIn('id_status', $usedArr)
+                                    ->first();
+
+        if($checkData){
+            //update data
+            $checkData->id_status = $request->status;
+            $checkData->save();
+        }else{
+            //insert new data
+            CompanyStatus::create([
+                'id_company_by' => session()->get('userSession')[0]->id_company,
+                'id_company_for' => $request->id,
+                'id_status' => $request->status,
+                'status' => 'active',
+            ]);
+        }
+
+        return back();
+
     }
 
 }

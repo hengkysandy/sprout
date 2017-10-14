@@ -4,7 +4,7 @@
   @include('layouts.dashboard.navbar')
 
   <div class="container-fluid">
-    <h1 class="main-title no-margin-top">Argomas Internusa</h1>
+    <h1 class="main-title no-margin-top">{{$company->name}}</h1>
     <div class="col-md-10 col-sm-12 col-xs-12 margin-top">
       <ul class="nav nav-tabs nav-justified" role="tablist">
         <li role="presentation" class="active"><a href="#cp" aria-controls="cp" role="tab" data-toggle="tab">Company Profile</a></li>
@@ -233,28 +233,38 @@
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="table-responsive">
-                  <table class="table table-middle table-bordered table-hover">
-                    <thead>
-                      <tr>
-                        <th>Section</th>
-                        <th>Section Name</th>
-                        <th>Division</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Section A</td>
-                        <td>Agriculture, forestry and fishing</td>
-                        <td>Division 1, Division 2</td>
-                        <td>
-                          <a href="#detailBc" data-toggle="modal" class="btn btn-orange btn-sm">Detail</a>
-                          <a href="#editBc" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
-                          <a href="#deleteBc" data-toggle="modal" class="btn btn-danger btn-sm">Delete</a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                  @if(count($companyBC) == 0)
+                    <p>There's no business category yet.</p>
+                  @else
+                    <table class="table table-middle table-bordered table-hover">
+                      <thead>
+                        <tr>
+                          <th>Section</th>
+                          <th>Section Name</th>
+                          <th>Division</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @foreach($companyBC as $bcData)
+                          <tr>
+                            <td>{{$bcData->Section()->first()->section}}</td>
+                            <td>{{$bcData->Section()->first()->name}}</td>
+                            <td>
+                              @foreach($bcData->Section()->first()->Division()->get() as $dData)
+                                {{$dData->name}},
+                              @endforeach
+                            </td>
+                            <td>
+                              <a href="#detailBc" data-toggle="modal" class="btn btn-orange btn-sm">Detail</a>
+                              <a href="#editBc" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
+                              <a href="#deleteBc" data-toggle="modal" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                          </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
+                  @endif
                 </div>
               </div>
 
@@ -381,6 +391,7 @@
           </div>
           <form>
             <div class="row">
+
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                   <label>Choose Section</label>
@@ -601,6 +612,9 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title">Choose From Existing Category</h4>
         </div>
+        <form method="post" action="{{url('doAddCompanyBC')}}">
+          {{csrf_field()}}
+          <input type="hidden" name="id_company" value="{{$company->id}}">
         <div class="modal-body">
           <div class="table-responsive">
             <table class="table table-middle table-condensed table-hover">
@@ -612,47 +626,32 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Section A</td>
-                  <td>Division 1, Division 2, Division 3, Division 4, Division 5</td>
-                  <td>
-                    <div class="radio">
-                      <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-                      </label>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Section B</td>
-                  <td>Division 6, Division 7, Division 8, Division 9, Division 10</td>
-                  <td>
-                    <div class="radio">
-                      <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-                      </label>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Section C</td>
-                  <td>Division 11, Division 12, Division 13, Division 14, Division 15</td>
-                  <td>
-                    <div class="radio">
-                      <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-                      </label>
-                    </div>
-                  </td>
-                </tr>
+                @foreach($section as $sData)
+                  <tr>
+                    <td>{{$sData->section}}</td>
+                    <td>
+                      @foreach($sData->Division()->get() as $dData)
+                        {{$dData->name}},
+                      @endforeach
+                    </td>
+                    <td>
+                      <div class="radio">
+                        <label>
+                          <input type="radio" name="sectionOption" value="{{$sData->id}}">
+                        </label>
+                      </div>
+                    </td>
+                  </tr>
+                @endforeach
               </tbody>
             </table>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Add</button>
+          <button type="submit" class="btn btn-primary">Add</button>
         </div>
+        </form>
       </div>
     </div>
   </div>

@@ -13,4 +13,14 @@ class CompanyBusinessCategory extends Model
 		'id_business_category',
 		'status'
     ];
+
+    public function Section()
+    {
+    	return $this->belongsTo(Section::class,'id_business_category','id');
+    }
+
+    public function Company()
+    {
+        return $this->belongsTo(Company::class,'id_company','id');
+    }
 }

@@ -33,7 +33,7 @@
           @foreach($companyPackageData as $cpData)
           <tr>
             <td>{{$cpData->Company()->first()->id}}</td>
-            <td><a href="#">{{$cpData->Company()->first()->name}}</a></td>
+            <td><a href="{{url('member/'.$cpData->Company()->first()->id)}}">{{$cpData->Company()->first()->name}}</a></td>
             <td>{{$cpData->Package()->first()->name}}</td>
             <td>
               <button type="button" value="{{$cpData->id}}|approve" data-target="#popup" data-toggle="modal" class="btn btn-success btn-sm chooseAction">Approve</button>

@@ -17,6 +17,10 @@ class Revise extends Model
         'city',
         'id_shipping_term',
         'delivery_day',
+        'id_area',
+        'payment_term',
+        'id_province',
+        'amount'
     ];
 
     public function User()

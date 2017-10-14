@@ -41,7 +41,7 @@
               @foreach($companyPackageData as $cpData)
               <tr>
                 <td>{{$cpData->Company()->first()->id}}</td>
-                <td><a href="#">{{$cpData->Company()->first()->name}}</a></td>
+                <td><a href="{{url('member/'.$cpData->Company()->first()->id)}}">{{$cpData->Company()->first()->name}}</a></td>
                 <td><a href="#" data-toggle="modal">NULL</a></td>
                 <td>{{$cpData->Package()->first()->name}}</td>
                 <td>{{$cpData->year_duration}} Year</td>

@@ -61,12 +61,17 @@ Route::group(['middleware' => 'checkUser','checkSales'],function(){
     Route::get('item/{id}','BuyLeadController@showItem');
     Route::get('detailItem/{id}','BuyLeadController@detailItem');
     Route::get('acceptRequest/{buylead}/{user}','BuyLeadController@acceptRequest');
+    Route::get('acceptBuyLead/{id}','BuyLeadController@acceptBuyLead');
     Route::get('requestBuyLead/{id}','BuyLeadController@requestBuyLead');
     Route::post('createQuotation','BuyLeadController@createQuotation');
     Route::post('assignUser/{id}','BuyLeadController@assignUser');
 
     Route::post('doCreateRevise','BuyLeadController@doCreateRevise');
     Route::get('getQuotationDataAjax/{id}','BuyLeadController@getQuotationDataAjax');
+    Route::get('doApproveQuotation','BuyLeadController@doApproveQuotation');
+
+    Route::get('company-database','BuyLeadController@companyDatabase');
+    Route::get('doChangeCompanyStatus','BuyLeadController@doChangeCompanyStatus');
 
 }); 
 
@@ -107,12 +112,15 @@ Route::group(['middleware' => 'checkAdmin'], function () {
     Route::post('doUpdateGroup/{id}', 'GroupController@doUpdateGroup');
 
     Route::get('company_membership', 'PageController@companyMembership');
-    Route::get('member', 'PageController@member');
+    Route::get('member/{id}', 'PageController@member');
 
     Route::get('new_member_request', 'PageController@memberRequest');
     Route::get('doChangeStatusCompanyPackage', 'PageController@doChangeStatusCompanyPackage');
     
     Route::get('rfq', 'PageController@rfq');
+
+    Route::post('doAddCompanyBC', 'PageController@doAddCompanyBC');
+    
 
 });
 

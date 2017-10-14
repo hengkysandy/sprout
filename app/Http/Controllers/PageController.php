@@ -7,6 +7,7 @@ use App\Area;
 use App\Certificate;
 use App\CloudinaryMapping;
 use App\Company;
+use App\CompanyBusinessCategory;
 use App\CompanyInterestedProgram;
 use App\CompanyMainProduct;
 use App\CompanyPackage;
@@ -113,8 +114,11 @@ class PageController extends Controller
     	return view('dashboard.company-membership',compact('companyPackageData'));
     }
 
-    public function member() {
-    	return view('dashboard.member');
+    public function member($id) {
+        $data['company'] = Company::find($id);
+        $data['companyBC'] = CompanyBusinessCategory::where('id_company', $data['company']->id)->get();
+        $data['section'] = Section::all();
+    	return view('dashboard.member', $data);
     }
 
     public function memberRequest() {
@@ -170,7 +174,7 @@ class PageController extends Controller
             return view('search-buy-lead.sales-staff.home');
         }
         else{
-            return view('post-buy-lead.procurement-staff.home');
+            return view('post-buy-lead.home');
         }
     }
 
@@ -205,6 +209,17 @@ class PageController extends Controller
         
         return back();
         
+    }
+
+    public function doAddCompanyBC(Request $request)
+    {
+        CompanyBusinessCategory::create([
+            'id_company' => $request->id_company,
+            'id_business_category' => $request->sectionOption,
+            'status' => 'active'
+        ]);
+
+        return back();
     }
 
 }

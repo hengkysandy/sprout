@@ -24,7 +24,8 @@ class BuyLead extends Model
 		'payment_term',
 		'closed_date',
 		'delivery_day',
-		'document',
+        'document',
+		'po_document',
 		'approved_vendor_only',
 		'status',
     ];

@@ -43,14 +43,14 @@
           </div>
         </div>
         <div class="col-md-9 col-sm-12 col-xs-12">
-          @include('post-buy-lead.view-buy-lead')
-          @include('post-buy-lead.view-unit')
+          @include('post-buy-lead.popup-view.view-buy-lead')
+          @include('post-buy-lead.popup-view.view-unit')
         </div>
-        @include('post-buy-lead.side-nav-buy-lead')
+        @include('post-buy-lead.popup-view.side-nav-buy-lead')
       </div>
     </div>
 
-    @include('post-buy-lead.add-buy-lead-pop-up')
+    @include('post-buy-lead.popup-view.add-buy-lead-pop-up')
 
     <!-- Edit Post Buy Lead -->
     <div class="modal fade" id="editPbl" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -412,9 +412,9 @@
       </div>
     </div>
 
-    @include('post-buy-lead.confirmation-pop-up')
+    @include('post-buy-lead.popup-view.confirmation-pop-up')
 
-    @include('post-buy-lead.add-unit-pop-up')
+    @include('post-buy-lead.popup-view.add-unit-pop-up')
 
     <!-- Edit Unit Wegith -->
     <div class="modal fade" id="editUw" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -812,6 +812,6 @@
     </div>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script type="text/javascript" src="js/myscript/unit.js"></script>
-    <script type="text/javascript" src="js/myscript/post-buy-lead.js"></script>
+    <script type="text/javascript" src="js/myscript/post-buy-lead.popup-view.js"></script>
   @include('layouts.user.mobile-menu')
 @endsection

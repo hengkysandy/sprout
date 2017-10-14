@@ -13,4 +13,9 @@ class Section extends Model
 		'name',
 		'status'
     ];
+
+    public function Division()
+    {
+    	return $this->hasMany(Division::class,'section_id','id');
+    }
 }

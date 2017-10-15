@@ -11,7 +11,7 @@ class CloudinaryController extends Controller
 {
 
   public function download(Request $request){
-      
+    return $request->url;
       $url = urldecode($request->url);
       $cm = CloudinaryMapping::where('url',$url)->first();
       $currTime = strtotime(date('c'));
@@ -44,8 +44,4 @@ class CloudinaryController extends Controller
 		// obj.nama
 	}
 
-    public function test()
-    {
-    	return view('test');
-    }
 }

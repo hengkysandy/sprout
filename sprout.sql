@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 14, 2017 at 08:44 AM
+-- Generation Time: Oct 15, 2017 at 07:48 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -633,8 +633,9 @@ CREATE TABLE `company_status` (
 --
 
 INSERT INTO `company_status` (`id`, `id_company_by`, `id_company_for`, `id_status`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 15, 16, 6, 'active', '2017-10-14 01:02:50', '2017-10-14 05:50:11', NULL),
-(2, 15, 16, 6, 'active', '2017-10-14 05:48:32', '2017-10-14 05:48:32', NULL);
+(1, 15, 16, 5, 'active', '2017-10-14 01:02:50', '2017-10-14 11:46:08', NULL),
+(2, 15, 16, 6, 'active', '2017-10-14 05:48:32', '2017-10-14 05:48:32', NULL),
+(3, 16, 15, 4, 'active', '2017-10-14 11:42:21', '2017-10-14 11:45:18', NULL);
 
 -- --------------------------------------------------------
 
@@ -91425,7 +91426,7 @@ ALTER TABLE `company_required_document`
 -- AUTO_INCREMENT for table `company_status`
 --
 ALTER TABLE `company_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `discussion`
 --

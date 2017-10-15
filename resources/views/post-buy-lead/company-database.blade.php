@@ -24,11 +24,18 @@
                   <th>Company Name</th>
                   <th>Business Category</th>
                   <th>Location</th>
-                  <th>Status</th>
+                  @if(in_array(session()->get('userSession')[0]->role_id,[3,4]))
+                    <th>Status</th>
+                  @endif
                   @if(session()->get('userSession')[0]->role_id == 3)
                     <th>Action</th>
                   @endif
-                  <th>Vendor Assessment</th>
+                  @if(in_array(session()->get('userSession')[0]->role_id,[5,6]))
+                    <th>Frequent Buyer</th>
+                  @else
+                    <th>Vendor Assessment</th>
+                  @endif
+                  
                 </tr>
               </thead>
               <tbody>
@@ -40,15 +47,18 @@
                   <td>{{$data['section']->name}}</td>
                   <td>{{$data['company_city']}}</td>
 
-                  <td>
-                    @if(count($data['company_status']) == 0 || $data['company_status']->id_status == 5)
-                      <span class="text-muted no-text-decoration"><strong>Undecided</strong></span>
-                    @elseif($data['company_status']->id_status == 6)
-                      <span class="text-success"><strong>Approved</strong></span>
-                    @elseif($data['company_status']->id_status == 7)
-                      <span class="text-danger"><strong>Blacklisted</strong></span>
-                    @endif
-                  </td>
+                  @if(in_array(session()->get('userSession')[0]->role_id,[3,4]))
+                    <td>
+                      @if(count($data['company_status']) == 0 || $data['company_status']->id_status == 5)
+                        <span class="text-muted no-text-decoration"><strong>Undecided</strong></span>
+                      @elseif($data['company_status']->id_status == 6)
+                        <span class="text-success"><strong>Approved</strong></span>
+                      @elseif($data['company_status']->id_status == 7)
+                        <span class="text-danger"><strong>Blacklisted</strong></span>
+                      @endif
+                    </td>
+                  @endif
+                  
 
                   @if(session()->get('userSession')[0]->role_id == 3)
                   <td>
@@ -64,7 +74,21 @@
                   @endif
 
                   <td>
-                    <a href="../../storage/sample.pdf" class="btn btn-sm btn-primary">Open Document</a>
+                    @if(in_array(session()->get('userSession')[0]->role_id,[5,6]))
+
+                      @if(count($data['company_status']) == 0 || $data['company_status']->id_status == 15)
+                        <a href="{{url('doChangeCompanyStatus?id='.$data['company']->id.'&status=4')}}">
+                          <span class="favourite favourite-false"><i class="fa fa-star-o"></i></span>
+                        </a>
+                      @elseif($data['company_status']->id_status == 4)
+                        <a href="{{url('doChangeCompanyStatus?id='.$data['company']->id.'&status=15')}}">
+                          <span class="favourite favourite-true"><i class="fa fa-star yellow-icon"></i></span>
+                        </a>
+                      @endif
+                      
+                    @else
+                      <a href="{{url('download/file?url=http://res.cloudinary.com/stts/image/upload/v1506604787/z2nuvqflbflfxdd9q2q8.jpg')}}" class="btn btn-sm btn-primary">Download Document</a>
+                    @endif
                   </td>
 
                 </tr>

@@ -388,7 +388,6 @@ class BuyLeadController extends Controller
         }else if(in_array(session()->get('userSession')[0]->role_id, $salesRoleArr)){
             $usedArr = $salesStatusArr;
         }
-
         $currCompanyCategoryEloquent = CompanyBusinessCategory::where('id_company', session()->get('userSession')[0]->id_company)->get();
         $listOfCompanyCategory = [];
         foreach ($currCompanyCategoryEloquent as $val) {

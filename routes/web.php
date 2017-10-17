@@ -55,6 +55,12 @@ Route::group(['middleware' => 'checkUser'], function () {
     Route::get('post-buy-lead', 'BuyLeadController@postBuyLead');
     Route::post('doInsertBuyLead', 'BuyLeadController@doInsertBuyLead');
     Route::get('doChangeStatusBuyLead', 'BuyLeadController@doChangeStatusBuyLead');
+
+    Route::get('meeting-schedule', 'MeetingScheduleController@meetingschedule');
+    Route::get('meeting-detail', 'MeetingScheduleController@meetingdetail');
+    Route::get('meeting-calendar', 'MeetingScheduleController@meetingcalendar');
+    Route::get('doInsertMeeting', 'MeetingScheduleController@doInsertMeeting');
+    Route::get('acceptMeeting/{id}','MeetingScheduleController@acceptMeeting');
 });
 
 Route::group(['middleware' => 'checkUser','checkSales'],function(){

@@ -14,6 +14,10 @@ body {
 .cust-bg {
   padding: 0 50px; }
 
+.send-to-div > .bootstrap-select{
+  width:92% !important;
+}
+ 
 .anchor-white {
   color: #ffffff;
   text-decoration: none; }

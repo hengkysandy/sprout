@@ -1108,6 +1108,8 @@ $(document).ready(function(){
       var $newId = "send-to-"+$initNumber;
       var $orginal = $('.send-to:first');
       var $cloned = $orginal.clone().addClass('cloned');
+      $cloned.find('.bootstrap-select').replaceWith(function() { return $('select', this); });
+      $cloned.find('select').selectpicker(); 
       //$cloned.find('.btn-add-send-to').replaceWith('<a class="btn btn-danger btn-remove-send-to"><i class="fa fa-minus"></i></a>');
       $cloned.find(".btn-remove-send-to").css('visibility','visible');
       $cloned.find("#send-to-1").attr('id',$newId);

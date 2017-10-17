@@ -44,4 +44,10 @@ class GroupController extends Controller
 
         return back();
     }
+
+    public function loadGroupDataAjax($divisionId)
+    {
+        $data = Group::where('division_id',$divisionId)->get();
+        return $data;
+    }
 }

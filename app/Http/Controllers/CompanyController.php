@@ -28,9 +28,18 @@ class CompanyController extends Controller
         $packageData = Package::all();
         $indo = new Indonesia();
         $provinceData = $indo->allProvinces();
-        $cityData = $indo->allCities();
+        
         return view('cust-auth.register-company.register-1', 
             compact('packageData', 'provinceData','cityData'));
+    }
+
+    public function loadCityDataAjax($provinceId)
+    {
+        $indo = new Indonesia();
+        $provinceData = $indo->allProvinces();
+        $data = $indo->allCities()[0]->where('province_id',$provinceId)->get();
+
+        return $data;
     }
 
     public function register_2(Request $request)

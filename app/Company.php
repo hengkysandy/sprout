@@ -30,5 +30,15 @@ class Company extends Model
     	return $this->belongsTo('Laravolt\Indonesia\Models\City','city_id','id');
     }
 
+    public function CompanyStatusBy()
+    {
+    	return $this->hasMany(CompanyStatus::class,'id_company_by','id');
+    }
+
+    public function CompanyStatusFor()
+    {
+    	return $this->hasMany(CompanyStatus::class,'id_company_For','id');
+    }
+
     
 }

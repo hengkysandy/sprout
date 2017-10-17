@@ -93,13 +93,13 @@
             <div class="form-group">
               <div class="row">
 
-                <label class="col-md-3 col-sm-3 col-xs-12 control-label">City <small class="text-danger">(required)</small></label>
+                <label class="col-md-3 col-sm-3 col-xs-12 control-label">Province <small class="text-danger">(required)</small></label>
 
                 <div class="col-md-9 col-sm-9 col-xs-12">
-                  <select class="form-control selectpicker margin-top-register" data-live-search="true" name="city">
-                    <option value="0">Choose City</option>
-                    @foreach($cityData as $cData)
-                      <option value="{{$cData->id}}">{{$cData->name}}</option>
+                  <select class="form-control selectpicker margin-top-register" data-live-search="true" id="groupProvince" name="province">
+                    <option value="0">Choose Province</option>
+                    @foreach($provinceData as $provData)
+                      <option value="{{$provData->id}}">{{$provData->name}}</option>
                     @endforeach
                   </select>
                 </div>
@@ -110,14 +110,12 @@
             <div class="form-group">
               <div class="row">
 
-                <label class="col-md-3 col-sm-3 col-xs-12 control-label">Province <small class="text-danger">(required)</small></label>
+                <label class="col-md-3 col-sm-3 col-xs-12 control-label">City <small class="text-danger">(required)</small></label>
 
                 <div class="col-md-9 col-sm-9 col-xs-12">
-                  <select class="form-control selectpicker margin-top-register" data-live-search="true" id="province" name="province">
-                    <option value="0">Choose Province</option>
-                    @foreach($provinceData as $provData)
-                      <option value="{{$provData->id}}">{{$provData->name}}</option>
-                    @endforeach
+                  <select id="groupCity" class="form-control selectpicker margin-top-register" data-live-search="true" name="city">
+                    <option value="0">Choose City</option>
+                    
                   </select>
                 </div>
 

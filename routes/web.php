@@ -16,6 +16,7 @@ Route::get('download/file','CloudinaryController@download');
 Route::post('upload', 'CloudinaryController@upload');
 
 Route::get('regis_1', 'CompanyController@register_1');
+Route::get('loadCityDataAjax/{provinceId}', 'CompanyController@loadCityDataAjax');
 Route::post('regis_2', 'CompanyController@register_2');
 Route::get('regis_3', 'CompanyController@register_3');
 Route::post('doRegis', 'CompanyController@doRegis');
@@ -65,6 +66,7 @@ Route::group(['middleware' => 'checkUser','checkSales'],function(){
     Route::get('requestBuyLead/{id}','BuyLeadController@requestBuyLead');
     Route::post('createQuotation','BuyLeadController@createQuotation');
     Route::post('assignUser/{id}','BuyLeadController@assignUser');
+    Route::post('doAssignCompanyBuyLead','BuyLeadController@doAssignCompanyBuyLead');
 
     Route::post('doCreateRevise','BuyLeadController@doCreateRevise');
     Route::get('getQuotationDataAjax/{id}','BuyLeadController@getQuotationDataAjax');
@@ -104,7 +106,7 @@ Route::group(['middleware' => 'checkAdmin'], function () {
     Route::get('doDeleteDivision', 'DivisionController@doDeleteDivision');
     Route::get('getDivisionDataAjax/{id}', 'DivisionController@getDivisionDataAjax');
     Route::post('doUpdateDivision/{id}', 'DivisionController@doUpdateDivision');
-    Route::get('loadDivisionDataAjax/{sectionId}', 'DivisionController@loadDivisionDataAjax');
+    
     
     Route::post('doInsertGroup', 'GroupController@doInsertGroup');
     Route::get('doDeleteGroup', 'GroupController@doDeleteGroup');
@@ -123,6 +125,9 @@ Route::group(['middleware' => 'checkAdmin'], function () {
     
 
 });
+
+Route::get('loadDivisionDataAjax/{sectionId}', 'DivisionController@loadDivisionDataAjax');
+Route::get('loadGroupDataAjax/{divisionId}', 'GroupController@loadGroupDataAjax');
 
 
 // User

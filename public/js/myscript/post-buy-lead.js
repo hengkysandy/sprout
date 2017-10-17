@@ -12,6 +12,83 @@ $(function() {
  //    	});
 	// });
 
+	$(document).on('change','#sectionOption1',function(){
+		var divisionId = $(this).val();
+		$.ajax({
+        url : "loadDivisionDataAjax/"+divisionId,
+        dataType: "json",
+        success :function(result){
+        	$('#divisionOption1').empty().append('<option selected="selected">-</option>');
+        	$("#divisionOption1").selectpicker("refresh");
+        	$.each(result,function(key,val){
+                $('#divisionOption1').append($('<option>', { 
+                    value: val.id,
+                    text : val.name 
+                }));
+        		$("#divisionOption1").selectpicker("refresh");
+            });
+    	} 
+    	});
+	});
+
+	$(document).on('change','#divisionOption1',function(){
+		var divisionId = $(this).val();
+		$.ajax({
+        url : "loadGroupDataAjax/"+divisionId,
+        dataType: "json",
+        success :function(result){
+        	$('#groupOption1').empty().append('<option selected="selected">-</option>');
+        	$("#groupOption1").selectpicker("refresh");
+        	$.each(result,function(key,val){
+                $('#groupOption1').append($('<option>', { 
+                    value: val.id,
+                    text : val.name 
+                }));
+        		$("#groupOption1").selectpicker("refresh");
+            });
+    	} 
+    	});
+	});
+
+	$(document).on('change','#sectionOption2',function(){
+		var divisionId = $(this).val();
+		$.ajax({
+        url : "loadDivisionDataAjax/"+divisionId,
+        dataType: "json",
+        success :function(result){
+        	$('#divisionOption2').empty().append('<option selected="selected">-</option>');
+        	$("#divisionOption2").selectpicker("refresh");
+        	$.each(result,function(key,val){
+                $('#divisionOption2').append($('<option>', { 
+                    value: val.id,
+                    text : val.name 
+                }));
+        		$("#divisionOption2").selectpicker("refresh");
+            });
+    	} 
+    	});
+	});
+
+	$(document).on('change','#divisionOption2',function(){
+		var divisionId = $(this).val();
+		$.ajax({
+        url : "loadGroupDataAjax/"+divisionId,
+        dataType: "json",
+        success :function(result){
+        	$('#groupOption2').empty().append('<option selected="selected">-</option>');
+        	$("#groupOption2").selectpicker("refresh");
+        	$.each(result,function(key,val){
+                $('#groupOption2').append($('<option>', { 
+                    value: val.id,
+                    text : val.name 
+                }));
+        		$("#groupOption2").selectpicker("refresh");
+            });
+    	} 
+    	});
+	});
+
+
 	$(document).on('click','.chooseConfirmation',function(){
 		console.log($(this).val());
 		var dataHandler = $("#btn-confirmation-buy-lead");

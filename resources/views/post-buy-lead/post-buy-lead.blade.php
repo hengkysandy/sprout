@@ -466,83 +466,7 @@
       </div>
     </div>
 
-    <!-- Broadcsat to company -->
-    <div class="modal fade" id="broadcast" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Broadcast Company</h4>
-          </div>
-          <div class="modal-body">
-            <table id="tableBroadcast" class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>ID</th>
-                  <th>Company Name</th>
-                  <th>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox"> Select all
-                      </label>
-                    </div>
-                  </th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>JKT-02</td>
-                  <td>Arjuna Sanjaya</td>
-                  <td>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox">
-                      </label>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>JKT-01</td>
-                  <td>Adijaya Abadi</td>
-                  <td>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox">
-                      </label>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>JKT-05</td>
-                  <td>Malik Sentosa Selalu</td>
-                  <td>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox">
-                      </label>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox"> Approved Vendor Only
-              </label>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Add</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    @include('post-buy-lead.popup-view.broadcast-company-pop-up')
 
     <!-- Detail Business Category 1 -->
     <div class="modal fade" id="bc1" tabindex="-1" role="dialog">
@@ -812,6 +736,6 @@
     </div>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script type="text/javascript" src="js/myscript/unit.js"></script>
-    <script type="text/javascript" src="js/myscript/post-buy-lead.popup-view.js"></script>
+    <script type="text/javascript" src="js/myscript/post-buy-lead.js"></script>
   @include('layouts.user.mobile-menu')
 @endsection

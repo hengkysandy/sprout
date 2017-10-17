@@ -34,14 +34,13 @@ class BuyLeadController extends Controller
     public function postBuyLead() {
         $data['unitData'] = Unit::latest('created_at')->get();
         $data['sectionData'] = Section::all();
-        $data['divisionData'] = Division::all();
-        $data['groupData'] = Group::all();
         $data['areaData'] = Area::all();
         $indo = new Indonesia();
         $data['provinceData'] = $indo->allProvinces();
-        $data['cityData'] = $indo->allCities();
         $data['shippingData'] = ShippingTerm::all();
         $data['buyLeadData'] = BuyLead::latest('created_at')->get();
+        $data['notAssignedCompany'] = Company::where('company.id','!=',session()->get('companySession')[0]->id)
+            ->get();
 
         return view('post-buy-lead.post-buy-lead', $data);
 
@@ -52,6 +51,21 @@ class BuyLeadController extends Controller
         // }
 
     	
+    }
+
+    public function doAssignCompanyBuyLead(Request $request)
+    {
+        // listOfCompanyId
+        for ($i=0; $i < count($request->listOfCompanyId); $i++) {
+            CompanyStatus::create([
+                'id_company_by' => session()->get('companySession')[0]->id,
+                'id_company_for' => $request->listOfCompanyId[$i],
+                'id_status' => 16, //assigned
+                'status' => 'active',
+            ]);
+        }
+
+        return back();
     }
 
     public function doInsertBuyLead(Request $request)

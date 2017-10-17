@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 15, 2017 at 07:48 PM
+-- Generation Time: Oct 16, 2017 at 07:22 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -633,9 +633,12 @@ CREATE TABLE `company_status` (
 --
 
 INSERT INTO `company_status` (`id`, `id_company_by`, `id_company_for`, `id_status`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 15, 16, 5, 'active', '2017-10-14 01:02:50', '2017-10-14 11:46:08', NULL),
+(1, 15, 16, 6, 'active', '2017-10-14 01:02:50', '2017-10-14 05:50:11', NULL),
 (2, 15, 16, 6, 'active', '2017-10-14 05:48:32', '2017-10-14 05:48:32', NULL),
-(3, 16, 15, 4, 'active', '2017-10-14 11:42:21', '2017-10-14 11:45:18', NULL);
+(3, 16, 15, 4, 'active', '2017-10-16 11:22:03', '2017-10-16 11:22:07', NULL),
+(4, 16, 12, 16, 'active', '2017-10-16 16:52:35', '2017-10-16 16:52:35', NULL),
+(5, 16, 14, 16, 'active', '2017-10-16 16:52:35', '2017-10-16 16:52:35', NULL),
+(6, 16, 13, 16, 'active', '2017-10-16 17:13:44', '2017-10-16 17:13:44', NULL);
 
 -- --------------------------------------------------------
 
@@ -723,7 +726,10 @@ CREATE TABLE `groups` (
 --
 
 INSERT INTO `groups` (`id`, `division_id`, `name`, `description`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 5, 'zvzvzv1112', 'zvzvzvzv1112', 'active', '2017-09-07 10:17:31', '2017-09-09 03:09:29', NULL);
+(1, 5, 'zvzvzv1112', 'zvzvzvzv1112', 'active', '2017-09-07 10:17:31', '2017-09-09 03:09:29', NULL),
+(2, 7, 'grup', 'hahaha', 'active', '2017-10-16 16:19:38', '2017-10-16 16:19:38', NULL),
+(3, 8, 'asdsfaf', 'asdfasdf', 'active', '2017-10-16 16:20:06', '2017-10-16 16:20:06', NULL),
+(4, 8, 'zccvzx', 'zxcvzxv', 'active', '2017-10-16 16:20:32', '2017-10-16 16:20:32', NULL);
 
 -- --------------------------------------------------------
 
@@ -90893,7 +90899,8 @@ INSERT INTO `status` (`id`, `name`, `status`, `created_at`, `updated_at`, `delet
 (12, 'available', 'active', '2017-09-29 02:13:19', NULL, NULL),
 (13, 'request', 'active', '2017-09-29 02:13:19', NULL, NULL),
 (14, 'submitted', 'active', '2017-09-29 02:55:30', NULL, NULL),
-(15, 'unfavourite', 'active', '2017-10-14 05:20:55', NULL, NULL);
+(15, 'unfavourite', 'active', '2017-10-14 05:20:55', NULL, NULL),
+(16, 'assigned', 'active', '2017-10-16 16:44:04', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -91426,7 +91433,7 @@ ALTER TABLE `company_required_document`
 -- AUTO_INCREMENT for table `company_status`
 --
 ALTER TABLE `company_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `discussion`
 --
@@ -91446,7 +91453,7 @@ ALTER TABLE `division`
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `interested_program`
 --
@@ -91516,7 +91523,7 @@ ALTER TABLE `shipping_term`
 -- AUTO_INCREMENT for table `status`
 --
 ALTER TABLE `status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `unit`
 --

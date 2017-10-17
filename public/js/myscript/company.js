@@ -1,6 +1,24 @@
 $(document).ready(function(){
-
 	
+	$(document).on('change','#groupProvince',function(){
+		var provinceId = $(this).val();
+		$.ajax({
+        url : "loadCityDataAjax/"+provinceId,
+        dataType: "json",
+        success :function(result){
+        	$('#groupCity').empty().append('<option selected="selected">Choose City</option>');
+        	$("#groupCity").selectpicker("refresh");
+        	$.each(result,function(key,val){
+                $('#groupCity').append($('<option>', { 
+                    value: val.id,
+                    text : val.name 
+                }));
+        		$("#groupCity").selectpicker("refresh");
+            });
+    	} 
+    	});
+	});
+
 	$( "#numericWithPlusChar" ).keypress(function() {
 	  	return (event.charCode >= 48 && event.charCode <= 57 || event.charCode == 43);
 	});

@@ -6,7 +6,7 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title" id="myModalLabel">Post Buy Lead</h4>
           </div>
-          <form method="post" action="doInsertBuyLead" enctype="multipart/form-data">
+          <form method="post" action="{{url('doInsertBuyLead')}}" enctype="multipart/form-data">
             {{csrf_field()}}
           <div class="modal-body">
               <div class="row">
@@ -38,24 +38,18 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>JKT-02</td>
-                        <td>Jaya Abadi</td>
-                        <td><a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>JKT-01</td>
-                        <td>Abadi Isidah</td>
-                        <td><a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>JKT-04</td>
-                        <td>Maju Terus</td>
-                        <td><a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a></td>
-                      </tr>
+                      @foreach($notAssignedCompany as $acKey => $acData)
+                        @if( !empty($acData->CompanyStatusFor()->first()) )
+                          @if($acData->CompanyStatusFor()->first()->id_status == 16 && $acData->CompanyStatusFor()->first()->id_company_by == session()->get('companySession')[0]->id)
+                          <tr>
+                            <td>{{++$acKey}}</td>
+                            <td>{{$acData->id}}</td>
+                            <td>{{$acData->name}}</td>
+                            <td><a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a></td>
+                          </tr>
+                          @endif
+                        @endif
+                      @endforeach
                     </tbody>
                   </table>
                 </div>
@@ -71,7 +65,7 @@
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
                     <label>Section 1</label>
-                    <select name="section[]" class="form-control selectpicker" data-live-search="true">
+                    <select id="sectionOption1" name="section[]" class="form-control selectpicker" data-live-search="true">
                       @foreach($sectionData as $sData)
                         <option value="{{$sData->id}}">{{$sData->name}}</option>
                       @endforeach
@@ -81,7 +75,7 @@
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
                     <label>Section 2</label>
-                    <select name="section[]" class="form-control selectpicker" data-live-search="true">
+                    <select id="sectionOption2" name="section[]" class="form-control selectpicker" data-live-search="true">
                       @foreach($sectionData as $sData)
                         <option value="{{$sData->id}}">{{$sData->name}}</option>
                       @endforeach
@@ -91,40 +85,32 @@
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
                     <label>Division 1</label>
-                    <select name="division[]" class="form-control selectpicker" data-live-search="true">
-                      @foreach($divisionData as $dData)
-                        <option value="{{$dData->id}}">{{$dData->name}}</option>
-                      @endforeach
+                    <select id="divisionOption1" name="division[]" class="form-control selectpicker" data-live-search="true">
+                      
                     </select>
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
                     <label>Division 2</label>
-                    <select name="division[]" class="form-control selectpicker" data-live-search="true">
-                      @foreach($divisionData as $dData)
-                        <option value="{{$dData->id}}">{{$dData->name}}</option>
-                      @endforeach
+                    <select id="divisionOption2" name="division[]" class="form-control selectpicker" data-live-search="true">
+                      
                     </select>
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
                     <label>Group 1</label>
-                    <select name="group[]" class="form-control selectpicker" data-live-search="true">
-                      @foreach($groupData as $gData)
-                        <option value="{{$gData->id}}">{{$gData->name}}</option>
-                      @endforeach
+                    <select id="groupOption1" name="group[]" class="form-control selectpicker" data-live-search="true">
+                      
                     </select>
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
                     <label>Group 2</label>
-                    <select name="group[]" class="form-control selectpicker" data-live-search="true">
-                      @foreach($groupData as $gData)
-                        <option value="{{$gData->id}}">{{$gData->name}}</option>
-                      @endforeach
+                    <select id="groupOption2" name="group[]" class="form-control selectpicker" data-live-search="true">
+                      
                     </select>
                   </div>
                 </div>
@@ -166,7 +152,7 @@
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
                     <label>Province</label>
-                    <select name="province" class="form-control selectpicker" data-live-search="true">
+                    <select id="groupProvince" name="province" class="form-control selectpicker" data-live-search="true">
                       @foreach($provinceData as $pData)
                         <option value="{{$pData->id}}">{{$pData->name}}</option>
                       @endforeach
@@ -176,10 +162,7 @@
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
                     <label>City</label>
-                    <select name="city" class="form-control selectpicker" data-live-search="true">
-                      @foreach($cityData as $cData)
-                        <option value="{{$cData->id}}">{{$cData->name}}</option>
-                      @endforeach
+                    <select id="groupCity" name="city" class="form-control selectpicker" data-live-search="true">
                     </select>
                   </div>
                 </div>

@@ -207,7 +207,7 @@
             <div class="row ">
               <div class="col-md-12 col-sm-12 col-xs-12 append-send-to">
                 <label>Send To</label>
-                <div class="send-to-div send-to" style="margin-bottom:10px">
+                <div class="send-to-Ms send-to" style="margin-bottom:10px">
                   <select id="send-to-1" class="selectpicker" data-live-search="true" name="sendto[]">
                     <option value="0">Select Company</option>
                     @foreach($companyData as $row => $value)

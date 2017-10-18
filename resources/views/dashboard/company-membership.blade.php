@@ -21,6 +21,7 @@
     </div>
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
+        <h1 class="main-title no-margin-top">New Request</h1>
         <div class="table-responsive">
           <table id="companyMembershipTable" class="table table-bordered table-hover">
             <thead class="bg-white">
@@ -51,6 +52,58 @@
                 </td>
               </tr>
               @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <h1 class="main-title no-margin-top">Re-Activate Request</h1>
+        <div class="table-responsive">
+          <table id="reactivateRequest" class="table table-bordered table-hover">
+            <thead class="bg-white">
+              <tr>
+                <th>Company ID</th>
+                <th>Company Name</th>
+                <th>Business Category</th>
+                <th>Package</th>
+                <th>Duration</th>
+                <th>Price</th>
+                <th>Re-Activate Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>JKT-001</td>
+                <td><a href="member.html">Argomas Internusa</a></td>
+                <td><a href="#bCategory" data-toggle="modal">Agriculture, forestry and fishing, Wholesale and retail trade</a></td>
+                <td>Regular</td>
+                <td>1 Year</td>
+                <td>Rp. 5.000.000</td>
+                <td>
+                  <a href="#" class="btn btn-sm btn-primary btn-approve">Approve</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <h1 class="main-title no-margin-top">Company Database</h1>
+        <div class="table-responsive">
+          <table id="cpDatabase" class="table table-bordered table-hover">
+            <thead class="bg-white">
+              <tr>
+                <th>Company ID</th>
+                <th>Company Name</th>
+                <th>Business Category</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>JKT-001</td>
+                <td><a href="member.html">Argomas Internusa</a></td>
+                <td><a href="#bCategory" data-toggle="modal">Agriculture, forestry and fishing, Wholesale and retail trade</a></td>
+              </tr>
             </tbody>
           </table>
         </div>

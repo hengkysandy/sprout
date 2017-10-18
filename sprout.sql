@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2017 at 11:41 AM
+-- Generation Time: Oct 18, 2017 at 06:40 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -393,7 +393,8 @@ INSERT INTO `cloudinary_mapping` (`id`, `url`, `original_filename`, `created_at`
 (47, 'http://res.cloudinary.com/stts/image/upload/v1507008011/veupgxdseqzj1ctnzksi.png', 'Buy Lead Table Individual (1).xlsx', '2017-10-03 05:20:12', '2017-10-03 05:20:12', NULL),
 (48, 'http://res.cloudinary.com/stts/image/upload/v1507015553/kjlxyzvvfmgllavazrzr.png', 'Buy Lead Table Individual (1).xlsx', '2017-10-03 07:25:53', '2017-10-03 07:25:53', NULL),
 (49, 'http://res.cloudinary.com/stts/image/upload/v1507016040/hlsylh5zmdozjse5evhl.png', '2017031315035200009709_Assignment Bulan 5 - IN CS RS EN.docx', '2017-10-03 07:34:00', '2017-10-03 07:34:00', NULL),
-(50, 'http://res.cloudinary.com/stts/image/upload/v1507017061/lv8cxw2bjdfeqzuhhe4k.png', '2017041019482200001367_Assignment Bulan 6 - EES IN CS RS EN.docx', '2017-10-03 07:51:01', '2017-10-03 07:51:01', NULL);
+(50, 'http://res.cloudinary.com/stts/image/upload/v1507017061/lv8cxw2bjdfeqzuhhe4k.png', '2017041019482200001367_Assignment Bulan 6 - EES IN CS RS EN.docx', '2017-10-03 07:51:01', '2017-10-03 07:51:01', NULL),
+(51, 'http://res.cloudinary.com/stts/image/upload/v1508300149/ivpu0vpi2qjjygs0ikqk.png', 'Add Admin2.jpg', '2017-10-18 04:15:50', '2017-10-18 04:15:50', NULL);
 
 -- --------------------------------------------------------
 
@@ -90752,7 +90753,8 @@ CREATE TABLE `quotation` (
 
 INSERT INTO `quotation` (`id`, `id_buy_lead`, `id_user`, `id_shipping_term`, `city`, `amount`, `total_price`, `delivery_day`, `document`, `status`, `created_at`, `updated_at`, `deleted_at`, `id_area`, `payment_term`, `id_province`) VALUES
 (1, 3, 6, 1, 'KABUPATEN SIMEULUE', 11, 50000000, 4, 'http://res.cloudinary.com/stts/image/upload/v1506608909/xueuwjwlukvxoiudunkc.png', 'submitted', '2017-10-12 10:07:05', '2017-09-28 14:28:30', NULL, 2, 'asfdadsf', NULL),
-(5, 4, 6, 1, 'Kota Jakarta Timur', 12, 41000000, 4, 'http://res.cloudinary.com/stts/image/upload/v1507017061/lv8cxw2bjdfeqzuhhe4k.png', 'submitted', '2017-10-12 10:07:11', '2017-10-03 07:51:01', NULL, 2, 'afdasdfasdf', NULL);
+(5, 4, 6, 1, 'Kota Jakarta Timur', 12, 41000000, 4, 'http://res.cloudinary.com/stts/image/upload/v1507017061/lv8cxw2bjdfeqzuhhe4k.png', 'submitted', '2017-10-12 10:07:11', '2017-10-03 07:51:01', NULL, 2, 'afdasdfasdf', NULL),
+(6, 6, 6, 1, 'KABUPATEN SIMEULUE', 50, 50000000, 30, 'http://res.cloudinary.com/stts/image/upload/v1508300149/ivpu0vpi2qjjygs0ikqk.png', 'submitted', '2017-10-18 04:15:51', '2017-10-18 04:15:51', NULL, 2, 'Down Payment 50%, Installment 6 Months', NULL);
 
 -- --------------------------------------------------------
 
@@ -90776,7 +90778,8 @@ CREATE TABLE `quotation_status` (
 
 INSERT INTO `quotation_status` (`id`, `id_quotation`, `id_status`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 1, 14, 'active', '2017-09-29 02:59:25', NULL, NULL),
-(2, 5, 6, 'active', '2017-09-29 20:16:12', '2017-10-07 05:27:15', NULL);
+(2, 5, 6, 'active', '2017-09-29 20:16:12', '2017-10-07 05:27:15', NULL),
+(3, 6, 14, 'active', '2017-10-18 04:15:51', '2017-10-18 04:15:51', NULL);
 
 -- --------------------------------------------------------
 
@@ -91411,7 +91414,7 @@ ALTER TABLE `certificate`
 -- AUTO_INCREMENT for table `cloudinary_mapping`
 --
 ALTER TABLE `cloudinary_mapping`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 --
 -- AUTO_INCREMENT for table `company`
 --
@@ -91516,12 +91519,12 @@ ALTER TABLE `product_catelogue`
 -- AUTO_INCREMENT for table `quotation`
 --
 ALTER TABLE `quotation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `quotation_status`
 --
 ALTER TABLE `quotation_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `revise`
 --

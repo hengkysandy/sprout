@@ -44,8 +44,12 @@
       @endif
     </td>
     <td>
-      <a href="item/{{$value->id}}" class="btn btn-sm btn-default">Detail</a>
-    </td>
+      @if($value->name == 'submitted')
+        <a href="detailItem/{{$value->q_id}}" class="btn btn-sm btn-default">Detail</a>
+      @else
+        <a href="item/{{$value->id}}" class="btn btn-sm btn-default">Detail</a>
+      @endif
+    </td>   
   </tr>
   @endforeach
 </tbody>

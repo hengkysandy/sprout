@@ -539,9 +539,9 @@
       </div>
     </div>
 
-    @include('post-buy-lead.detail-post-buy-lead-pop-up')
+    @include('post-buy-lead.popup-view.detail-post-buy-lead-pop-up')
 
-    @include('post-buy-lead.detail-quotation-pop-up')
+    @include('post-buy-lead.popup-view.detail-quotation-pop-up')
     
 
     <!-- Add Meeting Summary -->

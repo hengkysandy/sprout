@@ -1,413 +1,327 @@
-@extends('layouts.user.app')
-
-@section('content')
-  @include('layouts.user.navbar')
-  
-  <div id="main" class="container-fluid">
-    <div class="row">
-      <div class="col-md-12 col-sm-12 col-xs-12">
-        <h1 class="main-title no-margin-top">Citra Tubindo Tbk</h1>
-      </div>
-      <div class="col-md-12 col-sm-12 col-xs-12">
-        <a href="#manageAccount" data-toggle="modal" class="btn btn-primary">Manage Account</a>
-      </div>
-      <div class="col-md-9 col-sm-12 col-xs-12 margin-top">
-        <ul class="nav nav-tabs nav-justified" role="tablist">
-          <li role="presentation" class="active"><a href="#cp" aria-controls="cp" role="tab" data-toggle="tab">Company Profile</a></li>
-          <li role="presentation"><a href="#up" aria-controls="up" role="tab" data-toggle="tab">User Profile</a></li>
-          <li role="presentation"><a href="#bc" aria-controls="bc" role="tab" data-toggle="tab">Business Category</a></li>
-        </ul>
-      </div>
-      <div class="col-md-9 col-sm-12 col-xs-12">
-        <div class="tab-content margin-bottom">
-          <div role="tabpanel" class="tab-pane bg-white active border-tab-pane" id="cp">
-            <!-- This is for company profile id -->
-            <div class="container-fluid padding">
-              <div class="row">
-                <div class="container-fluid">
-                  <form class="form-horizontal margin-top" disabled="">
-                    <div class="form-group">
-                      <label class="col-md-2 col-sm-12 col-xs-12 control-label">Package</label>
-                      <div class="col-md-3 col-sm-12 col-xs-12">
-                        <select class="form-control" disabled="">
-                          <option value="">Choose your package</option>
-                          <option value="free_trial">Free Trial</option>
-                          <option value="basic">Basic</option>
-                          <option value="regular">Regular</option>
-                          <option value="regular_plus" selected="">Regular +</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="form-group" >
-                      <label class="col-md-2 col-sm-12 col-xs-12 control-label">Business Entity</label>
-                      <div class="col-md-3 col-sm-12 col-xs-12">
-                        <input type="text" class="form-control" value="PT" disabled>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-md-2 col-sm-12 col-xs-12 control-label">Company Name</label>
-                      <div class="col-md-6 col-sm-12 col-xs-12">
-                        <input type="text" class="form-control" value="Argomas Internusa" disabled>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-md-2 col-sm-12 col-xs-12 control-label">Company Tagline</label>
-                      <div class="col-md-6 col-sm-12 col-xs-12">
-                        <input type="text" class="form-control" value="Company Tagline Company Tagline" disabled>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-md-2 col-sm-12 col-xs-12 control-label">Address</label>
-                      <div class="col-md-6 col-sm-12 col-xs-12">
-                        <textarea class="form-control no-resize" rows="6" disabled>Ki. Antapani Lama No. 365, Singkawang 74675, BaBel</textarea>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-md-2 col-sm-12 col-xs-12 control-label" disabled>Province &amp; City</label>
-                      <!-- Note: Untuk Select Province
-                      Pada saat province yang dipilih adalah banten, maka seluruh city (kota) hanya berada pada cakupan city (kota) yang ada di province tersebut
-                      -->
-                      <div class="col-md-3 col-sm-12 col-xs-12">
-                        <select class="selectpicker form-control" data-live-search="true" disabled>
-                          <option value="">Select Province</option>
-                          <option value="jakarta" selected="">Jakarta</option>
-                          <option value="banten">Banten</option>
-                        </select>
-                      </div>
-                      <div class="col-md-3 col-sm-12 col-xs-12">
-                        <select class="selectpicker form-control" data-live-search="true" disabled>
-                          <option value="">Select City</option>
-                          <option value="jakarta_barat" selected="">Jakarta Barat</option>
-                          <option value="jakarta_selatan">Jakarta Selatan</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-md-2 col-sm-12 col-xs-12 control-label">Phone Number</label>
-                      <div class="col-md-1 col-sm-4 col-xs-4">
-                        <input type="text" class="form-control" value="021" disabled>
-                      </div>
-                      <div class="col-md-5 col-sm-8 col-xs-8">
-                        <input type="text" class="form-control" value="55772211" disabled>
-                      </div>
-                    </div>
-                    <div class="wpMainProduct">
-                      <div id="removeMp" class="form-group">
-                        <label class="col-md-2 col-sm-12 col-xs-12 control-label">Main Product</label>
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                          <input type="text" class="form-control" value="Frozen Fish" disabled>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-md-2 col-sm-12 col-xs-12 control-label">Contact Name</label>
-                      <div class="col-md-6 col-sm-12 col-xs-12">
-                        <input type="text" class="form-control" value="Cahyo Gumilang" disabled>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-md-2 col-sm-12 col-xs-12 control-label">Mobile Phone</label>
-                      <div class="col-md-6 col-sm-12 col-xs-12">
-                        <input type="text" class="form-control" value="085678910" disabled>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-md-2 col-sm-12 col-xs-12 control-label">Required Document</label>
-                      <!-- Note:
-                      Untuk bagian ini client minta biar bisa buka file pdf, docs, atau sejenisnya, for all required document
-                      -->
-                      <div class="col-md-10 col-sm-12 col-xs-12">
-                        <!-- Note: Berlaku untuk setiap required document
-                        Untuk tombol choose document jika document dihapus maka tombol baru akan muncul, jika document ada maka tombol choose document tidak di munculkan
-                        -->
-                        <!--<label class="btn btn-primary btn-file">
-                          Choose Document <input type="file" class="hide">
-                        </label>-->
-                        <a href="../storage/sample.pdf" class="btn btn-success" disabled>Open Document</a>
-                        <a href="#deleteDoc" data-toggle="modal" class="btn btn-danger" disabled>Delete Document</a>
-                        <p class="help-block">Scan of Business Licence / SIUP</p>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-md-2 col-sm-12 col-xs-12 control-label"></label>
-                      <div class="col-md-10 col-sm-12 col-xs-12">
-                        <!-- Note: Berlaku untuk setiap required document
-                        Untuk tombol choose document jika document dihapus maka tombol baru akan muncul, jika document ada maka tombol choose document tidak di munculkan
-                        -->
-                        <!--<label class="btn btn-primary btn-file">
-                          Choose Document <input type="file" class="hide">
-                        </label>-->
-                        <a href="../storage/sample.pdf" class="btn btn-success" disabled>Open Document</a>
-                        <a href="#deleteDoc" data-toggle="modal" class="btn btn-danger" disabled>Delete Document</a>
-                        <p class="help-block">Scan of Tax ID / NPWP</p>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-md-2 col-sm-12 col-xs-12 control-label">Certification</label>
-                      <div class="col-md-10 col-sm-12 col-xs-12">
-                        <!-- Note: Berlaku untuk setiap required document
-                        Untuk tombol choose document jika document dihapus maka tombol baru akan muncul, jika document ada maka tombol choose document tidak di munculkan
-                        -->
-                        <!--<label class="btn btn-primary btn-file">
-                          Choose Document <input type="file" class="hide">
-                        </label>-->
-                        <a href="../storage/sample.pdf" class="btn btn-success" disabled>Open Document</a>
-                        <a href="#deleteDoc" class="btn btn-danger" disabled>Delete Document</a>
-                        <p class="help-block">Certificate 1081</p>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-md-2 col-sm-0 col-xs-0 control-label"></label>
-                      <div class="col-md-10 col-sm-12 col-xs-12">
-                        <!-- Note: Berlaku untuk setiap required document
-                        Untuk tombol choose document jika document dihapus maka tombol baru akan muncul, jika document ada maka tombol choose document tidak di munculkan
-                        -->
-                        <!--<label class="btn btn-primary btn-file">
-                          Choose Document <input type="file" class="hide">
-                        </label>-->
-                        <a href="#" class="btn btn-success" disabled>Open Document</a>
-                        <a href="#deleteDoc" data-toggle="modal" class="btn btn-danger" disabled>Delete Document</a>
-                        <p class="help-block">Certificate Halal</p>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-md-2 col-sm-0 col-xs-0 control-label"></label>
-                      <div class="col-md-10 col-sm-12 col-xs-12" style="margin-bottom: 10px;">
-                        <img src="../../images/amazon.png" class="show-logo" alt="Amazon">
-                      </div>
-
-                      <div class="hide-on-med-and-down">
-                        <br><br><br><br><br>
-                      </div>
-
-                      <label class="col-md-2 col-sm-12 col-xs-12 control-label">Company Logo</label>
-                      <div class="col-md-10 col-sm-12 col-xs-12">
-                        <!-- Note: Berlaku juga untuk logo
-                        Untuk tombol browse jika logo dihapus maka tombol baru akan muncul, jika logo ada maka tombol choose document tidak di munculkan
-                        -->
-                        <label class="btn btn-primary btn-file" disabled>
-                          Browse <input type="file" class="hide">
-                        </label>
-                        <a href="../../images/amazon.png" class="btn btn-success" disabled>Open Logo</a>
-                        <a href="#" class="btn btn-danger" disabled>Delete Logo</a>
-                        <p class="help-block" disabled>Insert image logo with format .png</p>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <div class="col-md-10 col-md-offset-2 col-sm-12 col-xs-12">
-                        <button type="button" class="btn btn-primary" disabled>Save</button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
+@extends('layouts.profile.profile-layouts')
+@section('company-profile-tab')
+<div class="container-fluid padding">
+  <div class="row">
+    <div class="container-fluid">
+      <form class="form-horizontal margin-top">
+        <div class="form-group">
+          <label class="col-md-2 col-sm-12 col-xs-12 control-label">Package</label>
+          <div class="col-md-3 col-sm-12 col-xs-12">
+            <select class="selectpicker form-control" data-live-search="true">
+              <option value="">Choose your package</option>
+              <option value="free_trial">Free Trial</option>
+              <option value="basic">Basic</option>
+              <option value="regular">Regular</option>
+              <option value="regular_plus" selected="">Regular +</option>
+            </select>
           </div>
+        </div>
 
-          <div role="tabpanel" class="tab-pane bg-white border-tab-pane" id="up">
-            <!-- This is for company profile id -->
-            <div class="container-fluid padding">
-              <div class="">
-                <div class="container-fluid">
-                  <form class="form-horizontal margin-top">
-                    <div class="row">
-                      <div class="form-group">
-                        <!-- Note dari client untuk user type -->
-                        <!--
-                          User type: master, manager buyer, manager sales, staff sales, staff buyer 1-5 (jika 1 sudah diambil tidak bisa di register ulang)
-                          Untuk master user, reset harus menghubungi customer service Sprout. Email digunakan untuk reset password dan aktivasi user.
-                        -->
-                        <label class="col-md-2 col-sm-12 col-xs-12 control-label">User Type <small class="text-danger"><strong>(required)</strong></small></label>
-                        <div class="col-md-4 col-sm-12 col-xs-12">
-                          <select class="form-control" disabled>
-                            <option value="">Choose user type</option>
-                            <option value="master_procurement_manager" selected="">Master Procurement Manager</option>
-                            <option value="master_sales_manager">Master Sales Manager</option>
-                            <option value="procurement_manager">Procurement Manager</option>
-                            <option value="procurement_staff">Procurement Staff</option>
-                            <option value="sales_manager">Sales Manager</option>
-                            <option value="sales_staff">Sales Staff</option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="col-md-2 col-sm-12 col-xs-12 control-label">Email <small class="text-danger"><strong>(required)</strong></small></label>
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                          <input type="text" class="form-control" placeholder="Email" value="jason@statham.com">
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="col-md-2 col-sm-12 col-xs-12 control-label">First Name <small class="text-danger"><strong>(required)</strong></small></label>
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                          <input type="text" class="form-control" placeholder="First Name" value="Jason">
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="col-md-2 col-sm-12 col-xs-12 control-label">Last Name <small class="text-danger"><strong>(required)</strong></small></label>
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                          <input type="text" class="form-control" placeholder="Last Name" value="Statham">
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="col-md-2 col-sm-12 col-xs-12 control-label">Username <small class="text-danger"><strong>(required)</strong></small></label>
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                          <input type="text" class="form-control" placeholder="Username" value="jasonstatham">
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="col-md-2 col-sm-12 col-xs-12 control-label">Job Title <small class="text-danger"><strong>(required)</strong></small></label>
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                          <input type="text" class="form-control" placeholder="Job Title" value="Sales Manager">
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="col-md-2 col-sm-12 col-xs-12 control-label">Upload Photo <small class="text-muted"><strong>(optional)</strong></small></label>
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                          <img src="../../images/avatar.jpg" alt="Avatar" width="150" height="150">
-                          <input type="file">
-                          <p class="help-block">Insert your photo as profile picture</p>
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="col-md-2 col-sm-12 col-xs-12 control-label">Password <small class="text-danger"><strong>(required)</strong></small></label>
-                        <div class="col-md-6">
-                          <input type="password" class="form-control" placeholder="Password">
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="col-md-2 col-sm-12 col-xs-12 control-label">Confirm Password <small class="text-danger"><strong>(required)</strong></small></label>
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                          <input type="password" class="form-control" placeholder="Confirm Password">
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <div class="col-md-6 col-md-offset-2">
-                          <a href="#" class="btn btn-primary">Change Data</a>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
+        <div class="form-group">
+          <label class="col-md-2 col-sm-12 col-xs-12 control-label">Business Entity</label>
+          <div class="col-md-3 col-sm-12 col-xs-12">
+            <select class="selectpicker form-control">
+              <option value="">Choose business entity</option>
+              <option value="pt" selected>PT</option>
+              <option value="cv">CV</option>
+              <option value="pd">PD</option>
+            </select>
           </div>
-
-          <div role="tabpanel" class="tab-pane bg-white border-tab-pane" id="bc">
-            <!-- This is for company profile person -->
-            <div class="container-fluid padding">
-              <div class="row">
-                <!--<div class="col-md-12 col-sm-12 col-xs-12 margin-top margin-bottom">
-                  <a href="#addBc" data-toggle="modal" class="btn btn-primary">
-                    Add Business Category
-                  </a>
-                </div>-->
-                <div class="col-md-12 col-sm-12 col-xs-12 margin-top">
-                  <div class="table-responsive">
-                    <table class="table table-middle table-bordered table-hover">
-                      <thead>
-                        <tr>
-                          <th>Section</th>
-                          <th>Section Name</th>
-                          <th>Division</th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>Section A</td>
-                          <td>Agriculture, forestry and fishing</td>
-                          <td>Division 1, Division 2</td>
-                          <td>
-                            <a href="#detailBc" data-toggle="modal" class="btn btn-orange btn-sm">Detail</a>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <div class="row">
-                    <div class="col-md-8 col-sm-8 col-xs-8">
-                      <div class="form-group">
-                        <label>Package</label>
-                        <input type="text" class="form-control" disabled="" value="Regular +">
-                      </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-4 col-xs-4">
-                      <!--<div class="wrapper-btn-bc">
-                        <a href="#addAccount" class="btn btn-primary" data-toggle="modal">Add Account</a>
-                      </div>-->
-                    </div>
-
-                    <div class="col-md-8 col-sm-8 col-xs-8">
-                      <div class="form-group">
-                        <label>Account Expired Date</label>
-                        <input type="text" class="form-control" disabled="" value="10 November 2018">
-                      </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-4 col-xs-4">
-                      <div class="wrapper-btn-bc">
-                        <a href="#reActivate" class="btn btn-success" data-toggle="modal" disabled>Re-Activate</a>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 col-sm-12 col-xs-12 control-label">Company Name</label>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <input type="text" class="form-control" value="Argomas Internusa">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 col-sm-12 col-xs-12 control-label">Company Tagline</label>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <input type="text" class="form-control" value="Company Tagline Company Tagline">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 col-sm-12 col-xs-12 control-label">Address</label>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <textarea class="form-control no-resize" rows="6">Ki. Antapani Lama No. 365, BaBel</textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 col-sm-12 col-xs-12 control-label">Province &amp; City</label>
+          <div class="col-md-3 col-sm-12 col-xs-12">
+            <select class="selectpicker form-control" data-live-search="true">
+              <option value="">Select Province</option>
+              <option value="1" selected>Aceh</option>
+              <option value="2">Bali</option>
+              <option value="3">Bangkulu</option>
+              <option value="4">Banten</option>
+            </select>
+          </div>
+          <div class="col-md-3 col-sm-12 col-xs-12">
+            <select class="selectpicker form-control" data-live-search="true">
+              <option value="">Select City</option>
+              <option value="1" selected>Mana Saja</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 col-sm-12 col-xs-12 control-label">Zip Code</label>
+          <div class="col-md-6 col-sm-4 col-xs-4">
+            <input type="text" class="form-control" value="15560">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 col-sm-12 col-xs-12 control-label">Phone Number</label>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="row">
+              <div class="col-md-3 col-sm-3 col-xs-3">
+                <input type="text" class="form-control" value="021">
+              </div>
+              <div class="col-md-1 col-sm-1 col-xs-1">
+                <label class="control-label">-</label>
+              </div>
+              <div class="col-md-8 col-sm-8 col-xs-8">
+                <input type="text" class="form-control" value="55772211">
               </div>
             </div>
           </div>
         </div>
+        <div class="form-group">
+          <label class="col-md-2 col-sm-12 col-xs-12 control-label">Mobile Phone</label>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <input type="text" class="form-control" value="085678910">
+          </div>
+        </div>
+        <div class="wpMainProduct">
+          <div id="removeMp" class="form-group">
+            <div class="col-md-12 no-padding main-product">
+              <label class="col-md-2 col-sm-12 col-xs-12 control-label labelfirst">Main Product</label>
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <input id="mp-1" type="text" class="form-control inline-input" value="Frozen Fish">
+                <button type="button" class="btn btn-sm btn-danger btn-remove-main-product"><i class="fa fa-minus"></i></button>
+              </div>
+            </div>
+            <div id="appendMp"></div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-offset-2 col-sm-12 col-xs-12">
+              <button type="button" id="addMainProduct" class="btn btn-sm btn-primary">Add Main Product</button>
+            </div>
+          </div>
+        </div>
+        <div class="wrapperCataloguePrf">
+          <div id="removeCataloguePrf" class="form-group">
+            <div class="">
+              <label class="col-md-2 col-sm-12 col-xs-12 control-label">Product Catalogue</label>
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <input type="text" class="form-control" placeholder="Product Catalogue" disabled>
+              </div>
+
+              <div class="col-md-4 col-sm-4 col-xs-6 margin-top-med-and-down">
+                <input type="file">
+                <p class="help-block hide-on-med-and-down">(.docx, .pdf, or photo of document Product Catalogue)</p>
+              </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label class="col-md-2 col-sm-0 col-xs-0 control-label"></label>
+                <div class="col-md-10 col-sm-12 col-xs-12">
+                  <a href="#" class="btn btn-success">Open Document</a>
+                  <a href="#delete" data-toggle="modal" class="btn btn-danger">Delete Document</a>
+                  <p class="help-block">Certificate Halal</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-md-2 col-sm-0 col-xs-0 control-label"></label>
+                <div class="col-md-10 col-sm-12 col-xs-12">
+                  <a href="../storage/sample.pdf" class="btn btn-success">Open Document</a>
+                  <a href="#deleteDoc" class="btn btn-danger">Delete Document</a>
+                  <p class="help-block">Catalogue 1</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 col-sm-12 col-xs-12 control-label">Contact Name</label>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <input type="text" class="form-control" value="Cahyo Gumilang">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 col-sm-12 col-xs-12 control-label">Interested Program</label>
+          <div class="col-md-2 col-sm-2 col-xs-2">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="program[]" checked> Selling
+              </label>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-3 col-xs-3">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="program[]" checked> Buying
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 col-sm-12 col-xs-12 control-label">Company Status</label>
+          <div class="col-md-2 col-sm-2 col-xs-2">
+            <div class="radio">
+              <label>
+                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked >
+                PKP
+              </label>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-3 col-xs-3">
+            <div class="radio">
+              <label>
+                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                Non PKP
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 col-sm-12 col-xs-12 control-label">Required Document</label>
+          <div class="col-md-10 col-sm-12 col-xs-12">
+            <a href="../storage/sample.pdf" class="btn btn-success">Open Document</a>
+            <a href="#delete" data-toggle="modal" class="btn btn-danger">Delete Document</a>
+            <p class="help-block">Scan of Business Licence / SIUP</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 col-sm-12 col-xs-12 control-label"></label>
+          <div class="col-md-10 col-sm-12 col-xs-12">
+            <a href="../storage/sample.pdf" class="btn btn-success">Open Document</a>
+            <a href="#delete" data-toggle="modal" class="btn btn-danger">Delete Document</a>
+            <p class="help-block">Scan of Tax ID / NPWP</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 col-sm-12 col-xs-12 control-label">Certification <small><strong>(optional)</strong></small></label>
+          <div class="col-md-10 col-sm-12 col-xs-12">
+            <a href="../storage/sample.pdf" class="btn btn-success">Open Document</a>
+            <a href="#delete" class="btn btn-danger">Delete Document</a>
+            <p class="help-block">Certificate 1081</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 col-sm-0 col-xs-0 control-label"></label>
+          <div class="col-md-10 col-sm-12 col-xs-12" style="margin-bottom: 10px;">
+            <img src="../images/amazon.png" class="show-logo" alt="Amazon">
+          </div>
+
+          <div class="hide-on-med-and-down">
+            <br><br><br><br><br>
+          </div>
+
+          <label class="col-md-2 col-sm-12 col-xs-12 control-label">Company Logo</label>
+          <div class="col-md-10 col-sm-12 col-xs-12">
+            <label class="btn btn-primary btn-file">
+              Browse <input type="file" class="hide">
+            </label>
+            <a href="../../images/amazon.png" class="btn btn-success">Open Logo</a>
+            <a href="#delete" data-toggle="modal" class="btn btn-danger">Delete Logo</a>
+            <p class="help-block">Insert image logo with format .png</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-10 col-md-offset-2 col-sm-12 col-xs-12">
+            <button type="button" class="btn btn-primary">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+@endsection 
+@section('business-category-tab')
+<div class="container-fluid padding">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12 margin-top">
+      <div class="table-responsive">
+        <table class="table table-middle table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Section</th>
+              <th>Section Name</th>
+              <th>Division</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Section A</td>
+              <td>Agriculture, forestry and fishing</td>
+              <td>Division 1, Division 2</td>
+              <td>
+                <a href="#detailBc" data-toggle="modal" class="btn btn-orange btn-sm">Detail</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="col-md-3 col-sm-12 col-xs-12 hide-on-med-and-down">
-        <ul class="no-ul-style menu-wrapper">
-          <li>
-            <a href="home.html" class="btn btn-orange btn-lg padding-transition no-border-radius">
-              <i class="pull-left fa fa-home padding-top-2px padding-right-8px"></i> <span>Home</span>
-            </a>
-          </li>
-          <li>
-            <a href="post-buy-lead.html" class="btn btn-orange btn-lg padding-transition no-border-radius">
-              <i class="pull-left fa fa-pencil-square padding-top-2px padding-right-8px"></i> <span>Post Buy Lead</span>
-            </a>
-          </li>
-          <li>
-            <a href="company-database.html" class="btn btn-orange btn-lg padding-transition no-border-radius">
-              <i class="pull-left fa fa-building padding-top-2px padding-right-8px"></i> <span>Company Database</span>
-            </a>
-          </li>
-          <li>
-            <a href="meeting-schedule.html" class="btn btn-orange btn-lg padding-transition no-border-radius">
-              <i class="pull-left fa fa-calendar padding-top-2px padding-right-8px"></i> <span>Meeting Schedule</span>
-            </a>
-          </li>
-          <li>
-            <a href="profile.html" class="btn btn-orange btn-lg active-orange padding-transition no-border-radius">
-              <i class="pull-left fa fa-gear padding-top-2px padding-right-8px"></i> <span>Profile</span>
-            </a>
-          </li>
-          <li>
-            <a href="../home-login.html" class="btn btn-orange btn-lg padding-transition no-border-radius">
-              <i class="pull-left fa fa-power-off padding-top-2px padding-right-8px"></i> <span>Logout</span>
-            </a>
-          </li>
-        </ul>
+    </div>
+
+    <div class="col-md-12 col-sm-6 col-xs-12">
+      <div class="row">
+        <div class="col-md-10 col-sm-12 col-xs-12">
+          <div class="form-group">
+            <label class="block">Package</label>
+            <div class="col-md-8 col-sm-8 col-xs-12 no-padding-left">
+              <input type="text" class="form-control" disabled value="Regular +">
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+             <a href="#" class="inline-block"><i class="fa fa-question-circle"></i> Package Information</a>
+           </div>
+         </div>
+       </div>
+
+       <br><br><br><br>
+
+       <div class="col-md-10 col-sm-12 col-xs-12">
+        <div class="col-md-8 col-sm-12 col-xs-12 no-padding-left">
+          <div class="form-group">
+            <label>Account Duration</label>
+            <input type="text" class="form-control"  value="10 November 2018" disabled>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-12 col-xs-12 no-padding-left">
+          <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="wrapper-btn-bc">
+              <a href="#reactivate" class="btn btn-primary" data-toggle="modal">Re-Activate</a>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="wrapper-btn-bc">
+              <a href="#requestAddon" class="btn btn-primary" data-toggle="modal">Request Add-On</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8 col-sm-12 col-xs-12 no-padding-left">
+          <div class="form-group">
+            <label>Add-On Duration</label>
+            <input type="text" class="form-control"  value="10 November 2018" disabled>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-12 col-xs-12">
+          <div class="wrapper-btn-bc">
+            <a href="#reactivateAddon" class="btn btn-primary" data-toggle="modal">Re-Activate Add-On</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
+</div>
+</div>
+@endsection
+@section('modal')
   <div class="modal fade" id="detailBc" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
@@ -520,37 +434,26 @@
     </div>
   </div>
 
-  <div class="modal fade" id="reActivate" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">To Re-Activate Account Please Call +62 816627 7562</h4>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="manageAccount" tabindex="-1" role="dialog">
+  <div class="modal fade" id="manageEmployee" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Manage Account</h4>
+          <h4 class="modal-title">Manage Employee</h4>
         </div>
         <div class="modal-body">
-          <a href="#addAccount" data-toggle="modal" class="btn btn-primary">Add Account</a>
+          <a href="#addEmployee" data-toggle="modal" class="btn btn-primary">Add Employee</a>
+          <br><br>
+          <h4><label class="label label-primary">Sisa Kuota User: 3</label></h4>
           <div class="table-responsive margin-top">
-            <table class="table table-hover">
+            <table class="table table-hover table-middle">
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Role</th>
+                  <th>Jabatan</th>
                   <th>Nama</th>
-                  <th>Username</th>
+                  <td>Status</td>
+                  <th>Head Manager</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -558,51 +461,71 @@
                 <tr>
                   <td>1</td>
                   <td>Procurement Manager</td>
-                  <td>Sakura</td>
-                  <td>sakurachan</td>
+                  <td>Sakura Uzumaki</td>
                   <td>
-                    <a href="#editAccount" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
-                    <a href="#" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this?');">Delete</a>
+                    <label class="btn btn-danger btn-sm">
+                      <i class="fa fa-close"></i>
+                    </label>
+                  </td>
+                  <td>
+                    <a href="#" class="btn btn-primary btn-sm">Set as head</a>
+                  </td>
+                  <td>
+                    <a href="#editEmployee" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="#deleteEmployee" data-toggle="modal" class="btn btn-danger btn-sm">Delete</a>
                   </td>
                 </tr>
                 <tr>
                   <td>2</td>
-                  <td>Procurement Staff</td>
-                  <td>Ino</td>
-                  <td>inochan</td>
+                  <td>Procurement Manager</td>
+                  <td>Sakura</td>
                   <td>
-                    <a href="#editAccount" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
-                    <a href="#" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this?');">Delete</a>
+                    <label class="btn btn-success btn-sm">
+                      <i class="fa fa-check"></i>
+                    </label>
+                  </td>
+                  <td>
+                    <a href="#" class="btn btn-warning btn-sm">Cancel as head</a>
+                  </td>
+                  <td>
+                    <a href="#editEmployee" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="#deleteEmployee" data-toggle="modal" class="btn btn-danger btn-sm">Delete</a>
                   </td>
                 </tr>
                 <tr>
                   <td>3</td>
-                  <td>Sales Staff</td>
-                  <td>Hinata</td>
-                  <td>hinatachan</td>
+                  <td>Procurement Staff</td>
+                  <td>Sakura</td>
+                  <td></td>
                   <td>
-                    <a href="#editAccount" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
-                    <a href="#" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this?');">Delete</a>
+                  </td>
+                  <td>
+                    <a href="#editEmployee" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="#deleteEmployee" data-toggle="modal" class="btn btn-danger btn-sm">Delete</a>
                   </td>
                 </tr>
                 <tr>
                   <td>4</td>
-                  <td>Sales Manager</td>
-                  <td>Ishida</td>
-                  <td>ishidakun</td>
+                  <td>Procurement Staff</td>
+                  <td>Sakura</td>
+                  <td></td>
                   <td>
-                    <a href="#editAccount" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
-                    <a href="#" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this?');">Delete</a>
+                  </td>
+                  <td>
+                    <a href="#editEmployee" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="#" class="btn btn-danger btn-sm">Delete</a>
                   </td>
                 </tr>
                 <tr>
                   <td>5</td>
-                  <td>Procurement Manager</td>
-                  <td>Kuroko</td>
-                  <td>kurokokun</td>
+                  <td>Procurement Staff</td>
+                  <td>Sakura</td>
+                  <td></td>
                   <td>
-                    <a href="#editAccount" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
-                    <a href="#" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this?');">Delete</a>
+                  </td>
+                  <td>
+                    <a href="#editEmployee" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="#deleteEmployee" data-toggle="modal" class="btn btn-danger btn-sm">Delete</a>
                   </td>
                 </tr>
               </tbody>
@@ -616,12 +539,12 @@
     </div>
   </div>
 
-  <div class="modal fade" id="addAccount" tabindex="-1" role="dialog">
+  <div class="modal fade" id="addEmployee" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Add Account</h4>
+          <h4 class="modal-title">Add Employee</h4>
         </div>
         <div class="modal-body">
           <form action="">
@@ -695,12 +618,12 @@
     </div>
   </div>
 
-  <div class="modal fade" id="editAccount" tabindex="-1" role="dialog">
+  <div class="modal fade" id="editEmployee" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Edit Account</h4>
+          <h4 class="modal-title">Edit Employee</h4>
         </div>
         <div class="modal-body">
           <form action="">
@@ -710,41 +633,38 @@
                   <label>User Type</label>
                   <select class="form-control">
                     <option value="">Choose user type</option>
-                    <option value="" selected="">Procurement Manager</option>
                     <option value="">Procurement Staff</option>
-                    <option value="">Sales Manager</option>
-                    <option value="">Sales Staff</option>
                   </select>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label>First Name</label>
-                  <input type="text" class="form-control" value="Uzumaki">
+                  <input type="text" class="form-control">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label>Last Name</label>
-                  <input type="text" class="form-control" value="Naruto">
+                  <input type="text" class="form-control">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label>Email</label>
-                  <input type="email" class="form-control" value="uzumaki@gmail.com">
+                  <input type="email" class="form-control">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label>Username</label>
-                  <input type="text" class="form-control" value="narutouzumaki">
+                  <input type="text" class="form-control">
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group">
                   <label>Job Title</label>
-                  <input type="text" class="form-control" value="Procurement Manager (Hokage)">
+                  <input type="text" class="form-control">
                 </div>
               </div>
               <div class="col-md-6">
@@ -771,43 +691,137 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Add</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
         </div>
       </div>
     </div>
   </div>
 
-  <div id="mySidenav" class="sidenav hide-on-large-only">
-    <div class="menu-content">
-      <a href="../home-login.html">
-        <i class="fa fa-power-off"></i> Logout
-      </a>
-      <a href="profile.html">
-        <i class="fa fa-gear"></i> Profile
-      </a>
-      <a href="meeting-schedule.html">
-        <i class="fa fa-calendar"></i> Meeting Schedule
-      </a>
-      <a href="company-database.html">
-        <i class="fa fa-building"></i> Company Database
-      </a>
-      <a href="post-buy-lead.html">
-        <i class="fa fa-pencil-square"></i> Post Buy Lead
-      </a>
-      <a href="home.html">
-        <i class="fa fa-home"></i> Home
-      </a>
-      <a href="javascript:void(0)" id="nav-btn-close" onclick="closeNav()"><i class="fa fa-close"></i></a>
-    </div>
-
-    <a href="javascript:void(0)">
-      <div class="menu-btn-container" id="nav-btn-open" onclick="openNav()">
-        <div class="menu-btn">
-          <i class="fa fa-bars"></i>
+  <div class="modal fade" id="deleteEmployee" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Are you sure want to delete this employee?</h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
         </div>
       </div>
-    </a>
+    </div>
   </div>
 
-  @include('layouts.user.mobile-menu')
+  <div class="modal fade" id="delete" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Are you sure want to delete this?</h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="reactivate" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Reactivate Account</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="optionsRadios" id="without" onclick="withaddOn();" value="option1" checked>
+                      Reactivate without addon
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="optionsRadios" id="with" onclick="withaddOn();" value="option2">
+                      Reactivate with addon
+                  </label>
+                </div>
+              </div>
+              <div id="ifWith" style="display: none;">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Total User</label>
+                    <input type="text" value="10" class="form-control" disabled>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Addon User</label>
+                    <input type="number" min="0" class="form-control">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Package</label>
+                  <select class="form-control">
+                    <option value="">Select Package</option>
+                    <option value="" selected>Basic</option>
+                    <option value="">Regular +</option>
+                    <option value="">Premium</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Duration</label>
+                  <select class="form-control">
+                    <option value="">Select Duration</option>
+                    <option value="" selected>1 Year</option>
+                    <option value="">2 Year</option>
+                    <option value="">3 Year</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Price</label>
+                  <select class="form-control">
+                    <option value="" selected>Rp. 1.000.000</option>
+                    <option value="">Rp. 2.000.000</option>
+                    <option value="">Rp. 3.000.000</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" data-target="#konfirmasiReactivate" class="btn btn-primary" data-dismiss="modal">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="konfirmasiReactivate" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Are you sure want to reactivate?</h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+          <button type="button" class="btn btn-primary reactivate-subs" data-dismiss="modal">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection

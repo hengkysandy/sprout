@@ -354,7 +354,7 @@ class BuyLeadController extends Controller
             'id_status' => 14, //submitted 
             'status' => 'active',
             ]);
-        return back(); 
+        return redirect('detailItem/'.$quotation->id); 
     }
 
     public function assignUser(Request $request, $id)

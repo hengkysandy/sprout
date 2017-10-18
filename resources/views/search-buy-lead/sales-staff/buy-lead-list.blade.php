@@ -1,5 +1,4 @@
 @extends('search-buy-lead.bl-list-master')
-
 @section('bl-content')
 <tbody>
   @foreach($buylead as $key => $value)
@@ -44,7 +43,11 @@
       @endif
     </td>
     <td>
+      @if($value->name == 'submitted')
+        <a href="detailItem/"{{$value->q_id}} class="btn btn-sm btn-default">Cek</a>
+      @else
       <a href="item/{{$value->id}}" class="btn btn-sm btn-default">Detail</a>
+      @endif
     </td>
   </tr>
   @endforeach

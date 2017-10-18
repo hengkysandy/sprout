@@ -135,7 +135,6 @@ class PageController extends Controller
         $currData->save();
 
         return back();
-
     }
     
     public function rfq() {

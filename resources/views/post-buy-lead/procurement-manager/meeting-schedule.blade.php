@@ -186,10 +186,10 @@
                   <label>Meeting Type</label>
                   <div>
                     <label class="radio-inline">
-                    <input id="internal" type="radio" value="0" name="meeting_type">Internal Meeting
+                    <input id="internal" type="radio" value="0" name="meeting_type" onchange="meetingTypeChange(1)">Internal Meeting
                     </label>
                     <label class="radio-inline">
-                      <input id="external" type="radio" value="1" name="meeting_type">External Meeting
+                      <input id="external" type="radio" value="1" name="meeting_type" onchange="meetingTypeChange(0)">External Meeting
                     </label>
                   </div>
                 </div>
@@ -205,25 +205,43 @@
               </div>
             </div>
             <div class="row ">
-              <div class="col-md-12 col-sm-12 col-xs-12 append-send-to">
-                <label>Send To</label>
-                <div class="send-to-Ms send-to" style="margin-bottom:10px">
-                  <select id="send-to-1" class="selectpicker" data-live-search="true" name="sendto[]">
-                    <option value="0">Select Company</option>
-                    @foreach($companyData as $row => $value)
-                    <option value="{{$value->id}}">{{$value->name}}</option>
-                    @endforeach
-                  </select>
-                  {{-- <input id="send-to-1" type="text" class="form-control inline-input"> --}}
-                  <a class="btn btn-danger btn-remove-send-to" style="float: right;  visibility: hidden" ><i class="fa fa-minus"></i></a>
+                <div class="col-md-12 col-sm-12 col-xs-12 append-send-to-company">
+                    <label>Send To</label>
+                    <div class="send-to-company-Ms send-to-company" style="margin-bottom:10px">
+                        <select id="send-to-company-1" class="selectpicker" data-live-search="true" name="sendto[]">
+                            <option value="0">Select Company</option>
+                            @foreach($companyData as $row => $value)
+                            <option value="{{$value->id}}">{{$value->name}}</option>
+                            @endforeach
+                        </select>
+                        {{-- <input id="send-to-company-1" type="text" class="form-control inline-input"> --}}
+                        <a class="btn btn-danger btn-remove-send-to-company" style="float: right;  visibility: hidden" ><i class="fa fa-minus"></i></a>
+                    </div>
                 </div>
-              </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 append-send-to-user">
+                    <label>Send To</label>
+                    <div class="send-to-user-Ms send-to-user" style="margin-bottom:10px">
+                        <select id="send-to-user-1" class="selectpicker" data-live-search="true" name="sendtouser[]">
+                            <option value="0">Select User</option>
+                            @foreach($companyUserList as $row => $value)
+                            <option value="{{$value['id']}}">{{$value['first_name']}} {{$value['last_name']}}</option>
+                            @endforeach
+                        </select>
+                        {{-- <input id="send-to-user-1" type="text" class="form-control inline-input"> --}}
+                        <a class="btn btn-danger btn-remove-send-to-user" style="float: right;  visibility: hidden" ><i class="fa fa-minus"></i></a>
+                    </div>
+                </div>
             </div>
-            <div class="row">
-              <div class="col-md-6 col-sm-12">
-                <a class="btn btn-default btn-add-send-to" >Add More</a>
+              <div class="row">
+                  <div class="col-md-6 col-sm-12">
+                      <a class="btn btn-default btn-add-send-to-company" >Add More</a>
+                  </div>
               </div>
-            </div>
+              <div class="row">
+                  <div class="col-md-6 col-sm-12">
+                      <a class="btn btn-default btn-add-send-to-user" >Add More</a>
+                  </div>
+              </div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group">
@@ -554,6 +572,26 @@
       });
       }
     });
+
+      meetingTypeChange(2);
   });
+  function meetingTypeChange(type){
+      if(type===0){
+          $('.append-send-to-company').show();
+          $('.append-send-to-user').hide();
+          $('.btn-add-send-to-user').hide();
+          $('.btn-add-send-to-company').show();
+      }else if(type==1){
+          $('.append-send-to-company').hide();
+          $('.append-send-to-user').show();
+          $('.btn-add-send-to-user').show();
+          $('.btn-add-send-to-company').hide();
+      }else{
+          $('.append-send-to-company').hide();
+          $('.append-send-to-user').hide();
+          $('.btn-add-send-to-user').hide();
+          $('.btn-add-send-to-company').hide();
+      }
+  }
 </script>
 @endsection

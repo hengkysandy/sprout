@@ -855,20 +855,22 @@ a#menu-share:hover > i {
 .favourite-false i {
   color: black; }
 
-.send-to-div {
+.send-to-company-div {
   margin-bottom: 15px; }
-  .send-to-div .inline-input {
+  .send-to-company-div .inline-input {
     width: 83% !important;
     display: inline-block !important; }
-    .send-to-Ms .inline-input {
+    .send-to-company-Ms .inline-input {
     width: 90% ;
     display: inline-block !important; }
 
-.send-to-Ms > .bootstrap-select{
+.send-to-company-Ms > .bootstrap-select{
   width: 90% !important;
 }
 
-.btn-add-send-to {
+.btn-add-send-to-company {
+  margin-bottom: 15px; }
+.btn-add-send-to-user {
   margin-bottom: 15px; }
 
 #removeMp {
@@ -1266,7 +1268,7 @@ a#menu-share:hover > i {
           .dash-menu li:hover a:hover {
             color: #141916; } 
 
-          .send-to-Ms .inline-input {
+          .send-to-company-Ms .inline-input {
     width: 88% ; } }
 
 @media screen and (max-width: 375px) {
@@ -1385,7 +1387,7 @@ a#menu-share:hover > i {
     color: #ffffff;
     font-weight: 700; } 
 
-  .send-to-Ms .inline-input {
+  .send-to-company-Ms .inline-input {
     width: 88% ; } }
 
 .btn-file {

@@ -138,17 +138,17 @@
         <div class="modal-body">
           <form>
             <div class="row ">
-              <div class="col-md-12 col-sm-12 col-xs-12 append-send-to">
+              <div class="col-md-12 col-sm-12 col-xs-12 append-send-to-company">
                   <label>Send To</label>
-                  <div class="send-to-div send-to" >
-                    <input id="send-to-1" type="text" class="form-control inline-input">
-                    <a class="btn btn-danger btn-remove-send-to" ><i class="fa fa-minus"></i></a>
+                  <div class="send-to-company-div send-to-company" >
+                    <input id="send-to-company-1" type="text" class="form-control inline-input">
+                    <a class="btn btn-danger btn-remove-send-to-company" ><i class="fa fa-minus"></i></a>
                   </div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-12 col-sm-12">
-                <a class="btn btn-default btn-add-send-to" >Add More</a>
+                <a class="btn btn-default btn-add-send-to-company" >Add More</a>
               </div>
             </div>
             <div class="row">

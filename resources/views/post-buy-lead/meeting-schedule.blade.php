@@ -205,23 +205,23 @@
               </div>
             </div>
             <div class="row ">
-              <div class="col-md-12 col-sm-12 col-xs-12 append-send-to">
+              <div class="col-md-12 col-sm-12 col-xs-12 append-send-to-company">
                 <label>Send To</label>
-                <div class="send-to-Ms send-to" style="margin-bottom:10px">
-                  <select id="send-to-1" class="selectpicker" data-live-search="true" name="sendto[]">
+                <div class="send-to-company-Ms send-to-company" style="margin-bottom:10px">
+                  <select id="send-to-company-1" class="selectpicker" data-live-search="true" name="sendto[]">
                     <option value="0">Select Company</option>
                     @foreach($companyData as $row => $value)
                     <option value="{{$value->id}}">{{$value->name}}</option>
                     @endforeach
                   </select>
-                  {{-- <input id="send-to-1" type="text" class="form-control inline-input"> --}}
-                  <a class="btn btn-danger btn-remove-send-to" style="float: right;  visibility: hidden" ><i class="fa fa-minus"></i></a>
+                  {{-- <input id="send-to-company-1" type="text" class="form-control inline-input"> --}}
+                  <a class="btn btn-danger btn-remove-send-to-company" style="float: right;  visibility: hidden" ><i class="fa fa-minus"></i></a>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6 col-sm-12">
-                <a class="btn btn-default btn-add-send-to" >Add More</a>
+                <a class="btn btn-default btn-add-send-to-company" >Add More</a>
               </div>
             </div>
             <div class="row">

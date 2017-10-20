@@ -1100,28 +1100,48 @@ $(document).ready(function(){
       $('.btn-remove-assign:first').css('visibility','hidden')
     });
 
-    //add send to
-    $('body').on('click','.btn-add-send-to', function (event) {
-      console.log('test');
-      var $initNumber = $(".send-to").length;
-      $initNumber++;
-      var $newId = "send-to-"+$initNumber;
-      var $orginal = $('.send-to:first');
-      var $cloned = $orginal.clone().addClass('cloned');
-      $cloned.find('.bootstrap-select').replaceWith(function() { return $('select', this); });
-      $cloned.find('select').selectpicker(); 
-      //$cloned.find('.btn-add-send-to').replaceWith('<a class="btn btn-danger btn-remove-send-to"><i class="fa fa-minus"></i></a>');
-      $cloned.find(".btn-remove-send-to").css('visibility','visible');
-      $cloned.find("#send-to-1").attr('id',$newId);
-      $cloned.appendTo('.append-send-to');
-    });
+//add send to
+$('body').on('click','.btn-add-send-to-company', function (event) {
+    console.log('test');
+    var $initNumber = $(".send-to-company").length;
+    $initNumber++;
+    var $newId = "send-to-company-"+$initNumber;
+    var $orginal = $('.send-to-company:first');
+    var $cloned = $orginal.clone().addClass('cloned');
+    $cloned.find('.bootstrap-select').replaceWith(function() { return $('select', this); });
+    $cloned.find('select').selectpicker();
+    //$cloned.find('.btn-add-send-to-company').replaceWith('<a class="btn btn-danger btn-remove-send-to-company"><i class="fa fa-minus"></i></a>');
+    $cloned.find(".btn-remove-send-to-company").css('visibility','visible');
+    $cloned.find("#send-to-company-1").attr('id',$newId);
+    $cloned.appendTo('.append-send-to-company');
+});
+
+//add send to
+$('body').on('click','.btn-add-send-to-user', function (event) {
+    console.log('test');
+    var $initNumber = $(".send-to-user").length;
+    $initNumber++;
+    var $newId = "send-to-user-"+$initNumber;
+    var $orginal = $('.send-to-user:first');
+    var $cloned = $orginal.clone().addClass('cloned');
+    $cloned.find('.bootstrap-select').replaceWith(function() { return $('select', this); });
+    $cloned.find('select').selectpicker();
+    //$cloned.find('.btn-add-send-to-company').replaceWith('<a class="btn btn-danger btn-remove-send-to-company"><i class="fa fa-minus"></i></a>');
+    $cloned.find(".btn-remove-send-to-user").css('visibility','visible');
+    $cloned.find("#send-to-user-1").attr('id',$newId);
+    $cloned.appendTo('.append-send-to-user');
+});
     //delete send to
-    $('body').on('click','.btn-remove-send-to', function (event) {
-      $(this).closest('.send-to').remove();
-      console.log("removed");
-    });
+$('body').on('click','.btn-remove-send-to-company', function (event) {
+    $(this).closest('.send-to-company').remove();
+    console.log("removed");
+});
+$('body').on('click','.btn-remove-send-to-user', function (event) {
+    $(this).closest('.send-to-user').remove();
+    console.log("removed");
+});
 /*    $("body").on('show.bs.modal', '#addMs', function () {
-        $('.btn-remove-send-to:first').css('visibility','hidden')
+        $('.btn-remove-send-to-company:first').css('visibility','hidden')
     });
 */
 function openNav() {

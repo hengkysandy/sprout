@@ -37,7 +37,7 @@ class Company extends Model
 
     public function CompanyStatusFor()
     {
-    	return $this->hasMany(CompanyStatus::class,'id_company_For','id');
+    	return $this->hasMany(CompanyStatus::class,'id_company_for','id');
     }
 
     

@@ -39,7 +39,7 @@ class BuyLeadController extends Controller
         $data['provinceData'] = $indo->allProvinces();
         $data['shippingData'] = ShippingTerm::all();
         $data['buyLeadData'] = BuyLead::latest('created_at')->get();
-        $data['notAssignedCompany'] = Company::where('company.id','!=',session()->get('companySession')[0]->id)
+        $data['anotherCompany'] = Company::where('company.id','!=',session()->get('companySession')[0]->id)
             ->get();
 
         return view('post-buy-lead.post-buy-lead', $data);
@@ -64,6 +64,18 @@ class BuyLeadController extends Controller
                 'status' => 'active',
             ]);
         }
+
+        return back();
+    }
+
+    public function doRemoveAssignedCompany(Request $request)
+    {
+        $currData = CompanyStatus::where('id_company_by', session()->get('companySession')[0]->id)
+            ->where('id_company_for',$request->id)
+            ->where('id_status',16)
+            ->first();
+
+        $currData->delete();
 
         return back();
     }

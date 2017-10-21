@@ -38,16 +38,18 @@
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach($notAssignedCompany as $acKey => $acData)
-                        @if( !empty($acData->CompanyStatusFor()->first()) )
-                          @if($acData->CompanyStatusFor()->first()->id_status == 16 && $acData->CompanyStatusFor()->first()->id_company_by == session()->get('companySession')[0]->id)
+                      @foreach($anotherCompany as $acKey => $acData)
+                        @if( !empty($acData->CompanyStatusFor()->get()) )
+
+                        @if($acData->CompanyStatusFor()->where('id_status',16)->first() && $acData->CompanyStatusFor()->where('id_company_by',session()->get('companySession')[0]->id)->first())
                           <tr>
                             <td>{{++$acKey}}</td>
                             <td>{{$acData->id}}</td>
                             <td>{{$acData->name}}</td>
-                            <td><a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a></td>
+                            <td><a href="{{url('doRemoveAssignedCompany?id='.$acData->id)}}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a></td>
                           </tr>
-                          @endif
+                        @endif
+
                         @endif
                       @endforeach
                     </tbody>

@@ -26,8 +26,8 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach($notAssignedCompany as $acKey => $acData)
-                  @if(empty($acData->CompanyStatusFor()->first()) || $acData->CompanyStatusFor()->first()->id_status != 16)
+                @foreach($anotherCompany as $acKey => $acData)
+                  @if(empty($acData->CompanyStatusFor()->first()))
                     <tr>
                       <td>{{++$acKey}}</td>
                       <td>{{$acData->id}}</td>

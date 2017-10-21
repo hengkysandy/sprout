@@ -73,6 +73,7 @@ Route::group(['middleware' => 'checkUser','checkSales'],function(){
     Route::post('createQuotation','BuyLeadController@createQuotation');
     Route::post('assignUser/{id}','BuyLeadController@assignUser');
     Route::post('doAssignCompanyBuyLead','BuyLeadController@doAssignCompanyBuyLead');
+    Route::get('doRemoveAssignedCompany','BuyLeadController@doRemoveAssignedCompany');
 
     Route::post('doCreateRevise','BuyLeadController@doCreateRevise');
     Route::get('getQuotationDataAjax/{id}','BuyLeadController@getQuotationDataAjax');

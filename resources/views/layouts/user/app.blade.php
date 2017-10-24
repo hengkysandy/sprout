@@ -22,6 +22,10 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('css/fullcalendar.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('css/fullcalendar.print.css') }}" media="print">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
+  <meta name="fullpathAssignCompany" content="{{ URL::to('doAssignCompanyBuyLead') }}">
+  <meta name="fullpathRemoveAssign" content="{{ URL::to('doRemoveAssignedCompany') }}">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
   <script src="{{ asset('js/jquery.min.js') }}"></script>

@@ -25,17 +25,21 @@
                   <th></th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="notAssigned-tbody">
                 @foreach($anotherCompany as $acKey => $acData)
-                  @if(empty($acData->CompanyStatusFor()->first()))
+                  @if(
+                  empty($acData->CompanyStatusFor()->first()) 
+                  || 
+                  $acData->CompanyStatusFor()->where('id_status','!=',16)->first()
+                  )
                     <tr>
                       <td>{{++$acKey}}</td>
                       <td>{{$acData->id}}</td>
                       <td>{{$acData->name}}</td>
                       <td>
-                        <div class="checkbox">
+                        <div class="checkbox-company">
                           <label>
-                            <input type="checkbox"  name="listOfCompanyId[]" value="{{$acData->id}}">
+                            <input type="checkbox" name="listOfCompanyId[]" value="{{$acData->id}}">
                           </label>
                         </div>
                       </td>
@@ -52,7 +56,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submitt" class="btn btn-primary">Add</button>
+            <button type="submit" class="btn btn-primary add-assign">Add</button>
           </div>
           </form>
         </div>

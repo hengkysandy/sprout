@@ -37,7 +37,7 @@
                         <th>Action</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="assigned-tbody">
                       @foreach($anotherCompany as $acKey => $acData)
                         @if( !empty($acData->CompanyStatusFor()->get()) )
 
@@ -46,7 +46,7 @@
                             <td>{{++$acKey}}</td>
                             <td>{{$acData->id}}</td>
                             <td>{{$acData->name}}</td>
-                            <td><a href="{{url('doRemoveAssignedCompany?id='.$acData->id)}}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a></td>
+                            <td><a href="{{url('doRemoveAssignedCompany?id='.$acData->id)}}" data-value="{{$acData->id}}" class="btn btn-sm btn-danger remove-assign"><i class="fa fa-trash"></i></a></td>
                           </tr>
                         @endif
 

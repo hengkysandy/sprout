@@ -38,10 +38,25 @@ class BuyLeadController extends Controller
         $indo = new Indonesia();
         $data['provinceData'] = $indo->allProvinces();
         $data['shippingData'] = ShippingTerm::all();
-        $data['buyLeadData'] = BuyLead::latest('created_at')->get();
+        // $data['buyLeadData'] = BuyLead::latest('created_at')->get();
+        // return $data['buyLeadData'][1]->User()->first()->Company()->first()->CompanyStatusBy()->where('id_status',16)->where('id_company_for',session()->get('companySession')[0]->id)->get();
+        // if(!$data['buyLeadData'][0]->User()->first()->Company()->first()->CompanyStatusBy()->where('id_status',16)->where('id_company_for',session()->get('companySession')[0]->id)->first()){
+        //     return 'ada data';
+        // }else{
+        //     return 'tidak ada data';
+        // }
+
+        $data['buyLeadData'] = [];
+        $count = 0;
+        foreach (BuyLead::latest('created_at')->get() as $key => $blData) {
+            if($blData->User()->first()->Company()->first()->CompanyStatusBy()->where('id_status',16)->where('id_company_for',session()->get('companySession')[0]->id)->first()){
+                $data['buyLeadData'][] = $blData;
+            }
+        }
+        // return $data['buyLeadData'];
         $data['anotherCompany'] = Company::where('company.id','!=',session()->get('companySession')[0]->id)
             ->get();
-
+        
         return view('post-buy-lead.post-buy-lead', $data);
 
         // if (session()->get('userSession')[0]->role_id == 2) {
@@ -55,7 +70,6 @@ class BuyLeadController extends Controller
 
     public function doAssignCompanyBuyLead(Request $request)
     {
-        // listOfCompanyId
         for ($i=0; $i < count($request->listOfCompanyId); $i++) {
             CompanyStatus::create([
                 'id_company_by' => session()->get('companySession')[0]->id,
@@ -65,7 +79,36 @@ class BuyLeadController extends Controller
             ]);
         }
 
-        return back();
+        $response = [];
+        $notAssignedComp = [];
+        $assignedComp = [];
+
+        $data['anotherCompany'] = Company::where('company.id','!=',session()->get('companySession')[0]->id)
+            ->get();
+
+        foreach ($data['anotherCompany'] as $acKey => $acData) {
+            if(empty($acData->CompanyStatusFor()->first())){
+                $r['notAssigned'] = $acData;
+                $notAssignedComp[] = $r['notAssigned'];
+            }else if($acData->CompanyStatusFor()->where('id_status','!=',16)->first() ){
+                $r['notAssigned'] = $acData;
+                $notAssignedComp[] = $r['notAssigned'];
+            }
+        }
+
+        $response['notAssigned'] = $notAssignedComp;
+
+        foreach ($data['anotherCompany'] as $acKey => $acData) {
+            if($acData->CompanyStatusFor()->where('id_status','=',16)->first() && $acData->CompanyStatusFor()->where('id_company_by',session()->get('companySession')[0]->id)->first()){
+                $r['assigned'] = $acData;
+                $assignedComp[] = $r['assigned'];
+            }
+            
+        }
+        
+        $response['assigned'] = $assignedComp;
+
+        return response()->json($response);
     }
 
     public function doRemoveAssignedCompany(Request $request)
@@ -77,7 +120,36 @@ class BuyLeadController extends Controller
 
         $currData->delete();
 
-        return back();
+        $response = [];
+        $notAssignedComp = [];
+        $assignedComp = [];
+
+        $data['anotherCompany'] = Company::where('company.id','!=',session()->get('companySession')[0]->id)
+            ->get();
+
+        foreach ($data['anotherCompany'] as $acKey => $acData) {
+            if(empty($acData->CompanyStatusFor()->first())){
+                $r['notAssigned'] = $acData;
+                $notAssignedComp[] = $r['notAssigned'];
+            }else if($acData->CompanyStatusFor()->where('id_status','!=',16)->first() ){
+                $r['notAssigned'] = $acData;
+                $notAssignedComp[] = $r['notAssigned'];
+            }
+        }
+
+        $response['notAssigned'] = $notAssignedComp;
+
+        foreach ($data['anotherCompany'] as $acKey => $acData) {
+            if($acData->CompanyStatusFor()->where('id_status','=',16)->first() && $acData->CompanyStatusFor()->where('id_company_by',session()->get('companySession')[0]->id)->first()){
+                $r['assigned'] = $acData;
+                $assignedComp[] = $r['assigned'];
+            }
+            
+        }
+        
+        $response['assigned'] = $assignedComp;
+
+        return response()->json($response);
     }
 
     public function doInsertBuyLead(Request $request)

@@ -1,4 +1,10 @@
 $(function() {
+
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
 	
 	// $(document).on('click','.chooseEdit',function(){
 	// 	$('#inputForm').attr('action', 'doUpdateUnit/'+$(this).val());
@@ -11,6 +17,74 @@ $(function() {
  //        	} 
  //    	});
 	// });
+
+    function reloadBroadcastData(data){
+        $("#assigned-tbody").empty();
+        $("#notAssigned-tbody").empty();
+
+        $.each( data.notAssigned, function( key, val ) {
+
+            var newRow = $("<tr>");
+            var cell1,cell1to2,cell2,cell3,cell4 = "";
+            cell1 = "<td>"+(key+1)+"</td>";
+            cell2 = "<td>"+val.id+"</td>";
+            cell3 = "<td>"+val.name+"</td>";
+            cell4 = "<td>"+"<div class='checkbox-company'><label><input type='checkbox' name='listOfCompanyId[]' value="+val.id+"></label></div>"+"</td>";
+
+            
+            newRow.html(cell1+cell2+cell3+cell4);
+            $("#notAssigned-tbody").append(newRow);
+        });
+
+
+        $.each( data.assigned, function( key, val ) {
+
+            var newRow = $("<tr>");
+            var cell1,cell1to2,cell2,cell3,cell4,my_url = "";
+            my_url = $('meta[name="fullpathRemoveAssign"]').attr('content')+"?id="+val.id;
+            cell1 = "<td>"+(key+1)+"</td>";
+            cell2 = "<td>"+val.id+"</td>";
+            cell3 = "<td>"+val.name+"</td>";
+            cell4 = "<td>"+"<div class='checkbox-company'><label><input type='checkbox' name='listOfCompanyId[]' value="+val.id+"></label></div>"+"</td>";
+            cell4 = "<td>"+"<a href="+my_url+" data-value="+val.id+" class='btn btn-sm btn-danger remove-assign'><i class='fa fa-trash'></i></a>"+"</td>";
+            
+            newRow.html(cell1+cell2+cell3+cell4);
+            $("#assigned-tbody").append(newRow);
+        });
+    }
+
+    $(document).on('click','.remove-assign',function(e){
+        e.preventDefault();
+        var companyId = $(this).data("value");
+        var my_url = $('meta[name="fullpathRemoveAssign"]').attr('content')+"?id="+companyId;
+        $.ajax({
+                type: "get",
+                url: my_url,
+                data: { id:companyId }, 
+                success: function( data ) {
+                    reloadBroadcastData(data);
+                }
+            });
+    });
+
+    $(document).on('click','.add-assign',function(e){
+        e.preventDefault();
+        var arrCompanyId = $(".checkbox-company input:checkbox:checked").map(function(){
+          return $(this).val();
+        }).get(); 
+        
+        var my_url = $('meta[name="fullpathAssignCompany"]').attr('content');
+        $.ajax({
+                type: "POST",
+                url: my_url,
+                data: { listOfCompanyId:arrCompanyId }, 
+                success: function( data ) {
+                    reloadBroadcastData(data);
+                }
+            });
+
+
+    });
 
 	$(document).on('change','#sectionOption1',function(){
 		var divisionId = $(this).val();

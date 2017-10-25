@@ -25,4 +25,9 @@ class UserPreDefine extends Model
     {
     	return $this->belongsTo(Company::class,'id_company','id');
     }
+
+    public function UserRole()
+    {
+    	return $this->hasOne(UserRole::class,'user_id','id');
+    }
 }

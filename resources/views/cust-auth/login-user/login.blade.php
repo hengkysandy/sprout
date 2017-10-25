@@ -3,10 +3,7 @@
 @section('content')
   @include('layouts.user.navbar')
 
-  <div class="container-fluid margin-top">
-    <a href="register-user.html" class="btn btn-success">Register New User</a>
-    <a href="procurement-staff/profile.html" class="btn btn-primary">Profile Company</a>
-  </div>
+
   
   <div class="container-fluid">
     <div class="text-center">

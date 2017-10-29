@@ -13,4 +13,9 @@ class CompanyInterestedProgram extends Model
 		'id_interested_program',
 		'status'
     ];
+
+    public function CompanyInterestedProgram()
+    {
+        return $this->belongsTo(InterestedProgram::class,'id_interested_program','id');
+    }
 }

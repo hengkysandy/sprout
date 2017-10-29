@@ -46,42 +46,42 @@
 										<div class="form-group">
 											<label class="col-md-2 col-sm-12 col-xs-12 control-label">Email <small class="text-danger"><strong>(required)</strong></small></label>
 											<div class="col-md-6 col-sm-12 col-xs-12">
-												<input type="text" class="form-control" placeholder="Email" value="jason@statham.com">
+												<input type="text" class="form-control" placeholder="Email" value="{{$thisUser->email}}">
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label class="col-md-2 col-sm-12 col-xs-12 control-label">First Name <small class="text-danger"><strong>(required)</strong></small></label>
 											<div class="col-md-6 col-sm-12 col-xs-12">
-												<input type="text" class="form-control" placeholder="First Name" value="Jason">
+												<input type="text" class="form-control" placeholder="First Name" value="{{$thisUser->first_name}}">
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label class="col-md-2 col-sm-12 col-xs-12 control-label">Last Name <small class="text-danger"><strong>(required)</strong></small></label>
 											<div class="col-md-6 col-sm-12 col-xs-12">
-												<input type="text" class="form-control" placeholder="Last Name" value="Statham">
+												<input type="text" class="form-control" placeholder="Last Name" value="{{$thisUser->last_name}}">
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label class="col-md-2 col-sm-12 col-xs-12 control-label">Username <small class="text-danger"><strong>(required)</strong></small></label>
 											<div class="col-md-6 col-sm-12 col-xs-12">
-												<input type="text" class="form-control" placeholder="Username" value="jasonstatham">
+												<input type="text" class="form-control" placeholder="Username" value="{{$thisUser->username}}">
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label class="col-md-2 col-sm-12 col-xs-12 control-label">Job Title <small class="text-danger"><strong>(required)</strong></small></label>
 											<div class="col-md-6 col-sm-12 col-xs-12">
-												<input type="text" class="form-control" placeholder="Job Title" value="Procurement Manager">
+												<input type="text" class="form-control" placeholder="Job Title" value="{{$thisUser->job_title}}">
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label class="col-md-2 col-sm-12 col-xs-12 control-label">Upload Photo <small class="text-muted"><strong>(optional)</strong></small></label>
 											<div class="col-md-6 col-sm-12 col-xs-12">
-												<img src="../../images/avatar.jpg" alt="Avatar" width="150" height="150">
+												<img src="{{$thisUser->photo_image}}" alt="Avatar" width="150" height="150">
 												<input type="file">
 												<p class="help-block">Insert your photo as profile picture</p>
 											</div>

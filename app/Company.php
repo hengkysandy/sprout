@@ -30,6 +30,11 @@ class Company extends Model
     	return $this->belongsTo('Laravolt\Indonesia\Models\City','city_id','id');
     }
 
+    public function Province()
+    {
+        return $this->belongsTo('Laravolt\Indonesia\Models\Province','province_id','id');
+    }
+
     public function CompanyStatusBy()
     {
     	return $this->hasMany(CompanyStatus::class,'id_company_by','id');
@@ -43,6 +48,21 @@ class Company extends Model
     public function CompanyBusinessCategory()
     {
         return $this->hasMany(CompanyBusinessCategory::class,'id_company','id');
+    }
+
+    public function CompanyMainProduct()
+    {
+        return $this->hasMany(CompanyMainProduct::class,'id_company','id');
+    }
+
+    public function CompanyInterestedProgram()
+    {
+        return $this->hasMany(CompanyInterestedProgram::class,'id_company','id');
+    }
+
+    public function CompanyPackage()
+    {
+        return $this->hasMany(CompanyPackage::class,'id_company','id');
     }
 
     

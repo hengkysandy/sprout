@@ -35,19 +35,19 @@
                     <div class="form-group">
                       <label class="col-md-2 col-sm-12 col-xs-12 control-label">Company Name</label>
                       <div class="col-md-6 col-sm-12 col-xs-12">
-                        <input type="text" class="form-control" value="Argomas Internusa" disabled>
+                        <input type="text" class="form-control" value="{{$thisCompany->name}}" disabled>
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-md-2 col-sm-12 col-xs-12 control-label">Company Tagline</label>
                       <div class="col-md-6 col-sm-12 col-xs-12">
-                        <input type="text" class="form-control" value="Company Tagline Company Tagline" disabled>
+                        <input type="text" class="form-control" value="{{$thisCompany->tagline}}" disabled>
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-md-2 col-sm-12 col-xs-12 control-label">Address</label>
                       <div class="col-md-6 col-sm-12 col-xs-12">
-                        <textarea class="form-control no-resize" rows="6" disabled>Ki. Antapani Lama No. 365, BaBel</textarea>
+                        <textarea class="form-control no-resize" rows="6" disabled>{{$thisCompany->address}}</textarea>
                       </div>
                     </div>
                     <div class="form-group">
@@ -58,26 +58,22 @@
                       <div class="col-md-3 col-sm-12 col-xs-12">
                         <select class="selectpicker form-control" data-live-search="true" disabled>
                           <option value="">Select Province</option>
-                          <option value="1" selected>Aceh</option>
-                          <option value="2">Bali</option>
-                          <option value="3">Bangkulu</option>
-                          <option value="4">Banten</option>
+                          <option value="1" selected>{{$thisCompany->Province()->first()->name}}</option>
+                          
                         </select>
                       </div>
                       <div class="col-md-3 col-sm-12 col-xs-12">
                         <select class="selectpicker form-control" data-live-search="true" disabled>
                           <option value="">Select City</option>
-                          <option value="1" selected>Mana Saja</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
+                          <option value="1" selected>{{$thisCompany->City()->first()->name}}</option>
+                          
                         </select>
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-md-2 col-sm-12 col-xs-12 control-label">Zip Code</label>
                       <div class="col-md-6 col-sm-4 col-xs-4">
-                        <input type="text" class="form-control" value="15560" disabled>
+                        <input type="text" class="form-control" value="gak ada saat register" disabled>
                       </div>
                     </div>
                     <div class="form-group">
@@ -85,13 +81,13 @@
                       <div class="col-md-6 col-sm-12 col-xs-12">
                         <div class="row">
                           <div class="col-md-3 col-sm-3 col-xs-3">
-                            <input type="text" class="form-control" value="021" disabled>
+                            <input type="text" class="form-control" value="{{substr($thisCompany->phone,0,3)}}" disabled>
                           </div>
                           <div class="col-md-1 col-sm-1 col-xs-1">
                             <label class="control-label">-</label>
                           </div>
                           <div class="col-md-8 col-sm-8 col-xs-8">
-                            <input type="text" class="form-control" value="55772211" disabled>
+                            <input type="text" class="form-control" value="{{substr($thisCompany->phone,3)}}" disabled>
                           </div>
                         </div>
                       </div>
@@ -99,7 +95,7 @@
                     <div class="form-group">
                       <label class="col-md-2 col-sm-12 col-xs-12 control-label">Mobile Phone</label>
                       <div class="col-md-6 col-sm-12 col-xs-12">
-                        <input type="text" class="form-control" value="085678910" disabled>
+                        <input type="text" class="form-control" value="{{$thisCompany->mobile_number}}" disabled>
                       </div>
                     </div>
                     <div class="wpMainProduct">
@@ -107,7 +103,7 @@
                         <div class="col-md-12 no-padding main-product">
                           <label class="col-md-2 col-sm-12 col-xs-12 control-label labelfirst">Main Product</label>
                           <div class="col-md-6 col-sm-12 col-xs-12">
-                            <input id="mp-1" type="text" class="form-control inline-input" value="Frozen Fish" disabled>
+                            <input id="mp-1" type="text" class="form-control inline-input" value="{{$thisCompany->CompanyMainProduct()->first()->main_product_name}}" disabled>
                             <button type="button" class="btn btn-sm btn-danger btn-remove-main-product"><i class="fa fa-minus"></i></button>
                           </div>
                         </div>
@@ -124,7 +120,7 @@
                         <div class="">
                           <label class="col-md-2 col-sm-12 col-xs-12 control-label">Product Catalogue</label>
                           <div class="col-md-6 col-sm-12 col-xs-12">
-                            <input type="text" class="form-control" placeholder="Product Catalogue" disabled>
+                            <input type="text" class="form-control" placeholder="ini ambil dari mana ya?" disabled>
                           </div>
 
                           <div class="col-md-4 col-sm-4 col-xs-6 margin-top-med-and-down">
@@ -156,7 +152,7 @@
                     <div class="form-group">
                       <label class="col-md-2 col-sm-12 col-xs-12 control-label">Contact Name</label>
                       <div class="col-md-6 col-sm-12 col-xs-12">
-                        <input type="text" class="form-control" value="Cahyo Gumilang" disabled>
+                        <input type="text" class="form-control" value="{{$thisCompany->contact_name}}" disabled>
                       </div>
                     </div>
                     <div class="form-group">
@@ -164,14 +160,14 @@
                       <div class="col-md-2 col-sm-2 col-xs-2">
                         <div class="checkbox">
                           <label>
-                            <input type="checkbox" checked disabled> Selling
+                            <input type="checkbox" {{$thisCompany->CompanyInterestedProgram()->where('id_interested_program',1)->first() ? 'checked' : ''}} disabled> Selling
                           </label>
                         </div>
                       </div>
                       <div class="col-md-3 col-sm-3 col-xs-3">
                         <div class="checkbox">
                           <label>
-                            <input type="checkbox" checked disabled> Buying
+                            <input type="checkbox" {{$thisCompany->CompanyInterestedProgram()->where('id_interested_program',2)->first() ? 'checked' : ''}} disabled> Buying
                           </label>
                         </div>
                       </div>
@@ -181,7 +177,7 @@
                       <div class="col-md-2 col-sm-2 col-xs-2">
                         <div class="radio">
                           <label>
-                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked disabled>
+                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" {{$thisCompany->tax_type == 'PKP' ? 'checked' : ''}} disabled>
                             PKP
                           </label>
                         </div>
@@ -189,7 +185,7 @@
                       <div class="col-md-3 col-sm-3 col-xs-3">
                         <div class="radio">
                           <label>
-                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" disabled>
+                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" {{$thisCompany->tax_type == 'Non PKP' ? 'checked' : ''}} disabled>
                             Non PKP
                           </label>
                         </div>

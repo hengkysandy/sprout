@@ -45,14 +45,29 @@ class BuyLeadController extends Controller
         // }else{
         //     return 'tidak ada data';
         // }
+        $procurementRoleArr = [3,4];
+        $salesRoleArr = [5,6];
+
 
         $data['buyLeadData'] = [];
         $count = 0;
-        foreach (BuyLead::latest('created_at')->get() as $key => $blData) {
-            if($blData->User()->first()->Company()->first()->CompanyStatusBy()->where('id_status',16)->where('id_company_for',session()->get('companySession')[0]->id)->first()){
-                $data['buyLeadData'][] = $blData;
+
+        if(in_array(session()->get('userSession')[0]->role_id, $procurementRoleArr)){
+            // $data['buyLeadData'][] = ;
+            foreach (BuyLead::all() as $key => $blData) {
+                if($blData->User()->first()->id_company == session()->get('companySession')[0]->id){
+                    $data['buyLeadData'][] = $blData;
+                }
+            }
+        }else if(in_array(session()->get('userSession')[0]->role_id, $salesRoleArr)){
+            foreach (BuyLead::latest('created_at')->get() as $key2 => $blData) {
+                if($blData->User()->first()->Company()->first()->CompanyStatusBy()->where('id_status',16)->where('id_company_for',session()->get('companySession')[0]->id)->first()){
+                    $data['buyLeadData'][] = $blData;
+                }
             }
         }
+
+        
         // return $data['buyLeadData'];
         $data['anotherCompany'] = Company::where('company.id','!=',session()->get('companySession')[0]->id)
             ->get();

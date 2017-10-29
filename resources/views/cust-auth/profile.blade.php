@@ -36,46 +36,45 @@
         <div class="form-group">
           <label class="col-md-2 col-sm-12 col-xs-12 control-label">Company Name</label>
           <div class="col-md-6 col-sm-12 col-xs-12">
-            <input type="text" class="form-control" value="Argomas Internusa">
+            <input type="text" class="form-control" value="{{$thisCompany->name}}" >
           </div>
         </div>
         <div class="form-group">
           <label class="col-md-2 col-sm-12 col-xs-12 control-label">Company Tagline</label>
           <div class="col-md-6 col-sm-12 col-xs-12">
-            <input type="text" class="form-control" value="Company Tagline Company Tagline">
+            <input type="text" class="form-control" value="{{$thisCompany->tagline}}" >
           </div>
         </div>
         <div class="form-group">
           <label class="col-md-2 col-sm-12 col-xs-12 control-label">Address</label>
           <div class="col-md-6 col-sm-12 col-xs-12">
-            <textarea class="form-control no-resize" rows="6">Ki. Antapani Lama No. 365, BaBel</textarea>
+            <textarea class="form-control no-resize" rows="6" >{{$thisCompany->address}}</textarea>
           </div>
         </div>
         <div class="form-group">
           <label class="col-md-2 col-sm-12 col-xs-12 control-label">Province &amp; City</label>
+          <!-- Note: Untuk Select Province
+          Pada saat province yang dipilih adalah banten, maka seluruh city (kota) hanya berada pada cakupan city (kota) yang ada di province tersebut
+          -->
           <div class="col-md-3 col-sm-12 col-xs-12">
-            <select class="selectpicker form-control" data-live-search="true">
+            <select class="selectpicker form-control" data-live-search="true" >
               <option value="">Select Province</option>
-              <option value="1" selected>Aceh</option>
-              <option value="2">Bali</option>
-              <option value="3">Bangkulu</option>
-              <option value="4">Banten</option>
+              <option value="1" selected>{{$thisCompany->Province()->first()->name}}</option>
+              
             </select>
           </div>
           <div class="col-md-3 col-sm-12 col-xs-12">
-            <select class="selectpicker form-control" data-live-search="true">
+            <select class="selectpicker form-control" data-live-search="true" >
               <option value="">Select City</option>
-              <option value="1" selected>Mana Saja</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
+              <option value="1" selected>{{$thisCompany->City()->first()->name}}</option>
+              
             </select>
           </div>
         </div>
         <div class="form-group">
           <label class="col-md-2 col-sm-12 col-xs-12 control-label">Zip Code</label>
           <div class="col-md-6 col-sm-4 col-xs-4">
-            <input type="text" class="form-control" value="15560">
+            <input type="text" class="form-control" value="gak ada saat register" disabled>
           </div>
         </div>
         <div class="form-group">
@@ -83,13 +82,13 @@
           <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="row">
               <div class="col-md-3 col-sm-3 col-xs-3">
-                <input type="text" class="form-control" value="021">
+                <input type="text" class="form-control" value="{{substr($thisCompany->phone,0,3)}}" >
               </div>
               <div class="col-md-1 col-sm-1 col-xs-1">
                 <label class="control-label">-</label>
               </div>
               <div class="col-md-8 col-sm-8 col-xs-8">
-                <input type="text" class="form-control" value="55772211">
+                <input type="text" class="form-control" value="{{substr($thisCompany->phone,3)}}" >
               </div>
             </div>
           </div>
@@ -97,7 +96,7 @@
         <div class="form-group">
           <label class="col-md-2 col-sm-12 col-xs-12 control-label">Mobile Phone</label>
           <div class="col-md-6 col-sm-12 col-xs-12">
-            <input type="text" class="form-control" value="085678910">
+            <input type="text" class="form-control" value="{{$thisCompany->mobile_number}}" >
           </div>
         </div>
         <div class="wpMainProduct">
@@ -459,8 +458,12 @@
                <select class="form-control" id="package" name="package">
                 <option value="0">Select your package</option>
                 @foreach($packageData as $packData)
-                <option value="{{$packData->id}}">{{$packData->name}}</option>
-                @endforeach
+                  @if($packData->id == $thisCompany->CompanyPackage()->latest('created_at')->first()->id_package)
+                    <option value="{{$packData->id}}" selected="">{{$packData->name}}</option>
+                  @else
+                    <option value="{{$packData->id}}">{{$packData->name}}</option>
+                  @endif
+                  @endforeach
               </select>
             </div>
           </div>

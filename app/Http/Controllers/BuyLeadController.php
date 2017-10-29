@@ -56,7 +56,10 @@ class BuyLeadController extends Controller
         // return $data['buyLeadData'];
         $data['anotherCompany'] = Company::where('company.id','!=',session()->get('companySession')[0]->id)
             ->get();
-        
+
+        if(session()->get('userSession')[0]->role_id == 2){
+            return view('post-buy-lead.master-user.post-buy-lead', $data);
+        }
         return view('post-buy-lead.post-buy-lead', $data);
 
         // if (session()->get('userSession')[0]->role_id == 2) {

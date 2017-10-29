@@ -12,7 +12,7 @@ $(function() {
     	var btn_css = "class='btn btn-danger'";
     	if(status == 'approve') btn_css = "class='btn btn-success'";
 
-		url = "doChangeStatusCompanyPackage?id="+id+"&status="+status;
+		url = "doChangeStatusCompany?id="+id+"&status="+status;
 	    cell2 = "<button type='button' style='margin:0px 5px' class='btn btn-default' data-dismiss='modal'>Close</button>";
 	    cell1 = "<a href="+url+"><button type='button' style='margin:0px 5px' "+btn_css+">"+status+"</button></a>";
 

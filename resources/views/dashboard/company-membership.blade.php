@@ -99,11 +99,19 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>JKT-001</td>
-                <td><a href="member.html">Argomas Internusa</a></td>
-                <td><a href="#bCategory" data-toggle="modal">Agriculture, forestry and fishing, Wholesale and retail trade</a></td>
+              @foreach($approvedCompany as $acData)
+                <tr>
+                <td>{{$acData->id}}</td>
+                <td><a href="{{url('member/'.$acData->id)}}">{{$acData->name}}</a></td>
+                <td>
+                @if($acData->CompanyBusinessCategory()->first()->Section()->first())
+                  <a href="#bCategory" data-toggle="modal">{{$acData->CompanyBusinessCategory()->first()->Section()->first()->name}}</a>
+                @else
+                  There's no business category yet
+                @endif
+                </td>
               </tr>
+              @endforeach
             </tbody>
           </table>
         </div>

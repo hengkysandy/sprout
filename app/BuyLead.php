@@ -64,4 +64,11 @@ class BuyLead extends Model
     {
         return $this->belongsTo(Area::class,'id_area','id');
     }
+
+    public function BuyLeadBusinessCategory()
+    {
+        return $this->hasMany(BuyLeadBusinessCategory::class,'buy_lead_id','id');
+    }
+
+    
 }

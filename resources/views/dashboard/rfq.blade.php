@@ -32,188 +32,28 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td><a href="post-buy-lead.html">xx-123-xx</a></td>
-                <td>JKT-001</td>
-                <td>Pupuk</td>
-                <td>100 Kg</td>
-                <td>Agriculture, forestry and fishing</td>
-                <td>
-                  <a href="#editRfq" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
-                  <!-- Note: Untuk tombol oke
-                  Pada tombol oke ini nantinya setelah rfq yang sudah di cek saat di klik tombol oke nya akan menghilang (bukan terhapus) dari tabel RFQ List
-                  -->
-                  <a href="#" class="btn btn-default btn-sm">Oke</a>
-                </td>
-              </tr>
-              <tr>
-                <td><a href="post-buy-lead.html">xx-123-xx</a></td>
-                <td>SUB-001</td>
-                <td>Batu Bara</td>
-                <td>10 Ton</td>
-                <td>Mining and quarrying</td>
-                <td>
-                  <a href="#editRfq" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
-                  <!-- Note: Untuk tombol oke
-                  Pada tombol oke ini nantinya setelah rfq yang sudah di cek saat di klik tombol oke nya akan menghilang (bukan terhapus) dari tabel RFQ List
-                  -->
-                  <a href="#" class="btn btn-default btn-sm">Oke</a>
-                </td>
-              </tr>
-              <tr>
-                <td><a href="post-buy-lead.html">xx-123-xx</a></td>
-                <td>TGS-012</td>
-                <td>Kain Wol</td>
-                <td>3 Ton</td>
-                <td>Manufacturing</td>
-                <td>
-                  <a href="#editRfq" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
-                  <!-- Note: Untuk tombol oke
-                  Pada tombol oke ini nantinya setelah rfq yang sudah di cek saat di klik tombol oke nya akan menghilang (bukan terhapus) dari tabel RFQ List
-                  -->
-                  <a href="#" class="btn btn-default btn-sm">Oke</a>
-                </td>
-              </tr>
-              <tr>
-                <td><a href="post-buy-lead.html">xx-123-xx</a></td>
-                <td>BJR-201</td>
-                <td>Kabel Tuvur</td>
-                <td>1 Ton</td>
-                <td>Electricity, gas, steam and air conditioning supply</td>
-                <td>
-                  <a href="#editRfq" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
-                  <!-- Note: Untuk tombol oke
-                  Pada tombol oke ini nantinya setelah rfq yang sudah di cek saat di klik tombol oke nya akan menghilang (bukan terhapus) dari tabel RFQ List
-                  -->
-                  <a href="#" class="btn btn-default btn-sm">Oke</a>
-                </td>
-              </tr>
-              <tr>
-                <td><a href="post-buy-lead.html">xx-123-xx</a></td>
-                <td>TGR-002</td>
-                <td>Gas Bumi</td>
-                <td>2 Ton</td>
-                <td>Electricity, gas, steam and air conditioning supply</td>
-                <td>
-                  <a href="#editRfq" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
-                  <!-- Note: Untuk tombol oke
-                  Pada tombol oke ini nantinya setelah rfq yang sudah di cek saat di klik tombol oke nya akan menghilang (bukan terhapus) dari tabel RFQ List
-                  -->
-                  <a href="#" class="btn btn-default btn-sm">Oke</a>
-                </td>
-              </tr>
-              <tr>
-                <td><a href="post-buy-lead.html">xx-123-xx</a></td>
-                <td>BDG-041</td>
-                <td>Mesin Jahit Otomatis</td>
-                <td>2000 Buah</td>
-                <td>Manufacture of special-purpose machinery</td>
-                <td>
-                  <a href="#editRfq" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
-                  <!-- Note: Untuk tombol oke
-                  Pada tombol oke ini nantinya setelah rfq yang sudah di cek saat di klik tombol oke nya akan menghilang (bukan terhapus) dari tabel RFQ List
-                  -->
-                  <a href="#" class="btn btn-default btn-sm">Oke</a>
-                </td>
-              </tr>
-              <tr>
-                <td><a href="post-buy-lead.html">xx-123-xx</a></td>
-                <td>JKT-051</td>
-                <td>Tripod Leg</td>
-                <td>2500 Buah</td>
-                <td>Manufacture of optical instruments and photographic equipment</td>
-                <td>
-                  <a href="#editRfq" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
-                  <!-- Note: Untuk tombol oke
-                  Pada tombol oke ini nantinya setelah rfq yang sudah di cek saat di klik tombol oke nya akan menghilang (bukan terhapus) dari tabel RFQ List
-                  -->
-                  <a href="#" class="btn btn-default btn-sm">Oke</a>
-                </td>
-              </tr>
-              <tr>
-                <td><a href="post-buy-lead.html">xx-123-xx</a></td>
-                <td>TGR-091</td>
-                <td>Plat</td>
-                <td>5400 Buah</td>
-                <td>Manufacture of basic iron and steel</td>
-                <td>
-                  <a href="#editRfq" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
-                  <!-- Note: Untuk tombol oke
-                  Pada tombol oke ini nantinya setelah rfq yang sudah di cek saat di klik tombol oke nya akan menghilang (bukan terhapus) dari tabel RFQ List
-                  -->
-                  <a href="#" class="btn btn-default btn-sm">Oke</a>
-                </td>
-              </tr>
-              <tr>
-                <td><a href="post-buy-lead.html">xx-123-xx</a></td>
-                <td>GRG-021</td>
-                <td>Natrium Karbonat for Mirror Production</td>
-                <td>100 Kg</td>
-                <td>Manufacture of glass and glass products</td>
-                <td>
-                  <a href="#editRfq" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
-                  <!-- Note: Untuk tombol oke
-                  Pada tombol oke ini nantinya setelah rfq yang sudah di cek saat di klik tombol oke nya akan menghilang (bukan terhapus) dari tabel RFQ List
-                  -->
-                  <a href="#" class="btn btn-default btn-sm">Oke</a>
-                </td>
-              </tr>
-              <tr>
-                <td><a href="post-buy-lead.html">xx-123-xx</a></td>
-                <td>BMS-036</td>
-                <td>Hard Plastic Appearance</td>
-                <td>2000 Buah</td>
-                <td>Manufacture of rubber products</td>
-                <td>
-                  <a href="#editRfq" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
-                  <!-- Note: Untuk tombol oke
-                  Pada tombol oke ini nantinya setelah rfq yang sudah di cek saat di klik tombol oke nya akan menghilang (bukan terhapus) dari tabel RFQ List
-                  -->
-                  <a href="#" class="btn btn-default btn-sm">Oke</a>
-                </td>
-              </tr>
-              <tr>
-                <td><a href="post-buy-lead.html">xx-123-xx</a></td>
-                <td>BMS-039</td>
-                <td>Penimbang Zat</td>
-                <td>2500 Buah</td>
-                <td>Manufacture of other chemical products</td>
-                <td>
-                  <a href="#editRfq" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
-                  <!-- Note: Untuk tombol oke
-                  Pada tombol oke ini nantinya setelah rfq yang sudah di cek saat di klik tombol oke nya akan menghilang (bukan terhapus) dari tabel RFQ List
-                  -->
-                  <a href="#" class="btn btn-default btn-sm">Oke</a>
-                </td>
-              </tr>
-              <tr>
-                <td><a href="post-buy-lead.html">xx-123-xx</a></td>
-                <td>BMS-040</td>
-                <td>Avtur</td>
-                <td>52 Ton</td>
-                <td>Manufacture of refined petroleum products</td>
-                <td>
-                  <a href="#editRfq" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
-                  <!-- Note: Untuk tombol oke
-                  Pada tombol oke ini nantinya setelah rfq yang sudah di cek saat di klik tombol oke nya akan menghilang (bukan terhapus) dari tabel RFQ List
-                  -->
-                  <a href="#" class="btn btn-default btn-sm">Oke</a>
-                </td>
-              </tr>
-              <tr>
-                <td><a href="post-buy-lead.html">xx-123-xx</a></td>
-                <td>BMS-041</td>
-                <td>Batubara</td>
-                <td>10 Ton</td>
-                <td>Manufacture of coke oven products</td>
-                <td>
-                  <a href="#editRfq" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
-                  <!-- Note: Untuk tombol oke
-                  Pada tombol oke ini nantinya setelah rfq yang sudah di cek saat di klik tombol oke nya akan menghilang (bukan terhapus) dari tabel RFQ List
-                  -->
-                  <a href="#" class="btn btn-default btn-sm">Oke</a>
-                </td>
-              </tr>
+              @foreach($buyLead as $blData)
+                <tr>
+                  <td><a href="#post-buy-lead">{{$blData->id}}</a></td>
+                  <td>{{$blData->buy_lead_code}}</td>
+                  <td>{{$blData->item}}</td>
+                  <td>{{$blData->amount}} {{$blData->Unit()->first()->name}}</td>
+                  <td>
+                    @if($blData->BuyLeadBusinessCategory()->first()->Section()->first())
+                      {{$blData->BuyLeadBusinessCategory()->first()->Section()->first()->name}}
+                    @else
+                      There's no business category yet
+                    @endif
+                  </td>
+                  <td>
+                    <a href="#editRfq" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
+                    <!-- Note: Untuk tombol oke
+                    Pada tombol oke ini nantinya setelah rfq yang sudah di cek saat di klik tombol oke nya akan menghilang (bukan terhapus) dari tabel RFQ List
+                    -->
+                    <a href="#" class="btn btn-default btn-sm">Oke</a>
+                  </td>
+                </tr>
+              @endforeach
             </tbody>
           </table>
         </div>

@@ -40,5 +40,12 @@ class Company extends Model
     	return $this->hasMany(CompanyStatus::class,'id_company_for','id');
     }
 
+    public function CompanyBusinessCategory()
+    {
+        return $this->hasMany(CompanyBusinessCategory::class,'id_company','id');
+    }
+
+    
+
     
 }

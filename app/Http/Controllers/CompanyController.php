@@ -104,7 +104,7 @@ class CompanyController extends Controller
             'mobile_number' => ($request->mobileCode.$request->mobileNumber),
             'tax_type' => $request->optionsRadios,
             'business_entity' => $regis1->businessEntity,
-            'status' => 'active'
+            'status' => 'wait for approval'
         ]);
 
         $getLatestCompanyId = Company::orderBy('id','DESC')->first()->id;
@@ -265,6 +265,7 @@ class CompanyController extends Controller
     {
         $login = Company::where('email',$request->email)
                             ->where('password',$request->password)
+                            ->where('status','active')
                             ->get();
 
         if(count($login) != 0){

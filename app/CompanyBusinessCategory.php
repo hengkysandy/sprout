@@ -23,4 +23,6 @@ class CompanyBusinessCategory extends Model
     {
         return $this->belongsTo(Company::class,'id_company','id');
     }
+
+    
 }

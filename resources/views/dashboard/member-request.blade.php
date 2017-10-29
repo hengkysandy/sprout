@@ -30,14 +30,14 @@
           </tr>
         </thead>
         <tbody>
-          @foreach($companyPackageData as $cpData)
+          @foreach($newCompany as $ncData)
           <tr>
-            <td>{{$cpData->Company()->first()->id}}</td>
-            <td><a href="{{url('member/'.$cpData->Company()->first()->id)}}">{{$cpData->Company()->first()->name}}</a></td>
-            <td>{{$cpData->Package()->first()->name}}</td>
+            <td>{{$ncData->id}}</td>
+            <td><a href="{{url('member/'.$ncData->id)}}">{{$ncData->name}}</a></td>
+            <td>{{$ncData->name}}</td>
             <td>
-              <button type="button" value="{{$cpData->id}}|approve" data-target="#popup" data-toggle="modal" class="btn btn-success btn-sm chooseAction">Approve</button>
-              <button type="button" value="{{$cpData->id}}|reject" data-target="#popup" data-toggle="modal" class="btn btn-danger btn-sm chooseAction">Reject</button>
+              <button type="button" value="{{$ncData->id}}|approve" data-target="#popup" data-toggle="modal" class="btn btn-success btn-sm chooseAction">Approve</button>
+              <button type="button" value="{{$ncData->id}}|reject" data-target="#popup" data-toggle="modal" class="btn btn-danger btn-sm chooseAction">Reject</button>
             </td>
           </tr>
           @endforeach

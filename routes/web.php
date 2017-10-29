@@ -124,7 +124,7 @@ Route::group(['middleware' => 'checkAdmin'], function () {
     Route::get('member/{id}', 'PageController@member');
 
     Route::get('new_member_request', 'PageController@memberRequest');
-    Route::get('doChangeStatusCompanyPackage', 'PageController@doChangeStatusCompanyPackage');
+    Route::get('doChangeStatusCompany', 'PageController@doChangeStatusCompany');
     
     Route::get('rfq', 'PageController@rfq');
 

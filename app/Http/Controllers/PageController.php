@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Admin;
 use App\Area;
+use App\BuyLead;
 use App\Certificate;
 use App\CloudinaryMapping;
 use App\Company;
@@ -108,10 +109,11 @@ class PageController extends Controller
     }
 
     public function companyMembership() {
-        $companyPackageData = CompanyPackage::where('status','active')
+        $data['companyPackageData'] = CompanyPackage::where('status','active')
                                         ->where('insert_from_profile','true')
                                         ->get();
-    	return view('dashboard.company-membership',compact('companyPackageData'));
+        $data['approvedCompany'] = Company::where('status','active')->get();
+    	return view('dashboard.company-membership',$data);
     }
 
     public function member($id) {
@@ -122,23 +124,33 @@ class PageController extends Controller
     }
 
     public function memberRequest() {
-        $companyPackageData = CompanyPackage::where('status','active')
-                                        ->where('insert_from_profile','false')
-                                        ->get();
-    	return view('dashboard.member-request',compact('companyPackageData'));
+        // $companyPackageData = CompanyPackage::where('status','active')
+        //                                 ->where('insert_from_profile','false')
+        //                                 ->get();
+        $data['newCompany'] = Company::where('status','wait for approval')->get();
+    	return view('dashboard.member-request',$data);
     }
 
-    public function doChangeStatusCompanyPackage(Request $request)
+    public function doChangeStatusCompany(Request $request)
     {
-        $currData = CompanyPackage::find($request->id);
-        $currData->status = $request->status;
-        $currData->save();
+        $currData = Company::find($request->id);
+        if($request->status == "approve"){
+            $currData->status = "active";
+            $currData->save();
+        }else{
+            $currData->delete();
+        }
+        // $currData = CompanyPackage::find($request->id);
+        // $currData->status = $request->status;
+        // $currData->save();
 
         return back();
     }
     
     public function rfq() {
-    	return view('dashboard.rfq');
+        $data['buyLead'] = BuyLead::all();
+        // return $data['buyLead'][2]->BuyLeadBusinessCategory()->first()->Section()->first();
+    	return view('dashboard.rfq',$data);
     }
 
     public function login_company()

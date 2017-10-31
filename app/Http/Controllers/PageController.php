@@ -35,30 +35,16 @@ class PageController extends Controller
         return view('dashboard.login');
     }
 
-    public function doExtendCompanyPackage(Request $request)
-    {
-        CompanyPackage::create([
-            'id_company' => session()->get('companySession')[0]->id,
-            'id_package' => $request->package,
-            'status' => 'active',
-            'year_duration' => $request->yearDuration,
-            'expired_date' => Carbon::now()->addYear($request->yearDuration),
-            'insert_from_profile' => 'true',
-        ]);
-
-        return back();
-    }
-
     public function dashHome() {
     	return view('dashboard.home');
     }
 
     public function businessCategory() {
-        $sectionData = Section::all();
-        $divisionData = Division::all();
-        $groupData = Group::all();
+        $data['sectionData'] = Section::all();
+        $data['divisionData'] = Division::all();
+        $data['groupData'] = Group::all();
 
-        return view('dashboard.business-category', compact('sectionData','divisionData','groupData'));
+        return view('dashboard.business-category', $data);
     }
 
     /*tampilin Business Category Section -> division -> group*/
@@ -113,6 +99,7 @@ class PageController extends Controller
                                         ->where('insert_from_profile','true')
                                         ->get();
         $data['approvedCompany'] = Company::where('status','active')->get();
+        
     	return view('dashboard.company-membership',$data);
     }
 
@@ -140,9 +127,15 @@ class PageController extends Controller
         }else{
             $currData->delete();
         }
-        // $currData = CompanyPackage::find($request->id);
-        // $currData->status = $request->status;
-        // $currData->save();
+        
+        return back();
+    }
+
+    public function doChangeStatusCompanyPackage(Request $request)
+    {
+        $currData = CompanyPackage::find($request->id);
+        $currData->status = $request->status;
+        $currData->save();
 
         return back();
     }

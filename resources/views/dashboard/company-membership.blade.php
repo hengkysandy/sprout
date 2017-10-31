@@ -48,7 +48,7 @@
                 <td>{{$cpData->year_duration}} Year</td>
                 <td>NULL</td>
                 <td>
-                  <a href="doChangeStatusCompanyPackage?id={{$cpData->id}}&status=confirmed" class="btn btn-sm btn-primary btn-approve">Approve</a>
+                  <a href="{{url('doChangeStatusCompanyPackage?id='.$cpData->id.'&status=confirmed')}}" class="btn btn-sm btn-primary btn-approve">Approve</a>
                 </td>
               </tr>
               @endforeach
@@ -104,7 +104,7 @@
                 <td>{{$acData->id}}</td>
                 <td><a href="{{url('member/'.$acData->id)}}">{{$acData->name}}</a></td>
                 <td>
-                @if($acData->CompanyBusinessCategory()->first()->Section()->first())
+                @if($acData->CompanyBusinessCategory()->first())
                   <a href="#bCategory" data-toggle="modal">{{$acData->CompanyBusinessCategory()->first()->Section()->first()->name}}</a>
                 @else
                   There's no business category yet

@@ -43,7 +43,7 @@ Route::group(['middleware' => 'checkUser'], function () {
     Route::post('doRegisUser', 'CompanyController@doRegisUser');
     
     Route::get('logoutUser', 'PageController@logoutUser');
-    Route::post('doExtendCompanyPackage', 'PageController@doExtendCompanyPackage');
+    Route::post('doExtendCompanyPackage', 'CompanyController@doExtendCompanyPackage');
     Route::get('profile', 'CompanyController@profile');
 
 
@@ -125,6 +125,7 @@ Route::group(['middleware' => 'checkAdmin'], function () {
 
     Route::get('new_member_request', 'PageController@memberRequest');
     Route::get('doChangeStatusCompany', 'PageController@doChangeStatusCompany');
+    Route::get('doChangeStatusCompanyPackage', 'PageController@doChangeStatusCompanyPackage');
     
     Route::get('rfq', 'PageController@rfq');
 

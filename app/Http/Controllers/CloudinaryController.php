@@ -11,7 +11,6 @@ class CloudinaryController extends Controller
 {
 
   public function download(Request $request){
-    return $request->url;
       $url = urldecode($request->url);
       $cm = CloudinaryMapping::where('url',$url)->first();
       $currTime = strtotime(date('c'));

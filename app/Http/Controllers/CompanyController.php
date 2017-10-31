@@ -124,7 +124,7 @@ class CompanyController extends Controller
         CompanyPackage::create([
             'id_company' => $getLatestCompanyId,
             'id_package' => $regis1->package,
-            'status' => 'active',
+            'status' => 'confirmed',
             'year_duration' => $regis1->yearDuration,
             'expired_date' => Carbon::now()->addYear($regis1->yearDuration),
             'insert_from_profile' => 'false',
@@ -285,28 +285,48 @@ class CompanyController extends Controller
 
     public function profile() {
         $data['packageData'] = Package::all();
+        $data['businessEntity'] = ['PT','CV','PD'];
         $data['thisCompany'] = Company::find(session()->get('companySession')[0]->id);
+        // return $data['thisCompany']->CompanyPackage()->where('status','approve')->latest('created_at')->first();
         $data['thisUser'] = UserPreDefine::find(session()->get('userSession')[0]->id);
         $userid = session()->get('userSession')[0]->id;
+
         if (session()->get('userSession')[0]->role_id == 2) {
             // return $user = UserPreDefine::leftjoin('user_role','user.id' ,'=','user_role.user_id')->leftjoin('role','role.id','=','user_role.role_id')->where('id_company',session()->get('companySession')[0]->id)->where('created_by','=',$userid)->select('user.*','role.name as role_name')->get();
 
             $data['user'] = UserPreDefine::where('id_company',session()->get('companySession')[0]->id)->join('user_role','user_role.user_id','=','user.id')->where('role_id','!=',2)->join('role','role.id','=','user_role.role_id')->select('user.*','role.name as role_name')->get();
-
             $data['role']= Role::whereIn('id',[3,5])->get();
-            return view('cust-auth.profile',$data);
-        }
+            
+        }else if (session()->get('userSession')[0]->role_id == 3 ) {
 
-        if (session()->get('userSession')[0]->role_id == 3 ) {
             $data['user'] = UserPreDefine::leftjoin('user_role','user.id' ,'=','user_role.user_id')->leftjoin('role','role.id','=','user_role.role_id')->where('id_company',session()->get('companySession')[0]->id)->where('created_by','=',$userid)->select('user.*','role.name as role_name')->get();
             $data['role']= Role::whereIn('id',[4])->get();
-            return view('post-buy-lead.procurement-manager.profile',$data);
-        }
-        if (session()->get('userSession')[0]->role_id == 5 ) {
+
+        }else if (session()->get('userSession')[0]->role_id == 5 ) {
+
             $data['user'] = UserPreDefine::leftjoin('user_role','user.id' ,'=','user_role.user_id')->leftjoin('role','role.id','=','user_role.role_id')->where('id_company',session()->get('companySession')[0]->id)->where('created_by','=',$userid)->select('user.*','role.name as role_name')->get();
             $data['role']= Role::whereIn('id',[6])->get();
-            return view('post-buy-lead.procurement-manager.profile',$data);
+
         }
+
+        return view('post-buy-lead.profile',$data);
+
     }
+
+    public function doExtendCompanyPackage(Request $request)
+    {
+        CompanyPackage::create([
+            'id_company' => session()->get('companySession')[0]->id,
+            'id_package' => $request->package,
+            'status' => 'pending',
+            'year_duration' => $request->yearDuration,
+            'expired_date' => Carbon::now()->addYear($request->yearDuration),
+            'insert_from_profile' => 'true',
+        ]);
+
+        return back();
+    }
+
+
     
 }

@@ -517,19 +517,20 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label>Package</label>
-                <select class="form-control selectpicker" data-live-search="true">
-                  <option value="">Select Package</option>
-                  <option value="" selected>Basic</option>
-                  <option value="">Regular +</option>
-                  <option value="">Premium</option>
+                <label>Add On</label>
+                <select id="addon-select" class="form-control selectpicker" name="addon-select" data-live-search="true">
+                  <option value="">Select Addon</option>
+                  <option value="" selected>Add Manager Account +1</option>
+                  <option value="">Add Staff Account +1</option>
+                  <option value="">Add Manager Account +5</option>
+                  <option value="">Add Staff Account +5</option>
                 </select>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label>Quantity</label>
-                <select class="form-control selectpicker" data-live-search="true">
+                <select id="addon-qty" class="form-control selectpicker" name="addon-qty" data-live-search="true">
                   <option value="">Select Quantity</option>
                   <option value="" selected>1</option>
                   <option value="">2</option>
@@ -540,7 +541,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label>Duration</label>
-                <select class="form-control selectpicker" data-live-search="true">
+                <select id="addon-duration" class="form-control selectpicker" name="addon-duration" data-live-search="true">
                   <option value="">Select Duration</option>
                   <option value="" selected>1 Year</option>
                   <option value="">2 Year</option>
@@ -551,7 +552,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label>Price</label>
-                <input type="text" class="form-control" disabled value="Rp. 1.000.000">
+                <input id="addon-price" type="text" class="form-control" name="addon-price" disabled value="Rp. 1.000.000">
               </div>
             </div>
           </div>

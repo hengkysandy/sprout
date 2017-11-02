@@ -45,7 +45,7 @@ Route::group(['middleware' => 'checkUser'], function () {
     Route::get('logoutUser', 'PageController@logoutUser');
     Route::post('doExtendCompanyPackage', 'CompanyController@doExtendCompanyPackage');
     Route::get('profile', 'CompanyController@profile');
-
+    Route::post('doRequestCompanyAddOn','CompanyController@doRequestCompanyAddOn');
 
     Route::post('doAddUnit', 'UnitController@create');
     Route::post('doUpdateUnit/{id}', 'UnitController@update');
@@ -74,6 +74,8 @@ Route::group(['middleware' => 'checkUser','checkSales'],function(){
     Route::post('assignUser/{id}','BuyLeadController@assignUser');
     Route::post('doAssignCompanyBuyLead','BuyLeadController@doAssignCompanyBuyLead');
     Route::get('doRemoveAssignedCompany','BuyLeadController@doRemoveAssignedCompany');
+    
+
 
     Route::post('doCreateRevise','BuyLeadController@doCreateRevise');
     Route::get('getQuotationDataAjax/{id}','BuyLeadController@getQuotationDataAjax');

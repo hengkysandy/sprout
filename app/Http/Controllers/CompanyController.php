@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AddOn;
 use App\Certificate;
 use App\CloudinaryMapping;
 use App\Company;
@@ -285,11 +286,13 @@ class CompanyController extends Controller
 
     public function profile() {
         $data['packageData'] = Package::all();
+        $data['addOnData'] = AddOn::all();
         $data['businessEntity'] = ['PT','CV','PD'];
         $data['thisCompany'] = Company::find(session()->get('companySession')[0]->id);
         // return $data['thisCompany']->CompanyPackage()->where('status','approve')->latest('created_at')->first();
         $data['thisUser'] = UserPreDefine::find(session()->get('userSession')[0]->id);
         $userid = session()->get('userSession')[0]->id;
+
 
         if (session()->get('userSession')[0]->role_id == 2) {
             // return $user = UserPreDefine::leftjoin('user_role','user.id' ,'=','user_role.user_id')->leftjoin('role','role.id','=','user_role.role_id')->where('id_company',session()->get('companySession')[0]->id)->where('created_by','=',$userid)->select('user.*','role.name as role_name')->get();
@@ -315,16 +318,27 @@ class CompanyController extends Controller
 
     public function doExtendCompanyPackage(Request $request)
     {
+        $latestExpiredDate = CompanyPackage::where('id_company',session()->get('companySession')[0]->id)->where('status','confirmed')->latest('created_at')->first()->expired_date;
+
         CompanyPackage::create([
             'id_company' => session()->get('companySession')[0]->id,
             'id_package' => $request->package,
             'status' => 'pending',
             'year_duration' => $request->yearDuration,
-            'expired_date' => Carbon::now()->addYear($request->yearDuration),
+            'expired_date' => Carbon::createFromFormat('Y-m-d', $latestExpiredDate)->addYear($request->yearDuration),
             'insert_from_profile' => 'true',
         ]);
 
         return back();
+    }
+
+    public function doRequestCompanyAddOn(Request $request)
+    {
+        return $request->all();
+
+        // addonId: "3",
+        // quantity: "2",
+        // duration: null
     }
 
 

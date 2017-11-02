@@ -45,7 +45,7 @@ class BuyLeadController extends Controller
         // }else{
         //     return 'tidak ada data';
         // }
-        $procurementRoleArr = [3,4];
+        $procurementRoleArr = [2,3,4];
         $salesRoleArr = [5,6];
 
 
@@ -66,8 +66,6 @@ class BuyLeadController extends Controller
                 }
             }
         }
-
-        
         // return $data['buyLeadData'];
         $data['anotherCompany'] = Company::where('company.id','!=',session()->get('companySession')[0]->id)
             ->get();

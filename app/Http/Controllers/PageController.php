@@ -95,7 +95,7 @@ class PageController extends Controller
     }
 
     public function companyMembership() {
-        $data['companyPackageData'] = CompanyPackage::where('status','active')
+        $data['companyPackageData'] = CompanyPackage::where('status','pending')
                                         ->where('insert_from_profile','true')
                                         ->get();
         $data['approvedCompany'] = Company::where('status','active')->get();
@@ -133,6 +133,7 @@ class PageController extends Controller
 
     public function doChangeStatusCompanyPackage(Request $request)
     {
+
         $currData = CompanyPackage::find($request->id);
         $currData->status = $request->status;
         $currData->save();

@@ -39,19 +39,7 @@
               </tr>
             </thead>
             <tbody>
-              @foreach($companyPackageData as $cpData)
-              <tr>
-                <td>{{$cpData->Company()->first()->id}}</td>
-                <td><a href="{{url('member/'.$cpData->Company()->first()->id)}}">{{$cpData->Company()->first()->name}}</a></td>
-                <td><a href="#" data-toggle="modal">NULL</a></td>
-                <td>{{$cpData->Package()->first()->name}}</td>
-                <td>{{$cpData->year_duration}} Year</td>
-                <td>NULL</td>
-                <td>
-                  <a href="{{url('doChangeStatusCompanyPackage?id='.$cpData->id.'&status=confirmed')}}" class="btn btn-sm btn-primary btn-approve">Approve</a>
-                </td>
-              </tr>
-              @endforeach
+              
             </tbody>
           </table>
         </div>
@@ -72,17 +60,19 @@
               </tr>
             </thead>
             <tbody>
+              @foreach($companyPackageData as $cpData)
               <tr>
-                <td>JKT-001</td>
-                <td><a href="member.html">Argomas Internusa</a></td>
-                <td><a href="#bCategory" data-toggle="modal">Agriculture, forestry and fishing, Wholesale and retail trade</a></td>
-                <td>Regular</td>
-                <td>1 Year</td>
-                <td>Rp. 5.000.000</td>
+                <td>{{$cpData->Company()->first()->id}}</td>
+                <td><a href="{{url('member/'.$cpData->Company()->first()->id)}}">{{$cpData->Company()->first()->name}}</a></td>
+                <td><a href="#" data-toggle="modal">ini ambil dari mana ya</a></td>
+                <td>{{$cpData->Package()->first()->name}}</td>
+                <td>{{$cpData->year_duration}} Year</td>
+                <td>belum ada harga</td>
                 <td>
-                  <a href="#" class="btn btn-sm btn-primary btn-approve">Approve</a>
+                  <a href="{{url('doChangeStatusCompanyPackage?id='.$cpData->id.'&status=confirmed')}}" class="btn btn-sm btn-primary btn-approve">Approve</a>
                 </td>
               </tr>
+              @endforeach
             </tbody>
           </table>
         </div>

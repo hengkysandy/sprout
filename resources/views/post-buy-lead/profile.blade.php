@@ -109,13 +109,16 @@
         </div>
         <div class="wpMainProduct">
           <div id="removeMp" class="form-group">
-            <div class="col-md-12 no-padding main-product">
-              <label class="col-md-2 col-sm-12 col-xs-12 control-label labelfirst">Main Product</label>
-              <div class="col-md-6 col-sm-12 col-xs-12">
-                <input id="mp-1" type="text" class="form-control inline-input" value="Frozen Fish">
-                <button type="button" class="btn btn-sm btn-danger btn-remove-main-product"><i class="fa fa-minus"></i></button>
+            @foreach($thisCompany->CompanyMainProduct()->get() as $mp)
+              <div class="col-md-12 no-padding main-product">
+                <label class="col-md-2 col-sm-12 col-xs-12 control-label labelfirst">Main Product</label>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <input id="mp-1" type="text" class="form-control inline-input" value="{{$mp->main_product_name}}">
+                  <button type="button" class="btn btn-sm btn-danger btn-remove-main-product"><i class="fa fa-minus"></i></button>
+                </div>
               </div>
-            </div>
+            @endforeach
+            
             <div id="appendMp"></div>
           </div>
           <div class="form-group">
@@ -129,7 +132,7 @@
             <div class="">
               <label class="col-md-2 col-sm-12 col-xs-12 control-label">Product Catalogue</label>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <input type="text" class="form-control" placeholder="Product Catalogue" disabled>
+                <input type="text" class="form-control" placeholder="Product Catalogue gak ada di regis" disabled>
               </div>
 
               <div class="col-md-4 col-sm-4 col-xs-6 margin-top-med-and-down">
@@ -160,7 +163,7 @@
         <div class="form-group">
           <label class="col-md-2 col-sm-12 col-xs-12 control-label">Contact Name</label>
           <div class="col-md-6 col-sm-12 col-xs-12">
-            <input type="text" class="form-control" value="Cahyo Gumilang">
+            <input type="text" class="form-control" value="{{$thisCompany->contact_name}}">
           </div>
         </div>
         <div class="form-group">
@@ -168,14 +171,14 @@
           <div class="col-md-2 col-sm-2 col-xs-2">
             <div class="checkbox">
               <label>
-                <input type="checkbox" name="program[]" checked> Selling
+                <input type="checkbox" name="program[]" {{$thisCompany->CompanyInterestedProgram()->where('id_interested_program', '1')->first() ? 'checked' : ''}}> Selling
               </label>
             </div>
           </div>
           <div class="col-md-3 col-sm-3 col-xs-3">
             <div class="checkbox">
               <label>
-                <input type="checkbox" name="program[]" checked> Buying
+                <input type="checkbox" name="program[]" {{$thisCompany->CompanyInterestedProgram()->where('id_interested_program', '2')->first() ? 'checked' : ''}}> Buying
               </label>
             </div>
           </div>
@@ -185,7 +188,7 @@
           <div class="col-md-2 col-sm-2 col-xs-2">
             <div class="radio">
               <label>
-                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked >
+                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" {{$thisCompany->tax_type == 'PKP' ? 'checked' : ''}} >
                 PKP
               </label>
             </div>
@@ -193,7 +196,7 @@
           <div class="col-md-3 col-sm-3 col-xs-3">
             <div class="radio">
               <label>
-                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" {{$thisCompany->tax_type == 'non PKP' ? 'checked' : ''}}>
                 Non PKP
               </label>
             </div>
@@ -512,56 +515,56 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Request Add-On</h4>
       </div>
+      <form method="post" action="{{url('doRequestCompanyAddOn')}}">
+      {{csrf_field()}}
       <div class="modal-body">
-        <form>
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
                 <label>Add On</label>
-                <select id="addon-select" class="form-control selectpicker" name="addon-select" data-live-search="true">
+                <select id="addon-select" class="form-control selectpicker" name="addonId" data-live-search="true">
                   <option value="">Select Addon</option>
-                  <option value="" selected>Add Manager Account +1</option>
-                  <option value="">Add Staff Account +1</option>
-                  <option value="">Add Manager Account +5</option>
-                  <option value="">Add Staff Account +5</option>
+                  @foreach($addOnData as $aData)
+                    <option value="{{$aData->id}}">{{$aData->name}}</option>
+                  @endforeach
                 </select>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label>Quantity</label>
-                <select id="addon-qty" class="form-control selectpicker" name="addon-qty" data-live-search="true">
-                  <option value="">Select Quantity</option>
-                  <option value="" selected>1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
+                <select id="addon-qty" class="form-control selectpicker" name="quantity" data-live-search="true">
+                  <option value="0">Select Quantity</option>
+                  <option value="1" selected>1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
                 </select>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label>Duration</label>
-                <select id="addon-duration" class="form-control selectpicker" name="addon-duration" data-live-search="true">
-                  <option value="">Select Duration</option>
-                  <option value="" selected>1 Year</option>
-                  <option value="">2 Year</option>
-                  <option value="">3 Year</option>
+                <select id="addon-duration" class="form-control selectpicker" name="duration" data-live-search="true">
+                  <option value="0">Select Duration</option>
+                  <option value="1" selected>1 Year</option>
+                  <option value="2">2 Year</option>
+                  <option value="3">3 Year</option>
                 </select>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label>Price</label>
-                <input id="addon-price" type="text" class="form-control" name="addon-price" disabled value="Rp. 1.000.000">
+                <input id="addon-price" type="text" class="form-control" name="price" disabled value="kosong">
               </div>
             </div>
           </div>
-        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" data-target="#konfirmasiRequestAddon" class="btn btn-primary" data-toggle="modal">Submit</button>
+        <button type="submit" data-target="#konfirmasiRequestAddon-tampung" class="btn btn-primary" data-toggle="modal">Submit</button>
       </div>
+      </form>
     </div>
   </div>
 </div>

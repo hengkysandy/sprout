@@ -40,11 +40,12 @@ Route::group(['middleware' => 'checkUser'], function () {
     Route::get('home', 'PageController@home');
     
     Route::get('profile', 'CompanyController@profile');
+    Route::get('doSetUserHeadStatus','CompanyController@doSetUserHeadStatus');
     Route::post('doRegisUser', 'CompanyController@doRegisUser');
     
     Route::get('logoutUser', 'PageController@logoutUser');
     Route::post('doExtendCompanyPackage', 'CompanyController@doExtendCompanyPackage');
-    Route::get('profile', 'CompanyController@profile');
+    // Route::get('profile', 'CompanyController@profile');
     Route::post('doRequestCompanyAddOn','CompanyController@doRequestCompanyAddOn');
 
     Route::post('doAddUnit', 'UnitController@create');
@@ -75,6 +76,7 @@ Route::group(['middleware' => 'checkUser','checkSales'],function(){
     Route::post('doAssignCompanyBuyLead','BuyLeadController@doAssignCompanyBuyLead');
     Route::get('doRemoveAssignedCompany','BuyLeadController@doRemoveAssignedCompany');
     
+    
 
 
     Route::post('doCreateRevise','BuyLeadController@doCreateRevise');
@@ -82,7 +84,7 @@ Route::group(['middleware' => 'checkUser','checkSales'],function(){
     Route::get('doApproveQuotation','BuyLeadController@doApproveQuotation');
 
     Route::get('company-database','BuyLeadController@companyDatabase');
-    Route::get('doChangeCompanyStatus','BuyLeadController@doChangeCompanyStatus');
+    Route::get('doChangeCompanyStatus','CompanyController@doChangeCompanyStatus');
 
 }); 
 

@@ -6,6 +6,7 @@ use App\AddOn;
 use App\Certificate;
 use App\CloudinaryMapping;
 use App\Company;
+use App\CompanyAddOn;
 use App\CompanyInterestedProgram;
 use App\CompanyMainProduct;
 use App\CompanyPackage;
@@ -336,9 +337,50 @@ class CompanyController extends Controller
     {
         return $request->all();
 
+        // CompanyAddOn::create([
+        //     'company_id' => $request->apa,
+        //     'add_on_id' => $request->addonId,
+        //     'request_from' => 'request addon',
+        //     'expired_date' => $request->apa,
+        //     'status' => 'pending',
+        // ]);
+
         // addonId: "3",
         // quantity: "2",
         // duration: null
+    }
+
+    public function doSetUserHeadStatus(Request $request)
+    {
+        if($request->status == "true"){
+            
+            $procurementRoleArr = [3,4];
+            $salesRoleArr = [5,6];
+
+            $currUser = UserPreDefine::find($request->id_user);
+            if(in_array($currUser->UserRole()->first()->role_id, $procurementRoleArr)){
+                $companyUser = UserPreDefine::where('user.id_company',$currUser->id_company)
+                                ->join('user_role','user_role.user_id','=','user.id')
+                                ->whereIn('role_id',$procurementRoleArr);
+            }else if(in_array($currUser->UserRole()->first()->role_id, $salesRoleArr)){
+                $companyUser = UserPreDefine::where('user.id_company',$currUser->id_company)
+                                ->join('user_role','user_role.user_id','=','user.id')
+                                ->whereIn('role_id',$salesRoleArr);
+            }
+
+            foreach ($companyUser->get() as $key => $value) {
+                $currData = UserPreDefine::find($value->user_id);
+                $currData->is_head = "false";
+                $currData->save();
+            }
+
+        }
+
+        $newHead = UserPreDefine::find($request->id_user);
+        $newHead->is_head = $request->status;
+        $newHead->save();
+
+        return back();
     }
 
 

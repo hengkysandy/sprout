@@ -104,8 +104,10 @@ class PageController extends Controller
     }
 
     public function member($id) {
-        $data['company'] = Company::find($id);
-        $data['companyBC'] = CompanyBusinessCategory::where('id_company', $data['company']->id)->get();
+        $data['packageData'] = Package::all();
+        $data['businessEntity'] = ['PT','CV','PD'];
+        $data['thisCompany'] = Company::find($id);
+        $data['companyBC'] = CompanyBusinessCategory::where('id_company', $data['thisCompany']->id)->get();
         $data['section'] = Section::all();
     	return view('dashboard.member', $data);
     }
@@ -172,14 +174,22 @@ class PageController extends Controller
 
     public function home()
     {
+        $data['buyLeadData'] = [];
+
+        foreach (BuyLead::all() as $key => $blData) {
+            if($blData->User()->first()->id_company == session()->get('companySession')[0]->id){
+                $data['buyLeadData'][] = $blData;
+            }
+        }
+
         if (session()->get('userSession')[0]->role_id == 2) {
-            return view('post-buy-lead.master-user.home');
+            return view('post-buy-lead.master-user.home',$data);
         }
         else if (session()->get('userSession')[0]->role_id == 5) {
-            return view('search-buy-lead.sales-manager.home');
+            return view('search-buy-lead.sales-manager.home',$data);
         }
         else if (session()->get('userSession')[0]->role_id == 6) {
-            return view('search-buy-lead.sales-staff.home');
+            return view('search-buy-lead.sales-staff.home',$data);
         }
         else{
             return view('post-buy-lead.home');

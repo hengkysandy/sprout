@@ -23,16 +23,17 @@
               <!-- /.box-header -->
               <div class="box-body">
                 <ul class="products-list product-list-in-box">
+                  @foreach($buyLeadData as $blData)
                   <li class="item">
                     <div class="col-md-6 col-sm-6 col-xs-12 no-padding">
                       <div class="product-img">
-                        <img src="../images/avatar4.jpg" alt="Riko">
+                        <img src="{{$blData->User()->first()->photo_image}}" alt="gambar">
                       </div>
                       <div class="product-info">
                         <div class="col-md-6 col-xs-12 no-padding">
-                          <a href="staff-procurement.html" class="product-title">Riko</a>
+                          <a href="staff-procurement.html" class="product-title">{{$blData->User()->first()->username}}</a>
                           <span class="product-description">
-                          Procurement Manager
+                          {{$blData->User()->first()->UserRole()->first()->Role()->first()->name}}
                           </span>
                         </div>
                       </div>
@@ -42,7 +43,7 @@
                         <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
                           <div class="col-md-12 col-xs-12 btn-danger btn no-padding btn-sm">
                             <span class="initial">M</span>
-                            <span class="label-sm">5 Meeting Schedule</span>
+                            <span class="label-sm">5 Meeting Schedule belum bisa</span>
                           </div>
                         </div>
                       </a>
@@ -50,7 +51,7 @@
                         <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
                           <div class="col-md-12 col-xs-12 btn-success btn no-padding btn-sm">
                             <span class="initial">A</span>
-                            <span class="label-sm">8 Active Buy Lead</span>
+                            <span class="label-sm">8 Active Buy Lead belum bisa</span>
                           </div>
                         </div>
                       </a>
@@ -58,94 +59,13 @@
                         <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
                           <div class="col-md-12 col-xs-12 btn-primary btn no-padding btn-sm">
                             <span class="initial">C</span>
-                            <span class="label-sm">2/10 Closed</span>
+                            <span class="label-sm">2/10 Closed belum bisa</span>
                           </div>
                         </div>
                       </a>
                     </div>
                   </li>
-                  <li class="item">
-                    <div class="col-md-6 col-sm-6 col-xs-12 no-padding">
-                      <div class="product-img">
-                        <img src="../images/avatar5.jpg" alt="Miru">
-                      </div>
-                      <div class="product-info">
-                        <div class="col-md-6 col-xs-12 no-padding">
-                          <a href="staff-procurement.html" class="product-title">Miru</a>
-                          <span class="product-description">
-                          Procurement Manager
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-12 no-padding margin-top-med-and-down">
-                      <a href="#" class="product-title">
-                        <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                          <div class="col-md-12 col-xs-12 btn-danger btn no-padding btn-sm">
-                            <span class="initial">M</span>
-                            <span class="label-sm">4 Meeting Schedule</span>
-                          </div>
-                        </div>
-                      </a>
-                      <a href="#" class="product-title">
-                        <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                          <div class="col-md-12 col-xs-12 btn-success btn no-padding btn-sm">
-                            <span class="initial">A</span>
-                            <span class="label-sm">2 Active Buy Lead</span>
-                          </div>
-                        </div>
-                      </a>
-                      <a href="#" class="product-title">
-                        <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                          <div class="col-md-12 col-xs-12 btn-primary btn no-padding btn-sm">
-                            <span class="initial">C</span>
-                            <span class="label-sm">1/3 Closed</span>
-                          </div>
-                        </div>
-                      </a>
-                    </div>
-                  </li>
-                  <li class="item">
-                    <div class="col-md-6 col-sm-6 col-xs-12 no-padding">
-                      <div class="product-img">
-                        <img src="../images/avatar6.jpg" alt="Zee">
-                      </div>
-                      <div class="product-info">
-                        <div class="col-md-6 col-xs-12 no-padding">
-                          <a href="staff-procurement.html" class="product-title">Zee</a>
-                          <span class="product-description">
-                          Procurement Manager
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-12 no-padding margin-top-med-and-down">
-                      <a href="#" class="product-title">
-                        <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                          <div class="col-md-12 col-xs-12 btn-danger btn no-padding btn-sm">
-                            <span class="initial">M</span>
-                            <span class="label-sm">6 Meeting Schedule</span>
-                          </div>
-                        </div>
-                      </a>
-                      <a href="#" class="product-title">
-                        <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                          <div class="col-md-12 col-xs-12 btn-success btn no-padding btn-sm">
-                            <span class="initial">A</span>
-                            <span class="label-sm">6 Active Buy Lead</span>
-                          </div>
-                        </div>
-                      </a>
-                      <a href="#" class="product-title">
-                        <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                          <div class="col-md-12 col-xs-12 btn-primary btn no-padding btn-sm">
-                            <span class="initial">C</span>
-                            <span class="label-sm">4/10 Closed</span>
-                          </div>
-                        </div>
-                      </a>
-                    </div>
-                  </li>
+                  @endforeach
                 </ul>
               </div>
             </div>
@@ -199,89 +119,7 @@
                       </a>
                     </div>
                   </li>
-                  <li class="item">
-                    <div class="col-md-6 col-sm-6 col-xs-12 no-padding">
-                      <div class="product-img">
-                        <img src="../images/avatar5.jpg" alt="Miru">
-                      </div>
-                      <div class="product-info">
-                        <div class="col-md-6 col-xs-12 no-padding">
-                          <a href="staff-sales.html" class="product-title">Supriatna</a>
-                          <span class="product-description">
-                          Sales Manager
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-12 no-padding margin-top-med-and-down">
-                      <a href="#" class="product-title">
-                        <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                          <div class="col-md-12 col-xs-12 btn-danger btn no-padding btn-sm">
-                            <span class="initial">M</span>
-                            <span class="label-sm">5 Meeting Schedule</span>
-                          </div>
-                        </div>
-                      </a>
-                      <a href="#" class="product-title">
-                        <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                          <div class="col-md-12 col-xs-12 btn-success btn no-padding btn-sm">
-                            <span class="initial">A</span>
-                            <span class="label-sm">3 Active Prospect</span>
-                          </div>
-                        </div>
-                      </a>
-                      <a href="#" class="product-title">
-                        <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                          <div class="col-md-12 col-xs-12 btn-primary btn no-padding btn-sm">
-                            <span class="initial">C</span>
-                            <span class="label-sm">2/5 Closed</span>
-                          </div>
-                        </div>
-                      </a>
-                    </div>
-                  </li>
-                  <li class="item">
-                    <div class="col-md-6 col-sm-6 col-xs-12 no-padding">
-                      <div class="product-img">
-                        <img src="../images/avatar6.jpg" alt="Zee">
-                      </div>
-                      <div class="product-info">
-                        <div class="col-md-6 col-xs-12 no-padding">
-                          <a href="staff-sales.html" class="product-title">Joko</a>
-                          <span class="product-description">
-                          Sales Manager
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-12 no-padding margin-top-med-and-down">
-                      <a href="#" class="product-title">
-                        <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                          <div class="col-md-12 col-xs-12 btn-danger btn no-padding btn-sm">
-                            <span class="initial">M</span>
-                            <span class="label-sm">4 Meeting Schedule</span>
-                          </div>
-                        </div>
-                      </a>
-                      <a href="#" class="product-title">
-                        <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                          <div class="col-md-12 col-xs-12 btn-success btn no-padding btn-sm">
-                            <span class="initial">A</span>
-                            <span class="label-sm">0 Active Prospect</span>
-                          </div>
-                        </div>
-                      </a>
-                      <a href="#" class="product-title">
-                        <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                          <div class="col-md-12 col-xs-12 btn-primary btn no-padding btn-sm">
-                            <span class="initial">C</span>
-                            <span class="label-sm">5/5 Closed</span>
-                          </div>
-                        </div>
-                      </a>
-                    </div>
-                  </li>
-                  <!-- /.item -->
+                  
                 </ul>
               </div>
               <!-- /.box-body -->

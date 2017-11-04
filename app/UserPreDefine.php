@@ -18,7 +18,8 @@ class UserPreDefine extends Model
 		'photo_image',
 		'old_password',
 		'new_password',
-		'status',
+        'status',
+		'as_head',
     ];
 
     public function Company()

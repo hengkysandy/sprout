@@ -104,7 +104,7 @@
                   </div>
 
                   <div class="col-md-4 col-sm-4 col-xs-6 margin-top-med-and-down">
-                    <input type="file">
+                    <input type="file" name="productImage">
                     <p class="help-block hide-on-med-and-down">(.docx, .pdf, or photo of document Product Catalogue)</p>
                   </div>
                 </div>

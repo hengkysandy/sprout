@@ -75,7 +75,7 @@
         <div class="form-group">
           <label class="col-md-2 col-sm-12 col-xs-12 control-label">Zip Code</label>
           <div class="col-md-6 col-sm-4 col-xs-4">
-            <input type="text" class="form-control" value="gak ada saat register" disabled>
+            <input type="text" class="form-control" value="{{$thisCompany->zip_code}}" disabled>
           </div>
         </div>
         <div class="form-group">

@@ -10,6 +10,7 @@ use App\CompanyAddOn;
 use App\CompanyInterestedProgram;
 use App\CompanyMainProduct;
 use App\CompanyPackage;
+use App\CompanyProductCatalogue;
 use App\CompanyRequiredDocument;
 use App\Package;
 use App\Role;
@@ -106,12 +107,20 @@ class CompanyController extends Controller
             'mobile_number' => ($request->mobileCode.$request->mobileNumber),
             'tax_type' => $request->optionsRadios,
             'business_entity' => $regis1->businessEntity,
-            'status' => 'wait for approval'
+            'status' => 'wait for approval',
+            'zip_code' => $regis1->zipcode,
         ]);
 
         $getLatestCompanyId = Company::orderBy('id','DESC')->first()->id;
 
         $request->session()->put('companyIdSession', $getLatestCompanyId);
+
+        $maskedFileProductCatalogueUrl = $this->cloudinaryMaskingFile($request->productImage);
+
+        CompanyProductCatalogue::create([
+            'id_company' => $getLatestCompanyId,
+            'product_catalogue_image' => $maskedFileProductCatalogueUrl,
+        ]);
 
         for ($i=0; $i < count($interestProgram); $i++) {
 

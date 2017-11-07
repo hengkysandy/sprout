@@ -22,7 +22,8 @@ class Company extends Model
 		'mobile_number',
 		'tax_type',
 		'business_entity',
-		'status'
+        'status',
+        'zip_code',
     ];
 
     public function City()
@@ -63,6 +64,11 @@ class Company extends Model
     public function CompanyPackage()
     {
         return $this->hasMany(CompanyPackage::class,'id_company','id');
+    }
+
+    public function CompanyProductCatalogue()
+    {
+        return $this->hasMany(CompanyProductCatalogue::class,'id_company','id');
     }
 
     

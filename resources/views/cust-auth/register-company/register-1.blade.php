@@ -156,7 +156,7 @@
                   <div class="no-padding">
                     <label class="col-md-3 col-sm-3 col-xs-12 control-label labelfirst">Main Product <small class="text-danger">(required)</small></label>
                     <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input id="mp-1" type="text" class="form-control inline-input col-md-10">
+                      <input id="mp-1" type="text" class="form-control inline-input col-md-10" name="mainProduct">
                       <button type="button" class="btn btn-sm btn-danger btn-remove-main-product col-md-1"><i class="fa fa-minus"></i></button>
                     </div>
                   </div>

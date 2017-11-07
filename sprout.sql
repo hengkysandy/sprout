@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.7.4
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2017 at 04:57 AM
--- Server version: 10.1.19-MariaDB
--- PHP Version: 7.0.13
+-- Generation Time: Nov 07, 2017 at 04:15 AM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 7.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sprout`
+-- Database: `stts-sprout`
 --
 
 -- --------------------------------------------------------
@@ -294,8 +296,8 @@ CREATE TABLE `buy_lead_user` (
 --
 
 INSERT INTO `buy_lead_user` (`id`, `id_buy_lead`, `id_user`, `linked_for`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 4, 7, b'0', 'active', '2017-09-29 20:08:27', '2017-09-29 20:08:27', NULL),
-(2, 5, 14, b'0', 'inactive', '2017-09-29 20:40:46', '2017-09-29 20:40:46', NULL);
+(1, 4, 7, b'1111111111111111111111111111111', 'active', '2017-09-29 20:08:27', '2017-09-29 20:08:27', NULL),
+(2, 5, 14, b'1111111111111111111111111111111', 'inactive', '2017-09-29 20:40:46', '2017-09-29 20:40:46', NULL);
 
 -- --------------------------------------------------------
 
@@ -322,8 +324,7 @@ INSERT INTO `certificate` (`id`, `id_company`, `certificate_image`, `status`, `c
 (3, 13, 'http://res.cloudinary.com/stts/image/upload/v1504842335/qqkekile9esunpa9fdpd.png', 'active', '2017-09-08 03:45:37', '2017-09-08 03:45:37', NULL),
 (4, 14, 'http://res.cloudinary.com/stts/image/upload/v1505552824/xoyzqax9qcoziomsfpjn.png', 'active', '2017-09-16 09:07:05', '2017-09-16 09:07:05', NULL),
 (5, 15, 'http://res.cloudinary.com/stts/image/upload/v1505718444/ztnstlb6vhkd7kwmoyqr.png', 'active', '2017-09-18 07:07:27', '2017-09-18 07:07:27', NULL),
-(6, 16, 'http://res.cloudinary.com/stts/image/upload/v1506491984/zu1iyaf5obxpr3tsltwr.png', 'active', '2017-09-27 05:59:47', '2017-09-27 05:59:47', NULL),
-(7, 17, 'http://res.cloudinary.com/stts/image/upload/v1509424359/cb2kci2igpdbed8bhlsj.png', 'active', '2017-10-31 04:32:41', '2017-10-31 04:32:41', NULL);
+(6, 16, 'http://res.cloudinary.com/stts/image/upload/v1506491984/zu1iyaf5obxpr3tsltwr.png', 'active', '2017-09-27 05:59:47', '2017-09-27 05:59:47', NULL);
 
 -- --------------------------------------------------------
 
@@ -395,9 +396,7 @@ INSERT INTO `cloudinary_mapping` (`id`, `url`, `original_filename`, `created_at`
 (48, 'http://res.cloudinary.com/stts/image/upload/v1507015553/kjlxyzvvfmgllavazrzr.png', 'Buy Lead Table Individual (1).xlsx', '2017-10-03 07:25:53', '2017-10-03 07:25:53', NULL),
 (49, 'http://res.cloudinary.com/stts/image/upload/v1507016040/hlsylh5zmdozjse5evhl.png', '2017031315035200009709_Assignment Bulan 5 - IN CS RS EN.docx', '2017-10-03 07:34:00', '2017-10-03 07:34:00', NULL),
 (50, 'http://res.cloudinary.com/stts/image/upload/v1507017061/lv8cxw2bjdfeqzuhhe4k.png', '2017041019482200001367_Assignment Bulan 6 - EES IN CS RS EN.docx', '2017-10-03 07:51:01', '2017-10-03 07:51:01', NULL),
-(51, 'http://res.cloudinary.com/stts/image/upload/v1509424353/dsqmkbcgjqxb5i9hvcy0.png', 'Bug Sprout (23 October 2017).docx', '2017-10-31 04:32:34', '2017-10-31 04:32:34', NULL),
-(52, 'http://res.cloudinary.com/stts/image/upload/v1509424356/o34ap397r7ulb3dffehm.png', 'Bug Sprout (23 October 2017).docx', '2017-10-31 04:32:37', '2017-10-31 04:32:37', NULL),
-(53, 'http://res.cloudinary.com/stts/image/upload/v1509424359/cb2kci2igpdbed8bhlsj.png', 'Bug Sprout (23 October 2017).docx', '2017-10-31 04:32:41', '2017-10-31 04:32:41', NULL);
+(51, 'http://res.cloudinary.com/stts/image/upload/v1508300149/ivpu0vpi2qjjygs0ikqk.png', 'Add Admin2.jpg', '2017-10-18 04:15:50', '2017-10-18 04:15:50', NULL);
 
 -- --------------------------------------------------------
 
@@ -432,12 +431,11 @@ CREATE TABLE `company` (
 --
 
 INSERT INTO `company` (`id`, `city_id`, `province_id`, `name`, `tagline`, `logo_image`, `email`, `password`, `address`, `phone`, `contact_name`, `mobile_number`, `tax_type`, `business_entity`, `status`, `created_at`, `updated_at`, `deleted_at`, `remember_token`) VALUES
-(12, 1101, 11, 'company1', 'tagline1', 'http://res.cloudinary.com/stts/image/upload/v1501498228/yg7wi5jlmmjuxdbkefmn.png', 'email1@gmail.com', '123123', 'address11111111', '+62080080080', 'contact1', '+62626626626', 'PKP', 'PD', 'active', '2017-07-31 03:51:14', '2017-07-31 03:51:14', NULL, NULL),
-(13, 1101, 11, 'qqrqrqrqr', 'qrqrqrqrqr', 'http://res.cloudinary.com/stts/image/upload/v1504842310/xkdd49jz6s6t3kr6e4pl.png', 'company2@gmail.com', '123123', 'qrqrqrqrqrqr qrqrqrqrqr', '+12123123123', '222222qrqr', '+12123123123', 'PKP', 'CV', 'active', '2017-09-08 03:45:32', '2017-09-08 03:45:32', NULL, NULL),
-(14, 1101, 11, 'company9', 'company999', 'http://res.cloudinary.com/stts/image/upload/v1505552802/ktaj9xn8unthrhwikvsv.png', 'company9@gmail.com', '123123', 'comcocmocmocm', '+12123123123', 'concta', '+12123123123', 'PKP', 'PD', 'active', '2017-09-16 09:06:59', '2017-10-28 07:44:28', NULL, NULL),
+(12, 13, 11, 'company1', 'tagline1', 'http://res.cloudinary.com/stts/image/upload/v1501498228/yg7wi5jlmmjuxdbkefmn.png', 'email1@gmail.com', '123123', 'address11111111', '+62080080080', 'contact1', '+62626626626', 'PKP', 'entity1', 'active', '2017-07-31 03:51:14', '2017-07-31 03:51:14', NULL, NULL),
+(13, 14, 11, 'qqrqrqrqr', 'qrqrqrqrqr', 'http://res.cloudinary.com/stts/image/upload/v1504842310/xkdd49jz6s6t3kr6e4pl.png', 'company2@gmail.com', '123123', 'qrqrqrqrqrqr qrqrqrqrqr', '+12123123123', '222222qrqr', '+12123123123', 'PKP', 'CV', 'active', '2017-09-08 03:45:32', '2017-09-08 03:45:32', NULL, NULL),
+(14, 15, 11, 'company9', 'company999', 'http://res.cloudinary.com/stts/image/upload/v1505552802/ktaj9xn8unthrhwikvsv.png', 'company9@gmail.com', '123123', 'comcocmocmocm', '+12123123123', 'concta', '+12123123123', 'PKP', '0', 'active', '2017-09-16 09:06:59', '2017-09-16 09:06:59', NULL, NULL),
 (15, 1101, 11, 'baru', 'baru', 'http://res.cloudinary.com/stts/image/upload/v1505718411/bkdsidjgtvbjsqbdwg7z.png', 'baru@gmail.com', '123123', 'baru baru', '+12123123123', 'baru cont', '+12123123123', 'PKP', 'CV', 'active', '2017-09-18 07:07:19', '2017-09-18 07:07:19', NULL, NULL),
-(16, 1103, 14, 'baru2', 'baru2tagline', 'http://res.cloudinary.com/stts/image/upload/v1506491905/axx9ckzxuqb0ehhkyujq.png', 'baru2@gmail.com', '123123', 'baru2222', '123123123123123', 'baru2cont', '123123412341234', 'PKP', 'PD', 'active', '2017-09-27 05:59:38', '2017-09-27 05:59:38', NULL, NULL),
-(17, 1305, 13, 'baru4', 'baru4 tagline', 'http://res.cloudinary.com/stts/image/upload/v1509423778/yqrhw1a6jsgobpsgrh40.png', 'baru4@gmail.com', '123123', 'baru baru baru 4444', '+123213213321', 'kontak baru 4', '+21987123987', 'PKP', 'PT', 'active', '2017-10-31 04:32:30', '2017-11-02 12:04:23', NULL, NULL);
+(16, 1103, 14, 'baru2', 'baru2tagline', 'http://res.cloudinary.com/stts/image/upload/v1506491905/axx9ckzxuqb0ehhkyujq.png', 'baru2@gmail.com', '123123', 'baru2222', '123123123123123', 'baru2cont', '123123412341234', 'PKP', 'PD', 'active', '2017-09-27 05:59:38', '2017-09-27 05:59:38', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -481,8 +479,7 @@ INSERT INTO `company_business_category` (`id`, `id_company`, `id_business_catego
 (2, 13, 1, 'active', '2017-10-13 05:12:16', '2017-10-13 05:12:16', NULL),
 (3, 15, 4, 'active', '2017-10-13 05:14:46', '2017-10-13 05:14:46', NULL),
 (4, 15, 5, 'active', '2017-10-13 05:14:58', '2017-10-13 05:14:58', NULL),
-(5, 16, 4, 'active', '2017-10-13 05:22:39', '2017-10-13 05:22:39', NULL),
-(6, 12, 4, 'active', '2017-11-03 04:28:56', '2017-11-03 04:28:56', NULL);
+(5, 16, 4, 'active', '2017-10-13 05:22:39', '2017-10-13 05:22:39', NULL);
 
 -- --------------------------------------------------------
 
@@ -511,9 +508,7 @@ INSERT INTO `company_interested_program` (`id`, `id_company`, `id_interested_pro
 (11, 14, 1, 'active', '2017-09-16 09:06:59', '2017-09-16 09:06:59', NULL),
 (12, 14, 2, 'active', '2017-09-16 09:06:59', '2017-09-16 09:06:59', NULL),
 (13, 15, 1, 'active', '2017-09-18 07:07:19', '2017-09-18 07:07:19', NULL),
-(14, 16, 1, 'active', '2017-09-27 05:59:38', '2017-09-27 05:59:38', NULL),
-(15, 17, 1, 'active', '2017-10-31 04:32:30', '2017-10-31 04:32:30', NULL),
-(16, 17, 2, 'active', '2017-10-31 04:32:30', '2017-10-31 04:32:30', NULL);
+(14, 16, 1, 'active', '2017-09-27 05:59:38', '2017-09-27 05:59:38', NULL);
 
 -- --------------------------------------------------------
 
@@ -540,8 +535,7 @@ INSERT INTO `company_main_product` (`id`, `id_company`, `main_product_name`, `st
 (7, 13, 'rqrqrqrqrqr', 'active', '2017-09-08 03:45:32', '2017-09-08 03:45:32', NULL),
 (8, 14, 'mainamianain', 'active', '2017-09-16 09:06:59', '2017-09-16 09:06:59', NULL),
 (9, 15, 'baru main', 'active', '2017-09-18 07:07:20', '2017-09-18 07:07:20', NULL),
-(10, 16, 'admin@gmail.com', 'active', '2017-09-27 05:59:38', '2017-09-27 05:59:38', NULL),
-(11, 17, 'mainmian', 'active', '2017-10-31 04:32:30', '2017-10-31 04:32:30', NULL);
+(10, 16, 'admin@gmail.com', 'active', '2017-09-27 05:59:38', '2017-09-27 05:59:38', NULL);
 
 -- --------------------------------------------------------
 
@@ -558,6 +552,14 @@ CREATE TABLE `company_meeting_schedule` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `company_meeting_schedule`
+--
+
+INSERT INTO `company_meeting_schedule` (`id`, `id_company_assign`, `id_meeting_schedule`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(6, 12, 4, 'created', '2017-11-06 12:19:25', '2017-11-06 12:19:25', NULL),
+(7, 13, 4, 'created', '2017-11-06 12:19:25', '2017-11-06 12:19:25', NULL);
 
 -- --------------------------------------------------------
 
@@ -585,14 +587,12 @@ CREATE TABLE `company_package` (
 INSERT INTO `company_package` (`id`, `id_company`, `id_package`, `year_duration`, `status`, `expired_date`, `insert_from_profile`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (6, 12, 3, 1, 'confirmed', '2017-07-31', 'false', '2017-07-31 03:51:14', '2017-09-09 05:59:01', NULL),
 (7, 13, 4, 1, 'active', '2018-09-08', 'false', '2017-09-08 03:45:32', '2017-09-08 03:45:32', NULL),
-(8, 13, 4, 1, 'confirmed', '2019-09-08', 'true', '2017-09-08 05:09:27', '2017-10-31 05:34:57', NULL),
+(8, 13, 4, 1, 'active', '2019-09-08', 'true', '2017-09-08 05:09:27', '2017-09-08 05:09:27', NULL),
 (9, 13, 3, 1, 'reject', '2019-09-09', 'true', '2017-09-09 03:12:01', '2017-09-09 04:03:25', NULL),
 (10, 14, 2, 2, 'active', '2019-09-16', 'false', '2017-09-16 09:06:59', '2017-09-16 09:06:59', NULL),
 (11, 14, 3, 3, 'confirmed', '2020-09-16', 'true', '2017-09-16 09:08:21', '2017-09-16 09:13:02', NULL),
-(12, 15, 3, 3, 'confirmed', '2020-09-18', 'false', '2017-09-18 07:07:19', '2017-10-25 11:10:29', NULL),
-(13, 16, 3, 2, 'active', '2019-09-27', 'false', '2017-09-27 05:59:38', '2017-09-27 05:59:38', NULL),
-(14, 15, 4, 3, 'active', '2020-10-25', 'true', '2017-10-25 10:49:37', '2017-10-25 10:49:37', NULL),
-(15, 17, 2, 2, 'approve', '2019-10-31', 'false', '2017-10-31 04:32:30', '2017-10-31 04:32:30', NULL);
+(12, 15, 3, 3, 'active', '2020-09-18', 'false', '2017-09-18 07:07:19', '2017-09-18 07:07:19', NULL),
+(13, 16, 3, 2, 'active', '2019-09-27', 'false', '2017-09-27 05:59:38', '2017-09-27 05:59:38', NULL);
 
 -- --------------------------------------------------------
 
@@ -620,8 +620,7 @@ INSERT INTO `company_required_document` (`id`, `id_company`, `business_license_i
 (3, 13, 'http://res.cloudinary.com/stts/image/upload/v1504842332/fnhlu2gtydv8uudqwppq.png', 'http://res.cloudinary.com/stts/image/upload/v1504842334/nbuhhwnb59fvrufb94f9.png', 'active', '2017-09-08 03:45:37', '2017-09-08 03:45:37', NULL),
 (4, 14, 'http://res.cloudinary.com/stts/image/upload/v1505552820/rrnc7dedd0da2b2uxjou.png', 'http://res.cloudinary.com/stts/image/upload/v1505552822/oa3r1ygtg1zgmyjnpidt.png', 'active', '2017-09-16 09:07:05', '2017-09-16 09:07:05', NULL),
 (5, 15, 'http://res.cloudinary.com/stts/image/upload/v1505718439/urezssuuvtnranaidtzg.png', 'http://res.cloudinary.com/stts/image/upload/v1505718440/drgnkcwmgts9fzdhuvtz.png', 'active', '2017-09-18 07:07:27', '2017-09-18 07:07:27', NULL),
-(6, 16, 'http://res.cloudinary.com/stts/image/upload/v1506491979/knkybywggh9lxvibyazd.png', 'http://res.cloudinary.com/stts/image/upload/v1506491981/suhye4pm8moac8k7hcrd.png', 'active', '2017-09-27 05:59:47', '2017-09-27 05:59:47', NULL),
-(7, 17, 'http://res.cloudinary.com/stts/image/upload/v1509424353/dsqmkbcgjqxb5i9hvcy0.png', 'http://res.cloudinary.com/stts/image/upload/v1509424356/o34ap397r7ulb3dffehm.png', 'active', '2017-10-31 04:32:41', '2017-10-31 04:32:41', NULL);
+(6, 16, 'http://res.cloudinary.com/stts/image/upload/v1506491979/knkybywggh9lxvibyazd.png', 'http://res.cloudinary.com/stts/image/upload/v1506491981/suhye4pm8moac8k7hcrd.png', 'active', '2017-09-27 05:59:47', '2017-09-27 05:59:47', NULL);
 
 -- --------------------------------------------------------
 
@@ -646,9 +645,11 @@ CREATE TABLE `company_status` (
 
 INSERT INTO `company_status` (`id`, `id_company_by`, `id_company_for`, `id_status`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 15, 16, 6, 'active', '2017-10-14 01:02:50', '2017-10-14 05:50:11', NULL),
+(2, 15, 16, 6, 'active', '2017-10-14 05:48:32', '2017-10-14 05:48:32', NULL),
 (3, 16, 15, 4, 'active', '2017-10-16 11:22:03', '2017-10-16 11:22:07', NULL),
-(11, 15, 16, 16, 'active', '2017-10-20 00:43:09', '2017-10-20 00:43:09', NULL),
-(13, 15, 12, 16, 'active', '2017-10-25 10:38:57', '2017-10-25 10:38:57', NULL);
+(4, 16, 12, 16, 'active', '2017-10-16 16:52:35', '2017-10-16 16:52:35', NULL),
+(5, 16, 14, 16, 'active', '2017-10-16 16:52:35', '2017-10-16 16:52:35', NULL),
+(6, 16, 13, 16, 'active', '2017-10-16 17:13:44', '2017-10-16 17:13:44', NULL);
 
 -- --------------------------------------------------------
 
@@ -1849,7 +1850,7 @@ INSERT INTO `indonesia_districts` (`id`, `city_id`, `name`) VALUES
 ('1214070', '1214', 'LOLOMATUA'),
 ('1214071', '1214', 'ULUNOYO'),
 ('1214072', '1214', 'HURUNA'),
-('1214080', '1214', 'LOLOWA''U'),
+('1214080', '1214', 'LOLOWA\'U'),
 ('1214081', '1214', 'HILIMEGAI'),
 ('1214082', '1214', 'OOU'),
 ('1214083', '1214', 'ONOHAZUMBA'),
@@ -5472,7 +5473,7 @@ INSERT INTO `indonesia_districts` (`id`, `city_id`, `name`) VALUES
 ('5204132', '5204', 'MARONGE'),
 ('5204140', '5204', 'EMPANG'),
 ('5204141', '5204', 'TARANO'),
-('5205010', '5205', 'HU''U'),
+('5205010', '5205', 'HU\'U'),
 ('5205011', '5205', 'PAJO'),
 ('5205020', '5205', 'DOMPU'),
 ('5205030', '5205', 'WOJA'),
@@ -5597,7 +5598,7 @@ INSERT INTO `indonesia_districts` (`id`, `city_id`, `name`) VALUES
 ('5304081', '5304', 'FAUTMOLO'),
 ('5304082', '5304', 'FATUKOPA'),
 ('5304090', '5304', 'KIE'),
-('5304091', '5304', 'KOT''OLIN'),
+('5304091', '5304', 'KOT\'OLIN'),
 ('5304100', '5304', 'AMANATUN SELATAN'),
 ('5304101', '5304', 'BOKING'),
 ('5304102', '5304', 'NUNKOLO'),
@@ -5987,7 +5988,7 @@ INSERT INTO `indonesia_districts` (`id`, `city_id`, `name`) VALUES
 ('6112010', '6112', 'BATU AMPAR'),
 ('6112020', '6112', 'TERENTANG'),
 ('6112030', '6112', 'KUBU'),
-('6112040', '6112', 'TELOK PA''KEDAI'),
+('6112040', '6112', 'TELOK PA\'KEDAI'),
 ('6112050', '6112', 'SUNGAI KAKAP'),
 ('6112060', '6112', 'RASAU JAYA'),
 ('6112070', '6112', 'SUNGAI RAYA'),
@@ -6512,7 +6513,7 @@ INSERT INTO `indonesia_districts` (`id`, `city_id`, `name`) VALUES
 ('7104041', '7104', 'BEO UTARA'),
 ('7104042', '7104', 'BEO SELATAN'),
 ('7104050', '7104', 'RAINIS'),
-('7104051', '7104', 'TAMPA NA''MMA'),
+('7104051', '7104', 'TAMPA NA\'MMA'),
 ('7104052', '7104', 'PULUTAN'),
 ('7104060', '7104', 'ESSANG'),
 ('7104061', '7104', 'ESSANG SELATAN'),
@@ -6817,7 +6818,7 @@ INSERT INTO `indonesia_districts` (`id`, `city_id`, `name`) VALUES
 ('7303020', '7303', 'BANTAENG'),
 ('7303021', '7303', 'EREMERASA'),
 ('7303030', '7303', 'TOMPOBULU'),
-('7303031', '7303', 'PA''JUKUKANG'),
+('7303031', '7303', 'PA\'JUKUKANG'),
 ('7303032', '7303', 'GANTARANGKEKE'),
 ('7304010', '7304', 'BANGKALA'),
 ('7304011', '7304', 'BANGKALA BARAT'),
@@ -6890,7 +6891,7 @@ INSERT INTO `indonesia_districts` (`id`, `city_id`, `name`) VALUES
 ('7309051', '7309', 'TONDONG TALLASA'),
 ('7309060', '7309', 'BUNGORO'),
 ('7309070', '7309', 'LABAKKANG'),
-('7309080', '7309', 'MA''RANG'),
+('7309080', '7309', 'MA\'RANG'),
 ('7309091', '7309', 'SEGERI'),
 ('7309092', '7309', 'MANDALLE'),
 ('7310010', '7310', 'TANETE RIAJA'),
@@ -7060,7 +7061,7 @@ INSERT INTO `indonesia_districts` (`id`, `city_id`, `name`) VALUES
 ('7326100', '7326', 'TIKALA'),
 ('7326110', '7326', 'SESEAN'),
 ('7326120', '7326', 'BALUSU'),
-('7326130', '7326', 'SA''DAN'),
+('7326130', '7326', 'SA\'DAN'),
 ('7326140', '7326', 'BENGKELEKILA'),
 ('7326150', '7326', 'SESEAN SULOARA'),
 ('7326160', '7326', 'KAPALA PITU'),
@@ -14596,7 +14597,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('1118060025', '1118060', 'RAYA'),
 ('1118060026', '1118060', 'MEE PEUDUEK'),
 ('1118060027', '1118060', 'SAGOE'),
-('1118070001', '1118070', 'LHOK PU''UK'),
+('1118070001', '1118070', 'LHOK PU\'UK'),
 ('1118070002', '1118070', 'TUNONG'),
 ('1118070003', '1118070', 'TEUNGOH'),
 ('1118070004', '1118070', 'PEURADE'),
@@ -14746,7 +14747,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('1172010004', '1172010', 'JABOI'),
 ('1172010005', '1172010', 'BALOHAN'),
 ('1172010006', '1172010', 'COT ABEUK'),
-('1172010007', '1172010', 'COT BA''U'),
+('1172010007', '1172010', 'COT BA\'U'),
 ('1172010008', '1172010', 'ANOE ITAM'),
 ('1172010009', '1172010', 'UJONG KAREUNG'),
 ('1172010010', '1172010', 'IE MEULEE'),
@@ -18437,7 +18438,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('1214030025', '1214030', 'HILISAOOTONIHA'),
 ('1214030040', '1214030', 'HILIANAA'),
 ('1214030041', '1214030', 'HILIGANOWO SALOO'),
-('1214030042', '1214030', 'HILIGANOWOSA''UA'),
+('1214030042', '1214030', 'HILIGANOWOSA\'UA'),
 ('1214030043', '1214030', 'HILILAZA'),
 ('1214030044', '1214030', 'NANOWA'),
 ('1214031004', '1214031', 'BAWONAHONO'),
@@ -18687,7 +18688,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('1214065008', '1214065', 'SILIMA BANUA'),
 ('1214065009', '1214065', 'SINDROLO'),
 ('1214065010', '1214065', 'SISARAHILI EWO'),
-('1214065011', '1214065', 'HILIALO''OA'),
+('1214065011', '1214065', 'HILIALO\'OA'),
 ('1214066001', '1214066', 'TUHEGAFOA'),
 ('1214066002', '1214066', 'SIHOLI'),
 ('1214066003', '1214066', 'SIFALAGO GOMO'),
@@ -18738,7 +18739,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('1214072013', '1214072', 'FADORO TUHEMBERUA'),
 ('1214072014', '1214072', 'HILIFALAWU'),
 ('1214072015', '1214072', 'LUAHAMOFAKHE'),
-('1214072016', '1214072', 'SIFAORO''ASI HURUNA'),
+('1214072016', '1214072', 'SIFAORO\'ASI HURUNA'),
 ('1214072017', '1214072', 'HILIMANAWA'),
 ('1214072018', '1214072', 'MOMBAWA OLADANO'),
 ('1214080001', '1214080', 'TUHEGAFOA'),
@@ -22629,7 +22630,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('1402061005', '1402061', 'TANJUNG SARI'),
 ('1402061006', '1402061', 'RAWA SEKIP'),
 ('1402061007', '1402061', 'RAWA ASRI'),
-('1402061008', '1402061', 'PULAU JUM''AT'),
+('1402061008', '1402061', 'PULAU JUM\'AT'),
 ('1402061009', '1402061', 'SUKA JADI'),
 ('1402061010', '1402061', 'TELUK SUNGKAI'),
 ('1403010001', '1403010', 'KOTABARU RETEH'),
@@ -56214,7 +56215,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('3526020004', '3526020', 'SUKOLILO TIMUR'),
 ('3526020005', '3526020', 'BUNAJIH'),
 ('3526020006', '3526020', 'BRINGIN'),
-('3526020007', '3526020', 'BA''ENGAS'),
+('3526020007', '3526020', 'BA\'ENGAS'),
 ('3526020008', '3526020', 'MORKEPEK'),
 ('3526020009', '3526020', 'LABANG'),
 ('3526020010', '3526020', 'JUKONG'),
@@ -56255,7 +56256,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('3526040016', '3526040', 'PAKONG'),
 ('3526040017', '3526040', 'ALASKOKON'),
 ('3526050001', '3526050', 'GIGIR'),
-('3526050002', '3526050', 'KO''OLAN'),
+('3526050002', '3526050', 'KO\'OLAN'),
 ('3526050003', '3526050', 'PANGERAN GEDUNGAN'),
 ('3526050004', '3526050', 'PANJALINAN'),
 ('3526050005', '3526050', 'ROSEP'),
@@ -56290,10 +56291,10 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('3526070002', '3526070', 'KAJUANAK'),
 ('3526070003', '3526070', 'PATERONGAN'),
 ('3526070004', '3526070', 'GALIS'),
-('3526070005', '3526070', 'PAKA''AN LAOK'),
+('3526070005', '3526070', 'PAKA\'AN LAOK'),
 ('3526070006', '3526070', 'KRANGGAN TIMUR'),
 ('3526070007', '3526070', 'SEPARAH'),
-('3526070008', '3526070', 'PAKA''AN DAYA'),
+('3526070008', '3526070', 'PAKA\'AN DAYA'),
 ('3526070009', '3526070', 'LONGKEK'),
 ('3526070010', '3526070', 'BANYUBUNIH'),
 ('3526070011', '3526070', 'DALEMAN'),
@@ -56420,7 +56421,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('3526150003', '3526150', 'KOKOP'),
 ('3526150004', '3526150', 'TLOKOH'),
 ('3526150005', '3526150', 'DURJAN'),
-('3526150006', '3526150', 'MANO''AN'),
+('3526150006', '3526150', 'MANO\'AN'),
 ('3526150007', '3526150', 'MANDUNG'),
 ('3526150008', '3526150', 'BANDANG LAOK'),
 ('3526150009', '3526150', 'TRAMOK'),
@@ -56458,7 +56459,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('3526170014', '3526170', 'LABUHAN'),
 ('3526170015', '3526170', 'LEMBUNG PASESER'),
 ('3526180001', '3526180', 'TOLBUK'),
-('3526180002', '3526180', 'RA''AS'),
+('3526180002', '3526180', 'RA\'AS'),
 ('3526180003', '3526180', 'MUARAH'),
 ('3526180004', '3526180', 'POLONGAN'),
 ('3526180005', '3526180', 'KARANG ASEM'),
@@ -56472,7 +56473,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('3526180013', '3526180', 'TENGGUN DAYA'),
 ('3526180014', '3526180', 'BULUNG'),
 ('3526180015', '3526180', 'TROGAN'),
-('3526180016', '3526180', 'KO''OL'),
+('3526180016', '3526180', 'KO\'OL'),
 ('3526180017', '3526180', 'TOBADDUNG'),
 ('3526180018', '3526180', 'MRANDUNG'),
 ('3526180019', '3526180', 'BULUK AGUNG'),
@@ -56681,7 +56682,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('3528010014', '3528010', 'GUGUL'),
 ('3528010015', '3528010', 'BUKEK'),
 ('3528010016', '3528010', 'LARANGAN SLAMPAR'),
-('3528010017', '3528010', 'TARO''AN'),
+('3528010017', '3528010', 'TARO\'AN'),
 ('3528020001', '3528020', 'BADDURIH'),
 ('3528020002', '3528020', 'PAGAGAN'),
 ('3528020003', '3528020', 'MAJUNGAN'),
@@ -56690,7 +56691,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('3528020006', '3528020', 'PADEMAWU TIMUR'),
 ('3528020007', '3528020', 'JARIN'),
 ('3528020008', '3528020', 'PREKBUN'),
-('3528020009', '3528020', 'SOPA''AH'),
+('3528020009', '3528020', 'SOPA\'AH'),
 ('3528020010', '3528020', 'BUDDIH'),
 ('3528020011', '3528020', 'DURBUK'),
 ('3528020012', '3528020', 'SUMEDANGAN'),
@@ -56746,7 +56747,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('3528050016', '3528050', 'KOLPAJUNG'),
 ('3528050017', '3528050', 'KOWEL'),
 ('3528050018', '3528050', 'TORONAN'),
-('3528060001', '3528060', 'GRO''OM'),
+('3528060001', '3528060', 'GRO\'OM'),
 ('3528060002', '3528060', 'BATUKALANGAN'),
 ('3528060003', '3528060', 'CANDIBURUNG'),
 ('3528060004', '3528060', 'TOKET'),
@@ -56763,7 +56764,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('3528060015', '3528060', 'PROPPO'),
 ('3528060016', '3528060', 'MAPPER'),
 ('3528060017', '3528060', 'PANGLEMAH'),
-('3528060018', '3528060', 'BILLA''AN'),
+('3528060018', '3528060', 'BILLA\'AN'),
 ('3528060019', '3528060', 'TLANGOH'),
 ('3528060020', '3528060', 'KODIK'),
 ('3528060021', '3528060', 'LENTENG'),
@@ -56922,7 +56923,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('3529060002', '3529060', 'KARANG ANYAR'),
 ('3529060003', '3529060', 'MARENGAN LAOK'),
 ('3529060004', '3529060', 'KERTASADA'),
-('3529060005', '3529060', 'KALIMO''OK'),
+('3529060005', '3529060', 'KALIMO\'OK'),
 ('3529060006', '3529060', 'KALIANGET BARAT'),
 ('3529060007', '3529060', 'KALIANGET TIMUR'),
 ('3529070005', '3529070', 'KOLOR'),
@@ -57053,7 +57054,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('3529150005', '3529150', 'GADDING'),
 ('3529150006', '3529150', 'GIRING'),
 ('3529150007', '3529150', 'GUNUNG KEMBAR'),
-('3529150008', '3529150', 'JABA''AN'),
+('3529150008', '3529150', 'JABA\'AN'),
 ('3529150009', '3529150', 'MANDING LAOK'),
 ('3529150010', '3529150', 'MANDING DAYA'),
 ('3529150011', '3529150', 'MANDING TIMUR'),
@@ -60545,7 +60546,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('5204141002', '5204141', 'LABUAN AJI'),
 ('5204141003', '5204141', 'BANTULANTEH'),
 ('5204141004', '5204141', 'LABUAN JAMBU'),
-('5204141005', '5204141', 'TOLO'' OI'),
+('5204141005', '5204141', 'TOLO\' OI'),
 ('5204141006', '5204141', 'MATA'),
 ('5204141007', '5204141', 'BANDA'),
 ('5204141008', '5204141', 'PIDANG'),
@@ -60598,7 +60599,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('5205040004', '5205040', 'MALAJU'),
 ('5205040005', '5205040', 'LASI'),
 ('5205040006', '5205040', 'K I W U'),
-('5205050009', '5205050', 'TA''A'),
+('5205050009', '5205050', 'TA\'A'),
 ('5205050010', '5205050', 'KEMPO'),
 ('5205050011', '5205050', 'SORO'),
 ('5205050012', '5205050', 'KONTE'),
@@ -60720,7 +60721,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('5206050020', '5206050', 'MARIA UTARA'),
 ('5206050021', '5206050', 'RIAMAU'),
 ('5206051002', '5206051', 'LAJU'),
-('5206051004', '5206051', 'DORO O''O'),
+('5206051004', '5206051', 'DORO O\'O'),
 ('5206051006', '5206051', 'WAWORADA'),
 ('5206051007', '5206051', 'KAWUWU'),
 ('5206051008', '5206051', 'KARUMBU'),
@@ -60795,7 +60796,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('5206080001', '5206080', 'RORA'),
 ('5206080002', '5206080', 'PALAMA'),
 ('5206080003', '5206080', 'MBAWA'),
-('5206080004', '5206080', 'O''O'),
+('5206080004', '5206080', 'O\'O'),
 ('5206080005', '5206080', 'DORIDUNGGA'),
 ('5206080008', '5206080', 'KALA'),
 ('5206080012', '5206080', 'BUMI PAJO'),
@@ -60992,7 +60993,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('5272020002', '5272020', 'DODU'),
 ('5272020003', '5272020', 'NUNGGA'),
 ('5272020004', '5272020', 'KUMBE'),
-('5272020014', '5272020', 'OI FO''O'),
+('5272020014', '5272020', 'OI FO\'O'),
 ('5272020015', '5272020', 'KODO'),
 ('5272020016', '5272020', 'LELAMASE'),
 ('5272021001', '5272021', 'NITU'),
@@ -61484,7 +61485,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('5304023005', '5304023', 'OELEKAM'),
 ('5304023006', '5304023', 'PIKA'),
 ('5304030001', '5304030', 'CENDANA'),
-('5304030002', '5304030', 'SO''E'),
+('5304030002', '5304030', 'SO\'E'),
 ('5304030003', '5304030', 'OEBESA'),
 ('5304030004', '5304030', 'KOBEKAMUSA'),
 ('5304030005', '5304030', 'NUNUMEU'),
@@ -61624,13 +61625,13 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('5304090016', '5304090', 'ENONAPI'),
 ('5304090017', '5304090', 'NAILEU'),
 ('5304090018', '5304090', 'FATUKUSI'),
-('5304091001', '5304091', 'KOT''OLIN'),
+('5304091001', '5304091', 'KOT\'OLIN'),
 ('5304091002', '5304091', 'NUNBENA'),
 ('5304091003', '5304091', 'FATUAT'),
 ('5304091004', '5304091', 'HOIBETI'),
 ('5304091005', '5304091', 'NUALUNAT'),
 ('5304091006', '5304091', 'PANITE'),
-('5304091007', '5304091', 'O''OBIBI'),
+('5304091007', '5304091', 'O\'OBIBI'),
 ('5304091008', '5304091', 'BINENOK'),
 ('5304100001', '5304100', 'OINLASI'),
 ('5304100002', '5304100', 'KOKOI'),
@@ -61768,7 +61769,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('5305023009', '5305023', 'SONO'),
 ('5305024001', '5305024', 'NILULAT'),
 ('5305024002', '5305024', 'TUBU'),
-('5305024003', '5305024', 'HAUMENI ''ANA'),
+('5305024003', '5305024', 'HAUMENI \'ANA'),
 ('5305024004', '5305024', 'SUNKAEN'),
 ('5305024005', '5305024', 'NAINABAN'),
 ('5305024006', '5305024', 'INBATE'),
@@ -61853,10 +61854,10 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('5305050011', '5305050', 'SUPUN'),
 ('5305050012', '5305050', 'SAINIUP'),
 ('5305050013', '5305050', 'TUNBAEN'),
-('5305051001', '5305051', 'T''EBA'),
+('5305051001', '5305051', 'T\'EBA'),
 ('5305051002', '5305051', 'OERINBESI'),
 ('5305051003', '5305051', 'OEKOPA'),
-('5305051004', '5305051', 'T''EBA TIMUR'),
+('5305051004', '5305051', 'T\'EBA TIMUR'),
 ('5305052001', '5305052', 'TUNBES'),
 ('5305052002', '5305052', 'LUNIUP'),
 ('5305052003', '5305052', 'MATABESI'),
@@ -61927,7 +61928,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('5306062002', '5306062', 'LIDAK'),
 ('5306062003', '5306062', 'MANUAMAN'),
 ('5306062004', '5306062', 'RINBESI'),
-('5306070001', '5306070', 'FATUBA''A'),
+('5306070001', '5306070', 'FATUBA\'A'),
 ('5306070002', '5306070', 'DAFALA'),
 ('5306070003', '5306070', 'TAKIRIN'),
 ('5306070004', '5306070', 'MANLETEN'),
@@ -62111,7 +62112,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('5307060016', '5307060', 'TERNATE SELATAN'),
 ('5307060017', '5307060', 'TERNATE'),
 ('5307060018', '5307060', 'PULAU BUAYA'),
-('5307060019', '5307060', 'O''AMATE'),
+('5307060019', '5307060', 'O\'AMATE'),
 ('5307060020', '5307060', 'AIMOLI'),
 ('5307060021', '5307060', 'ALAANG'),
 ('5307060022', '5307060', 'ADANG'),
@@ -63960,7 +63961,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('5319031008', '5319031', 'GISING'),
 ('5319031009', '5319031', 'TENO MESE'),
 ('5319031010', '5319031', 'LEMPANG PAJI'),
-('5319031011', '5319031', 'NANGA PU''UN'),
+('5319031011', '5319031', 'NANGA PU\'UN'),
 ('5319031012', '5319031', 'MOSI NGARAN'),
 ('5319031013', '5319031', 'WAE RASAN'),
 ('5319031014', '5319031', 'BENTENG PAU'),
@@ -64471,8 +64472,8 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('6101070010', '6101070', 'SETALIK'),
 ('6101070011', '6101070', 'PENAKALAN'),
 ('6101070012', '6101070', 'SULUNG'),
-('6101080001', '6101080', 'SEBUNGA'''),
-('6101080002', '6101080', 'KALIAU'''),
+('6101080001', '6101080', 'SEBUNGA\''),
+('6101080002', '6101080', 'KALIAU\''),
 ('6101080003', '6101080', 'SANATAB'),
 ('6101080004', '6101080', 'SANTABAN'),
 ('6101080005', '6101080', 'SEI BENING'),
@@ -65690,7 +65691,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('6108070010', '6108070', 'KALIS RAYA'),
 ('6108070011', '6108070', 'TEKUDAK'),
 ('6108070012', '6108070', 'SEMERANTAU'),
-('6108070013', '6108070', 'TAPANG DA''AN'),
+('6108070013', '6108070', 'TAPANG DA\'AN'),
 ('6108070014', '6108070', 'SEGIAM'),
 ('6108070015', '6108070', 'PAYUNGAN'),
 ('6108070016', '6108070', 'RIBANG KADENG'),
@@ -65710,7 +65711,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('6108080013', '6108080', 'TANJUNG LOKANG'),
 ('6108080014', '6108080', 'URANG UNSA'),
 ('6108080015', '6108080', 'KEREHO'),
-('6108080016', '6108080', 'INGKO'' TAMBE'),
+('6108080016', '6108080', 'INGKO\' TAMBE'),
 ('6108090001', '6108090', 'NANGA EMBALOH'),
 ('6108090002', '6108090', 'KELILING SEMULUNG'),
 ('6108090006', '6108090', 'LAWIK'),
@@ -67802,7 +67803,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('6213020002', '6213020', 'MALASAN'),
 ('6213020003', '6213020', 'BATU PUTIH'),
 ('6213020004', '6213020', 'MANGKAHUI'),
-('6213020005', '6213020', 'PANU''UT'),
+('6213020005', '6213020', 'PANU\'UT'),
 ('6213020006', '6213020', 'MUARA UNTU'),
 ('6213020007', '6213020', 'MUARA JAAN'),
 ('6213020008', '6213020', 'BAHITOM'),
@@ -68467,7 +68468,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('6303070021', '6303070', 'MALI MALI'),
 ('6303070022', '6303070', 'LOKTANGGA'),
 ('6303070023', '6303070', 'SUNGAI BESAR'),
-('6303070024', '6303070', 'BI''IH'),
+('6303070024', '6303070', 'BI\'IH'),
 ('6303070025', '6303070', 'BALAU'),
 ('6303070026', '6303070', 'ABIRAU'),
 ('6303080001', '6303080', 'BELANGIAN'),
@@ -68830,7 +68831,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('6305040012', '6305040', 'BUNGUR BARU'),
 ('6305050001', '6305050', 'BARAMBAN'),
 ('6305050002', '6305050', 'MIAWA'),
-('6305050003', '6305050', 'BUNI''IN JAYA'),
+('6305050003', '6305050', 'BUNI\'IN JAYA'),
 ('6305050004', '6305050', 'BATU AMPAR'),
 ('6305050005', '6305050', 'PIPITAK JAYA'),
 ('6305050006', '6305050', 'HARAKIT'),
@@ -69476,7 +69477,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('6309040006', '6309040', 'MANTUIL'),
 ('6309040007', '6309040', 'MURUNG KARANGAN'),
 ('6309050001', '6309050', 'WALANGKIR'),
-('6309050002', '6309050', 'PULAU KU''U'),
+('6309050002', '6309050', 'PULAU KU\'U'),
 ('6309050003', '6309050', 'TAMIYANG'),
 ('6309050004', '6309050', 'WARUKIN'),
 ('6309050005', '6309050', 'PADANG PANJANG'),
@@ -69658,7 +69659,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('6310040018', '6310040', 'DARASAN BINJAI'),
 ('6310040019', '6310040', 'GUNTUNG'),
 ('6310040020', '6310040', 'TELUK KEPAYANG'),
-('6310040021', '6310040', 'HATI''IF'),
+('6310040021', '6310040', 'HATI\'IF'),
 ('6310040022', '6310040', 'MANGKALAPI'),
 ('6310040023', '6310040', 'TAMUNIH'),
 ('6310040024', '6310040', 'BATU BULAN'),
@@ -69783,7 +69784,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('6311030021', '6311030', 'PUDAK'),
 ('6311030022', '6311030', 'BARU'),
 ('6311030023', '6311030', 'TANGALIN'),
-('6311031001', '6311031', 'JU''UH'),
+('6311031001', '6311031', 'JU\'UH'),
 ('6311031002', '6311031', 'SUNGSUM'),
 ('6311031003', '6311031', 'AUH'),
 ('6311031004', '6311031', 'DAYAK PITAP'),
@@ -69863,7 +69864,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('6311060013', '6311060', 'BINJU'),
 ('6311060014', '6311060', 'BANGKAL'),
 ('6311060015', '6311060', 'SURYATAMA'),
-('6311060016', '6311060', 'HA''UWAI'),
+('6311060016', '6311060', 'HA\'UWAI'),
 ('6311060017', '6311060', 'KARYA'),
 ('6311060018', '6311060', 'PUYUN'),
 ('6311060019', '6311060', 'GUNUNG RIUT'),
@@ -70864,7 +70865,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('6411050003', '6411050', 'LONG PENANEH DUA'),
 ('6411050004', '6411050', 'TIONG OHANG'),
 ('6411050005', '6411050', 'NAHA BUAN'),
-('6411050006', '6411050', 'TIONG BU''U'),
+('6411050006', '6411050', 'TIONG BU\'U'),
 ('6411050007', '6411050', 'LONG PENANEH SATU'),
 ('6411050008', '6411050', 'LONG PENANEH TIGA'),
 ('6411050009', '6411050', 'LONG KERIOK'),
@@ -72584,7 +72585,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7107020008', '7107020', 'BATULINTIK'),
 ('7107020009', '7107020', 'BINTAUNA'),
 ('7107020010', '7107020', 'TALAGA'),
-('7107020011', '7107020', 'VOA''A'),
+('7107020011', '7107020', 'VOA\'A'),
 ('7107020012', '7107020', 'PADANG'),
 ('7107020013', '7107020', 'KUHANGA'),
 ('7107020014', '7107020', 'BUNONG'),
@@ -73824,7 +73825,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7203020029', '7203020', 'BUNGINTENDE'),
 ('7203020030', '7203020', 'BOELIMAU'),
 ('7203020031', '7203020', 'PANIMBAWANG'),
-('7203020032', '7203020', 'PO''O'),
+('7203020032', '7203020', 'PO\'O'),
 ('7203020033', '7203020', 'UMBELE LAMA'),
 ('7203020034', '7203020', 'PULAU DUA DARAT'),
 ('7203020035', '7203020', 'POARO'),
@@ -74179,7 +74180,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7205101002', '7205101', 'SALOYA'),
 ('7205101003', '7205101', 'KALIBURU'),
 ('7205101004', '7205101', 'BATUSUYA'),
-('7205101005', '7205101', 'BATUSUYA GO''O'),
+('7205101005', '7205101', 'BATUSUYA GO\'O'),
 ('7205101006', '7205101', 'KALIBURU KATA'),
 ('7205102001', '7205102', 'TAMARENJA'),
 ('7205102002', '7205102', 'OTI'),
@@ -74929,7 +74930,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7210020007', '7210020', 'LAWUA'),
 ('7210020008', '7210020', 'WATUKILO'),
 ('7210020009', '7210020', 'SALUTOME'),
-('7210020010', '7210020', 'O''O'),
+('7210020010', '7210020', 'O\'O'),
 ('7210020011', '7210020', 'PALAMAKI'),
 ('7210020012', '7210020', 'WANGKA'),
 ('7210030001', '7210030', 'SIWONGI'),
@@ -74948,7 +74949,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7210030014', '7210030', 'TORO'),
 ('7210030015', '7210030', 'POLEROA MAKUHI'),
 ('7210030016', '7210030', 'MARENA'),
-('7210040001', '7210040', 'PURO''O'),
+('7210040001', '7210040', 'PURO\'O'),
 ('7210040002', '7210040', 'LANGKO'),
 ('7210040003', '7210040', 'TOMADO'),
 ('7210040004', '7210040', 'ANCA'),
@@ -75161,8 +75162,8 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7212010014', '7212010', 'KOLAKA'),
 ('7212020001', '7212020', 'WAWOPADA'),
 ('7212020002', '7212020', 'LEMBOBARU'),
-('7212020003', '7212020', 'WARA''A'),
-('7212020004', '7212020', 'TINGKEA''O'),
+('7212020003', '7212020', 'WARA\'A'),
+('7212020004', '7212020', 'TINGKEA\'O'),
 ('7212020005', '7212020', 'KOROBONDE'),
 ('7212020006', '7212020', 'MORA'),
 ('7212020007', '7212020', 'ULUANSO'),
@@ -75176,13 +75177,13 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7212030001', '7212030', 'DOLUPO KARYA'),
 ('7212030002', '7212030', 'MANDULA'),
 ('7212030003', '7212030', 'LEMBOBELALA'),
-('7212030004', '7212030', 'PO''ONA'),
+('7212030004', '7212030', 'PO\'ONA'),
 ('7212030005', '7212030', 'RONTA'),
 ('7212030006', '7212030', 'BINTANGOR MUKTI'),
 ('7212030007', '7212030', 'PETUMBEA'),
-('7212030008', '7212030', 'PONTANGO''A'),
+('7212030008', '7212030', 'PONTANGO\'A'),
 ('7212030009', '7212030', 'JAMOR JAYA'),
-('7212030010', '7212030', 'PA''AWARU'),
+('7212030010', '7212030', 'PA\'AWARU'),
 ('7212040001', '7212040', 'MOLORES'),
 ('7212040002', '7212040', 'KEUNO'),
 ('7212040003', '7212040', 'MOHONI'),
@@ -75269,7 +75270,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7212100011', '7212100', 'UEPAKATU'),
 ('7212100012', '7212100', 'PARANGISI'),
 ('7212100013', '7212100', 'LIJO'),
-('7212100014', '7212100', 'MENYO''E'),
+('7212100014', '7212100', 'MENYO\'E'),
 ('7271010004', '7271010', 'UJUNA'),
 ('7271010005', '7271010', 'BARU'),
 ('7271010006', '7271010', 'SIRANINDI'),
@@ -75578,9 +75579,9 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7303021004', '7303021', 'LONRONG'),
 ('7303021005', '7303021', 'BARUA'),
 ('7303021006', '7303021', 'KAMPALA'),
-('7303021007', '7303021', 'PA''BENTENGAN'),
+('7303021007', '7303021', 'PA\'BENTENGAN'),
 ('7303021008', '7303021', 'PARANGLOE'),
-('7303021009', '7303021', 'PA''BUMBUNGAN'),
+('7303021009', '7303021', 'PA\'BUMBUNGAN'),
 ('7303030016', '7303030', 'LEMBANG GANTARANGKEKE'),
 ('7303030017', '7303030', 'PATTALLASSANG'),
 ('7303030018', '7303030', 'BONTO-BONTOA'),
@@ -75596,7 +75597,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7303031003', '7303031', 'LUMPANGAN'),
 ('7303031004', '7303031', 'BIANGKEKE'),
 ('7303031005', '7303031', 'NIPA-NIPA'),
-('7303031006', '7303031', 'PA''JUKUKANG'),
+('7303031006', '7303031', 'PA\'JUKUKANG'),
 ('7303031007', '7303031', 'BORONGLOE'),
 ('7303031008', '7303031', 'PAPANLOE'),
 ('7303031009', '7303031', 'BARUGA'),
@@ -75747,14 +75748,14 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7305021004', '7305021', 'PADDINGING'),
 ('7305021005', '7305021', 'UJUNG BAJI'),
 ('7305021006', '7305021', 'TONASA'),
-('7305030003', '7305030', 'PA''BUNDUKANG'),
+('7305030003', '7305030', 'PA\'BUNDUKANG'),
 ('7305030005', '7305030', 'CANREGO'),
 ('7305030006', '7305030', 'BONTOKADATTO'),
 ('7305030007', '7305030', 'BULUKUNYI'),
 ('7305030008', '7305030', 'CAKURA'),
 ('7305030009', '7305030', 'LANTANG'),
 ('7305030010', '7305030', 'MONCONGKOMBA'),
-('7305030011', '7305030', 'PATTE''NE'),
+('7305030011', '7305030', 'PATTE\'NE'),
 ('7305030012', '7305030', 'RAJAYA'),
 ('7305030013', '7305030', 'SU RULANGI'),
 ('7305031001', '7305031', 'PATTALLASSANG'),
@@ -75772,10 +75773,10 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7305040006', '7305040', 'PALLEKO'),
 ('7305040007', '7305040', 'MATTOMPODALLE'),
 ('7305040008', '7305040', 'PARANG LUARA'),
-('7305040009', '7305040', 'PA''RAPPUNGANTA'),
+('7305040009', '7305040', 'PA\'RAPPUNGANTA'),
 ('7305040010', '7305040', 'MASSAMATURU'),
 ('7305040011', '7305040', 'TIMBUSENG'),
-('7305040012', '7305040', 'KO''MARA'),
+('7305040012', '7305040', 'KO\'MARA'),
 ('7305040013', '7305040', 'BARUGAYA'),
 ('7305040014', '7305040', 'TOWATA'),
 ('7305040015', '7305040', 'KAMPUNG BERU'),
@@ -75783,7 +75784,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7305040017', '7305040', 'PARANGBADO'),
 ('7305040018', '7305040', 'LASSANG BARAT'),
 ('7305040019', '7305040', 'BALANGTANAYA'),
-('7305040020', '7305040', 'KALE KO''MARA'),
+('7305040020', '7305040', 'KALE KO\'MARA'),
 ('7305050001', '7305050', 'MANGINDARA'),
 ('7305050002', '7305050', 'BONTO MARANNU'),
 ('7305050003', '7305050', 'BARAMAMASE'),
@@ -75915,7 +75916,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7306051009', '7306051', 'PATTALASSANG'),
 ('7306051010', '7306051', 'PALLANTIKANG'),
 ('7306051011', '7306051', 'PACELLEKANG'),
-('7306051013', '7306051', 'BORONG PA''LALA'),
+('7306051013', '7306051', 'BORONG PA\'LALA'),
 ('7306051014', '7306051', 'PANAIKANG'),
 ('7306051015', '7306051', 'JENEMADINGING'),
 ('7306060005', '7306060', 'LONJOBOKO'),
@@ -76090,7 +76091,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7308021003', '7308021', 'MARUMPA'),
 ('7308021004', '7308021', 'TELLUMPOCCOE'),
 ('7308021005', '7308021', 'BONTO MATENE'),
-('7308021006', '7308021', 'A''BULOSIBATANG'),
+('7308021006', '7308021', 'A\'BULOSIBATANG'),
 ('7308021007', '7308021', 'NISOMBALIA'),
 ('7308022001', '7308022', 'TAROADA'),
 ('7308022002', '7308022', 'ADATONGENG'),
@@ -76619,7 +76620,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7311200007', '7311200', 'BILA'),
 ('7311200008', '7311200', 'ULAWENG RIAJA'),
 ('7311200009', '7311200', 'MAMPOTU'),
-('7311200010', '7311200', 'TA''CIPONG'),
+('7311200010', '7311200', 'TA\'CIPONG'),
 ('7311200011', '7311200', 'WELLULANG'),
 ('7311200012', '7311200', 'AJANG LALENG'),
 ('7311200013', '7311200', 'TASSIPI'),
@@ -77306,10 +77307,10 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7317010020', '7317010', 'RIWANG SELATAN'),
 ('7317010021', '7317010', 'BUNTU PASIK'),
 ('7317010022', '7317010', 'KOMBA SELATAN'),
-('7317011001', '7317011', 'LA''LOA'),
+('7317011001', '7317011', 'LA\'LOA'),
 ('7317011002', '7317011', 'BATU LAPPA'),
 ('7317011003', '7317011', 'BONEPUTE'),
-('7317011004', '7317011', 'TEMBO''E'),
+('7317011004', '7317011', 'TEMBO\'E'),
 ('7317011005', '7317011', 'SALUSANA'),
 ('7317011006', '7317011', 'DADEKO'),
 ('7317011007', '7317011', 'SAMPANO'),
@@ -77390,7 +77391,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7317050015', '7317050', 'KANNA'),
 ('7317050016', '7317050', 'LEDAN'),
 ('7317050017', '7317050', 'LISSAGA'),
-('7317050018', '7317050', 'TO''LONG'),
+('7317050018', '7317050', 'TO\'LONG'),
 ('7317050019', '7317050', 'TABI'),
 ('7317050020', '7317050', 'KANNA UTARA'),
 ('7317050021', '7317050', 'BUNTU BATU'),
@@ -77418,14 +77419,14 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7317052009', '7317052', 'KARATUAN'),
 ('7317052010', '7317052', 'BONGLO'),
 ('7317052011', '7317052', 'BARANA'),
-('7317052012', '7317052', 'TA''BA'),
+('7317052012', '7317052', 'TA\'BA'),
 ('7317060001', '7317060', 'BALUTAN'),
 ('7317060002', '7317060', 'PADANG TUJU'),
 ('7317060003', '7317060', 'NOLING'),
 ('7317060004', '7317060', 'PADANG KAMBURI'),
 ('7317060013', '7317060', 'BUNTU BATU'),
 ('7317060021', '7317060', 'TANJONG'),
-('7317060022', '7317060', 'PADANG MA''BUD'),
+('7317060022', '7317060', 'PADANG MA\'BUD'),
 ('7317060023', '7317060', 'MALENGGANG'),
 ('7317060024', '7317060', 'TAMPUMIA'),
 ('7317060025', '7317060', 'SALU INDUK'),
@@ -77441,7 +77442,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7317061019', '7317061', 'PAREKAJU'),
 ('7317062001', '7317062', 'PACCERAKANG'),
 ('7317062002', '7317062', 'PATTEDONG'),
-('7317062003', '7317062', 'TO''BALO'),
+('7317062003', '7317062', 'TO\'BALO'),
 ('7317062004', '7317062', 'JENNE MAEJA'),
 ('7317062005', '7317062', 'LAMPUARA'),
 ('7317062006', '7317062', 'BAKTI'),
@@ -77450,7 +77451,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7317062012', '7317062', 'BASSIANG'),
 ('7317062013', '7317062', 'TARRAMATEKKENG'),
 ('7317062014', '7317062', 'PATTEDONG SELATAN'),
-('7317062015', '7317062', 'TO''BIA'),
+('7317062015', '7317062', 'TO\'BIA'),
 ('7317062016', '7317062', 'BASSIANG TIMUR'),
 ('7317070001', '7317070', 'LARE-LARE'),
 ('7317070002', '7317070', 'KARANG-KARANGAN'),
@@ -77490,9 +77491,9 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7317090013', '7317090', 'SALU JAMBU'),
 ('7317090014', '7317090', 'AWO GADING'),
 ('7317090015', '7317090', 'SETIAREJO'),
-('7317090016', '7317090', 'SE''PON'),
+('7317090016', '7317090', 'SE\'PON'),
 ('7317090017', '7317090', 'PONGSAMELUNG'),
-('7317090018', '7317090', 'TO''PONGO'),
+('7317090018', '7317090', 'TO\'PONGO'),
 ('7317090019', '7317090', 'WIWITAN TIMUR'),
 ('7317091001', '7317091', 'SANGTANDUNG'),
 ('7317091002', '7317091', 'BOLONG'),
@@ -77515,7 +77516,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7317093002', '7317093', 'POMPENGAN'),
 ('7317093003', '7317093', 'BULOLONDONG'),
 ('7317093004', '7317093', 'PELALAN'),
-('7317093005', '7317093', 'TO''LEMO'),
+('7317093005', '7317093', 'TO\'LEMO'),
 ('7317093006', '7317093', 'SALU PAO'),
 ('7317093007', '7317093', 'SERITI'),
 ('7317093008', '7317093', 'POMPENGAN TENGAH'),
@@ -77547,14 +77548,14 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7318020011', '7318020', 'ULUWAY BARAT'),
 ('7318020019', '7318020', 'LEMBANG GASING'),
 ('7318020023', '7318020', 'LEMBANG MARINDING'),
-('7318020024', '7318020', 'LEMBANG KE''PE TINORING'),
+('7318020024', '7318020', 'LEMBANG KE\'PE TINORING'),
 ('7318020025', '7318020', 'LEMBANG RANDANAN'),
 ('7318020030', '7318020', 'KELURAHAN TAMPO'),
 ('7318020032', '7318020', 'LEMBANG SIMBUANG'),
 ('7318020034', '7318020', 'KELURAHAN LEMO'),
 ('7318020035', '7318020', 'KELURAHAN TENGAN'),
 ('7318020037', '7318020', 'LEMBANG RANTEDADA'),
-('7318020038', '7318020', 'LEMBANG PA''TENGKO'),
+('7318020038', '7318020', 'LEMBANG PA\'TENGKO'),
 ('7318020040', '7318020', 'KELURAHAN  RANTE KALUA'),
 ('7318020041', '7318020', 'LEMBANG BUNTU TANGTI'),
 ('7318020042', '7318020', 'LEMBANG BUNTU DATU'),
@@ -77582,7 +77583,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7318031003', '7318031', 'KELURAHAN RANTE ALANG'),
 ('7318031004', '7318031', 'LEMBANG TOKESAN'),
 ('7318031005', '7318031', 'LEMBANG RARU SIBUNUAN'),
-('7318032001', '7318032', 'LEMBANG RANTE LA''BI KAMBISA'),
+('7318032001', '7318032', 'LEMBANG RANTE LA\'BI KAMBISA'),
 ('7318032002', '7318032', 'LEMBANG LEATUNG MATALLO'),
 ('7318032003', '7318032', 'KELURAHAN  LEATUNG'),
 ('7318032004', '7318032', 'LEMBANG SALU ALLO'),
@@ -77603,11 +77604,11 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7318040037', '7318040', 'KELURAHAN TAMPO MAKALE'),
 ('7318040038', '7318040', 'LEMBANG LEA'),
 ('7318040039', '7318040', 'KELURAHAN LAPANDAN'),
-('7318041001', '7318041', 'LEMBANG  PA''BUARAN'),
+('7318041001', '7318041', 'LEMBANG  PA\'BUARAN'),
 ('7318041002', '7318041', 'LEMBANG RANDAN BATU'),
 ('7318041003', '7318041', 'KELURAHAN TIROMANDA'),
 ('7318041004', '7318041', 'KELURAHAN TOSAPAN'),
-('7318041005', '7318041', 'LEMBANG BO''NE BUNTU SISONG'),
+('7318041005', '7318041', 'LEMBANG BO\'NE BUNTU SISONG'),
 ('7318041006', '7318041', 'LEMBANG PATEKKE'),
 ('7318041007', '7318041', 'KELURAHAN SANDABALIK'),
 ('7318041008', '7318041', 'KELURAHAN PASANG'),
@@ -77619,14 +77620,14 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7318050019', '7318050', 'KELURAHAN PATTAN ULUSALU'),
 ('7318050030', '7318050', 'LEMBANG SALUTANDUNG'),
 ('7318050046', '7318050', 'LEMBANG RATTE TALONGE'),
-('7318050047', '7318050', 'LEMBANG SA''TANDUNG'),
+('7318050047', '7318050', 'LEMBANG SA\'TANDUNG'),
 ('7318050049', '7318050', 'LEMBANG SALU'),
 ('7318050050', '7318050', 'LEMBANG BATU TIAKA'),
 ('7318050051', '7318050', 'LEMBANG REA TULAKLANGI'),
-('7318050052', '7318050', 'LEMBANG RA''BUNG'),
+('7318050052', '7318050', 'LEMBANG RA\'BUNG'),
 ('7318050053', '7318050', 'LEMBANG SALU BORONAN'),
 ('7318051001', '7318051', 'LEMBANG PALI'),
-('7318051002', '7318051', 'LEMBANG SE''SENG'),
+('7318051002', '7318051', 'LEMBANG SE\'SENG'),
 ('7318051003', '7318051', 'KELURAHAN BITTUANG'),
 ('7318051004', '7318051', 'LEMBANG  TIROAN'),
 ('7318051005', '7318051', 'LEMBANG BAU'),
@@ -77637,9 +77638,9 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7318051010', '7318051', 'LEMBANG BALLA'),
 ('7318051011', '7318051', 'LEMBANG PATONGLOAN'),
 ('7318051012', '7318051', 'LEMBANG SASAK'),
-('7318051013', '7318051', 'LEMBANG LE''TEK'),
+('7318051013', '7318051', 'LEMBANG LE\'TEK'),
 ('7318051014', '7318051', 'LEMBANG SANDANA'),
-('7318051015', '7318051', 'LEMBANG KANDUA'''),
+('7318051015', '7318051', 'LEMBANG KANDUA\''),
 ('7318052001', '7318052', 'KELURAHAN TALION'),
 ('7318052002', '7318052', 'LEMBANG LIMBONG'),
 ('7318052003', '7318052', 'LEMBANG SARAPEANG'),
@@ -78000,20 +78001,20 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7326020003', '7326020', 'LEMBANG ANGIN-ANGIN'),
 ('7326020004', '7326020', 'LEMBANG TALLU LOLO'),
 ('7326020005', '7326020', 'LEMBANG RINDINGBATU'),
-('7326020006', '7326020', 'KELURAHAN BA''TAN'),
-('7326020007', '7326020', 'KELURAHAN PANTA''NAKAN LOLO'),
+('7326020006', '7326020', 'KELURAHAN BA\'TAN'),
+('7326020007', '7326020', 'KELURAHAN PANTA\'NAKAN LOLO'),
 ('7326030001', '7326030', 'LEMBANG TALLUNG PENANIAN'),
-('7326030002', '7326030', 'LEMBANG PATA''  PADANG'),
-('7326030003', '7326030', 'KELURAHAN PA''PAELEAN'),
-('7326030004', '7326030', 'LEMBANG BUNTU LA''BO'),
-('7326030005', '7326030', 'LEMBANG TANDUNG LA''BO'),
-('7326030006', '7326030', 'LEMBANG LA''BO'),
+('7326030002', '7326030', 'LEMBANG PATA\'  PADANG'),
+('7326030003', '7326030', 'KELURAHAN PA\'PAELEAN'),
+('7326030004', '7326030', 'LEMBANG BUNTU LA\'BO'),
+('7326030005', '7326030', 'LEMBANG TANDUNG LA\'BO'),
+('7326030006', '7326030', 'LEMBANG LA\'BO'),
 ('7326040001', '7326040', 'LEMBANG SAPAN KUA-KUA'),
-('7326040002', '7326040', 'LEMBANG  MISA BA''BANA'),
+('7326040002', '7326040', 'LEMBANG  MISA BA\'BANA'),
 ('7326040003', '7326040', 'LEMBANG RINDING KILA BALABATU'),
 ('7326040004', '7326040', 'KELURAHAN TONGKONAN BASSE'),
 ('7326040005', '7326040', 'LEMBANG ISSONG KALUA'),
-('7326040006', '7326040', 'KELURAHAN TALLANG SURA'''),
+('7326040006', '7326040', 'KELURAHAN TALLANG SURA\''),
 ('7326050001', '7326050', 'LEMBANG RANTE BUA SANGGALANGI'),
 ('7326050002', '7326050', 'LEMBANG RANTE BUA SAMALU'),
 ('7326050003', '7326050', 'LEMBANG RANTE BUA'),
@@ -78033,7 +78034,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7326070001', '7326070', 'LEMBANG TONDON'),
 ('7326070002', '7326070', 'LEMBANG TONDON MATALLO'),
 ('7326070003', '7326070', 'LEMBANG TONDON LANGI'),
-('7326070004', '7326070', 'LEMBANG TONDON SIBA''TA'),
+('7326070004', '7326070', 'LEMBANG TONDON SIBA\'TA'),
 ('7326080001', '7326080', 'KELURAHAN TAMPO TALLUNGLIPU'),
 ('7326080002', '7326080', 'KELURAHAN TAGARI TALLUNG LIPU'),
 ('7326080003', '7326080', 'KELURAHAN RANTE PAKU TALLUNGLIPU'),
@@ -78057,32 +78058,32 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7326100003', '7326100', 'LEMBANG SEREALE'),
 ('7326100004', '7326100', 'LEMBANG BUNTU BATU'),
 ('7326100005', '7326100', 'LEMBANG EMBATAU'),
-('7326100006', '7326100', 'LEMBANG BENTENG KA''DO TO''RIA'),
+('7326100006', '7326100', 'LEMBANG BENTENG KA\'DO TO\'RIA'),
 ('7326100007', '7326100', 'LEMBANG PANGDEN'),
 ('7326110001', '7326110', 'LEMBANG BUNTU LOBO'),
-('7326110002', '7326110', 'LEMBANG PARINDING'''),
+('7326110002', '7326110', 'LEMBANG PARINDING\''),
 ('7326110003', '7326110', 'KELURAHAN DERI'),
 ('7326110004', '7326110', 'LEMBANG BORI RANTATELOK'),
 ('7326110005', '7326110', 'KELURAHAN BORI'),
 ('7326110006', '7326110', 'LEMBANG BORI LOMBONGAN'),
 ('7326110007', '7326110', 'KELURAHAN PANGLI SELATAN'),
 ('7326110008', '7326110', 'KELURAHAN PANGLI'),
-('7326110009', '7326110', 'KELURAHAN PALAWA'''),
+('7326110009', '7326110', 'KELURAHAN PALAWA\''),
 ('7326120001', '7326120', 'LEMBANG PALANGI'),
 ('7326120002', '7326120', 'LEMBANG KARUA'),
-('7326120003', '7326120', 'LEMBANG LILIKIRA AO''GADING'),
+('7326120003', '7326120', 'LEMBANG LILIKIRA AO\'GADING'),
 ('7326120004', '7326120', 'LEMBANG AWAK KAWASIK'),
 ('7326120005', '7326120', 'KELURAHAN TAGARI'),
 ('7326120006', '7326120', 'KELURAHAN  BALUSU'),
 ('7326120007', '7326120', 'LEMBANG BALUSU BANGUN LIPU'),
-('7326130001', '7326130', 'LEMBANG SA''DAN ANDULAN'),
-('7326130002', '7326130', 'LEMBANG SA''DAN TIRO ALLO'),
-('7326130003', '7326130', 'KELURAHAN SA''DAN MATALO'),
+('7326130001', '7326130', 'LEMBANG SA\'DAN ANDULAN'),
+('7326130002', '7326130', 'LEMBANG SA\'DAN TIRO ALLO'),
+('7326130003', '7326130', 'KELURAHAN SA\'DAN MATALO'),
 ('7326130004', '7326130', 'LEMBANG SANGKAROPI'),
 ('7326130005', '7326130', 'KELURAHAN SA DAN MALIMBONG'),
 ('7326130006', '7326130', 'LEMBANG SADAN PABULIAN'),
 ('7326130007', '7326130', 'LEMBANG SADAN BALLO PASANGE'),
-('7326130008', '7326130', 'LEMBANG SA''DAN LIKU LAMBE'),
+('7326130008', '7326130', 'LEMBANG SA\'DAN LIKU LAMBE'),
 ('7326130009', '7326130', 'LEMBANG SADAN PESONDONGAN'),
 ('7326130010', '7326130', 'LEMBANG SADAN ULUSALU'),
 ('7326140001', '7326140', 'LEMBANG TOYASA AKUNG'),
@@ -78097,15 +78098,15 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7326160001', '7326160', 'LEMBANG BENTENG MAMULLU'),
 ('7326160002', '7326160', 'LEMBANG KAPALA PITU'),
 ('7326160003', '7326160', 'LEMBANG KANTUN POYA'),
-('7326160004', '7326160', 'LEMBANG BENTENG KA''DO'),
-('7326160005', '7326160', 'LEMBANG SIKUKU'''),
+('7326160004', '7326160', 'LEMBANG BENTENG KA\'DO'),
+('7326160005', '7326160', 'LEMBANG SIKUKU\''),
 ('7326160006', '7326160', 'LEMBANG POLO PADANG'),
 ('7326170001', '7326170', 'LEMBANG KAPOLOANG'),
 ('7326170002', '7326170', 'LEMBANG PIONGAN'),
 ('7326170003', '7326170', 'KELURAHAN PASANG'),
 ('7326170004', '7326170', 'LEMBANG DENDE'),
 ('7326170005', '7326170', 'LEMBANG PAKU'),
-('7326170006', '7326170', 'LEMBANG MA''DONG'),
+('7326170006', '7326170', 'LEMBANG MA\'DONG'),
 ('7326170007', '7326170', 'LEMBANG BUNTU TAGARI'),
 ('7326170008', '7326170', 'LEMBANG PARINDINGAN'),
 ('7326180001', '7326180', 'LEMBANG BATU LOTONG'),
@@ -78116,8 +78117,8 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7326190002', '7326190', 'KELURAHAN PANGALA'),
 ('7326190003', '7326190', 'LEMBANG AMPANG BATU'),
 ('7326190004', '7326190', 'KELURAHAN PANGALA UTARA'),
-('7326190005', '7326190', 'LEMBANG MAI''TING'),
-('7326190006', '7326190', 'LEMBANG LO''KO'' URU TANETE BATU'),
+('7326190005', '7326190', 'LEMBANG MAI\'TING'),
+('7326190006', '7326190', 'LEMBANG LO\'KO\' URU TANETE BATU'),
 ('7326190007', '7326190', 'LEMBANG RINDING ALLO'),
 ('7326190009', '7326190', 'LEMBANG BULU LANGKAN'),
 ('7326190010', '7326190', 'LEMBANG LEMPO POTON'),
@@ -78129,7 +78130,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7326200006', '7326200', 'LEMBANG PULU-PULU'),
 ('7326200007', '7326200', 'LEMBANG PENGKAROAN MANUK'),
 ('7326200008', '7326200', 'LEMBANG BATU BUSA'),
-('7326200009', '7326200', 'LEMBANG ROROAN BARRA''-BARRA'''),
+('7326200009', '7326200', 'LEMBANG ROROAN BARRA\'-BARRA\''),
 ('7326200010', '7326200', 'LEMBANG PANGKUNG BATU'),
 ('7326200011', '7326200', 'LEMBANG PONGLU'),
 ('7326200012', '7326200', 'LEMBANG PAONGANAN'),
@@ -78151,7 +78152,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7371020002', '7371020', 'SAMBUNG JAWA'),
 ('7371020003', '7371020', 'KARANG ANYAR'),
 ('7371020004', '7371020', 'BAJI MAPPAKASUNGGU'),
-('7371020005', '7371020', 'PA''BATANG'),
+('7371020005', '7371020', 'PA\'BATANG'),
 ('7371020006', '7371020', 'PARANG'),
 ('7371020007', '7371020', 'BONTO LEBANG'),
 ('7371020008', '7371020', 'MAMAJANG DALAM'),
@@ -78166,7 +78167,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7371030004', '7371030', 'BALANG BARU'),
 ('7371030005', '7371030', 'JONGAYA'),
 ('7371030006', '7371030', 'BONGAYA'),
-('7371030007', '7371030', 'PA''BAENG-BAENG'),
+('7371030007', '7371030', 'PA\'BAENG-BAENG'),
 ('7371030008', '7371030', 'MANNURUKI'),
 ('7371030009', '7371030', 'PARANG TAMBUNG'),
 ('7371030010', '7371030', 'MANGASA'),
@@ -78239,7 +78240,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7371090001', '7371090', 'BUNGA EJA BERU'),
 ('7371090002', '7371090', 'LEMBO'),
 ('7371090003', '7371090', 'KALUKUANG'),
-('7371090004', '7371090', 'LA''LATANG'),
+('7371090004', '7371090', 'LA\'LATANG'),
 ('7371090005', '7371090', 'RAPPOJAWA'),
 ('7371090006', '7371090', 'TAMMUA'),
 ('7371090007', '7371090', 'RAPPOKALLING'),
@@ -78337,7 +78338,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7373031006', '7373031', 'RAMPOANG'),
 ('7373031007', '7373031', 'TEMMALEBBA'),
 ('7373031008', '7373031', 'BALANDAI'),
-('7373031009', '7373031', 'TO''BULUNG'),
+('7373031009', '7373031', 'TO\'BULUNG'),
 ('7373031010', '7373031', 'BUNTU DATU'),
 ('7373040002', '7373040', 'MANCANI'),
 ('7373040003', '7373040', 'SALUBATTANG'),
@@ -79824,7 +79825,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7408052005', '7408052', 'LATALI'),
 ('7408052006', '7408052', 'TERENGGA'),
 ('7408052007', '7408052', 'POWALAA'),
-('7408052008', '7408052', 'TO''LEMO'),
+('7408052008', '7408052', 'TO\'LEMO'),
 ('7408052009', '7408052', 'SALULOTONG'),
 ('7408052010', '7408052', 'KALAHUNDE'),
 ('7408060001', '7408060', 'LATOWU'),
@@ -80745,7 +80746,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7502010009', '7502010', 'KAYUBULAN'),
 ('7502010010', '7502010', 'LOPO'),
 ('7502010011', '7502010', 'BONGO'),
-('7502010013', '7502010', 'OLIMOO''O'),
+('7502010013', '7502010', 'OLIMOO\'O'),
 ('7502010014', '7502010', 'LANGGULA'),
 ('7502010015', '7502010', 'BUHUDAA'),
 ('7502011001', '7502011', 'HUWONGO'),
@@ -80755,7 +80756,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7502011005', '7502011', 'BILUHU TENGAH'),
 ('7502011006', '7502011', 'LOBUTO TIMUR'),
 ('7502011007', '7502011', 'OLIMEYALA'),
-('7502011008', '7502011', 'BOTUBOLU''O'),
+('7502011008', '7502011', 'BOTUBOLU\'O'),
 ('7502020019', '7502020', 'PAYUNGA'),
 ('7502020020', '7502020', 'HUNTU'),
 ('7502020021', '7502020', 'BUA'),
@@ -81634,7 +81635,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7602061002', '7602061', 'TAPUA'),
 ('7602061003', '7602061', 'MATANGNGA'),
 ('7602061004', '7602061', 'RANGOAN'),
-('7602061005', '7602061', 'BA''PA TAPUA'),
+('7602061005', '7602061', 'BA\'PA TAPUA'),
 ('7602061006', '7602061', 'MAMBU TAPUA'),
 ('7602061007', '7602061', 'KATIMBANG'),
 ('7603010001', '7603010', 'SIBANAWA'),
@@ -81654,7 +81655,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7603020005', '7603020', 'MALIMBONG'),
 ('7603020006', '7603020', 'MATANDE'),
 ('7603020007', '7603020', 'SIPAI'),
-('7603020008', '7603020', 'PASAPA'' MAMBU'),
+('7603020008', '7603020', 'PASAPA\' MAMBU'),
 ('7603020009', '7603020', 'TANETE BATU'),
 ('7603030001', '7603030', 'PANA'),
 ('7603030002', '7603030', 'MANIPI'),
@@ -81679,10 +81680,10 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7603031007', '7603031', 'PARINDING'),
 ('7603040001', '7603040', 'TABANG'),
 ('7603040002', '7603040', 'TABANG BARAT'),
-('7603040003', '7603040', 'TADO'' KALUA'),
+('7603040003', '7603040', 'TADO\' KALUA'),
 ('7603040004', '7603040', 'MASUPPU'),
 ('7603040005', '7603040', 'BAKADISURA'),
-('7603040006', '7603040', 'KALAMA'''),
+('7603040006', '7603040', 'KALAMA\''),
 ('7603040007', '7603040', 'SALUKONA'),
 ('7603050001', '7603050', 'MAMASA'),
 ('7603050002', '7603050', 'OSANGO'),
@@ -81712,7 +81713,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7603061002', '7603061', 'BALLA SATANETEAN'),
 ('7603061003', '7603061', 'BALLA BARAT'),
 ('7603061004', '7603061', 'PIDARA'),
-('7603061005', '7603061', 'BALLA TUMUKA'''),
+('7603061005', '7603061', 'BALLA TUMUKA\''),
 ('7603061006', '7603061', 'BAMBAPUANG'),
 ('7603061007', '7603061', 'SEPAKUAN'),
 ('7603061008', '7603061', 'BALLA TIMUR'),
@@ -81723,7 +81724,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7603070005', '7603070', 'OROBUA SELATAN'),
 ('7603070006', '7603070', 'OROBUA'),
 ('7603070007', '7603070', 'OROBUA TIMUR'),
-('7603070008', '7603070', 'LISUAN ADA'''),
+('7603070008', '7603070', 'LISUAN ADA\''),
 ('7603070013', '7603070', 'MALIMBONG'),
 ('7603070014', '7603070', 'MARAMPAN OROBUA'),
 ('7603071001', '7603071', 'TAWALIAN TIMUR'),
@@ -81741,7 +81742,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7603080014', '7603080', 'BUJUNGMANURUNG'),
 ('7603080016', '7603080', 'SENDANA'),
 ('7603080027', '7603080', 'INDO BANUA'),
-('7603080028', '7603080', 'SALUALO'''),
+('7603080028', '7603080', 'SALUALO\''),
 ('7603080029', '7603080', 'SALUDURIAN'),
 ('7603081001', '7603081', 'BAMBANG'),
 ('7603081002', '7603081', 'BAMBANG TIMUR'),
@@ -81828,7 +81829,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7604010007', '7604010', 'KOPEANG'),
 ('7604010008', '7604010', 'RANTEDODA'),
 ('7604010009', '7604010', 'TAMPALANG'),
-('7604011001', '7604011', 'PASA''BU'),
+('7604011001', '7604011', 'PASA\'BU'),
 ('7604011002', '7604011', 'DUNGKAIT'),
 ('7604011003', '7604011', 'LABUANG RANO'),
 ('7604011004', '7604011', 'LEBANI'),
@@ -81907,7 +81908,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('7604040010', '7604040', 'SANDAPANG'),
 ('7604040011', '7604040', 'KONDO BULO'),
 ('7604040012', '7604040', 'MAKKALIKI'),
-('7604040013', '7604040', 'LASA'''),
+('7604040013', '7604040', 'LASA\''),
 ('7604040014', '7604040', 'BATU MAKKADA'),
 ('7604041001', '7604041', 'BUTTU ADA'),
 ('7604041002', '7604041', 'BONEHAU'),
@@ -85715,7 +85716,7 @@ INSERT INTO `indonesia_villages` (`id`, `district_id`, `name`) VALUES
 ('9110050002', '9110050', 'MIRAFAN'),
 ('9110050003', '9110050', 'FATEGOMI'),
 ('9110050004', '9110050', 'GOHSAMES'),
-('9110050005', '9110050', 'ASMURUF ''U'''),
+('9110050005', '9110050', 'ASMURUF \'U\''),
 ('9110050006', '9110050', 'FAAN'),
 ('9110051001', '9110051', 'JITMAU TIMUR'),
 ('9110051002', '9110051', 'JITMAU'),
@@ -90594,8 +90595,10 @@ INSERT INTO `interested_program` (`id`, `program_name`, `status`, `created_at`, 
 
 CREATE TABLE `meeting_schedule` (
   `id` int(11) NOT NULL,
-  `id_quotation` int(11) NOT NULL,
+  `id_quotation` int(11) DEFAULT NULL,
   `id_user` int(11) NOT NULL,
+  `meeting_type` tinyint(1) NOT NULL,
+  `recipient_role` tinyint(1) DEFAULT NULL,
   `subject` varchar(200) NOT NULL,
   `date` date NOT NULL,
   `time` time NOT NULL,
@@ -90605,6 +90608,13 @@ CREATE TABLE `meeting_schedule` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `meeting_schedule`
+--
+
+INSERT INTO `meeting_schedule` (`id`, `id_quotation`, `id_user`, `meeting_type`, `recipient_role`, `subject`, `date`, `time`, `place`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(4, NULL, 6, 1, 0, 'test meeting', '2017-11-07', '07:23:00', 'test place', 'active', '2017-11-06 12:19:24', '2017-11-06 12:19:24', NULL);
 
 -- --------------------------------------------------------
 
@@ -90740,7 +90750,8 @@ CREATE TABLE `quotation` (
 
 INSERT INTO `quotation` (`id`, `id_buy_lead`, `id_user`, `id_shipping_term`, `city`, `amount`, `total_price`, `delivery_day`, `document`, `status`, `created_at`, `updated_at`, `deleted_at`, `id_area`, `payment_term`, `id_province`) VALUES
 (1, 3, 6, 1, 'KABUPATEN SIMEULUE', 11, 50000000, 4, 'http://res.cloudinary.com/stts/image/upload/v1506608909/xueuwjwlukvxoiudunkc.png', 'submitted', '2017-10-12 10:07:05', '2017-09-28 14:28:30', NULL, 2, 'asfdadsf', NULL),
-(5, 4, 6, 1, 'Kota Jakarta Timur', 12, 41000000, 4, 'http://res.cloudinary.com/stts/image/upload/v1507017061/lv8cxw2bjdfeqzuhhe4k.png', 'submitted', '2017-10-12 10:07:11', '2017-10-03 07:51:01', NULL, 2, 'afdasdfasdf', NULL);
+(5, 4, 6, 1, 'Kota Jakarta Timur', 12, 41000000, 4, 'http://res.cloudinary.com/stts/image/upload/v1507017061/lv8cxw2bjdfeqzuhhe4k.png', 'submitted', '2017-10-12 10:07:11', '2017-10-03 07:51:01', NULL, 2, 'afdasdfasdf', NULL),
+(6, 6, 6, 1, 'KABUPATEN SIMEULUE', 50, 50000000, 30, 'http://res.cloudinary.com/stts/image/upload/v1508300149/ivpu0vpi2qjjygs0ikqk.png', 'submitted', '2017-10-18 04:15:51', '2017-10-18 04:15:51', NULL, 2, 'Down Payment 50%, Installment 6 Months', NULL);
 
 -- --------------------------------------------------------
 
@@ -90764,7 +90775,8 @@ CREATE TABLE `quotation_status` (
 
 INSERT INTO `quotation_status` (`id`, `id_quotation`, `id_status`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 1, 14, 'active', '2017-09-29 02:59:25', NULL, NULL),
-(2, 5, 6, 'active', '2017-09-29 20:16:12', '2017-10-07 05:27:15', NULL);
+(2, 5, 6, 'active', '2017-09-29 20:16:12', '2017-10-07 05:27:15', NULL),
+(3, 6, 14, 'active', '2017-10-18 04:15:51', '2017-10-18 04:15:51', NULL);
 
 -- --------------------------------------------------------
 
@@ -90955,28 +90967,42 @@ CREATE TABLE `user` (
   `photo_image` varchar(200) NOT NULL,
   `old_password` varchar(200) DEFAULT NULL,
   `new_password` varchar(200) DEFAULT NULL,
+  `is_head` tinyint(1) DEFAULT '0',
   `status` varchar(200) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  `is_head` varchar(200) DEFAULT 'false'
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `id_company`, `created_by`, `email`, `first_name`, `last_name`, `username`, `job_title`, `photo_image`, `old_password`, `new_password`, `status`, `created_at`, `updated_at`, `deleted_at`, `is_head`) VALUES
-(1, 13, NULL, 'user2@gmail.com', 'qqweqe', 'dadad', 'user222', 'tit22', 'http://res.cloudinary.com/stts/image/upload/v1504842637/sxu4ghs5vkvetnhlmlht.png', '123123', NULL, 'Active', '2017-09-08 03:50:39', '2017-09-08 03:50:39', NULL, NULL),
-(2, 14, NULL, 'user9@gmail.com', 'user', '9999', 'user9', 'title9', 'http://res.cloudinary.com/stts/image/upload/v1505552852/o2bff3ynii2g195qomcv.png', '123123', NULL, 'Active', '2017-09-16 09:07:33', '2017-09-16 09:07:33', NULL, NULL),
-(3, 15, 0, 'baruuser@gmail.com', 'baru', 'user', 'masteruser', 'title baru', 'http://res.cloudinary.com/stts/image/upload/v1505718477/twfbp4kn2yralswjh5bl.png', '123123', NULL, 'Active', '2017-09-18 07:08:00', '2017-09-18 07:08:00', NULL, 'false'),
-(4, 15, 3, 'aaa@aa.aa', 'procurement Manager', 'procurement Manager', 'tmanager', 'titleaaaa', 'http://res.cloudinary.com/stts/image/upload/v1506276903/besl0vodzo1e3u5p0gmy.png', '123123', NULL, 'Active', '2017-09-24 18:15:04', '2017-11-03 18:01:16', NULL, 'false'),
-(5, 16, NULL, 'baruuser2@gmail.com', 'baru', 'user2', 'baruuser2', 'title2', 'http://res.cloudinary.com/stts/image/upload/v1506492019/xxnw2gjcgmkv9mfmkwpy.png', '123123', NULL, 'Active', '2017-09-27 06:00:22', '2017-09-27 06:00:22', NULL, 'false'),
-(6, 16, 5, 'tsales@gmail.com', 'Sales', 'Manager', 'tsales', 'sales manager', 'http://res.cloudinary.com/stts/image/upload/v1506572688/e4w3t78cko5qca8xuora.jpg', '123123', NULL, 'Active', '2017-09-28 04:24:52', '2017-09-28 04:24:52', NULL, 'false'),
-(7, 16, 6, 'tstaff@gmail.com', 'test', 'staff', 'tstaff', 'staff', 'http://res.cloudinary.com/stts/image/upload/v1506604226/e21cp3flmyapjcvvb4wa.jpg', '123123', NULL, 'Active', '2017-09-28 13:10:27', '2017-09-28 13:10:27', NULL, 'false'),
-(14, 16, 6, 'cstaff@gmail.com', 'coba', 'staff', 'cstaff', 'staff', 'http://res.cloudinary.com/stts/image/upload/v1506604787/z2nuvqflbflfxdd9q2q8.jpg', '123123', NULL, 'Active', '2017-09-28 13:19:47', '2017-09-28 13:19:47', NULL, 'false'),
-(15, 15, NULL, 'emailpro@gmail.com', 'procu', 'rema', 'promanager', 'asdfasfasfasf', 'http://res.cloudinary.com/stts/image/upload/v1508930247/w3czqejfetamedya0dcw.png', '123123', NULL, 'Active', '2017-10-25 11:17:30', '2017-11-03 18:01:18', NULL, 'true'),
-(16, 17, NULL, 'baru4user@gmail.com', 'baru', 'user4', 'masteruser4', 'job title', 'http://res.cloudinary.com/stts/image/upload/v1509424411/be3iee7psdgfwvojhmau.png', '123123', NULL, 'Active', '2017-10-31 04:33:32', '2017-10-31 04:33:32', NULL, 'false');
+INSERT INTO `user` (`id`, `id_company`, `created_by`, `email`, `first_name`, `last_name`, `username`, `job_title`, `photo_image`, `old_password`, `new_password`, `is_head`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 13, NULL, 'user2@gmail.com', 'qqweqe', 'dadad', 'user222', 'tit22', 'http://res.cloudinary.com/stts/image/upload/v1504842637/sxu4ghs5vkvetnhlmlht.png', '123123', NULL, 0, 'Active', '2017-09-08 03:50:39', '2017-09-08 03:50:39', NULL),
+(2, 14, NULL, 'user9@gmail.com', 'user', '9999', 'user9', 'title9', 'http://res.cloudinary.com/stts/image/upload/v1505552852/o2bff3ynii2g195qomcv.png', '123123', NULL, 0, 'Active', '2017-09-16 09:07:33', '2017-09-16 09:07:33', NULL),
+(3, 15, 0, 'baruuser@gmail.com', 'baru', 'user', 'baruuser', 'title baru', 'http://res.cloudinary.com/stts/image/upload/v1505718477/twfbp4kn2yralswjh5bl.png', '123123', NULL, 0, 'Active', '2017-09-18 07:08:00', '2017-09-18 07:08:00', NULL),
+(4, 15, 3, 'aaa@aa.aa', 'procurement Manager', 'procurement Manager', 'tmanager', 'titleaaaa', 'http://res.cloudinary.com/stts/image/upload/v1506276903/besl0vodzo1e3u5p0gmy.png', '123123', NULL, 0, 'Active', '2017-09-24 18:15:04', '2017-09-24 18:15:04', NULL),
+(5, 16, NULL, 'baruuser2@gmail.com', 'baru', 'user2', 'baruuser2', 'title2', 'http://res.cloudinary.com/stts/image/upload/v1506492019/xxnw2gjcgmkv9mfmkwpy.png', '123123', NULL, 0, 'Active', '2017-09-27 06:00:22', '2017-09-27 06:00:22', NULL),
+(6, 16, 5, 'tsales@gmail.com', 'Sales', 'Manager', 'tsales', 'sales manager', 'http://res.cloudinary.com/stts/image/upload/v1506572688/e4w3t78cko5qca8xuora.jpg', '123123', NULL, 0, 'Active', '2017-09-28 04:24:52', '2017-09-28 04:24:52', NULL),
+(7, 16, 6, 'tstaff@gmail.com', 'test', 'staff', 'tstaff', 'staff', 'http://res.cloudinary.com/stts/image/upload/v1506604226/e21cp3flmyapjcvvb4wa.jpg', '123123', NULL, 0, 'Active', '2017-09-28 13:10:27', '2017-09-28 13:10:27', NULL),
+(14, 16, 6, 'cstaff@gmail.com', 'coba', 'staff', 'cstaff', 'staff', 'http://res.cloudinary.com/stts/image/upload/v1506604787/z2nuvqflbflfxdd9q2q8.jpg', '123123', NULL, 0, 'Active', '2017-09-28 13:19:47', '2017-09-28 13:19:47', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -91003,7 +91029,7 @@ CREATE TABLE `user_meeting_schedule` (
 CREATE TABLE `user_role` (
   `id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
   `status` varchar(200) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -91023,9 +91049,7 @@ INSERT INTO `user_role` (`id`, `role_id`, `user_id`, `status`, `created_at`, `up
 (6, 6, 10, 'Active', '2017-09-28 13:14:05', '2017-09-28 13:14:05', NULL),
 (7, 6, 11, 'Active', '2017-09-28 13:16:09', '2017-09-28 13:16:09', NULL),
 (8, 6, 12, 'Active', '2017-09-28 13:17:53', '2017-09-28 13:17:53', NULL),
-(9, 6, 14, 'Active', '2017-09-28 13:19:48', '2017-09-28 13:19:48', NULL),
-(10, 3, 15, 'Active', '2017-10-25 11:17:30', '2017-10-25 11:17:30', NULL),
-(11, 2, 16, 'Active', '2017-10-31 04:33:32', '2017-10-31 04:33:32', NULL);
+(9, 6, 14, 'Active', '2017-09-28 13:19:48', '2017-09-28 13:19:48', NULL);
 
 --
 -- Indexes for dumped tables
@@ -91095,8 +91119,7 @@ ALTER TABLE `buy_lead_user`
 -- Indexes for table `certificate`
 --
 ALTER TABLE `certificate`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `c_to_company` (`id_company`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `cloudinary_mapping`
@@ -91126,15 +91149,13 @@ ALTER TABLE `company_business_category`
 -- Indexes for table `company_interested_program`
 --
 ALTER TABLE `company_interested_program`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `to_company` (`id_company`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `company_main_product`
 --
 ALTER TABLE `company_main_product`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `cmp_to_company` (`id_company`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `company_meeting_schedule`
@@ -91146,15 +91167,13 @@ ALTER TABLE `company_meeting_schedule`
 -- Indexes for table `company_package`
 --
 ALTER TABLE `company_package`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `cp_to_company` (`id_company`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `company_required_document`
 --
 ALTER TABLE `company_required_document`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `crd_to_company` (`id_company`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `company_status`
@@ -91309,8 +91328,13 @@ ALTER TABLE `unit`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_to_company` (`id_company`);
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `user_meeting_schedule`
@@ -91322,8 +91346,7 @@ ALTER TABLE `user_meeting_schedule`
 -- Indexes for table `user_role`
 --
 ALTER TABLE `user_role`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -91334,249 +91357,268 @@ ALTER TABLE `user_role`
 --
 ALTER TABLE `add_on`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `area`
 --
 ALTER TABLE `area`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `business_category`
 --
 ALTER TABLE `business_category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT for table `buy_lead`
 --
 ALTER TABLE `buy_lead`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT for table `buy_lead_business_category`
 --
 ALTER TABLE `buy_lead_business_category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT for table `buy_lead_company`
 --
 ALTER TABLE `buy_lead_company`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `buy_lead_discussion`
 --
 ALTER TABLE `buy_lead_discussion`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `buy_lead_status`
 --
 ALTER TABLE `buy_lead_status`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `buy_lead_user`
 --
 ALTER TABLE `buy_lead_user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `certificate`
 --
 ALTER TABLE `certificate`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `cloudinary_mapping`
 --
 ALTER TABLE `cloudinary_mapping`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+
 --
 -- AUTO_INCREMENT for table `company`
 --
 ALTER TABLE `company`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
 --
 -- AUTO_INCREMENT for table `company_add_on`
 --
 ALTER TABLE `company_add_on`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `company_business_category`
 --
 ALTER TABLE `company_business_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `company_interested_program`
 --
 ALTER TABLE `company_interested_program`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
 --
 -- AUTO_INCREMENT for table `company_main_product`
 --
 ALTER TABLE `company_main_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT for table `company_meeting_schedule`
 --
 ALTER TABLE `company_meeting_schedule`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT for table `company_package`
 --
 ALTER TABLE `company_package`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
 --
 -- AUTO_INCREMENT for table `company_required_document`
 --
 ALTER TABLE `company_required_document`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `company_status`
 --
 ALTER TABLE `company_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `discussion`
 --
 ALTER TABLE `discussion`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `discussion_detail`
 --
 ALTER TABLE `discussion_detail`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `division`
 --
 ALTER TABLE `division`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `interested_program`
 --
 ALTER TABLE `interested_program`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `meeting_schedule`
 --
 ALTER TABLE `meeting_schedule`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `meeting_status`
 --
 ALTER TABLE `meeting_status`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `meeting_summary`
 --
 ALTER TABLE `meeting_summary`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `package`
 --
 ALTER TABLE `package`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `product_catelogue`
 --
 ALTER TABLE `product_catelogue`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `quotation`
 --
 ALTER TABLE `quotation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `quotation_status`
 --
 ALTER TABLE `quotation_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `revise`
 --
 ALTER TABLE `revise`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `section`
 --
 ALTER TABLE `section`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `shipping_term`
 --
 ALTER TABLE `shipping_term`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `status`
 --
 ALTER TABLE `status`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
 --
 -- AUTO_INCREMENT for table `unit`
 --
 ALTER TABLE `unit`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `user_meeting_schedule`
 --
 ALTER TABLE `user_meeting_schedule`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `user_role`
 --
 ALTER TABLE `user_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `certificate`
---
-ALTER TABLE `certificate`
-  ADD CONSTRAINT `c_to_company` FOREIGN KEY (`id_company`) REFERENCES `company` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `company_interested_program`
---
-ALTER TABLE `company_interested_program`
-  ADD CONSTRAINT `to_company` FOREIGN KEY (`id_company`) REFERENCES `company` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `company_main_product`
---
-ALTER TABLE `company_main_product`
-  ADD CONSTRAINT `cmp_to_company` FOREIGN KEY (`id_company`) REFERENCES `company` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `company_package`
---
-ALTER TABLE `company_package`
-  ADD CONSTRAINT `cp_to_company` FOREIGN KEY (`id_company`) REFERENCES `company` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `company_required_document`
---
-ALTER TABLE `company_required_document`
-  ADD CONSTRAINT `crd_to_company` FOREIGN KEY (`id_company`) REFERENCES `company` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `division`
@@ -91607,12 +91649,7 @@ ALTER TABLE `indonesia_districts`
 --
 ALTER TABLE `indonesia_villages`
   ADD CONSTRAINT `indonesia_villages_district_id_foreign` FOREIGN KEY (`district_id`) REFERENCES `indonesia_districts` (`id`);
-
---
--- Constraints for table `user`
---
-ALTER TABLE `user`
-  ADD CONSTRAINT `user_to_company` FOREIGN KEY (`id_company`) REFERENCES `company` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

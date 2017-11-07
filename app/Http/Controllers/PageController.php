@@ -12,6 +12,7 @@ use App\CompanyBusinessCategory;
 use App\CompanyInterestedProgram;
 use App\CompanyMainProduct;
 use App\CompanyPackage;
+use App\CompanyProductCatalogue;
 use App\CompanyRequiredDocument;
 use App\Division;
 use App\Group;
@@ -238,6 +239,124 @@ class PageController extends Controller
         ]);
 
         return back();
+    }
+
+    public function doDeleteProductCatalogue(Request $request)
+    {
+        $currData = CompanyProductCatalogue::find($request->id);
+        $currData->delete();
+
+        return back();
+    }
+
+    public function doDeleteRequiredDocument(Request $request)
+    {
+        $currData = CompanyRequiredDocument::find($request->id);
+        $currData->delete();
+
+        return back();
+    }
+
+    public function doDeleteCertificate(Request $request)
+    {
+        $currData = Certificate::find($request->id);
+        $currData->delete();
+
+        return back();
+    }
+
+    public function doUpdateCompanyData(Request $request)
+    {
+        // return $request->all();
+
+
+        $currCompany = Company::find($request->id_company);
+        $currCompany->business_entity = $request->businessEntity;
+        $currCompany->province_id = $request->id_province; //
+        $currCompany->city_id = $request->id_city; //
+        $currCompany->name = $request->companyName;
+        $currCompany->tagline = $request->companyTagline;
+        $currCompany->name = $request->companyName;
+        $currCompany->address = $request->address;
+        $currCompany->contact_name = $request->contactName;
+        $currCompany->tax_type = $request->optionsRadios;
+        $currCompany->zip_code = $request->zipcode;
+        $currCompany->phone = $request->phoneCode.$request->phoneNumber;
+        $currCompany->mobile_number = $request->mobileNumber;
+        $currCompany->logo_image = $this->cloudinaryMaskingFile($request->logoImage);
+        $currCompany->save();
+
+
+
+        CompanyProductCatalogue::create([
+            'id_company' => $request->id_company,
+            'product_catalogue_image' => $this->cloudinaryMaskingFile($request->productImage),
+        ]);
+
+
+        $currInterestedProgram = CompanyInterestedProgram::where('id_company',$request->id_company)->get();
+
+        if(!empty($currInterestedProgram)){
+            foreach ($currInterestedProgram as $key => $value) {
+                $val = CompanyInterestedProgram::find($value->id);
+                $val->delete();
+            }
+        }
+        
+
+        for ($i=0; $i < count($request->interestProgram); $i++) {
+
+            CompanyInterestedProgram::create([
+                'id_company' => $request->id_company,
+                'id_interested_program' => $request->interestProgram[$i],
+                'status' => 'active'
+            ]);
+
+        }
+
+        $currMainProduct = CompanyMainProduct::where('id_company',$request->id_company)->get();
+        if(!empty($currMainProduct)){
+            foreach ($currMainProduct as $key => $value) {
+                $val = CompanyMainProduct::find($value->id);
+                $val->delete();
+            }
+        }
+
+        CompanyMainProduct::create([
+            'id_company' => $request->id_company,
+            'main_product_name' => $request->mainProduct,
+            'status' => 'active'
+        ]);
+
+
+        $currPackage = CompanyPackage::where('id_company',$request->id_company)->latest('created_at')->first();
+        $currPackage->id_package = $request->package;
+        $currPackage->save();
+
+        return back();
+
+        // id_company: "19",
+        // package: "3",
+        // businessEntity: "CV",
+        // companyName: "adfadsfadsf1",
+        // companyTagline: "asdfasfsdaf1",
+        // address: "safasdfas1",
+        // id_province: "1",
+        // id_city: "1",
+        // zipcode: "13411",
+        // phoneCode: "+11",
+        // phoneNumber: "123987121",
+        // mobileNumber: "+12132987121",
+        // mainProduct: "asdfasdfasdf1",
+        // contactName: "asdfasdfasd",
+        // interestProgram: [
+        // "1",
+        // "2"
+        // ],
+        // optionsRadios: "Non PKP",
+        // productImage: { },
+        // logoImage: { }
+
     }
 
 }

@@ -2,11 +2,13 @@
   <div class="row">
     <div class="container-fluid">
       
-      <form id="company-profile-form" class="form-horizontal margin-top">
+      <form method="post" action="{{url('doUpdateCompanyData')}}" enctype="multipart/form-data" id="company-profile-form" class="form-horizontal margin-top">
+        {{csrf_field()}}
+        <input type="hidden" name="id_company" value="{{$thisCompany->id}}">
         <div class="form-group">
           <label class="col-md-2 col-sm-12 col-xs-12 control-label">Package</label>
           <div class="col-md-3 col-sm-12 col-xs-12">
-            <select class="selectpicker form-control" data-live-search="true">
+            <select name="package" class="selectpicker form-control" data-live-search="true">
               <option value="">Choose your package</option>
               @foreach($packageData as $packData)
                 @if($packData->id == $thisCompany->CompanyPackage()->latest('created_at')->first()->id_package)
@@ -22,7 +24,7 @@
         <div class="form-group">
           <label class="col-md-2 col-sm-12 col-xs-12 control-label">Business Entity</label>
           <div class="col-md-3 col-sm-12 col-xs-12">
-            <select class="selectpicker form-control">
+            <select name="businessEntity" class="selectpicker form-control">
               <option value="">Choose business entity</option>
               @foreach($businessEntity as $data)
                 @if($thisCompany->business_entity == $data)
@@ -37,19 +39,19 @@
         <div class="form-group">
           <label class="col-md-2 col-sm-12 col-xs-12 control-label">Company Name</label>
           <div class="col-md-6 col-sm-12 col-xs-12">
-            <input type="text" class="form-control" value="{{$thisCompany->name}}" >
+            <input type="text" name="companyName" class="form-control" value="{{$thisCompany->name}}" >
           </div>
         </div>
         <div class="form-group">
           <label class="col-md-2 col-sm-12 col-xs-12 control-label">Company Tagline</label>
           <div class="col-md-6 col-sm-12 col-xs-12">
-            <input type="text" class="form-control" value="{{$thisCompany->tagline}}" >
+            <input type="text" name="companyTagline" class="form-control" value="{{$thisCompany->tagline}}" >
           </div>
         </div>
         <div class="form-group">
           <label class="col-md-2 col-sm-12 col-xs-12 control-label">Address</label>
           <div class="col-md-6 col-sm-12 col-xs-12">
-            <textarea class="form-control no-resize" rows="6" >{{$thisCompany->address}}</textarea>
+            <textarea name="address" class="form-control no-resize" rows="6" >{{$thisCompany->address}}</textarea>
           </div>
         </div>
         <div class="form-group">
@@ -58,16 +60,16 @@
           Pada saat province yang dipilih adalah banten, maka seluruh city (kota) hanya berada pada cakupan city (kota) yang ada di province tersebut
           -->
           <div class="col-md-3 col-sm-12 col-xs-12">
-            <select class="selectpicker form-control" data-live-search="true" >
+            <select name="id_province" class="selectpicker form-control" data-live-search="true" >
               <option value="">Select Province</option>
-              <option value="1" selected>{{$thisCompany->Province()->first()->name}}</option>
+              <option value="{{$thisCompany->Province()->first()->id}}" selected>{{$thisCompany->Province()->first()->name}}</option>
               
             </select>
           </div>
           <div class="col-md-3 col-sm-12 col-xs-12">
-            <select class="selectpicker form-control" data-live-search="true" >
+            <select name="id_city" class="selectpicker form-control" data-live-search="true" >
               <option value="">Select City</option>
-              <option value="1" selected>{{$thisCompany->City()->first()->name}}</option>
+              <option value="{{$thisCompany->City()->first()->id}}" selected>{{$thisCompany->City()->first()->name}}</option>
               
             </select>
           </div>
@@ -75,7 +77,7 @@
         <div class="form-group">
           <label class="col-md-2 col-sm-12 col-xs-12 control-label">Zip Code</label>
           <div class="col-md-6 col-sm-4 col-xs-4">
-            <input type="text" class="form-control" value="{{$thisCompany->zip_code}}" disabled>
+            <input type="text" name="zipcode" class="form-control" value="{{$thisCompany->zip_code}}" >
           </div>
         </div>
         <div class="form-group">
@@ -83,13 +85,13 @@
           <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="row">
               <div class="col-md-3 col-sm-3 col-xs-3">
-                <input type="text" class="form-control" value="{{substr($thisCompany->phone,0,3)}}" >
+                <input type="text" name="phoneCode" class="form-control" value="{{substr($thisCompany->phone,0,3)}}" >
               </div>
               <div class="col-md-1 col-sm-1 col-xs-1">
                 <label class="control-label">-</label>
               </div>
               <div class="col-md-8 col-sm-8 col-xs-8">
-                <input type="text" class="form-control" value="{{substr($thisCompany->phone,3)}}" >
+                <input type="text" name="phoneNumber" class="form-control" value="{{substr($thisCompany->phone,3)}}" >
               </div>
             </div>
           </div>
@@ -97,7 +99,7 @@
         <div class="form-group">
           <label class="col-md-2 col-sm-12 col-xs-12 control-label">Mobile Phone</label>
           <div class="col-md-6 col-sm-12 col-xs-12">
-            <input type="text" class="form-control" value="{{$thisCompany->mobile_number}}" >
+            <input type="text" name="mobileNumber" class="form-control" value="{{$thisCompany->mobile_number}}" >
           </div>
         </div>
         <div class="wpMainProduct">
@@ -106,7 +108,7 @@
               <div class="col-md-12 no-padding main-product">
                 <label class="col-md-2 col-sm-12 col-xs-12 control-label labelfirst">Main Product</label>
                 <div class="col-md-6 col-sm-12 col-xs-12">
-                  <input id="mp-1" type="text" class="form-control inline-input" value="{{$mp->main_product_name}}">
+                  <input id="mp-1" type="text" name="mainProduct" class="form-control inline-input" value="{{$mp->main_product_name}}">
                   <button type="button" class="btn btn-sm btn-danger btn-remove-main-product"><i class="fa fa-minus"></i></button>
                 </div>
               </div>
@@ -125,38 +127,32 @@
             <div class="">
               <label class="col-md-2 col-sm-12 col-xs-12 control-label">Product Catalogue</label>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <input type="text" class="form-control" placeholder="Product Catalogue gak ada di regis" disabled>
+                <input type="text" class="form-control" placeholder="" disabled>
               </div>
 
               <div class="col-md-4 col-sm-4 col-xs-6 margin-top-med-and-down">
-                <input type="file">
+                <input type="file" name="productImage">
                 <p class="help-block hide-on-med-and-down">(.docx, .pdf, or photo of document Product Catalogue)</p>
               </div>
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
+              @foreach($thisCompany->CompanyProductCatalogue()->get() as $data)
               <div class="form-group">
                 <label class="col-md-2 col-sm-0 col-xs-0 control-label"></label>
                 <div class="col-md-10 col-sm-12 col-xs-12">
-                  <a href="#" class="btn btn-success">Open Document</a>
-                  <a href="#delete" data-toggle="modal" class="btn btn-danger">Delete Document</a>
-                  <p class="help-block">Certificate Halal</p>
+                  <a target="_blank" href="{{url('download/file?url='.$data->product_catalogue_image)}}" class="btn btn-success">Open Document</a>
+                  <a href="{{url('doDeleteProductCatalogue?id='.$data->id)}}" data-toggle="modal" class="btn btn-danger">Delete Document</a>
+                  <p class="help-block"></p>
                 </div>
               </div>
-              <div class="form-group">
-                <label class="col-md-2 col-sm-0 col-xs-0 control-label"></label>
-                <div class="col-md-10 col-sm-12 col-xs-12">
-                  <a href="../storage/sample.pdf" class="btn btn-success">Open Document</a>
-                  <a href="#deleteDoc" class="btn btn-danger">Delete Document</a>
-                  <p class="help-block">Catalogue 1</p>
-                </div>
-              </div>
+              @endforeach
             </div>
           </div>
         </div>
         <div class="form-group">
           <label class="col-md-2 col-sm-12 col-xs-12 control-label">Contact Name</label>
           <div class="col-md-6 col-sm-12 col-xs-12">
-            <input type="text" class="form-control" value="{{$thisCompany->contact_name}}">
+            <input type="text" name="contactName" class="form-control" value="{{$thisCompany->contact_name}}">
           </div>
         </div>
         <div class="form-group">
@@ -164,14 +160,14 @@
           <div class="col-md-2 col-sm-2 col-xs-2">
             <div class="checkbox">
               <label>
-                <input type="checkbox" name="program[]" {{$thisCompany->CompanyInterestedProgram()->where('id_interested_program', '1')->first() ? 'checked' : ''}}> Selling
+                <input type="checkbox" value="1" name="interestProgram[]" {{$thisCompany->CompanyInterestedProgram()->where('id_interested_program', '1')->first() ? 'checked' : ''}}> Selling
               </label>
             </div>
           </div>
           <div class="col-md-3 col-sm-3 col-xs-3">
             <div class="checkbox">
               <label>
-                <input type="checkbox" name="program[]" {{$thisCompany->CompanyInterestedProgram()->where('id_interested_program', '2')->first() ? 'checked' : ''}}> Buying
+                <input type="checkbox" value="2" name="interestProgram[]" {{$thisCompany->CompanyInterestedProgram()->where('id_interested_program', '2')->first() ? 'checked' : ''}}> Buying
               </label>
             </div>
           </div>
@@ -181,7 +177,7 @@
           <div class="col-md-2 col-sm-2 col-xs-2">
             <div class="radio">
               <label>
-                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" {{$thisCompany->tax_type == 'PKP' ? 'checked' : ''}} >
+                <input type="radio" name="optionsRadios" id="optionsRadios1" value="PKP" {{$thisCompany->tax_type == 'PKP' ? 'checked' : ''}} >
                 PKP
               </label>
             </div>
@@ -189,37 +185,35 @@
           <div class="col-md-3 col-sm-3 col-xs-3">
             <div class="radio">
               <label>
-                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" {{$thisCompany->tax_type == 'non PKP' ? 'checked' : ''}}>
+                <input type="radio" name="optionsRadios" id="optionsRadios2" value="Non PKP" {{$thisCompany->tax_type == 'non PKP' ? 'checked' : ''}}>
                 Non PKP
               </label>
             </div>
           </div>
         </div>
+        @foreach($thisCompany->CompanyRequiredDocument()->get() as $data)
         <div class="form-group">
           <label class="col-md-2 col-sm-12 col-xs-12 control-label">Required Document</label>
           <div class="col-md-10 col-sm-12 col-xs-12">
-            <a href="../storage/sample.pdf" class="btn btn-success">Open Document</a>
-            <a href="#delete" data-toggle="modal" class="btn btn-danger">Delete Document</a>
-            <p class="help-block">Scan of Business Licence / SIUP</p>
+            <a target="_blank" href="{{url('download/file?url='.$data->business_license_image)}}" class="btn btn-success">Open Document</a>
+            <a href="{{url('doDeleteRequiredDocument?id='.$data->id)}}" data-toggle="modal" class="btn btn-danger">Delete Document</a>
+            <p class="help-block"></p>
           </div>
         </div>
-        <div class="form-group">
-          <label class="col-md-2 col-sm-12 col-xs-12 control-label"></label>
-          <div class="col-md-10 col-sm-12 col-xs-12">
-            <a href="../storage/sample.pdf" class="btn btn-success">Open Document</a>
-            <a href="#delete" data-toggle="modal" class="btn btn-danger">Delete Document</a>
-            <p class="help-block">Scan of Tax ID / NPWP</p>
-          </div>
-        </div>
+        @endforeach
+
+        @foreach($thisCompany->Certificate()->get() as $data)
         <div class="form-group">
           <label class="col-md-2 col-sm-12 col-xs-12 control-label">Certification <small><strong>(optional)</strong></small></label>
           <div class="col-md-10 col-sm-12 col-xs-12">
 
-            <a href="../storage/sample.pdf" class="btn btn-success">Open Document</a>
-            <a href="#delete" class="btn btn-danger">Delete Document</a>
-            <p class="help-block">Certificate 1081</p>
+            <a target="_blank" href="{{url('download/file?url='.$data->certificate_image)}}" class="btn btn-success">Open Document</a>
+            <a href="{{url('doDeleteCertificate?id='.$data->id)}}" class="btn btn-danger">Delete Document</a>
+            <p class="help-block"></p>
           </div>
         </div>
+        @endforeach
+
         <div class="form-group">
           <label class="col-md-2 col-sm-0 col-xs-0 control-label"></label>
           <div class="col-md-10 col-sm-12 col-xs-12" style="margin-bottom: 10px;">
@@ -234,7 +228,7 @@
           <div class="col-md-10 col-sm-12 col-xs-12">
 
             <label class="btn btn-primary btn-file">
-              Browse <input type="file" class="hide">
+              Browse <input type="file" name="logoImage" class="hide">
             </label>
             <a href="../../images/amazon.png" class="btn btn-success">Open Logo</a>
             <a href="#delete" data-toggle="modal" class="btn btn-danger">Delete Logo</a>
@@ -243,7 +237,7 @@
         </div>
         <div class="form-group">
           <div class="col-md-10 col-md-offset-2 col-sm-12 col-xs-12">
-            <button type="button" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary">Save</button>
           </div>
         </div>
       </form>

@@ -126,6 +126,12 @@ Route::group(['middleware' => 'checkAdmin'], function () {
 
     Route::get('company_membership', 'PageController@companyMembership');
     Route::get('member/{id}', 'PageController@member');
+    Route::get('doDeleteProductCatalogue', 'PageController@doDeleteProductCatalogue');
+    Route::get('doDeleteRequiredDocument', 'PageController@doDeleteRequiredDocument');
+    Route::get('doDeleteCertificate', 'PageController@doDeleteCertificate');
+    Route::post('doUpdateCompanyData', 'PageController@doUpdateCompanyData');
+
+
 
     Route::get('new_member_request', 'PageController@memberRequest');
     Route::get('doChangeStatusCompany', 'PageController@doChangeStatusCompany');

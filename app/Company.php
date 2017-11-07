@@ -71,6 +71,17 @@ class Company extends Model
         return $this->hasMany(CompanyProductCatalogue::class,'id_company','id');
     }
 
+    public function CompanyRequiredDocument()
+    {
+        return $this->hasMany(CompanyRequiredDocument::class,'id_company','id');
+    }
+
+
+    public function Certificate()
+    {
+        return $this->hasMany(Certificate::class,'id_company','id');
+    }
+
     
 
     

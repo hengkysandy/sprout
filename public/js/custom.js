@@ -20,13 +20,46 @@ $(document).ready(function(){
     e.preventDefault();
     if(x < max_fields_cert){ // Max input box allowed
       x++; // Text box increment
-      $(wrapperCertificate).append('<div class="wrapperCertificate"><div id="removeCertificate" class="form-group"><div class="row"><label class="col-md-3 col-sm-3 col-xs-12 control-label">Certificate <small class="text-danger">(required)</small></label><div class="col-md-5 col-sm-4 col-xs-12"><input type="text" class="form-control" placeholder="Certificate"></div><div class="col-md-3 col-sm-4 col-xs-6 margin-top-med-and-down"><input type="file"><p class="help-block hide-on-med-and-down">(.docx, .pdf, or photo of document Certificate)</p></div><div class="col-md-1 col-sm-1 col-xs-6 margin-top-med-and-down"><a href="#" class="btn btn-danger remove_cert"><i class="fa fa-minus"></i></a></div></div></div></div>'); //add input box
+      $(wrapperCertificate).append('<div class="wrapperCertificate"><div id="removeCertificate" class="form-group"><div class="row"><label class="col-md-3 col-sm-3 col-xs-12 control-label">Certificate <small class="text-danger">(required)</small></label><div class="col-md-5 col-sm-4 col-xs-12"><input type="text" class="form-control" placeholder="Certificate" disabled></div><div class="col-md-3 col-sm-4 col-xs-6 margin-top-med-and-down"><input type="file"><p class="help-block hide-on-med-and-down">(.docx, .pdf, or photo of document Certificate)</p></div><div class="col-md-1 col-sm-1 col-xs-6 margin-top-med-and-down"><a href="#" class="btn btn-danger remove_cert"><i class="fa fa-minus"></i></a></div></div></div></div>'); //add input box
     }
   });
 
   $(wrapperCertificate).on("click", ".remove_cert", function(e){ // User click on remove text
     e.preventDefault(); $(this).parents('div#removeCertificate').remove(); x--;
   });
+
+    // This is for add new form catalogue
+  var wrapperCatalogue      = $(".wrapperCatalogue"); // Fields wrapper
+  var addCatalogue          = $("#addCatalogue"); // Add button ID
+
+  $(addCatalogue).click(function(e){ // On add input button click
+    e.preventDefault();
+    if(x < max_fields_cert){ // Max input box allowed
+      x++; // Text box increment
+      $(wrapperCatalogue).append('<div class="wrapperCatalogue"><div id="removeCatalogue" class="form-group"><div class="row"><label class="col-md-3 col-sm-3 col-xs-12 control-label">Product Catalogue <small>(optional)</small></label><div class="col-md-5 col-sm-4 col-xs-12"><input type="text" class="form-control" placeholder="Product Catalogue" disabled></div><div class="col-md-3 col-sm-4 col-xs-6 margin-top-med-and-down"><input type="file"><p class="help-block hide-on-med-and-down">(.docx, .pdf, or photo of document Product Catalogue)</p></div><div class="col-md-1 col-sm-1 col-xs-6 margin-top-med-and-down"><a href="#" class="btn btn-danger remove_catl"><i class="fa fa-minus"></i></a></div></div></div></div>'); //add input box
+    }
+  });
+
+  $(wrapperCatalogue).on("click", ".remove_catl", function(e){ // User click on remove text
+    e.preventDefault(); $(this).parents('div#removeCatalogue').remove(); x--;
+  });
+
+  // This is for add new form catalogue in profile page
+  var wrapperCataloguePrf      = $(".wrapperCataloguePrf"); // Fields wrapper
+  var addCataloguePrf          = $("#addCataloguePrf"); // Add button ID
+
+  $(addCataloguePrf).click(function(e){ // On add input button click
+    e.preventDefault();
+    if(x < max_fields_cert){ // Max input box allowed
+      x++; // Text box increment
+      $(wrapperCataloguePrf).append('<div class="wrapperCataloguePrf"><div id="removeCataloguePrf" class="form-group"><div class=""><label class="col-md-2 col-sm-12 col-xs-12 control-label">Product Catalogue</label><div class="col-md-6 col-sm-12 col-xs-12"><input type="text" class="form-control" placeholder="Product Catalogue" disabled></div><div class="col-md-3 col-sm-4 col-xs-6 margin-top-med-and-down"><input type="file"><p class="help-block hide-on-med-and-down">(.docx, .pdf, or photo of document Product Catalogue)</p></div><div class="col-md-1 col-sm-1 col-xs-6 margin-top-med-and-down"><a href="#" class="btn btn-danger remove_catl_prf"><i class="fa fa-minus"></i></a></div></div></div></div>'); //add input box
+    }
+  });
+
+  $(wrapperCataloguePrf).on("click", ".remove_catl_prf", function(e){ // User click on remove text
+    e.preventDefault(); $(this).parents('div#removeCataloguePrf').remove(); x--;
+  });
+
 
   $('body').on('click','#addMainProduct', function (event) {
     //event.preventDefault();

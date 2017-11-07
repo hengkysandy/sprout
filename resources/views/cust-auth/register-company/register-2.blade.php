@@ -95,6 +95,30 @@
               </div>
             </div>
 
+            <div class="wrapperCatalogue">
+              <div id="removeCatalogue" class="form-group">
+                <div class="row">
+                  <label class="col-md-3 col-sm-3 col-xs-12 control-label">Product Catalogue <small>(optional)</small></label>
+                  <div class="col-md-5 col-sm-4 col-xs-12">
+                    <input type="text" class="form-control" placeholder="Product Catalogue" disabled>
+                  </div>
+
+                  <div class="col-md-4 col-sm-4 col-xs-6 margin-top-med-and-down">
+                    <input type="file">
+                    <p class="help-block hide-on-med-and-down">(.docx, .pdf, or photo of document Product Catalogue)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-9 col-md-offset-3 col-sm-9 col-sm-offset-3 col-xs-12">
+                  <button id="addCatalogue" class="btn btn-primary">Add another product catalogue</button>
+                </div>
+              </div>
+            </div>
+
             <div class="wrapperCertificate">
               <div id="removeCertificate" class="form-group">
                 <div class="row">

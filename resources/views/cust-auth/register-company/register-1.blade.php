@@ -125,6 +125,18 @@
             <div class="form-group">
               <div class="row">
 
+                <label class="col-md-3 col-sm-3 col-xs-12 control-label">Zip Code <small class="text-danger">(required)</small></label>
+
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                  <input type="text" id="zipcode" class="form-control" data-live-search="true" placeholder="Zip Code" name="zipcode">
+                </div>
+
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+
                 <label class="col-md-3 col-sm-3 col-xs-12 control-label">Phone Number <small class="text-danger">(required)</small></label>
 
                 <div class="col-md-2 col-sm-2 col-xs-3">
@@ -139,23 +151,25 @@
             </div>
 
             <div class="wrapperMainProduct">
-              <div id="removeMainProduct" class="form-group">
-                <div class="row">
-
-                  <label class="col-md-3 col-sm-3 col-xs-12 control-label">Main Product <small class="text-danger">(required)</small></label>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
-                    <input type="text" class="form-control" placeholder="Main Product" name="mainProduct" required="">
+              <div class="row no-margin-bottom main-product ">
+                <div id="removeMainProduct" class="form-group">
+                  <div class="no-padding">
+                    <label class="col-md-3 col-sm-3 col-xs-12 control-label labelfirst">Main Product <small class="text-danger">(required)</small></label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input id="mp-1" type="text" class="form-control inline-input col-md-10">
+                      <button type="button" class="btn btn-sm btn-danger btn-remove-main-product col-md-1"><i class="fa fa-minus"></i></button>
+                    </div>
                   </div>
-
                 </div>
               </div>
+              <div id="appendMp"></div>
             </div>
 
             <div class="form-group">
               <div class="row">
 
                 <div class="col-md-9 col-md-offset-3 col-sm-9 col-sm-offset-3 col-xs-12">
-                  <button id="addMainProduct" class="btn btn-primary">Add another main product</button>
+                  <button id="addMainProduct" type="button" class="btn btn-primary">Add another main product</button>
                 </div>
 
               </div>

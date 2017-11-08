@@ -217,7 +217,7 @@
         <div class="form-group">
           <label class="col-md-2 col-sm-0 col-xs-0 control-label"></label>
           <div class="col-md-10 col-sm-12 col-xs-12" style="margin-bottom: 10px;">
-            <img src="../images/amazon.png" class="show-logo" alt="Amazon">
+            <img src="{{$thisCompany->logo_image}}" class="show-logo" alt="Amazon">
           </div>
 
           <div class="hide-on-med-and-down">
@@ -230,8 +230,8 @@
             <label class="btn btn-primary btn-file">
               Browse <input type="file" name="logoImage" class="hide">
             </label>
-            <a href="../../images/amazon.png" class="btn btn-success">Open Logo</a>
-            <a href="#delete" data-toggle="modal" class="btn btn-danger">Delete Logo</a>
+            <a target="_blank" href="{{$thisCompany->logo_image}}" class="btn btn-success">Open Logo</a>
+            <a href="{{url('doDeleteCompanyLogo?id='.$thisCompany->id)}}" data-toggle="modal" class="btn btn-danger">Delete Logo</a>
             <p class="help-block">Insert image logo with format .png</p>
           </div>
         </div>

@@ -39,14 +39,16 @@
                   <td>{{$blData->item}}</td>
                   <td>{{$blData->amount}} {{$blData->Unit()->first()->name}}</td>
                   <td>
-                    @if($blData->BuyLeadBusinessCategory()->first()->Section()->first())
-                      {{$blData->BuyLeadBusinessCategory()->first()->Section()->first()->name}}
+                    @if(!empty($blData->BuyLeadBusinessCategory()->get()))
+                      @foreach( $blData->BuyLeadBusinessCategory()->get() as $d)
+                        <span>{{$d->Section()->first()->section}},</span>
+                      @endforeach
                     @else
                       There's no business category yet
                     @endif
                   </td>
                   <td>
-                    <a href="#editRfq" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="#editRfq" data-value="{{$blData->id}}" data-toggle="modal" class="btn btn-primary btn-sm chooseEdit">Edit</a>
                     <!-- Note: Untuk tombol oke
                     Pada tombol oke ini nantinya setelah rfq yang sudah di cek saat di klik tombol oke nya akan menghilang (bukan terhapus) dari tabel RFQ List
                     -->
@@ -68,52 +70,55 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title">Edit RFQ / Post Buy Lead</h4>
         </div>
+        <form method="post" action="{{url('doAddBuyLeadBusinessCategoryAdmin')}}">
+          {{csrf_field()}}
         <div class="modal-body">
-          <form>
+            <input type="hidden" name="id_buylead" id="id_buylead">
             <div class="row">
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group">
                   <label>RFQ Number</label>
-                  <input type="text" class="form-control" value="xxx-123-xxx" disabled="">
+                  <input type="text" id="rfq-number-buy-lead-id" class="form-control" disabled="">
                 </div>
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group">
                   <label>Company ID</label>
-                  <input type="text" class="form-control" value="JKT-001" disabled="">
+                  <input type="text" id="company-id" class="form-control"  disabled="">
                 </div>
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group">
                   <label>Item Description</label>
-                  <input type="text" class="form-control" value="Pupuk" disabled="">
+                  <input type="text" id="item" class="form-control" disabled="">
                 </div>
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group">
                   <label>Purchase Amount</label>
                   <div class="input-group">
-                    <input type="number" class="form-control" value="100" min="0" disabled="">
-                    <span class="input-group-addon">Kg</span>
+                    <input type="number" id="amount-val" class="form-control"  min="0" disabled="">
+                    <span class="input-group-addon unit-val"></span>
                   </div>
                 </div>
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group">
                   <label>Business Category</label>
-                  <select class="form-control">
-                    <option value="agriculture_forestry_and_fishing" selected="">Agriculture, forestry and fishing</option>
-                    <option value="mining_and_quarrying">﻿Mining and quarrying</option>
+                  <select name="id_section" class="form-control">
+                    @foreach($section as $sData)
+                    <option value="{{$sData->id}}">{{$sData->section}}</option>
+                    @endforeach
                   </select>
                 </div>
               </div>
             </div>
-          </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary edit-rfq" data-dismiss="modal">Save</button>
+          <button type="submit" class="btn btn-primary edit-rfq">Save</button>
         </div>
+        </form>
       </div>
     </div>
   </div>
@@ -132,6 +137,7 @@
       </div>
     </div>
   </div>
+  <script type="text/javascript" src="js/myscript/rfq.js"></script>
 
   @include('layouts.dashboard.menu-mobile')
 @endsection

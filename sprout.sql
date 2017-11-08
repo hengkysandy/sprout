@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 07, 2017 at 11:56 AM
+-- Generation Time: Nov 08, 2017 at 11:54 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -192,7 +192,6 @@ CREATE TABLE `buy_lead_business_category` (
 
 INSERT INTO `buy_lead_business_category` (`id`, `buy_lead_id`, `business_category_id`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (3, 3, 3, 'active', '2017-09-23 18:46:22', '2017-09-23 18:46:22', NULL),
-(4, 3, 4, 'active', '2017-09-23 18:46:23', '2017-09-23 18:46:23', NULL),
 (5, 4, 5, 'active', '2017-09-28 04:19:27', '2017-09-28 04:19:27', NULL),
 (6, 4, 6, 'active', '2017-09-28 04:19:28', '2017-09-28 04:19:28', NULL),
 (7, 5, 7, 'active', '2017-09-29 17:57:29', '2017-09-29 17:57:29', NULL),
@@ -200,7 +199,11 @@ INSERT INTO `buy_lead_business_category` (`id`, `buy_lead_id`, `business_categor
 (9, 6, 9, 'active', '2017-09-29 17:58:45', '2017-09-29 17:58:45', NULL),
 (10, 6, 10, 'active', '2017-09-29 17:58:45', '2017-09-29 17:58:45', NULL),
 (11, 7, 11, 'active', '2017-10-02 08:53:03', '2017-10-02 08:53:03', NULL),
-(12, 7, 12, 'active', '2017-10-02 08:53:03', '2017-10-02 08:53:03', NULL);
+(12, 7, 12, 'active', '2017-10-02 08:53:03', '2017-10-02 08:53:03', NULL),
+(14, 3, 4, 'active', '2017-11-08 10:19:27', '2017-11-08 10:19:27', NULL),
+(15, 6, 4, 'active', '2017-11-08 10:20:44', '2017-11-08 10:20:44', NULL),
+(16, 5, 2, 'active', '2017-11-08 10:33:14', '2017-11-08 10:33:14', NULL),
+(17, 7, 1, 'active', '2017-11-08 10:35:56', '2017-11-08 10:35:56', NULL);
 
 -- --------------------------------------------------------
 
@@ -90913,8 +90916,17 @@ CREATE TABLE `section` (
 
 INSERT INTO `section` (`id`, `section`, `name`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'section1', 'section name 12', 'active', '2017-09-04 06:09:33', '2017-09-04 09:16:26', NULL),
+(2, 'section22', 'secitoa name 22', 'active', '2017-11-08 10:29:19', NULL, NULL),
+(3, 'section 33', 'secio name 3', 'active', '2017-11-08 10:29:21', NULL, NULL),
 (4, 'section2', 'section name 22', 'active', '2017-09-04 06:46:06', '2017-09-19 07:26:30', NULL),
-(5, 'section3', 'section name 3', 'active', '2017-09-04 06:46:14', '2017-09-04 06:46:14', NULL);
+(5, 'section3', 'section name 3', 'active', '2017-09-04 06:46:14', '2017-09-04 06:46:14', NULL),
+(6, 'section4', 'sec name 4', 'active', '2017-11-08 10:29:49', NULL, NULL),
+(7, 'section7', 'name 7', 'active', '2017-11-08 10:30:16', NULL, NULL),
+(8, 'sec8', 'name8', 'active', '2017-11-08 10:30:56', NULL, NULL),
+(9, 'sec7', 'name9', 'active', '2017-11-08 10:30:57', NULL, NULL),
+(10, 'sec10', 'sec1000', 'active', '2017-11-08 10:30:59', NULL, NULL),
+(11, 'sec11', 'sec111111', 'active', '2017-11-08 10:31:00', NULL, NULL),
+(12, 'sec12', '1212', 'active', '2017-11-08 10:31:00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -91447,7 +91459,7 @@ ALTER TABLE `buy_lead`
 -- AUTO_INCREMENT for table `buy_lead_business_category`
 --
 ALTER TABLE `buy_lead_business_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `buy_lead_company`
 --
@@ -91607,7 +91619,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `section`
 --
 ALTER TABLE `section`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `shipping_term`
 --

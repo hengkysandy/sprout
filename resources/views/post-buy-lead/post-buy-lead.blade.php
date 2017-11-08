@@ -737,5 +737,6 @@
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script type="text/javascript" src="js/myscript/unit.js"></script>
     <script type="text/javascript" src="js/myscript/post-buy-lead.js"></script>
+    
   @include('layouts.user.mobile-menu')
 @endsection

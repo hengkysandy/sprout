@@ -11,7 +11,7 @@
                   <th>Action</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="Tablepbl-tbody">
                 @foreach($buyLeadData as $blKey => $blData)
                 <tr>
                   <td>{{++$blKey}}</td>

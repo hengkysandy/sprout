@@ -62,7 +62,7 @@
                 <label>Filter Status</label>
                 <select class="form-control selectpicker" multiple>
                   <option value="0">Pending</option>
-                  <option value="1" selected="">Rejected</option>
+                  <option value="1" selected="">Rejecteda</option>
                   <option value="2">Delayed</option>
                   <option value="3">Assigned</option>
                 </select>

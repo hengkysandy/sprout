@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Admin;
 use App\Area;
 use App\BuyLead;
+use App\BuyLeadBusinessCategory;
 use App\Certificate;
 use App\CloudinaryMapping;
 use App\Company;
@@ -145,10 +146,37 @@ class PageController extends Controller
     }
     
     public function rfq() {
+        // $currBuyLead = BuyLead::find(5);
+        // return $currBuyLead->BuyLeadBusinessCategory()->get();
+
         $data['buyLead'] = BuyLead::all();
+        $data['section'] = Section::all();
         // return $data['buyLead'][2]->BuyLeadBusinessCategory()->first()->Section()->first();
     	return view('dashboard.rfq',$data);
     }
+
+    public function getBuyLeadDataAjax($id)
+    {
+        $currBuyLead = BuyLead::find($id);
+
+        $response['buyLead'] = $currBuyLead;
+        $response['user'] = $currBuyLead->User()->first();
+        $response['unit'] = $currBuyLead->Unit()->first();
+
+        return response()->json($response);
+    }
+
+    public function doAddBuyLeadBusinessCategoryAdmin(Request $request)
+    {
+        BuyLeadBusinessCategory::create([
+            'buy_lead_id' => $request->id_buylead,
+            'business_category_id' => $request->id_section,
+            'status' => 'active',
+        ]);
+
+        return back();
+    }
+
 
     public function login_company()
     {
@@ -193,7 +221,7 @@ class PageController extends Controller
             return view('search-buy-lead.sales-staff.home',$data);
         }
         else{
-            return view('post-buy-lead.home');
+            return view('post-buy-lead.home',$data);
         }
     }
 
@@ -261,6 +289,15 @@ class PageController extends Controller
     {
         $currData = Certificate::find($request->id);
         $currData->delete();
+
+        return back();
+    }
+
+    public function doDeleteCompanyLogo(Request $request)
+    {
+        $currData = Company::find($request->id);
+        $currData->logo_image = "";
+        $currData->save();
 
         return back();
     }

@@ -152,10 +152,10 @@ $(document).ready(function(){
     "dom": '<"top"l>rt<"bottom"ip><"clear">'
   });
   $('#findBuyCi').on('keyup', function(){
-    rfqTable.column(0).search(this.value).draw();
+    rfqTable.column(1).search(this.value).draw();
   });
   $('#findBuyBc').on('keyup', function(){
-    rfqTable.column(1).search(this.value).draw();
+    rfqTable.column(4).search(this.value).draw();
   });
   // Table Company Database
   cmpDb = $('#cmpDb').DataTable({

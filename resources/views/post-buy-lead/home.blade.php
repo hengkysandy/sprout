@@ -18,224 +18,49 @@
             <!-- /.box-header -->
             <div class="box-body">
               <ul class="products-list product-list-in-box">
-                <li class="item">
-                  <div class="col-md-6 col-sm-6 col-xs-12 no-padding">
-                    <div class="product-img">
-                      <div class="product-first-title">
-                        <strong>S</strong>
+                @foreach($buyLeadData as $blData)
+                  <li class="item">
+                    <div class="col-md-6 col-sm-6 col-xs-12 no-padding">
+                      <div class="product-img">
+                        <img src="{{$blData->User()->first()->photo_image}}" alt="gambar">
+                      </div>
+                      <div class="product-info">
+                        <div class="col-md-6 col-xs-12 no-padding">
+                          <a href="staff-procurement.html" class="product-title">{{$blData->User()->first()->username}}</a>
+                          <span class="product-description">
+                          {{$blData->User()->first()->UserRole()->first()->Role()->first()->name}}
+                          </span>
+                        </div>
                       </div>
                     </div>
-                    <div class="product-info">
-                      <div class="col-md-6 col-xs-12 no-padding">
-                        <a href="item" class="product-title">Samsung TV</a>
-                        <span class="product-description">
-                          26" Mongoose Dolomite Men's 7-speed, Navy Blue.
-                        </span>
-                      </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12 no-padding margin-top-med-and-down">
+                      <a href="meeting-schedule.html" class="product-title">
+                        <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
+                          <div class="col-md-12 col-xs-12 btn-danger btn no-padding btn-sm">
+                            <span class="initial">M</span>
+                            <span class="label-sm">5 Meeting Schedule belum bisa</span>
+                          </div>
+                        </div>
+                      </a>
+                      <a href="staff-procurement.html" class="product-title">
+                        <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
+                          <div class="col-md-12 col-xs-12 btn-success btn no-padding btn-sm">
+                            <span class="initial">A</span>
+                            <span class="label-sm">8 Active Buy Lead belum bisa</span>
+                          </div>
+                        </div>
+                      </a>
+                      <a href="history-rfq.html" class="product-title">
+                        <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
+                          <div class="col-md-12 col-xs-12 btn-primary btn no-padding btn-sm">
+                            <span class="initial">C</span>
+                            <span class="label-sm">2/10 Closed belum bisa</span>
+                          </div>
+                        </div>
+                      </a>
                     </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-xs-12 no-padding margin-top-med-and-down">
-                    <a href="discussion" class="product-title">
-                      <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                        <div class="col-md-12 col-xs-12 btn-primary btn no-padding btn-sm">
-                          <span class="initial">D</span>
-                          <span class="label-sm">2 Discussion</span>
-                        </div>
-                      </div>
-                    </a>
-                    <a href="quotation-pm" class="product-title">
-                      <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                        <div class="col-md-12 col-xs-12 btn-success btn no-padding btn-sm">
-                          <span class="initial">Q</span>
-                          <span class="label-sm">10 Quotation</span>
-                        </div>
-                      </div>
-                    </a>
-                    <a href="meeting-schedule" class="product-title">
-                      <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                        <div class="col-md-12 col-xs-12 btn-danger btn no-padding btn-sm">
-                          <span class="initial">M</span>
-                          <span class="label-sm">1 Meeting Schedule</span>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                </li>
-                <!-- /.item -->
-                <li class="item">
-                  <div class="col-md-6 col-sm-6 col-xs-12 no-padding">
-                    <div class="product-img">
-                      <div class="product-first-title">
-                        <strong>S</strong>
-                      </div>
-                    </div>
-                    <div class="product-info">
-                      <div class="col-md-6 col-xs-12 no-padding">
-                        <a href="item" class="product-title">Samsung TV</a>
-                        <span class="product-description">
-                          26" Mongoose Dolomite Men's 7-speed, Navy Blue.
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-xs-12 no-padding margin-top-med-and-down">
-                    <a href="#" class="product-title">
-                      <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                        <div class="col-md-12 col-xs-12 btn-primary btn no-padding btn-sm">
-                          <span class="initial">D</span>
-                          <span class="label-sm">2 Discussion</span>
-                        </div>
-                      </div>
-                    </a>
-                    <a href="#" class="product-title">
-                      <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                        <div class="col-md-12 col-xs-12 btn-success btn no-padding btn-sm">
-                          <span class="initial">Q</span>
-                          <span class="label-sm">10 Quotation</span>
-                        </div>
-                      </div>
-                    </a>
-                    <a href="#" class="product-title">
-                      <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                        <div class="col-md-12 col-xs-12 btn-danger btn no-padding btn-sm">
-                          <span class="initial">M</span>
-                          <span class="label-sm">1 Meeting Schedule</span>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                </li>
-                <!-- /.item -->
-                <li class="item">
-                  <div class="col-md-6 col-sm-6 col-xs-12 no-padding">
-                    <div class="product-img">
-                      <div class="product-first-title">
-                        <strong>S</strong>
-                      </div>
-                    </div>
-                    <div class="product-info">
-                      <div class="col-md-6 col-xs-12 no-padding">
-                        <a href="item" class="product-title">Samsung TV</a>
-                        <span class="product-description">
-                          26" Mongoose Dolomite Men's 7-speed, Navy Blue.
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-xs-12 no-padding margin-top-med-and-down">
-                    <a href="#" class="product-title">
-                      <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                        <div class="col-md-12 col-xs-12 btn-primary btn no-padding btn-sm">
-                          <span class="initial">D</span>
-                          <span class="label-sm">2 Discussion</span>
-                        </div>
-                      </div>
-                    </a>
-                    <a href="#" class="product-title">
-                      <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                        <div class="col-md-12 col-xs-12 btn-success btn no-padding btn-sm">
-                          <span class="initial">Q</span>
-                          <span class="label-sm">10 Quotation</span>
-                        </div>
-                      </div>
-                    </a>
-                    <a href="#" class="product-title">
-                      <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                        <div class="col-md-12 col-xs-12 btn-danger btn no-padding btn-sm">
-                          <span class="initial">M</span>
-                          <span class="label-sm">1 Meeting Schedule</span>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                </li>
-                <li class="item">
-                  <div class="col-md-6 col-sm-6 col-xs-12 no-padding">
-                    <div class="product-img">
-                      <div class="product-first-title">
-                        <strong>S</strong>
-                      </div>
-                    </div>
-                    <div class="product-info">
-                      <div class="col-md-6 col-xs-12 no-padding">
-                        <a href="item" class="product-title">Samsung TV</a>
-                        <span class="product-description">
-                          26" Mongoose Dolomite Men's 7-speed, Navy Blue.
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-xs-12 no-padding margin-top-med-and-down">
-                    <a href="#" class="product-title">
-                      <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                        <div class="col-md-12 col-xs-12 btn-primary btn no-padding btn-sm">
-                          <span class="initial">D</span>
-                          <span class="label-sm">2 Discussion</span>
-                        </div>
-                      </div>
-                    </a>
-                    <a href="#" class="product-title">
-                      <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                        <div class="col-md-12 col-xs-12 btn-success btn no-padding btn-sm">
-                          <span class="initial">Q</span>
-                          <span class="label-sm">10 Quotation</span>
-                        </div>
-                      </div>
-                    </a>
-                    <a href="#" class="product-title">
-                      <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                        <div class="col-md-12 col-xs-12 btn-danger btn no-padding btn-sm">
-                          <span class="initial">M</span>
-                          <span class="label-sm">1 Meeting Schedule</span>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                </li>
-                <li class="item">
-                  <div class="col-md-6 col-sm-6 col-xs-12 no-padding">
-                    <div class="product-img">
-                      <div class="product-first-title">
-                        <strong>S</strong>
-                      </div>
-                    </div>
-                    <div class="product-info">
-                      <div class="col-md-6 col-xs-12 no-padding">
-                        <a href="item" class="product-title">Samsung TV</a>
-                        <span class="product-description">
-                          26" Mongoose Dolomite Men's 7-speed, Navy Blue.
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-xs-12 no-padding margin-top-med-and-down">
-                    <a href="#" class="product-title">
-                      <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                        <div class="col-md-12 col-xs-12 btn-primary btn no-padding btn-sm">
-                          <span class="initial">D</span>
-                          <span class="label-sm">2 Discussion</span>
-                        </div>
-                      </div>
-                    </a>
-                    <a href="#" class="product-title">
-                      <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                        <div class="col-md-12 col-xs-12 btn-success btn no-padding btn-sm">
-                          <span class="initial">Q</span>
-                          <span class="label-sm">10 Quotation</span>
-                        </div>
-                      </div>
-                    </a>
-                    <a href="#" class="product-title">
-                      <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                        <div class="col-md-12 col-xs-12 btn-danger btn no-padding btn-sm">
-                          <span class="initial">M</span>
-                          <span class="label-sm">1 Meeting Schedule</span>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                </li>
-                <!-- /.item -->
+                  </li>
+                  @endforeach
               </ul>
             </div>
             <!-- /.box-body -->

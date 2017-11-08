@@ -130,6 +130,7 @@ Route::group(['middleware' => 'checkAdmin'], function () {
     Route::get('doDeleteRequiredDocument', 'PageController@doDeleteRequiredDocument');
     Route::get('doDeleteCertificate', 'PageController@doDeleteCertificate');
     Route::post('doUpdateCompanyData', 'PageController@doUpdateCompanyData');
+    Route::post('doDeleteCompanyLogo', 'PageController@doDeleteCompanyLogo');
 
 
 
@@ -138,6 +139,10 @@ Route::group(['middleware' => 'checkAdmin'], function () {
     Route::get('doChangeStatusCompanyPackage', 'PageController@doChangeStatusCompanyPackage');
     
     Route::get('rfq', 'PageController@rfq');
+    Route::get('getBuyLeadDataAjax/{id}', 'PageController@getBuyLeadDataAjax');
+    Route::post('doAddBuyLeadBusinessCategoryAdmin', 'PageController@doAddBuyLeadBusinessCategoryAdmin');
+    
+
 
     Route::post('doAddCompanyBC', 'PageController@doAddCompanyBC');
     

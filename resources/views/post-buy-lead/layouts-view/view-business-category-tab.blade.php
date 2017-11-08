@@ -12,14 +12,20 @@
             </tr>
           </thead>
           <tbody>
+            @foreach($thisCompany->CompanyBusinessCategory()->get() as $sVal)
             <tr>
-              <td>Section A</td>
-              <td>Agriculture, forestry and fishing</td>
-              <td>Division 1, Division 2</td>
+              <td>{{$sVal->Section()->first()->section}}</td>
+              <td>{{$sVal->Section()->first()->name}}</td>
+              <td>
+              @foreach($sVal->Section()->first()->Division()->get() as $dVal)
+                {{$dVal->name}},
+              @endforeach
+              </td>
               <td>
                 <a href="#detailBc" data-toggle="modal" class="btn btn-orange btn-sm">Detail</a>
               </td>
             </tr>
+            @endforeach
           </tbody>
         </table>
       </div>
@@ -31,7 +37,7 @@
           <div class="form-group">
             <label class="block">Package</label>
             <div class="col-md-8 col-sm-8 col-xs-12 no-padding-left">
-              <input type="text" class="form-control" disabled value="Regular +">
+              <input type="text" class="form-control" disabled value="{{$thisCompany->CompanyPackage()->latest('created_at')->first()->Package()->first()->name}}">
             </div>
             <div class="col-md-4 col-sm-4 col-xs-12">
               <a href="#" class="inline-block"><i class="fa fa-question-circle"></i> Package Information</a>

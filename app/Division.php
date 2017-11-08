@@ -14,4 +14,9 @@ class Division extends Model
 		'description',
 		'status'
     ];
+
+    public function Group()
+    {
+    	return $this->hasMany(Group::class,'division_id','id');
+    }
 }

@@ -311,13 +311,20 @@ class CompanyController extends Controller
             $data['role']= Role::whereIn('id',[3,5])->get();
             
         }else if (session()->get('userSession')[0]->role_id == 3 ) {
+            // $data['user'] = UserPreDefine::leftjoin('user_role','user.id' ,'=','user_role.user_id')->leftjoin('role','role.id','=','user_role.role_id')->where('id_company',session()->get('companySession')[0]->id)->where('created_by','=',$userid)->select('user.*','role.name as role_name')->get();
 
-            $data['user'] = UserPreDefine::leftjoin('user_role','user.id' ,'=','user_role.user_id')->leftjoin('role','role.id','=','user_role.role_id')->where('id_company',session()->get('companySession')[0]->id)->where('created_by','=',$userid)->select('user.*','role.name as role_name')->get();
+            //copy from master user
+            $data['user'] = UserPreDefine::where('id_company',session()->get('companySession')[0]->id)->join('user_role','user_role.user_id','=','user.id')->where('role_id','!=',2)->join('role','role.id','=','user_role.role_id')->select('user.*','role.name as role_name')->get();
+
             $data['role']= Role::whereIn('id',[4])->get();
 
         }else if (session()->get('userSession')[0]->role_id == 5 ) {
 
-            $data['user'] = UserPreDefine::leftjoin('user_role','user.id' ,'=','user_role.user_id')->leftjoin('role','role.id','=','user_role.role_id')->where('id_company',session()->get('companySession')[0]->id)->where('created_by','=',$userid)->select('user.*','role.name as role_name')->get();
+            // $data['user'] = UserPreDefine::leftjoin('user_role','user.id' ,'=','user_role.user_id')->leftjoin('role','role.id','=','user_role.role_id')->where('id_company',session()->get('companySession')[0]->id)->where('created_by','=',$userid)->select('user.*','role.name as role_name')->get();
+
+            //copy from master user
+            $data['user'] = UserPreDefine::where('id_company',session()->get('companySession')[0]->id)->join('user_role','user_role.user_id','=','user.id')->where('role_id','!=',2)->join('role','role.id','=','user_role.role_id')->select('user.*','role.name as role_name')->get();
+
             $data['role']= Role::whereIn('id',[6])->get();
 
         }
@@ -361,7 +368,7 @@ class CompanyController extends Controller
 
     public function doSetUserHeadStatus(Request $request)
     {
-        if($request->status == "true"){
+        if($request->status == "1"){
             
             $procurementRoleArr = [3,4];
             $salesRoleArr = [5,6];
@@ -379,7 +386,7 @@ class CompanyController extends Controller
 
             foreach ($companyUser->get() as $key => $value) {
                 $currData = UserPreDefine::find($value->user_id);
-                $currData->is_head = "false";
+                $currData->is_head = "0";
                 $currData->save();
             }
 
@@ -388,6 +395,14 @@ class CompanyController extends Controller
         $newHead = UserPreDefine::find($request->id_user);
         $newHead->is_head = $request->status;
         $newHead->save();
+
+        return back();
+    }
+
+    public function doDeleteUser(Request $request)
+    {
+        $currUser = UserPreDefine::find($request->id);
+        $currUser->delete();
 
         return back();
     }

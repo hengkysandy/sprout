@@ -21,8 +21,10 @@
         <h4 class="modal-title">Detail Business Category</h4>
       </div>
       <div class="modal-body">
-        <h4><strong>Section A</strong></h4>
-        <h5>Agriculture, forestry and fishing</h5>
+        @foreach($thisCompany->CompanyBusinessCategory()->get() as $sVal)
+
+        <h4><strong>{{$sVal->Section()->first()->section}}</strong></h4>
+        <h5>{{$sVal->Section()->first()->name}}</h5>
 
         <div class="row">
           <div class="col-md-12 col-sm-12 col-xs-12">
@@ -76,47 +78,9 @@
               </div>
             </div>
           </div>
-
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h3 class="panel-title">
-                  <a href="#division2" class="no-text-decoration" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="division2">Division 2 - Forestry and logging</a>
-                </h3>
-              </div>
-              <div id="division2" class="panel-body collapse">
-                <div class="table-responsive">
-                  <table class="table table-condensed">
-                    <thead>
-                      <tr>
-                        <th>Group</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>021</td>
-                        <td>Silviculture and other forestry activities</td>
-                      </tr>
-                      <tr>
-                        <td>022</td>
-                        <td>Logging</td>
-                      </tr>
-                      <tr>
-                        <td>023</td>
-                        <td>Gathering of non-wood forest products</td>
-                      </tr>
-                      <tr>
-                        <td>024</td>
-                        <td>Support services to forestry</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
+          
         </div>
+        @endforeach
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -345,69 +309,8 @@
   </div>
 </div>
 
-<div class="modal fade" id="manageEmployee" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Manage Employee</h4>
-      </div>
-      <div class="modal-body">
-        <a href="#addEmployee" data-toggle="modal" class="btn btn-primary">Add Employee</a>
-        <br><br>
-        <h4><label class="label label-success">Manager Quota Left: 3</label> - <label class="label label-warning">Staff Quota Left: 3</label></h4>
-        <div class="table-responsive margin-top">
-          <table class="table table-hover table-middle">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Position</th>
-                <th>Name</th>
-                <th>Status</th>
-                <th>Head Manager</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach($user as $key => $value)
-              <tr>
-                <td>{{$value->id}}</td>
-                <td>{{$value->role_name}}</td>
-                <td>{{$value->first_name.' '.$value->last_name}}</td>
-                <td>
-                  @if($value->status == "Active")
-                  <label class="btn btn-success btn-sm">
-                    <i class="fa fa-check"></i>
-                  </label>
-                  @else
-                  <label class="btn btn-danger btn-sm">
-                    <i class="fa fa-close"></i>
-                  </label>
-                  @endif
-                </td>
-                <td>
-                  @if($value->is_head == "false")
-                  <a href="{{url('doSetUserHeadStatus?id_user='.$value->id.'&status=true')}}" class="btn btn-primary btn-sm">Set as head</a>
-                  @else
-                  <a href="{{url('doSetUserHeadStatus?id_user='.$value->id.'&status=false')}}" class="btn btn-warning btn-sm">Cancel as head</a>
-                  @endif
-                </td>
-                <td>
-                <a href="#editEmployee" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
-                  <a href="#" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this?');">Delete</a>
-                </td>
-              </tr>
-              @endforeach
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+
+@include('post-buy-lead.popup-view.manage-employee-pop-up')
 
 <div class="modal fade" id="addEmployee" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">

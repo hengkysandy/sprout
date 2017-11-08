@@ -95,7 +95,7 @@
 
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-          <a class="btn btn-warning btn-sm" href="post-buy-lead.html"><i class="fa fa-arrow-left"></i> Back</a>
+          <a class="btn btn-warning btn-sm" href="{{url('post-buy-lead')}}"><i class="fa fa-arrow-left"></i> Back</a>
         </div>
       </div>
     </div>

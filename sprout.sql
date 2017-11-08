@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 08, 2017 at 11:54 AM
+-- Generation Time: Nov 08, 2017 at 07:21 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -613,13 +613,13 @@ CREATE TABLE `company_package` (
 
 INSERT INTO `company_package` (`id`, `id_company`, `id_package`, `year_duration`, `status`, `expired_date`, `insert_from_profile`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (6, 12, 3, 1, 'confirmed', '2017-07-31', 'false', '2017-07-31 03:51:14', '2017-09-09 05:59:01', NULL),
-(7, 13, 4, 1, 'active', '2018-09-08', 'false', '2017-09-08 03:45:32', '2017-09-08 03:45:32', NULL),
-(8, 13, 4, 1, 'active', '2019-09-08', 'true', '2017-09-08 05:09:27', '2017-09-08 05:09:27', NULL),
+(7, 13, 4, 1, 'confirmed', '2018-09-08', 'false', '2017-09-08 03:45:32', '2017-09-08 03:45:32', NULL),
+(8, 13, 4, 1, 'confirmed', '2019-09-08', 'true', '2017-09-08 05:09:27', '2017-09-08 05:09:27', NULL),
 (9, 13, 3, 1, 'reject', '2019-09-09', 'true', '2017-09-09 03:12:01', '2017-09-09 04:03:25', NULL),
-(10, 14, 2, 2, 'active', '2019-09-16', 'false', '2017-09-16 09:06:59', '2017-09-16 09:06:59', NULL),
+(10, 14, 2, 2, 'confirmed', '2019-09-16', 'false', '2017-09-16 09:06:59', '2017-09-16 09:06:59', NULL),
 (11, 14, 3, 3, 'confirmed', '2020-09-16', 'true', '2017-09-16 09:08:21', '2017-09-16 09:13:02', NULL),
-(12, 15, 3, 3, 'active', '2020-09-18', 'false', '2017-09-18 07:07:19', '2017-09-18 07:07:19', NULL),
-(13, 16, 3, 2, 'active', '2019-09-27', 'false', '2017-09-27 05:59:38', '2017-09-27 05:59:38', NULL),
+(12, 15, 3, 3, 'confirmed', '2020-09-18', 'false', '2017-09-18 07:07:19', '2017-09-18 07:07:19', NULL),
+(13, 16, 3, 2, 'confirmed', '2019-09-27', 'false', '2017-09-27 05:59:38', '2017-09-27 05:59:38', NULL),
 (14, 17, 4, 2, 'confirmed', '2019-11-07', 'false', '2017-11-07 09:18:47', '2017-11-07 09:18:47', NULL),
 (15, 18, 3, 2, 'confirmed', '2019-11-07', 'false', '2017-11-07 10:04:56', '2017-11-07 10:04:56', NULL),
 (16, 19, 4, 3, 'confirmed', '2020-11-07', 'false', '2017-11-07 10:23:39', '2017-11-07 10:23:39', NULL);
@@ -699,9 +699,9 @@ CREATE TABLE `company_status` (
 --
 
 INSERT INTO `company_status` (`id`, `id_company_by`, `id_company_for`, `id_status`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 15, 16, 6, 'active', '2017-10-14 01:02:50', '2017-10-14 05:50:11', NULL),
+(1, 15, 16, 6, 'active', '2017-10-14 01:02:50', '2017-11-08 15:20:28', NULL),
 (2, 15, 16, 6, 'active', '2017-10-14 05:48:32', '2017-10-14 05:48:32', NULL),
-(3, 16, 15, 4, 'active', '2017-10-16 11:22:03', '2017-10-16 11:22:07', NULL),
+(3, 16, 15, 15, 'active', '2017-10-16 11:22:03', '2017-11-08 15:23:11', NULL),
 (4, 16, 12, 16, 'active', '2017-10-16 16:52:35', '2017-10-16 16:52:35', NULL),
 (5, 16, 14, 16, 'active', '2017-10-16 16:52:35', '2017-10-16 16:52:35', NULL),
 (6, 16, 13, 16, 'active', '2017-10-16 17:13:44', '2017-10-16 17:13:44', NULL),
@@ -91048,14 +91048,15 @@ INSERT INTO `user` (`id`, `id_company`, `created_by`, `email`, `first_name`, `la
 (1, 13, NULL, 'user2@gmail.com', 'qqweqe', 'dadad', 'user222', 'tit22', 'http://res.cloudinary.com/stts/image/upload/v1504842637/sxu4ghs5vkvetnhlmlht.png', '123123', NULL, 0, 'Active', '2017-09-08 03:50:39', '2017-09-08 03:50:39', NULL),
 (2, 14, NULL, 'user9@gmail.com', 'user', '9999', 'user9', 'title9', 'http://res.cloudinary.com/stts/image/upload/v1505552852/o2bff3ynii2g195qomcv.png', '123123', NULL, 0, 'Active', '2017-09-16 09:07:33', '2017-09-16 09:07:33', NULL),
 (3, 15, 0, 'baruuser@gmail.com', 'baru', 'user', 'baruuser', 'title baru', 'http://res.cloudinary.com/stts/image/upload/v1505718477/twfbp4kn2yralswjh5bl.png', '123123', NULL, 0, 'Active', '2017-09-18 07:08:00', '2017-09-18 07:08:00', NULL),
-(4, 15, 3, 'aaa@aa.aa', 'procurement Manager', 'procurement Manager', 'tmanager', 'titleaaaa', 'http://res.cloudinary.com/stts/image/upload/v1506276903/besl0vodzo1e3u5p0gmy.png', '123123', NULL, 0, 'Active', '2017-09-24 18:15:04', '2017-09-24 18:15:04', NULL),
+(4, 15, 3, 'aaa@aa.aa', 'procurement Manager', 'procurement Manager', 'tmanager', 'titleaaaa', 'http://res.cloudinary.com/stts/image/upload/v1506276903/besl0vodzo1e3u5p0gmy.png', '123123', NULL, 0, 'Active', '2017-09-24 18:15:04', '2017-11-08 18:08:54', NULL),
 (5, 16, NULL, 'baruuser2@gmail.com', 'baru', 'user2', 'baruuser2', 'title2', 'http://res.cloudinary.com/stts/image/upload/v1506492019/xxnw2gjcgmkv9mfmkwpy.png', '123123', NULL, 0, 'Active', '2017-09-27 06:00:22', '2017-09-27 06:00:22', NULL),
-(6, 16, 5, 'tsales@gmail.com', 'Sales', 'Manager', 'tsales', 'sales manager', 'http://res.cloudinary.com/stts/image/upload/v1506572688/e4w3t78cko5qca8xuora.jpg', '123123', NULL, 0, 'Active', '2017-09-28 04:24:52', '2017-09-28 04:24:52', NULL),
-(7, 16, 6, 'tstaff@gmail.com', 'test', 'staff', 'tstaff', 'staff', 'http://res.cloudinary.com/stts/image/upload/v1506604226/e21cp3flmyapjcvvb4wa.jpg', '123123', NULL, 0, 'Active', '2017-09-28 13:10:27', '2017-09-28 13:10:27', NULL),
+(6, 16, 5, 'tsales@gmail.com', 'Sales', 'Manager', 'tsales', 'sales manager', 'http://res.cloudinary.com/stts/image/upload/v1506572688/e4w3t78cko5qca8xuora.jpg', '123123', NULL, 1, 'Active', '2017-09-28 04:24:52', '2017-11-08 18:17:53', NULL),
+(7, 16, 6, 'tstaff@gmail.com', 'test', 'staff', 'tstaff', 'staff', 'http://res.cloudinary.com/stts/image/upload/v1506604226/e21cp3flmyapjcvvb4wa.jpg', '123123', NULL, 0, 'Active', '2017-09-28 13:10:27', '2017-11-08 18:17:52', NULL),
 (14, 16, 6, 'cstaff@gmail.com', 'coba', 'staff', 'cstaff', 'staff', 'http://res.cloudinary.com/stts/image/upload/v1506604787/z2nuvqflbflfxdd9q2q8.jpg', '123123', NULL, 0, 'Active', '2017-09-28 13:19:47', '2017-09-28 13:19:47', NULL),
 (15, 17, NULL, 'newcomp', 'first', 'last', 'masteruser', 'ititl', 'http://res.cloudinary.com/stts/image/upload/v1510046554/okjzcl4prlf8volbtyqv.png', '123123', NULL, 0, 'Active', '2017-11-07 09:22:36', '2017-11-07 09:22:36', NULL),
 (16, 18, NULL, 'asfaas@sadfa.asdf', 'asdfaasf', 'safasdf', 'masteruser', '123123sdfasdfa', 'http://res.cloudinary.com/stts/image/upload/v1510049133/giqdzvywhvgx7dydl5zw.png', '123123', NULL, 0, 'Active', '2017-11-07 10:05:36', '2017-11-07 10:05:36', NULL),
-(17, 19, NULL, 'asfaas@sadfa.asdf', 'asdfasdf', 'zsfasdf', 'masteruser', 'sdfasdfdsa', 'http://res.cloudinary.com/stts/image/upload/v1510050263/vpzr9vwrur3fm0oqpva4.png', '123123', NULL, 0, 'Active', '2017-11-07 10:24:25', '2017-11-07 10:24:25', NULL);
+(17, 19, NULL, 'asfaas@sadfa.asdf', 'asdfasdf', 'zsfasdf', 'masteruser', 'sdfasdfdsa', 'http://res.cloudinary.com/stts/image/upload/v1510050263/vpzr9vwrur3fm0oqpva4.png', '123123', NULL, 0, 'Active', '2017-11-07 10:24:25', '2017-11-07 10:24:25', NULL),
+(18, 15, NULL, 'asfaas@sadfa.asdf', 'asdfasdf', 'zsfasdf', 'masteruser', 'sdfasdfdsa', 'http://res.cloudinary.com/stts/image/upload/v1510050263/vpzr9vwrur3fm0oqpva4.png', '123123', NULL, 0, 'Active', '2017-11-07 10:24:25', '2017-11-07 10:24:25', NULL);
 
 -- --------------------------------------------------------
 
@@ -91121,7 +91122,8 @@ INSERT INTO `user_role` (`id`, `role_id`, `user_id`, `status`, `created_at`, `up
 (9, 6, 14, 'Active', '2017-09-28 13:19:48', '2017-09-28 13:19:48', NULL),
 (10, 2, 15, 'Active', '2017-11-07 09:22:36', '2017-11-07 09:22:36', NULL),
 (11, 2, 16, 'Active', '2017-11-07 10:05:36', '2017-11-07 10:05:36', NULL),
-(12, 2, 17, 'Active', '2017-11-07 10:24:25', '2017-11-07 10:24:25', NULL);
+(12, 2, 17, 'Active', '2017-11-07 10:24:25', '2017-11-07 10:24:25', NULL),
+(13, 2, 18, 'Active', '2017-11-08 14:55:23', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -91639,7 +91641,7 @@ ALTER TABLE `unit`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -91654,7 +91656,7 @@ ALTER TABLE `user_meeting_schedule`
 -- AUTO_INCREMENT for table `user_role`
 --
 ALTER TABLE `user_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- Constraints for dumped tables
 --

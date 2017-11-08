@@ -41,6 +41,8 @@ Route::group(['middleware' => 'checkUser'], function () {
     
     Route::get('profile', 'CompanyController@profile');
     Route::get('doSetUserHeadStatus','CompanyController@doSetUserHeadStatus');
+    Route::get('doDeleteUser','CompanyController@doDeleteUser');
+    
     Route::post('doRegisUser', 'CompanyController@doRegisUser');
     
     Route::get('logoutUser', 'PageController@logoutUser');
@@ -84,7 +86,7 @@ Route::group(['middleware' => 'checkUser','checkSales'],function(){
     Route::get('doApproveQuotation','BuyLeadController@doApproveQuotation');
 
     Route::get('company-database','BuyLeadController@companyDatabase');
-    Route::get('doChangeCompanyStatus','CompanyController@doChangeCompanyStatus');
+    Route::get('doChangeCompanyStatus','BuyLeadController@doChangeCompanyStatus');
 
 }); 
 

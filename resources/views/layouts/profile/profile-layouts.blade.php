@@ -137,102 +137,46 @@
 				<h4 class="modal-title">Detail Business Category</h4>
 			</div>
 			<div class="modal-body">
-				<h4><strong>Section A</strong></h4>
-				<h5>Agriculture, forestry and fishing</h5>
-
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title">
-									<a href="#division1" class="no-text-decoration" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="division1">Division 1 - Crop and animal production, hunting and related service activities</a>
-								</h3>
-							</div>
-							<div id="division1" class="panel-body collapse">
-								<div class="table-responsive">
-									<table class="table table-condensed">
-										<thead>
-											<tr>
-												<th>Group</th>
-												<th>Description</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>011</td>
-												<td>Growing of non-perennial crops</td>
-											</tr>
-											<tr>
-												<td>012</td>
-												<td>Growing of perennial crops</td>
-											</tr>
-											<tr>
-												<td>013</td>
-												<td>Plant propagation</td>
-											</tr>
-											<tr>
-												<td>014</td>
-												<td>Animal production</td>
-											</tr>
-											<tr>
-												<td>015</td>
-												<td>Mixed farming</td>
-											</tr>
-											<tr>
-												<td>016</td>
-												<td>Support activities to agriculture and post-harvest crop activities</td>
-											</tr>
-											<tr>
-												<td>017</td>
-												<td>Hunting, trapping and related service activities</td>
-											</tr>
-										</tbody>
-									</table>
+				@foreach($thisCompany->CompanyBusinessCategory()->get() as $sVal)
+				
+				<h4><strong>{{$sVal->Section()->first()->section}}</strong></h4>
+				<h5>{{$sVal->Section()->first()->name}}</h5>
+					@foreach($sVal->Section()->first()->Division()->get() as $dKey => $dVal)
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title">
+										<a href="#division{{$dKey}}" class="no-text-decoration" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="division{{$dKey}}">{{$dVal->name}} - {{$dVal->description}}</a>
+									</h3>
 								</div>
+
+								<div id="division{{$dKey}}" class="panel-body collapse">
+									<div class="table-responsive">
+										<table class="table table-condensed">
+											<thead>
+												<tr>
+													<th>Group</th>
+													<th>Description</th>
+												</tr>
+											</thead>
+											<tbody>
+												@foreach($dVal->Group()->get() as $gVal)
+												<tr>
+													<td>{{$gVal->name}}</td>
+													<td>{{$gVal->description}}</td>
+												</tr>
+												@endforeach
+											</tbody>
+										</table>
+									</div>
+								</div>
+								
 							</div>
 						</div>
 					</div>
-
-					<div class="col-md-12 col-sm-12 col-xs-12">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title">
-									<a href="#division2" class="no-text-decoration" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="division2">Division 2 - Forestry and logging</a>
-								</h3>
-							</div>
-							<div id="division2" class="panel-body collapse">
-								<div class="table-responsive">
-									<table class="table table-condensed">
-										<thead>
-											<tr>
-												<th>Group</th>
-												<th>Description</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>021</td>
-												<td>Silviculture and other forestry activities</td>
-											</tr>
-											<tr>
-												<td>022</td>
-												<td>Logging</td>
-											</tr>
-											<tr>
-												<td>023</td>
-												<td>Gathering of non-wood forest products</td>
-											</tr>
-											<tr>
-												<td>024</td>
-												<td>Support services to forestry</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+					@endforeach
+				@endforeach
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

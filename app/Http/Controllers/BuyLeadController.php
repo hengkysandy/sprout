@@ -492,7 +492,7 @@ class BuyLeadController extends Controller
 
     public function companyDatabase()
     {
-        $procurementRoleArr = [3,4];
+        $procurementRoleArr = [2,3,4];
         $salesRoleArr = [5,6];
         $procurementStatusArr = [5,6,7];
         $salesStatusArr = [4,15];
@@ -535,7 +535,7 @@ class BuyLeadController extends Controller
 
     public function doChangeCompanyStatus(Request $request)
     {
-        $procurementRoleArr = [3,4];
+        $procurementRoleArr = [2,3,4];
         $salesRoleArr = [5,6];
         $procurementStatusArr = [5,6,7];
         $salesStatusArr = [4,15];

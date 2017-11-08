@@ -24,10 +24,10 @@
                   <th>Company Name</th>
                   <th>Business Category</th>
                   <th>Location</th>
-                  @if(in_array(session()->get('userSession')[0]->role_id,[3,4]))
+                  @if(in_array(session()->get('userSession')[0]->role_id,[2,3,4]))
                     <th>Status</th>
                   @endif
-                  @if(session()->get('userSession')[0]->role_id == 3)
+                  @if(in_array(session()->get('userSession')[0]->role_id,[2,3]))
                     <th>Action</th>
                   @endif
                   @if(in_array(session()->get('userSession')[0]->role_id,[5,6]))
@@ -47,7 +47,7 @@
                   <td>{{$data['section']->name}}</td>
                   <td>{{$data['company_city']}}</td>
 
-                  @if(in_array(session()->get('userSession')[0]->role_id,[3,4]))
+                  @if(in_array(session()->get('userSession')[0]->role_id,[2,3,4]))
                     <td>
                       @if(count($data['company_status']) == 0 || $data['company_status']->id_status == 5)
                         <span class="text-muted no-text-decoration"><strong>Undecided</strong></span>
@@ -60,7 +60,7 @@
                   @endif
                   
 
-                  @if(session()->get('userSession')[0]->role_id == 3)
+                  @if(in_array(session()->get('userSession')[0]->role_id,[2,3]))
                   <td>
                     @if(count($data['company_status']) == 0 || $data['company_status']->id_status == 5)
                       <a href="{{url('doChangeCompanyStatus?id='.$data['company']->id.'&status=6')}}" data-toggle="modal" class="btn btn-sm btn-success"><strong>Approve</strong></a>

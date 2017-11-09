@@ -85,7 +85,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($meetingRequest as $key => $value)
+                  @foreach($companyRequest as $key => $value)
                   <tr value="{{$value->id}}">
                     <td>
                       {{$value->sender}}
@@ -170,9 +170,7 @@
     @include('layouts.user.side-nav')
   </div>
 </div>
-
 @include('layouts.meeting-schedule.popup-view.add-meeting-schedule')
-
   <!-- Note: Back-End
   Yang edit saya belum tau gimana kalu di Front-End nya
 -->
@@ -411,6 +409,7 @@
     });
 
     $('#acc-confirm').on('click', function(){
+      alert('test');
       var url = $(this).attr('url');
       $.ajax({
         type:"GET",

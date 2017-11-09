@@ -30,54 +30,86 @@ class MeetingScheduleController extends Controller
             ->where('id', '<>', $currentCompanyId)
             ->get();
 
-        $companyUser = Company::join('user', 'company.id', '=', 'user.id_company')
-            ->where('company.id', $currentCompanyId)
-            ->select('user.id as userid')
-            ->pluck('userid')
-            ->toArray();
+        $companyUserList = UserPreDefine::where('id_company', $currentCompanyId)->where('id','<>',$currentUserId)->get()->toArray();
 
-        $companyUserList = UserPreDefine::where('id_company', $currentCompanyId)->get()->toArray();
-
-        $companyMeetingData = MeetingSchedule::join('company_meeting_schedule as cms', 'meeting_schedule.id', '=', 'cms.id_meeting_schedule')
+        $meetingExternalData = MeetingSchedule::join('company_meeting_schedule as cms', 'meeting_schedule.id', '=', 'cms.id_meeting_schedule')
             ->join('company', 'company.id', '=', 'cms.id_company_assign')
             ->where('meeting_schedule.status', 'active')
-            ->whereIn('meeting_schedule.id_user', $companyUser)
+            ->where('meeting_schedule.id_user',$currentUserId)
             ->distinct()
-            ->select('meeting_schedule.*')
-            ->get();
+            ->select('meeting_schedule.*');
+            
+        $meetingInternalData = MeetingSchedule::join('user_meeting_schedule as ums','meeting_schedule.id','=','ums.id_meeting_schedule')
+            ->join('user','user.id','=','ums.id_user_assigned')
+            ->where('meeting_schedule.status','active')
+            ->where('meeting_schedule.id_user',$currentUserId)
+            ->distinct()
+            ->select('meeting_schedule.*');
+
+        $companyMeetingData = $meetingExternalData->union($meetingInternalData)->get();
 
         foreach ($companyMeetingData as $key => $value) {
-            $recipient = CompanyMeetingSchedule::join('company', 'company.id', '=', 'company_meeting_schedule.id_company_assign')
+
+            // GET Recipient and status from external Meeting
+            if($value->meeting_type == 1)
+            {
+                $recipient = CompanyMeetingSchedule::join('company', 'company.id', '=', 'company_meeting_schedule.id_company_assign')
                 ->where('company_meeting_schedule.id_meeting_schedule', $value->id)
                 ->select('company.name')
                 ->pluck('name')
                 ->toArray();
 
-            $status = CompanyMeetingSchedule::join('company', 'company.id', '=', 'company_meeting_schedule.id_company_assign')
+                $status = CompanyMeetingSchedule::join('company', 'company.id', '=', 'company_meeting_schedule.id_company_assign')
                 ->where('company_meeting_schedule.id_meeting_schedule', $value->id)
                 ->select('company_meeting_schedule.status')
                 ->pluck('status')
                 ->toArray();
+            }
+            elseif($value->meeting_type == 0)
+            {
+                $recipient = UserMeetingSchedule::join('user', 'user.id', '=', 'user_meeting_schedule.id_user_assigned')
+                ->where('user_meeting_schedule.id_meeting_schedule', $value->id)
+                ->select('user.first_name')
+                ->pluck('first_name')
+                ->toArray();
+
+                $status = UserMeetingSchedule::join('user', 'user.id', '=', 'user_meeting_schedule.id_user_assigned')
+                ->where('user_meeting_schedule.id_meeting_schedule', $value->id)
+                ->select('user_meeting_schedule.status')
+                ->pluck('status')
+                ->toArray();
+            }
 
             $value['recipient'] = $recipient;
             $value['status'] = $status;
         }
+
+        $userRequest = MeetingSchedule::join('user_meeting_schedule as ums','meeting_schedule.id','=','ums.id_meeting_schedule')
+            ->join('user as r_user','r_user.id','=','ums.id_user_assigned')
+            ->leftjoin('user as s_user','s_user.id','=','meeting_schedule.id_user')
+            ->where('r_user.id', $currentUserId)
+            ->select('meeting_schedule.*','ums.status','s_user.first_name as sender','r_user.first_name as recipient');
+
         $companyRequest = MeetingSchedule::join('company_meeting_schedule as cms', 'meeting_schedule.id', '=', 'cms.id_meeting_schedule')
             ->join('company as r_comp', 'r_comp.id', '=', 'cms.id_company_assign')
             ->leftjoin('user', 'user.id', '=', 'meeting_schedule.id_user')
             ->leftjoin('company as s_comp', 's_comp.id', '=', 'user.id_company')
             ->where('id_company_assign', $currentCompanyId)
             ->select('meeting_schedule.*', 'cms.status', 's_comp.name as sender', 'r_comp.name as recipient');
-        if ($currentUserRole == 3) // procurement role
-        {
-            $companyRequest = $companyRequest->where('recipient_role', 0); // recipient role for procurement
-        } else if ($currentUserRole == 5) // sales role
-        {
-            $companyRequest = $companyRequest->where('recipient_role', 1); // recipient role for sales
-        }
-        $companyRequest = $companyRequest->get();
+            if ($currentUserRole == 3) // procurement role
+            {
+                $companyRequest = $companyRequest->where('recipient_role', 0); // recipient role for procurement
+            } else if ($currentUserRole == 5) // sales role
+            {
+                $companyRequest = $companyRequest->where('recipient_role', 1); // recipient role for sales
+            }
+            // $companyRequest = $companyRequest->get();
 
-        return view('post-buy-lead.procurement-manager.meeting-schedule', compact('companyUserList', 'companyData', 'companyMeetingData', 'companyRequest'));
+        $meetingRequest = $companyRequest->union($userRequest)->get();
+
+        // return $meetingRequest;
+
+        return view('post-buy-lead.procurement-manager.meeting-schedule', compact('companyUserList', 'companyData', 'companyMeetingData', 'meetingRequest'));
     }
 
     public function doInsertMeeting(Request $request)
@@ -125,10 +157,21 @@ class MeetingScheduleController extends Controller
 
     public function acceptMeeting(Request $request, $id)
     {
-        $currentCompanyId = session()->get('companySession')[0]->id;
-        companymeetingschedule::where('id_meeting_schedule', $id)->where('id_company_assign', $currentCompanyId)->update([
-            'status' => 'approved',
-        ]);
+        $meeting_type = MeetingSchedule::find($id)->meeting_type;
+
+        if($meeting_type == 1) // External
+        {
+            $currentCompanyId = session()->get('companySession')[0]->id;
+            companymeetingschedule::where('id_meeting_schedule', $id)->where('id_company_assign', $currentCompanyId)->update([
+                'status' => 'approved',
+            ]);
+        }elseif($meeting_type == 0)
+        {
+            $currentUserId = session()->get('userSession')[0]->id;
+            UserMeetingSchedule::where('id_meeting_schedule', $id)->where('id_user_assigned', $currentUserId)->update([
+                'status' => 'approved',
+            ]);
+        }
     }
 
     //meeting detail 
@@ -138,6 +181,7 @@ class MeetingScheduleController extends Controller
         $detailArray = [];
         $id = $request->id;
         $meetingData = MeetingSchedule::where('id', $id)->first();
+        $meetingType = MeetingSchedule::where('id', $id)->first()->meeting_type;;
 
         $Recipient = MeetingSchedule::leftjoin('company_meeting_schedule as cms', 'meeting_schedule.id', '=', 'cms.id_meeting_schedule')
             ->leftjoin('company', 'company.id', '=', 'cms.id_company_assign')
@@ -153,14 +197,14 @@ class MeetingScheduleController extends Controller
 
         if ($meetingData->meeting_type===1) {
             $meetingType = "External Meeting";
-        } else if($meetingData->meeting_type===0){
+        }else if($meetingData->meeting_type===0){
             $detailRecipient = collect();
             $meetingType = 'Internal Meeting';
             $Recipient = MeetingSchedule::leftjoin('user_meeting_schedule as ums', 'meeting_schedule.id', '=', 'ums.id_meeting_schedule')
                 ->leftjoin('company', 'company.id', '=', 'ums.id_user_assigned')
                 ->leftjoin('user','ums.id_user_assigned','=','user.id')
                 ->where('meeting_schedule.id', $id)
-                ->select('user.first_name','user.last_name')
+                ->select('user.first_name','user.last_name','ums.status')
                 ->get();
 
             foreach ($Recipient as $key => $value) {
@@ -169,7 +213,6 @@ class MeetingScheduleController extends Controller
                 $detailRecipient->push($detailArray);
             }
         }
-
 
         return view('post-buy-lead.procurement-manager.meeting-detail', compact('meetingData', 'detailRecipient', 'meetingType'));
     }

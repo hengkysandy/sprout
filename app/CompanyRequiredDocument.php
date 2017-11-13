@@ -14,4 +14,14 @@ class CompanyRequiredDocument extends Model
     	'tax_id_image',
     	'status'
     ];
+
+    public function CdnMapTax()
+    {
+        return $this->hasOne(CloudinaryMapping::class,'url','tax_id_image');
+    }
+
+    public function CdnMapBli()
+    {
+        return $this->hasOne(CloudinaryMapping::class,'url','business_license_image');
+    }
 }

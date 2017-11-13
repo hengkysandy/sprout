@@ -13,4 +13,6 @@ class CloudinaryMapping extends Model
         'url',
         'original_filename'
     ];
+
+    
 }

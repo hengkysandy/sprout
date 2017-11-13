@@ -140,9 +140,9 @@
               <div class="form-group">
                 <label class="col-md-2 col-sm-0 col-xs-0 control-label"></label>
                 <div class="col-md-10 col-sm-12 col-xs-12">
-                  <a target="_blank" href="{{url('download/file?url='.$data->product_catalogue_image)}}" class="btn btn-success">Open Document</a>
+                  <a target="_blank" href="{{url('download/file?url='.$data->product_catalogue_image)}}" class="btn btn-success">Download Document</a>
                   <a href="{{url('doDeleteProductCatalogue?id='.$data->id)}}" data-toggle="modal" class="btn btn-danger">Delete Document</a>
-                  <p class="help-block"></p>
+                  <p class="help-block">{{$data->CdnMap()->first()->original_filename}}</p>
                 </div>
               </div>
               @endforeach
@@ -195,9 +195,9 @@
         <div class="form-group">
           <label class="col-md-2 col-sm-12 col-xs-12 control-label">Required Document</label>
           <div class="col-md-10 col-sm-12 col-xs-12">
-            <a target="_blank" href="{{url('download/file?url='.$data->business_license_image)}}" class="btn btn-success">Open Document</a>
+            <a target="_blank" href="{{url('download/file?url='.$data->business_license_image)}}" class="btn btn-success">Download Document</a>
             <a href="{{url('doDeleteRequiredDocument?id='.$data->id)}}" data-toggle="modal" class="btn btn-danger">Delete Document</a>
-            <p class="help-block"></p>
+            <p class="help-block">{{$data->CdnMapBli()->first()->original_filename}}</p>
           </div>
         </div>
         @endforeach
@@ -207,9 +207,9 @@
           <label class="col-md-2 col-sm-12 col-xs-12 control-label">Certification <small><strong>(optional)</strong></small></label>
           <div class="col-md-10 col-sm-12 col-xs-12">
 
-            <a target="_blank" href="{{url('download/file?url='.$data->certificate_image)}}" class="btn btn-success">Open Document</a>
+            <a target="_blank" href="{{url('download/file?url='.$data->certificate_image)}}" class="btn btn-success">Download Document</a>
             <a href="{{url('doDeleteCertificate?id='.$data->id)}}" class="btn btn-danger">Delete Document</a>
-            <p class="help-block"></p>
+            <p class="help-block">{{$data->CdnMap()->first()->original_filename}}</p>
           </div>
         </div>
         @endforeach
@@ -230,7 +230,7 @@
             <label class="btn btn-primary btn-file">
               Browse <input type="file" name="logoImage" class="hide">
             </label>
-            <a target="_blank" href="{{$thisCompany->logo_image}}" class="btn btn-success">Open Logo</a>
+            <a target="_blank" href="{{$thisCompany->logo_image}}" class="btn btn-success">Download Logo</a>
             <a href="{{url('doDeleteCompanyLogo?id='.$thisCompany->id)}}" data-toggle="modal" class="btn btn-danger">Delete Logo</a>
             <p class="help-block">Insert image logo with format .png</p>
           </div>

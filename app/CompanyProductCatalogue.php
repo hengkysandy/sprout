@@ -12,4 +12,10 @@ class CompanyProductCatalogue extends Model
     	'id_company',
     	'product_catalogue_image',
     ];
+
+    public function CdnMap()
+    {
+        return $this->hasOne(CloudinaryMapping::class,'url','product_catalogue_image');
+    }
+
 }

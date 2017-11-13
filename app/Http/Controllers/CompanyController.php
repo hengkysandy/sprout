@@ -299,6 +299,7 @@ class CompanyController extends Controller
         $data['addOnData'] = AddOn::all();
         $data['businessEntity'] = ['PT','CV','PD'];
         $data['thisCompany'] = Company::find(session()->get('companySession')[0]->id);
+
         // return $data['thisCompany']->CompanyPackage()->where('status','approve')->latest('created_at')->first();
         $data['thisUser'] = UserPreDefine::find(session()->get('userSession')[0]->id);
         $userid = session()->get('userSession')[0]->id;

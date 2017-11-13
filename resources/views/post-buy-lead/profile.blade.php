@@ -505,6 +505,9 @@
   @if(session()->get('userSession')[0]->role_id != 2)
     <script type="text/javascript">
       $("#company-profile-form :input").attr("disabled", true);
+      $('#company-profile-form a').click(function(e) {
+          e.preventDefault();
+      });
     </script>
   @endif
 

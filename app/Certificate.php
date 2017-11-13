@@ -13,4 +13,9 @@ class Certificate extends Model
 		'certificate_image',
 		'status'
     ];
+
+    public function CdnMap()
+    {
+        return $this->hasOne(CloudinaryMapping::class,'url','certificate_image');
+    }
 }

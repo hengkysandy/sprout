@@ -166,11 +166,11 @@ class PageController extends Controller
         return response()->json($response);
     }
 
-    public function doAddBuyLeadBusinessCategoryAdmin(Request $request)
+    public function doEditBuyLeadBusinessCategoryAdmin(Request $request)
     {
         BuyLeadBusinessCategory::create([
             'buy_lead_id' => $request->id_buylead,
-            'business_category_id' => $request->id_section,
+            'business_category_id' => $request->id_section, //ada salah ini
             'status' => 'active',
         ]);
 
@@ -180,6 +180,8 @@ class PageController extends Controller
 
     public function login_company()
     {
+        // return file_get_contents('http://10.22.64.200:80/Utility/getStudentData?nim=1801400240');
+        // return file_get_contents('https://www.instagram.com/explore/tags/girls/?__a=1');
         return view('cust-auth.login-company.index');
     }
 
@@ -198,7 +200,8 @@ class PageController extends Controller
             return redirect('home');
         }
             
-        return back(); 
+        return back();
+        
     }
 
     public function home()

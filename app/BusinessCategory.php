@@ -13,4 +13,9 @@ class BusinessCategory extends Model
 		'id_group_division',
 		'status'
     ];
+
+    public function Section()
+    {
+        return $this->belongsTo(Section::class,'id_section','id');
+    }
 }

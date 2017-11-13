@@ -142,7 +142,7 @@ Route::group(['middleware' => 'checkAdmin'], function () {
     
     Route::get('rfq', 'PageController@rfq');
     Route::get('getBuyLeadDataAjax/{id}', 'PageController@getBuyLeadDataAjax');
-    Route::post('doAddBuyLeadBusinessCategoryAdmin', 'PageController@doAddBuyLeadBusinessCategoryAdmin');
+    Route::post('doEditBuyLeadBusinessCategoryAdmin', 'PageController@doEditBuyLeadBusinessCategoryAdmin');
     
 
 

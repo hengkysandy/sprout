@@ -40,8 +40,11 @@
                   <td>{{$blData->amount}} {{$blData->Unit()->first()->name}}</td>
                   <td>
                     @if(!empty($blData->BuyLeadBusinessCategory()->get()))
-                      @foreach( $blData->BuyLeadBusinessCategory()->get() as $d)
-                        <span>{{$d->Section()->first()->section}},</span>
+
+                      @foreach( $blData->BuyLeadBusinessCategory()->get() as $blbc)
+                        @if(!empty($blbc->BusinessCategory()->first()))
+                          <span>{{$blbc->BusinessCategory()->first()->Section()->first()->section}}</span>
+                        @endif
                       @endforeach
                     @else
                       There's no business category yet
@@ -70,7 +73,7 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title">Edit RFQ / Post Buy Lead</h4>
         </div>
-        <form method="post" action="{{url('doAddBuyLeadBusinessCategoryAdmin')}}">
+        <form method="post" action="{{url('doEditBuyLeadBusinessCategoryAdmin')}}">
           {{csrf_field()}}
         <div class="modal-body">
             <input type="hidden" name="id_buylead" id="id_buylead">
@@ -104,7 +107,17 @@
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group">
-                  <label>Business Category</label>
+                  <label>Business Category 1</label>
+                  <select name="id_section" class="form-control">
+                    @foreach($section as $sData)
+                    <option value="{{$sData->id}}">{{$sData->section}}</option>
+                    @endforeach
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="form-group">
+                  <label>Business Category 2</label>
                   <select name="id_section" class="form-control">
                     @foreach($section as $sData)
                     <option value="{{$sData->id}}">{{$sData->section}}</option>

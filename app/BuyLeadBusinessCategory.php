@@ -14,9 +14,9 @@ class BuyLeadBusinessCategory extends Model
 		'status',
     ];
 
-    public function Section()
+    public function BusinessCategory()
     {
-        return $this->belongsTo(Section::class,'business_category_id','id');
+        return $this->belongsTo(BusinessCategory::class,'business_category_id','id');
     }
     
 }

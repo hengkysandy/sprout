@@ -39,7 +39,23 @@
               </tr>
             </thead>
             <tbody>
-              
+              @foreach($requestAddOn as $data)
+              <tr>
+                <td>{{$data->company_id}}</td>
+                <td>{{$data->Company()->first()->name}}</td>
+                <td>
+                  @foreach($data->Company()->first()->CompanyBusinessCategory()->get() as $bcData)
+                    {{$bcData->BusinessCategory()->first()->Section()->first()->section}},
+                  @endforeach
+                </td>
+                <td>{{$data->AddOn()->first()->name}} * {{$data->quantity}} pcs</td>
+                <td>{{$data->expired_date}}</td>
+                <td>{{$data->AddOn()->first()->price}}</td>
+                <td>
+                  <a href="{{url('doChangeStatusCompanyAddOn?id='.$data->id.'&status=confirmed')}}" class="btn btn-sm btn-primary btn-approve">Approve</a>
+                </td>
+              </tr>
+              @endforeach
             </tbody>
           </table>
         </div>

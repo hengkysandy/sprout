@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AddOn;
 use App\Admin;
 use App\Area;
 use App\BuyLead;
@@ -9,6 +10,7 @@ use App\BuyLeadBusinessCategory;
 use App\Certificate;
 use App\CloudinaryMapping;
 use App\Company;
+use App\CompanyAddOn;
 use App\CompanyBusinessCategory;
 use App\CompanyInterestedProgram;
 use App\CompanyMainProduct;
@@ -100,6 +102,7 @@ class PageController extends Controller
         $data['companyPackageData'] = CompanyPackage::where('status','pending')
                                         ->where('insert_from_profile','true')
                                         ->get();
+        $data['requestAddOn'] = CompanyAddOn::where('status','pending')->get();
         $data['approvedCompany'] = Company::where('status','active')->get();
         
     	return view('dashboard.company-membership',$data);
@@ -111,6 +114,7 @@ class PageController extends Controller
         $data['thisCompany'] = Company::find($id);
         $data['companyBC'] = CompanyBusinessCategory::where('id_company', $data['thisCompany']->id)->get();
         $data['section'] = Section::all();
+        $data['addOnData'] = AddOn::all();
     	return view('dashboard.member', $data);
     }
 
@@ -139,6 +143,16 @@ class PageController extends Controller
     {
 
         $currData = CompanyPackage::find($request->id);
+        $currData->status = $request->status;
+        $currData->save();
+
+        return back();
+    }
+
+    public function doChangeStatusCompanyAddOn(Request $request)
+    {
+
+        $currData = CompanyAddOn::find($request->id);
         $currData->status = $request->status;
         $currData->save();
 

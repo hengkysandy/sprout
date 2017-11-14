@@ -76,7 +76,7 @@
 
                   <div class="col-md-4 col-sm-4 col-xs-4">
                     <div class="wrapper-btn-bc">
-                      <a href="#addEmployee" data-toggle="modal" class="btn btn-primary">
+                      <a href="#requestAddon" data-toggle="modal" class="btn btn-primary chooseAddEmployee">
                         Add Employee
                       </a>
                     </div>
@@ -148,8 +148,9 @@
     </div>
   </div>
 
+@include('post-buy-lead.popup-view.request-add-on-pop-up')
   <!-- Add Account for Purchasing/Sales -->
-  <div class="modal fade" id="addEmployee" tabindex="-1" role="dialog">
+  <!-- <div class="modal fade" id="addEmployee" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -172,7 +173,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- Add Business Category -->
   <div class="modal fade" id="addBc" tabindex="-1" role="dialog">
@@ -613,6 +614,8 @@
       </div>
     </div>
   </div>
+  <script type="text/javascript" src="{{asset('js/myscript/admin-member.js')}}"></script>
+
 
   @include('layouts.dashboard.menu-mobile')
 @endsection

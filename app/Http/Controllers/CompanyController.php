@@ -359,19 +359,16 @@ class CompanyController extends Controller
 
     public function doRequestCompanyAddOn(Request $request)
     {
-        return $request->all();
+        CompanyAddOn::create([
+            'company_id' => $request->id_company,
+            'add_on_id' => $request->addonId,
+            'request_from' => 'request addon',
+            'expired_date' => Carbon::now()->addYear($request->duration),
+            'quantity' => $request->quantity,
+            'status' => 'pending',
+        ]);
 
-        // CompanyAddOn::create([
-        //     'company_id' => $request->apa,
-        //     'add_on_id' => $request->addonId,
-        //     'request_from' => 'request addon',
-        //     'expired_date' => $request->apa,
-        //     'status' => 'pending',
-        // ]);
-
-        // addonId: "3",
-        // quantity: "2",
-        // duration: null
+        return back();
     }
 
     public function doSetUserHeadStatus(Request $request)

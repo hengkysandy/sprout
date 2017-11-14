@@ -143,6 +143,7 @@ Route::group(['middleware' => 'checkAdmin'], function () {
     Route::get('new_member_request', 'PageController@memberRequest');
     Route::get('doChangeStatusCompany', 'PageController@doChangeStatusCompany');
     Route::get('doChangeStatusCompanyPackage', 'PageController@doChangeStatusCompanyPackage');
+    Route::get('doChangeStatusCompanyAddOn', 'PageController@doChangeStatusCompanyAddOn');
     
     Route::get('rfq', 'PageController@rfq');
     Route::get('getBuyLeadDataAjax/{id}', 'PageController@getBuyLeadDataAjax');

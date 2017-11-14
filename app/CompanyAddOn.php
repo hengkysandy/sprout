@@ -12,7 +12,8 @@ class CompanyAddOn extends Model
 		'company_id',
 		'add_on_id',
     	'request_from',
-		'expired_date',
+        'expired_date',
+		'quantity',
 		'status',
     ];
 

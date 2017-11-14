@@ -76,10 +76,14 @@ class Company extends Model
         return $this->hasMany(CompanyRequiredDocument::class,'id_company','id');
     }
 
-
     public function Certificate()
     {
         return $this->hasMany(Certificate::class,'id_company','id');
+    }
+
+    public function User()
+    {
+        return $this->hasMany(UserPreDefine::class,'id_company','id');
     }
 
     

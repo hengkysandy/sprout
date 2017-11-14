@@ -257,11 +257,12 @@ class CompanyController extends Controller
             'old_password' => $request->password,
             'new_password' => NULL,
             'status' => 'Active',
+            'created_by' => session()->get('userSession')[0]->id,
         ]);
 
         UserRole::create([
             'user_id' => $user->id,
-            'role_id' => $request->role, // 1 => master user
+            'role_id' => $request->role,
             'status' => 'Active',
             ]);
         return back();
@@ -299,6 +300,12 @@ class CompanyController extends Controller
         $data['addOnData'] = AddOn::all();
         $data['businessEntity'] = ['PT','CV','PD'];
         $data['thisCompany'] = Company::find(session()->get('companySession')[0]->id);
+
+        $user_manager = UserPreDefine::join('user_role','user_role.user_id','=','user.id')->where('id_company',session()->get('companySession')[0]->id)->whereIn('role_id',[3,5])->get();
+        $data['manager_quota'] = $data['thisCompany']->CompanyPackage()->latest('created_at')->first()->Package()->first()->manager_account - count($user_manager);
+
+        $user_staff = UserPreDefine::join('user_role','user_role.user_id','=','user.id')->where('id_company',session()->get('companySession')[0]->id)->whereIn('role_id',[4,6])->get();
+        $data['staff_quota'] = $data['thisCompany']->CompanyPackage()->latest('created_at')->first()->Package()->first()->staff_account - count($user_staff);
 
         // return $data['thisCompany']->CompanyPackage()->where('status','approve')->latest('created_at')->first();
         $data['thisUser'] = UserPreDefine::find(session()->get('userSession')[0]->id);
@@ -408,6 +415,29 @@ class CompanyController extends Controller
         return back();
     }
 
+    public function doEditUser(Request $request)
+    {
+        $response = Cloudder::upload($request->photoImage->path())->getResult();
+        $url = $response['url'];
 
+        $currData = UserPreDefine::find($request->userId);
+        $currData->first_name = $request->firstName;
+        $currData->last_name = $request->lastName;
+        $currData->email = $request->email;
+        $currData->username = $request->username;
+        $currData->job_title = $request->jobTitle;
+        $currData->old_password = $request->password;
+        $currData->photo_image = $url;
+        $currData->save();
+
+        return back();
+    }
+
+    public function getUserDataAjax($id)
+    {
+        $data = UserPreDefine::find($id);
+
+        return $data;
+    }
     
 }

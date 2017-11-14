@@ -204,28 +204,29 @@ class PageController extends Controller
         
     }
 
-    public function home()
+    public function home(Request $request)
     {
-        $data['buyLeadData'] = [];
+        
+        if($request->has('id')) $data['currUser'] = UserPreDefine::find($request->id);
+        else $data['currUser'] = UserPreDefine::find(session()->get('userSession')[0]->id);
+            
+        $data['companyUser'] = UserPreDefine::where('id_company',session()->get('companySession')[0]->id)->get();
 
-        foreach (BuyLead::all() as $key => $blData) {
-            if($blData->User()->first()->id_company == session()->get('companySession')[0]->id){
-                $data['buyLeadData'][] = $blData;
-            }
-        }
 
-        if (session()->get('userSession')[0]->role_id == 2) {
-            return view('post-buy-lead.master-user.home',$data);
-        }
-        else if (session()->get('userSession')[0]->role_id == 5) {
-            return view('search-buy-lead.sales-manager.home',$data);
-        }
-        else if (session()->get('userSession')[0]->role_id == 6) {
-            return view('search-buy-lead.sales-staff.home',$data);
-        }
-        else{
-            return view('post-buy-lead.home',$data);
-        }
+        return view('post-buy-lead.master-user.home',$data);
+
+        // if (session()->get('userSession')[0]->role_id == 2) {
+        //     return view('post-buy-lead.master-user.home',$data);
+        // }
+        // else if (session()->get('userSession')[0]->role_id == 5) {
+        //     return view('search-buy-lead.sales-manager.home',$data);
+        // }
+        // else if (session()->get('userSession')[0]->role_id == 6) {
+        //     return view('search-buy-lead.sales-staff.home',$data);
+        // }
+        // else{
+        //     return view('post-buy-lead.home',$data);
+        // }
     }
 
     public function home_login()

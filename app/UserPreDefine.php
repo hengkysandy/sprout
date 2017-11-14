@@ -20,6 +20,7 @@ class UserPreDefine extends Model
 		'new_password',
         'status',
 		'as_head',
+        'created_by',
     ];
 
     public function Company()

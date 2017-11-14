@@ -400,8 +400,10 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Edit Employee</h4>
       </div>
+      <form action="{{url('doEditUser')}}" method="post" enctype="multipart/form-data">
+        {{csrf_field()}}
+        <input type="hidden" name="userId" id="userId">
       <div class="modal-body">
-        <form action="">
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
@@ -415,59 +417,59 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label>First Name</label>
-                <input type="text" class="form-control">
+                <input type="text" name="firstName" id="firstName" class="form-control">
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label>Last Name</label>
-                <input type="text" class="form-control">
+                <input type="text" id="lastName" name="lastName" class="form-control">
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label>Email</label>
-                <input type="email" class="form-control">
+                <input type="email" name="email" id="email" class="form-control">
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label>Username</label>
-                <input type="text" class="form-control">
+                <input type="text" name="username" id="username" class="form-control">
               </div>
             </div>
             <div class="col-md-12">
               <div class="form-group">
                 <label>Job Title</label>
-                <input type="text" class="form-control">
+                <input type="text" name="jobTitle" id="jobTitle" class="form-control">
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label>Password</label>
-                <input type="password" class="form-control">
+                <input type="password" name="password" class="form-control">
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label>Confirm Password</label>
-                <input type="password" class="form-control">
+                <input type="password" name="confPass" class="form-control">
               </div>
             </div>
             <div class="col-md-12">
               <div class="form-group">
-                <img src="../../images/avatar.jpg" width="150" height="150"><br>
+                <img id="photoImage" width="150" height="150"><br>
                 <label>Upload Photo</label>
-                <input type="file">
+                <input type="file" name="photoImage">
               </div>
             </div>
           </div>
-        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+        <button type="submit" class="btn btn-primary">Save</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
@@ -501,7 +503,7 @@
     </div>
   </div>
 </div>
-
+  <script type="text/javascript" src="js/myscript/manage-employee.js"></script>
   @if(session()->get('userSession')[0]->role_id != 2)
     <script type="text/javascript">
       $("#company-profile-form :input").attr("disabled", true);

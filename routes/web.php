@@ -44,9 +44,12 @@ Route::group(['middleware' => 'checkUser'], function () {
     Route::get('doDeleteUser','CompanyController@doDeleteUser');
     
     Route::post('doRegisUser', 'CompanyController@doRegisUser');
+    Route::post('doEditUser', 'CompanyController@doEditUser');
     
     Route::get('logoutUser', 'PageController@logoutUser');
     Route::post('doExtendCompanyPackage', 'CompanyController@doExtendCompanyPackage');
+    Route::get('getUserDataAjax/{id}','CompanyController@getUserDataAjax');
+    
     // Route::get('profile', 'CompanyController@profile');
     Route::post('doRequestCompanyAddOn','CompanyController@doRequestCompanyAddOn');
 
@@ -64,6 +67,7 @@ Route::group(['middleware' => 'checkUser'], function () {
     Route::get('meeting-calendar', 'MeetingScheduleController@meetingcalendar');
     Route::get('doInsertMeeting', 'MeetingScheduleController@doInsertMeeting');
     Route::get('acceptMeeting/{id}','MeetingScheduleController@acceptMeeting');
+
 });
 
 Route::group(['middleware' => 'checkUser','checkSales'],function(){

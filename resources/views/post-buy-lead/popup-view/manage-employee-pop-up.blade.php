@@ -8,7 +8,7 @@
       <div class="modal-body">
         <a href="#addEmployee" data-toggle="modal" class="btn btn-primary">Add Employee</a>
         <br><br>
-        <h4><label class="label label-success">Manager Quota Left: not yet</label> - <label class="label label-warning">Staff Quota Left: not yet</label></h4>
+        <h4><label class="label label-success">Manager Quota Left: {{$manager_quota}}</label> - <label class="label label-warning">Staff Quota Left: {{$staff_quota}}</label></h4>
         <div class="table-responsive margin-top">
           <table class="table table-hover table-middle">
             <thead>
@@ -17,7 +17,9 @@
                 <th>Position</th>
                 <th>Name</th>
                 <th>Status</th>
+                @if(session()->get('userSession')[0]->role_id == 2)
                 <th>Head Manager</th>
+                @endif
                 <th>Action</th>
               </tr>
             </thead>
@@ -38,6 +40,7 @@
                   </label>
                   @endif
                 </td>
+                @if(session()->get('userSession')[0]->role_id == 2)
                 <td>
                   @if($value->is_head == "0")
                   <a href="{{url('doSetUserHeadStatus?id_user='.$value->id.'&status=1')}}" class="btn btn-primary btn-sm">Set as head</a>
@@ -45,8 +48,9 @@
                   <a href="{{url('doSetUserHeadStatus?id_user='.$value->id.'&status=0')}}" class="btn btn-warning btn-sm">Cancel as head</a>
                   @endif
                 </td>
+                @endif
                 <td>
-                <a href="#editEmployee" data-value="" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
+                <a href="#editEmployee" data-value="{{$value->id}}" data-toggle="modal" class="btn btn-primary btn-sm chooseEditUser">Edit</a>
                   <a href="{{url('doDeleteUser?id='.$value->id)}}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this?');">Delete</a>
                 </td>
               </tr>

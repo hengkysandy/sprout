@@ -63,7 +63,7 @@
                       <td>Not Yet Approved</td>
                     @endif
                     <td>
-                      <a href="meeting-detail?{{'id='.$value->id}}" class="detail-meeting btn btn-sm btn-default">Detail</a>
+                      <a href="{{url('meeting-detail?id='.$value->id)}}" class="detail-meeting btn btn-sm btn-default">Detail</a>
                     </td>
                   </tr>
                   @endforeach
@@ -101,7 +101,7 @@
                     <td>Rejected</td>
                     @endif
                     <td>
-                      <a href="meeting-detail?{{'id='.$value->id}}" class="detail-meeting btn btn-sm btn-default">Detail</a>
+                      <a href="{{url('meeting-detail?id='.$value->id)}}" class="detail-meeting btn btn-sm btn-default">Detail</a>
                       @if($value->status == 'created')
                       <button id="{{$value->id}}" class="btn btn-sm btn-primary btn-acc-meeting" data-toggle="modal" data-target="#acceptMeeting">Accept</button>
                       <a id="{{$value->id}}" href="#rejectMeeting btn-reject-meeting" data-toggle="modal" class="btn btn-sm btn-danger">Reject</a>

@@ -68,6 +68,7 @@
                   <div class="form-group">
                     <label>Section 1</label>
                     <select id="sectionOption1" name="section[]" class="form-control selectpicker" data-live-search="true">
+                      <option value="">Choose Section</option>
                       @foreach($sectionData as $sData)
                         <option value="{{$sData->id}}">{{$sData->name}}</option>
                       @endforeach
@@ -78,6 +79,7 @@
                   <div class="form-group">
                     <label>Section 2</label>
                     <select id="sectionOption2" name="section[]" class="form-control selectpicker" data-live-search="true">
+                      <option value="">Choose Section</option>
                       @foreach($sectionData as $sData)
                         <option value="{{$sData->id}}">{{$sData->name}}</option>
                       @endforeach
@@ -155,6 +157,7 @@
                   <div class="form-group">
                     <label>Province</label>
                     <select id="groupProvince" name="province" class="form-control selectpicker" data-live-search="true">
+                      <option value="">Choose Province</option>
                       @foreach($provinceData as $pData)
                         <option value="{{$pData->id}}">{{$pData->name}}</option>
                       @endforeach
@@ -171,7 +174,7 @@
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
                     <label>Closed Date</label>
-                    <input name="closedDate" type="date" id="Editcd" class="form-control datepicker">
+                    <input name="closedDate" type="date" id="Editcdtemp" class="form-control datepicker">
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">

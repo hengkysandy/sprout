@@ -10,7 +10,7 @@
         <div class="col-md-4 col-sm-12 col-xs-12 margin-bottom">
           <a href="#addPbl" data-toggle="modal" class="btn btn-primary btn-responsive">Post Buy Lead</a>
           <a href="#addUw" data-toggle="modal" class="btn btn-primary btn-responsive">Add Unit</a>
-          <a href="history-rfq" class="btn btn-primary btn-responsive">Buy Lead History</a>
+          <a href="{{url('history-rfq')}}" class="btn btn-primary btn-responsive">Buy Lead History</a>
         </div>
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="row">
@@ -32,10 +32,9 @@
                 <label>Filter Staff</label>
                 <select class="form-control">
                   <option value="">Select staff</option>
-                  <option value="">Sule</option>
-                  <option value="">Maman</option>
-                  <option value="">Andika</option>
-                  <option value="">Julaeha</option>
+                  @foreach($userCompany as $uc)
+                    <option value="{{$uc->username}}">{{$uc->username}}</option>
+                  @endforeach
                 </select>
               </div>
             </div>

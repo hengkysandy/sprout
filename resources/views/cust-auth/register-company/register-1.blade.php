@@ -2,7 +2,7 @@
 
 @section('content')
   @include('layouts.user.navbar-register')
-  <form action="regis_2" method="post" enctype="multipart/form-data">
+  <form action="{{url('regis_2')}}" method="post" enctype="multipart/form-data">
   {{csrf_field()}}
   <div class="container-fluid">
     <h1 class="main-title no-margin-top text-uppercase">

@@ -206,7 +206,7 @@ class PageController extends Controller
                             ->where('username',$request->username)
                             ->where('old_password',$request->password)
                             ->where('id_company',session()->get('companySession')[0]->id)
-                            ->select('user.*','role.id as role_id')
+                            ->select('user.*','role.id as role_id','role.name as role_name')
                             ->get();
 
         if(count($login) != 0){

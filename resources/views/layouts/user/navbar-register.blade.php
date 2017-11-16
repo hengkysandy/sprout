@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="register">
-      <a href="regis_1" class="btn btn-xl btn-primary">Register</a>
+      <a href="{{url('regis_1')}}" class="btn btn-xl btn-primary">Register</a>
     </div>
   </div>
 </nav>

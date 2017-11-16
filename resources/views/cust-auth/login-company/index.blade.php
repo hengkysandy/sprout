@@ -24,7 +24,7 @@
 
       <div class="col-md-3 col-sm-12 col-xs-12 long-margin-top">
         <div class="row">
-          <form action="doLoginCompany" method="post">
+          <form action="{{url('doLoginCompany')}}" method="post">
           {{csrf_field()}}
             <div class="col-md-12 col-xs-12">
               <div class="form-group">

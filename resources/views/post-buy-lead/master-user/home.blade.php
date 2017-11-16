@@ -77,7 +77,6 @@
           </div>
           @endif
           @if(in_array($currUser->UserRole()->first()->role_id,[2,5,6]))
-          
           <div role="tabpanel" class="tab-pane bg-white border-tab-pane" id="SM">
             <div class="box box-primary margin-top">
               <div class="box-header with-border">
@@ -180,8 +179,10 @@
       </div>
     </div>
   </div>
-
-  
-
+  @if(in_array(session()->get('userSession')[0]->role_id,[5,6]))
+  <script type="text/javascript">
+    $( ".tab-content > .tab-pane" ).show();
+  </script>
+  @endif
   @include('layouts.user.mobile-menu')
 @endsection

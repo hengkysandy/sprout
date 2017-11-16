@@ -59,3 +59,5 @@
     </div>
   </div>
 </div>
+<meta name="fullpath" content="{{ URL::to('') }}">
+<script type="text/javascript" src="{{asset('js/myscript/request-add-on.js')}}"></script>

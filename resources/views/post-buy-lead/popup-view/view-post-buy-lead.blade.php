@@ -4,6 +4,7 @@
                 <tr>
                   <th>No</th>
                   <th>Item</th>
+                  <th>User</th>
                   <th>Amount</th>
                   <th>Total Price</th>
                   <th>Shipping Term</th>
@@ -12,10 +13,11 @@
                 </tr>
               </thead>
               <tbody id="Tablepbl-tbody">
-                @foreach($buyLeadData as $blKey => $blData)
+                @foreach($postBuyLead as $blKey => $blData)
                 <tr>
                   <td>{{++$blKey}}</td>
                   <td>{{$blData->item}}</td>
+                  <td>{{$blData->User->username}}</td>
                   <td>{{$blData->amount}}</td>
                   <td>Rp {{number_format($blData->total_price)}}</td>
                   <td>{{$blData->ShippingTerm()->first()->name}}</td>
@@ -27,9 +29,9 @@
                     <span style="display: none;"></span>
                   </td>
                   <td>
-                    <a href="item/{{$blData->id}}" class="btn btn-default btn-sm">Detail</a>
+                    <a href="{{url('item/'.$blData->id)}}" class="btn btn-default btn-sm">Detail</a>
 
-                    @if(session()->get('userSession')[0]->role_id == 3)
+                    @if(in_array(session()->get('userSession')[0]->role_id, [2,3]))
                     <button value="{{$blData->id}}|2" data-target="#confirmRelease" class="btn btn-default btn-sm chooseConfirmation" data-toggle="modal">Release</button>
                     <br><br>
                     @endif
@@ -45,7 +47,7 @@
                       <span style="display: none;">Done</span>
                     </td>
                     <td>
-                      <a href="item/{{$blData->id}}" class="btn btn-default btn-sm">Detail</a>
+                      <a href="{{url('item/'.$blData->id)}}" class="btn btn-default btn-sm">Detail</a>
                       <a href="#" class="btn btn-default btn-sm" disabled="disabled">Approved</a>
                     </td>
                   @else
@@ -56,7 +58,7 @@
                       <span style="display: none;">Done</span>
                     </td>
                     <td>
-                      <a href="item/{{$blData->id}}" class="btn btn-default btn-sm">Detail</a>
+                      <a href="{{url('item/'.$blData->id)}}" class="btn btn-default btn-sm">Detail</a>
                       <a href="#" class="btn btn-default btn-sm" disabled="disabled">Approved</a>
                     </td>
                   @endif

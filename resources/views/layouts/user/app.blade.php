@@ -24,6 +24,7 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
   <meta name="fullpathAssignCompany" content="{{ URL::to('doAssignCompanyBuyLead') }}">
+  <meta name="fullpath" content="{{ URL::to('') }}">
   <meta name="fullpathRemoveAssign" content="{{ URL::to('doRemoveAssignedCompany') }}">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>

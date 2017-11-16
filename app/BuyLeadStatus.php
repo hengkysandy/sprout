@@ -18,4 +18,9 @@ class BuyLeadStatus extends Model
     {
     	return $this->belongsTo(Status::class,'id_status','id');
     }
+
+    public function BuyLead()
+    {
+        return $this->belongsTo(BuyLead::class,'id_buy_lead','id');
+    }
 }

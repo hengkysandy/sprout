@@ -194,6 +194,9 @@ $(document).ready(function(){
   $('#searchStaff').on('keyup', function(){
     Tablepbl.column(2).search(this.value).draw();
   });
+  $('#filterStaff').on('change', function(){
+    Tablepbl.column(2).search(this.value).draw();
+  });
   // Table List Quotation
   listQuote = $('#listQuote').DataTable({
     searching: true,

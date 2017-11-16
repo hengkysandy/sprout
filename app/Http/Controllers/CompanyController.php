@@ -296,16 +296,32 @@ class CompanyController extends Controller
     }
 
     public function profile() {
+        $companyAddOn = CompanyAddOn::whereDate('expired_date','>=',Carbon::now())
+                ->where('status','confirmed')
+                ->latest('created_at')
+                ->first();
+
+        $addOnManagerQuota = 0;
+        $addOnStaffQuota = 0;
+        
+        if($companyAddOn){
+            if($companyAddOn->add_on_id == 1){
+                $addOnManagerQuota = $companyAddOn->quantity * $companyAddOn->AddOn->quantity;
+            }else if($companyAddOn->add_on_id == 2){
+                $addOnStaffQuota = $companyAddOn->quantity * $companyAddOn->AddOn->quantity;
+            }
+        }
+        
         $data['packageData'] = Package::all();
         $data['addOnData'] = AddOn::all();
         $data['businessEntity'] = ['PT','CV','PD'];
         $data['thisCompany'] = Company::find(session()->get('companySession')[0]->id);
 
         $user_manager = UserPreDefine::join('user_role','user_role.user_id','=','user.id')->where('id_company',session()->get('companySession')[0]->id)->whereIn('role_id',[3,5])->get();
-        $data['manager_quota'] = $data['thisCompany']->CompanyPackage()->latest('created_at')->first()->Package()->first()->manager_account - count($user_manager);
+        $data['manager_quota'] = $data['thisCompany']->CompanyPackage()->latest('created_at')->first()->Package()->first()->manager_account + $addOnManagerQuota - count($user_manager);
 
         $user_staff = UserPreDefine::join('user_role','user_role.user_id','=','user.id')->where('id_company',session()->get('companySession')[0]->id)->whereIn('role_id',[4,6])->get();
-        $data['staff_quota'] = $data['thisCompany']->CompanyPackage()->latest('created_at')->first()->Package()->first()->staff_account - count($user_staff);
+        $data['staff_quota'] = $data['thisCompany']->CompanyPackage()->latest('created_at')->first()->Package()->first()->staff_account + $addOnStaffQuota - count($user_staff);
 
         // return $data['thisCompany']->CompanyPackage()->where('status','approve')->latest('created_at')->first();
         $data['thisUser'] = UserPreDefine::find(session()->get('userSession')[0]->id);
@@ -369,6 +385,11 @@ class CompanyController extends Controller
         ]);
 
         return back();
+    }
+
+    public function getAddOnPriceAjax($id)
+    {
+        return AddOn::find($id)->price;
     }
 
     public function doSetUserHeadStatus(Request $request)

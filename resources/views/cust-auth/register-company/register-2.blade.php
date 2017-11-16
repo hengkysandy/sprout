@@ -10,7 +10,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-8 col-sm-12 col-xs-12">
-          <form class="form-horizontal" action="doRegis" method="post" enctype="multipart/form-data">
+          <form class="form-horizontal" action="{{url('doRegis')}}" method="post" enctype="multipart/form-data">
             {{csrf_field()}}
             <div class="form-group">
               <div class="row">

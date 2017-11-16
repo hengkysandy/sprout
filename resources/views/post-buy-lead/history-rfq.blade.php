@@ -19,7 +19,7 @@
         </div>
         <div class="col-md-9 col-sm-12 col-xs-12">
           <div class="table-responsive">
-            <table id="historyRfq" class="table table-bordered table-middle table-hover">
+            <table id="Tablepbl" class="table table-middle table-bordered table-hover">
               <thead class="bg-white">
                 <tr>
                   <th>No</th>
@@ -31,13 +31,14 @@
                   <th>Action</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="Tablepbl-tbody">
+                @foreach($buyLeadDataDone as $blKey => $blData)
                 <tr>
-                  <td>1</td>
-                  <td>Biji Kedelai</td>
-                  <td>10 Ton</td>
-                  <td>Rp 45.000.000</td>
-                  <td>EXW</td>
+                  <td>{{++$blKey}}</td>
+                  <td>{{$blData->item}}</td>
+                  <td>{{$blData->amount}}</td>
+                  <td>Rp {{number_format($blData->total_price)}}</td>
+                  <td>{{$blData->ShippingTerm()->first()->name}}</td>
                   <td>
                     <span class="btn btn-success btn-sm">
                       <i class="fa fa-check"></i>
@@ -47,183 +48,16 @@
                     <a href="detail-history-quotation.html" class="btn btn-default btn-sm">Detail</a>
                   </td>
                 </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Pupuk Organik</td>
-                  <td>7 Ton</td>
-                  <td>Rp 35.000.000</td>
-                  <td>FCA</td>
-                  <td>
-                    <span class="btn btn-success btn-sm">
-                      <i class="fa fa-check"></i>
-                    </span>
-                  </td>
-                  <td>
-                    <a href="detail-history-quotation.html" class="btn btn-default btn-sm">Detail</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Bibit Padi</td>
-                  <td>13 Ton</td>
-                  <td>Rp 88.000.000</td>
-                  <td>FAS</td>
-                  <td>
-                    <span class="btn btn-success btn-sm">
-                      <i class="fa fa-check"></i>
-                    </span>
-                  </td>
-                  <td>
-                    <a href="detail-history-quotation.html" class="btn btn-default btn-sm">Detail</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>Pupuk Kandang</td>
-                  <td>6.5 Ton</td>
-                  <td>Rp 35.000.000</td>
-                  <td>FOB</td>
-                  <td>
-                    <span class="btn btn-success btn-sm">
-                      <i class="fa fa-check"></i>
-                    </span>
-                  </td>
-                  <td>
-                    <a href="detail-history-quotation.html" class="btn btn-default btn-sm">Detail</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>Bibit Teh</td>
-                  <td>10 Ton</td>
-                  <td>Rp 100.000.000</td>
-                  <td>CFR</td>
-                  <td>
-                    <span class="btn btn-success btn-sm">
-                      <i class="fa fa-check"></i>
-                    </span>
-                  </td>
-                  <td>
-                    <a href="detail-history-quotation.html" class="btn btn-default btn-sm">Detail</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>6</td>
-                  <td>Beras Kualitas Terbaik</td>
-                  <td>10 Ton</td>
-                  <td>Rp 500.000.000</td>
-                  <td>CIF</td>
-                  <td>
-                    <span class="btn btn-success btn-sm">
-                      <i class="fa fa-check"></i>
-                    </span>
-                  </td>
-                  <td>
-                    <a href="detail-history-quotation.html" class="btn btn-default btn-sm">Detail</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>7</td>
-                  <td>Plate Material</td>
-                  <td>2 Ton</td>
-                  <td>Rp 20.000.000</td>
-                  <td>CPT</td>
-                  <td>
-                    <span class="btn btn-success btn-sm">
-                      <i class="fa fa-check"></i>
-                    </span>
-                  </td>
-                  <td>
-                    <a href="detail-history-quotation.html" class="btn btn-default btn-sm">Detail</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>8</td>
-                  <td>Pupuk Anorganik</td>
-                  <td>10 Ton</td>
-                  <td>Rp 31.000.000</td>
-                  <td>CIP</td>
-                  <td>
-                    <span class="btn btn-success btn-sm">
-                      <i class="fa fa-check"></i>
-                    </span>
-                  </td>
-                  <td>
-                    <a href="detail-history-quotation.html" class="btn btn-default btn-sm">Detail</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>9</td>
-                  <td>Biji Kelapa</td>
-                  <td>10 Ton</td>
-                  <td>Rp 26.000.000</td>
-                  <td>DAF</td>
-                  <td>
-                    <span class="btn btn-success btn-sm">
-                      <i class="fa fa-check"></i>
-                    </span>
-                  </td>
-                  <td>
-                    <a href="detail-history-quotation.html" class="btn btn-default btn-sm">Detail</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>10</td>
-                  <td>Pupuk High Class</td>
-                  <td>10 Ton</td>
-                  <td>Rp 38.000.000</td>
-                  <td>DES</td>
-                  <td>
-                    <span class="btn btn-success btn-sm">
-                      <i class="fa fa-check"></i>
-                    </span>
-                  </td>
-                  <td>
-                    <a href="detail-history-quotation.html" class="btn btn-default btn-sm">Detail</a>
-                  </td>
-                </tr>
+                @endforeach
               </tbody>
             </table>
           </div>
         </div>
-        <div class="col-md-3 col-sm-12 col-xs-12 hide-on-med-and-down">
-          <ul class="no-ul-style menu-wrapper">
-            <li>
-              <a href="home.html" class="btn btn-orange btn-lg padding-transition no-border-radius">
-                <i class="pull-left fa fa-home padding-top-2px padding-right-8px"></i> <span>Home</span>
-              </a>
-            </li>
-            <li>
-              <a href="post-buy-lead.html" class="btn btn-orange btn-lg active-orange padding-transition no-border-radius">
-                <i class="pull-left fa fa-pencil-square padding-top-2px padding-right-8px"></i> <span>Post Buy Lead</span>
-              </a>
-            </li>
-            <li>
-              <a href="company-database.html" class="btn btn-orange btn-lg padding-transition no-border-radius">
-                <i class="pull-left fa fa-building padding-top-2px padding-right-8px"></i> <span>Company Database</span>
-              </a>
-            </li>
-            <li>
-              <a href="meeting-schedule.html" class="btn btn-orange btn-lg padding-transition no-border-radius">
-                <i class="pull-left fa fa-calendar padding-top-2px padding-right-8px"></i> <span>Meeting Schedule</span>
-              </a>
-            </li>
-            <li>
-              <a href="profile.html" class="btn btn-orange btn-lg padding-transition no-border-radius">
-                <i class="pull-left fa fa-gear padding-top-2px padding-right-8px"></i> <span>Profile</span>
-              </a>
-            </li>
-            <li>
-              <a href="../home-login.html" class="btn btn-orange btn-lg padding-transition no-border-radius">
-                <i class="pull-left fa fa-power-off padding-top-2px padding-right-8px"></i> <span>Logout</span>
-              </a>
-            </li>
-          </ul>
-        </div>
+        @include('post-buy-lead.popup-view.side-nav-buy-lead')
       </div>
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12 margin-top">
-          <a class="btn btn-warning btn-sm" href="post-buy-lead.html"><i class="fa fa-arrow-left"></i> Back</a>
+          <a class="btn btn-warning btn-sm" href="{{url('post-buy-lead')}}"><i class="fa fa-arrow-left"></i> Back</a>
         </div>
       </div>
     </div>
@@ -579,22 +413,22 @@
 
     <div id="mySidenav" class="sidenav hide-on-large-only">
       <div class="menu-content">
-        <a href="home.html">
+        <a href="{{url('')}}home">
           <i class="fa fa-home"></i> Home
         </a>
-        <a href="post-buy-lead.html">
+        <a href="{{url('post-buy-lead')}}">
           <i class="fa fa-pencil-square"></i> Post Buy Lead
         </a>
-        <a href="company-database.html">
+        <a href="{{url('company-database')}}">
           <i class="fa fa-building"></i> Company Database
         </a>
-        <a href="meeting-schedule.html">
+        <a href="{{url('meeting-schedule')}}">
           <i class="fa fa-calendar"></i> Meeting Schedule
         </a>
-        <a href="profile.html">
+        <a href="{{url('profile')}}">
           <i class="fa fa-gear"></i> Profile
         </a>
-        <a href="../home-login.html">
+        <a href="{{url('logoutUser')}}">
           <i class="fa fa-power-off"></i> Logout
         </a>
         <a href="javascript:void(0)" id="nav-btn-close" onclick="closeNav()"><i class="fa fa-close"></i></a>

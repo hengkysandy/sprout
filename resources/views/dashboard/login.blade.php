@@ -6,7 +6,7 @@
       <img src="images/logo.png" alt="Sprout" class="img-responsive">
       <div class="panel panel-default panel-hover">
         <div class="panel-body">
-          <form action="doLoginAdmin" method="post">
+          <form action="{{url('doLoginAdmin')}}" method="post">
           {{csrf_field()}}
             <div class="form-group">
               <label>Username</label>

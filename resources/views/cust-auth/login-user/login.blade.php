@@ -16,7 +16,7 @@
 
     <br>
 
-    <form action="doLoginUser" method="POST">
+    <form action="{{url('doLoginUser')}}" method="POST">
     {{csrf_field()}}
       <div class="row">
 

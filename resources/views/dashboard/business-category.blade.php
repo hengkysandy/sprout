@@ -386,7 +386,7 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title">Add Section</h4>
           </div>
-          <form action="doInsertSection" method="post">
+          <form action="{{url('doInsertSection')}}" method="post">
           {{csrf_field()}}
           <div class="modal-body">
               <div class="row">
@@ -475,7 +475,7 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title">Add Division</h4>
           </div>
-          <form action="doInsertDivision" method="post">
+          <form action="{{url('doInsertDivision')}}" method="post">
           {{csrf_field()}}
           <div class="modal-body">
               <div class="row">
@@ -762,7 +762,7 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title">Add Group</h4>
           </div>
-          <form action="doInsertGroup" method="post">
+          <form action="{{url('doInsertGroup')}}" method="post">
             {{csrf_field()}}
           <div class="modal-body">
               <div class="row">

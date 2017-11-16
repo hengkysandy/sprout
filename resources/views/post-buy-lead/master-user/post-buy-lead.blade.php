@@ -5,6 +5,7 @@
   
   <div id="main" class="container-fluid">
     <div class="row">
+      @if(session()->get('userSession')[0]->role_id == 2)
       <div class="col-md-9 col-sm-12 col-xs-12">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs nav-justified" role="tablist">
@@ -12,7 +13,9 @@
           <li role="presentation"><a href="#buy_lead_list" aria-controls="buy_lead_list" role="tab" data-toggle="tab">Buy Lead List</a></li>
         </ul>
       </div>
+      @endif
       <div class="tab-content">
+        @if(in_array(session()->get('userSession')[0]->role_id,[2,3,4]))
         <div role="tabpanel" class="tab-pane active" id="post_buy_lead">
           <div class="col-md-12 col-sm-12 col-xs-12">
             <h1 class="main-title no-margin-top">Post Buy Lead</h1>
@@ -20,7 +23,7 @@
           <div class="col-md-4 col-sm-12 col-xs-12 margin-bottom">
             <a href="#addPbl" data-toggle="modal" class="btn btn-primary btn-responsive">Post Buy Lead</a>
             <a href="#addUw" data-toggle="modal" class="btn btn-primary btn-responsive">Add Unit</a>
-            <a href="history-rfq.html" class="btn btn-primary btn-responsive">Buy Lead History</a>
+            <a href="{{url('history-rfq')}}" class="btn btn-primary btn-responsive">Buy Lead History</a>
           </div>
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="row">
@@ -39,23 +42,23 @@
               <div class="col-md-3">
                 <div class="form-group">
                   <label>Filter User</label>
-                  <select class="form-control">
+                  <select id="filterStaff" class="form-control">
                     <option value="">Select staff</option>
-                    <option value="">Sule</option>
-                    <option value="">Maman</option>
-                    <option value="">Andika</option>
-                    <option value="">Julaeha</option>
+                    @foreach($userCompany as $uc)
+                      <option value="{{$uc->username}}">{{$uc->username}}</option>
+                    @endforeach
                   </select>
                 </div>
               </div>
             </div>
           </div>
           <div class="col-md-9 col-sm-12 col-xs-12">
-            @include('post-buy-lead.popup-view.view-buy-lead')
+            @include('post-buy-lead.popup-view.view-post-buy-lead')
             @include('post-buy-lead.popup-view.view-unit')
           </div>
         </div>
-
+        @endif
+        @if(in_array(session()->get('userSession')[0]->role_id,[2,5,6]))
         <div role="tabpanel" class="tab-pane" id="buy_lead_list">
           <div class="col-md-12 col-sm-12 col-xs-12">
             <h1 class="main-title no-margin-top">Buy Lead List</h1>
@@ -65,280 +68,7 @@
             <a href="history-rfq.html" class="btn btn-primary margin-bottom">Buy Lead History</a>
           </div>
 
-          <div class="col-md-9 col-sm-12 col-xs-12">
-            <div class="table-responsive">
-              <table id="bll" class="table table-middle table-bordered table-hover">
-                <thead class="bg-white">
-                  <tr>
-                    <th>Buy Lead ID</th>
-                    <th>Buyer Name</th>
-                    <th>Item</th>
-                    <th>Delivery Time</th>
-                    <th>Shipping Term</th>
-                    <th>Total Price</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Jak-00101</td>
-                    <td>PT Total Indonesia</td>
-                    <td>Biji Kedelai</td>
-                    <td>30 Days</td>
-                    <td>DDP</td>
-                    <td>Rp 45.000.000</td>
-                    <td>
-                      <span class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Success Job">
-                        <i class="fa fa-handshake-o"></i>
-                      </span>
-                      <span style="display: none;">Success Job</span>
-                    </td>
-                    <td>
-                      <a href="sales-item.html" class="btn btn-sm btn-default">Detail</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Jak-00102</td>
-                    <td>PT Salam Sehat Sejahtera</td>
-                    <td>Pupuk Organik</td>
-                    <td>30 Days</td>
-                    <td>DES</td>
-                    <td>Rp 35.000.000</td>
-                    <td>
-                      <span class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Approved">
-                        <i class="fa fa-check"></i>
-                      </span>
-                      <span style="display: none;">Approved</span>
-                    </td>
-                    <td>
-                      <a href="sales-item.html" class="btn btn-sm btn-default">Detail</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Jak-00122</td>
-                    <td>PT Panca Karya</td>
-                    <td>Bibit Padi</td>
-                    <td>10 Days</td>
-                    <td>FAS</td>
-                    <td>Rp 88.000.000</td>
-                    <td>
-                      <span class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Waiting approve">
-                        <i class="fa fa-question"></i>
-                      </span>
-                      <span style="display: none;">Waiting approve</span>
-                    </td>
-                    <td>
-                      <a href="sales-item.html" class="btn btn-sm btn-default">Detail</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Jak-00133</td>
-                    <td>PT Kebun Makmur</td>
-                    <td>Pupuk Kandang</td>
-                    <td>20 Days</td>
-                    <td>CIF</td>
-                    <td>Rp 35.000.000</td>
-                    <td>
-                      <span class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Waiting approve">
-                        <i class="fa fa-question"></i>
-                      </span>
-                      <span style="display: none;">Waiting approve</span>
-                    </td>
-                    <td>
-                      <a href="sales-item.html" class="btn btn-sm btn-default">Detail</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Jak-00144</td>
-                    <td>PT Sayur Hijau</td>
-                    <td>Bibit Teh</td>
-                    <td>15 Days</td>
-                    <td>CPT</td>
-                    <td>Rp 100.000.000</td>
-                    <td>
-                      <span class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="Pending">
-                        <i class="fa fa-clock-o"></i>
-                      </span>
-                      <span style="display: none;">Pending</span>
-                    </td>
-                    <td>
-                      <a href="sales-item.html" class="btn btn-sm btn-default">Detail</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Jak-00155</td>
-                    <td>PT Diffusion</td>
-                    <td>Beras Terbaik</td>
-                    <td>20 Days</td>
-                    <td>CFR</td>
-                    <td>Rp 500.000.000</td>
-                    <td>
-                      <span class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="Pending">
-                        <i class="fa fa-clock-o"></i>
-                      </span>
-                      <span style="display: none;">Pending</span>
-                    </td>
-                    <td>
-                      <a href="sales-item.html" class="btn btn-sm btn-default">Detail</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Jak-00155</td>
-                    <td>PT Rakyat Sentosa</td>
-                    <td>Plate Material</td>
-                    <td>20 Days</td>
-                    <td>FOB</td>
-                    <td>Rp 20.000.000</td>
-                    <td>
-                      <span class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="Pending">
-                        <i class="fa fa-clock-o"></i>
-                      </span>
-                      <span style="display: none;">Pending</span>
-                    </td>
-                    <td>
-                      <a href="sales-item.html" class="btn btn-sm btn-default">Detail</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Jak-00155</td>
-                    <td>PT Mari Berbenah</td>
-                    <td>Pupuk Anorganik</td>
-                    <td>20 Days</td>
-                    <td>DES</td>
-                    <td>Rp 31.000.000</td>
-                    <td>
-                      <span class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Already taken">
-                        <i class="fa fa-times"></i>
-                      </span>
-                      <span style="display: none;">Already taken</span>
-                    </td>
-                    <td>
-                      <a href="sales-item.html" class="btn btn-sm btn-default">Detail</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Jak-00155</td>
-                    <td>PT Rakyat Sentosa</td>
-                    <td>Biji Kelapa</td>
-                    <td>20 Days</td>
-                    <td>DDU</td>
-                    <td>Rp 26.000.000</td>
-                    <td>
-                      <span class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Already taken">
-                        <i class="fa fa-times"></i>
-                      </span>
-                      <span style="display: none;">Already taken</span>
-                    </td>
-                    <td>
-                      <a href="sales-item.html" class="btn btn-sm btn-default">Detail</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Jak-00155</td>
-                    <td>PT Makmur Sentosa</td>
-                    <td>Pupuk Kandang</td>
-                    <td>20 Days</td>
-                    <td>FCA</td>
-                    <td>Rp 38.000.000</td>
-                    <td>
-                      <span class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Already taken">
-                        <i class="fa fa-times"></i>
-                      </span>
-                      <span style="display: none;">Already taken</span>
-                    </td>
-                    <td>
-                      <a href="sales-item.html" class="btn btn-sm btn-default">Detail</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Jak-00155</td>
-                    <td>PT Cahaya Makmur</td>
-                    <td>Biji Kedelai</td>
-                    <td>20 Days</td>
-                    <td>DDP</td>
-                    <td>Rp 38.000.000</td>
-                    <td>
-                      <span class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Already taken">
-                        <i class="fa fa-times"></i>
-                      </span>
-                      <span style="display: none;">Already taken</span>
-                    </td>
-                    <td>
-                      <a href="sales-item.html" class="btn btn-sm btn-default">Detail</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Jak-00155</td>
-                    <td>PT Rakyat Sentosa</td>
-                    <td>Pupuk Organik</td>
-                    <td>20 Days</td>
-                    <td>DES</td>
-                    <td>Rp 45.000.000</td>
-                    <td>
-                      <span class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Already taken">
-                        <i class="fa fa-times"></i>
-                      </span>
-                      <span style="display: none;">Already taken</span>
-                    </td>
-                    <td>
-                      <a href="sales-item.html" class="btn btn-sm btn-default">Detail</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Jak-00155</td>
-                    <td>PT Suka Makmur</td>
-                    <td>Bibit Padi</td>
-                    <td>20 Days</td>
-                    <td>FAS</td>
-                    <td>Rp 88.000.000</td>
-                    <td>
-                      <span class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Already taken">
-                        <i class="fa fa-times"></i>
-                      </span>
-                      <span style="display: none;">Already taken</span>
-                    </td>
-                    <td>
-                      <a href="sales-item.html" class="btn btn-sm btn-default">Detail</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Jak-00155</td>
-                    <td>PT Jaya Abadi</td>
-                    <td>Bibit Teh</td>
-                    <td>20 Days</td>
-                    <td>CIF</td>
-                    <td>Rp 20.000.000</td>
-                    <td>
-                      <span class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Already taken">
-                        <i class="fa fa-times"></i>
-                      </span>
-                      <span style="display: none;">Already taken</span>
-                    </td>
-                    <td>
-                      <a href="sales-item.html" data-toggle="modal" class="btn btn-sm btn-default">Detail</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Jak-00155</td>
-                    <td>PT Sawit Mekar</td>
-                    <td>Biji Kelapa</td>
-                    <td>20 Days</td>
-                    <td>CPT</td>
-                    <td>Rp 31.000.000</td>
-                    <td>
-                      <span class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Already taken">
-                        <i class="fa fa-times"></i>
-                      </span>
-                      <span style="display: none;">Already taken</span>
-                    </td>
-                    <td>
-                      <a href="sales-item.html" class="btn btn-sm btn-default">Detail</a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+          @include('post-buy-lead.popup-view.view-buy-lead-list')
             <div class="row">
               <div class="col-md-8 col-sm-8 col-xs-12">
                 <div class="row">
@@ -387,6 +117,7 @@
             </div>
           </div>
         </div>
+        @endif
       </div>
 
       @include('post-buy-lead.popup-view.side-nav-buy-lead')
@@ -771,39 +502,9 @@
     </div>
   </div>
 
-  <!-- Add Unit Wegith -->
-  <div class="modal fade" id="addUw" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-sm" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Add Unit</h4>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="form-group">
-                  <label>Unit</label>
-                  <input type="text" class="form-control">
-                </div>
-              </div>
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="form-group">
-                  <label>Description</label>
-                  <textarea rows="6" class="form-control"></textarea>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary add-uw" data-dismiss="modal">Add</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  @include('post-buy-lead.popup-view.confirmation-pop-up')
+
+  @include('post-buy-lead.popup-view.add-unit-pop-up')
 
   <!-- Edit Unit Wegith -->
   <div class="modal fade" id="editUw" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -1123,5 +824,10 @@
   <script src="{{ asset('js/jquery.min.js') }}"></script>
   <script type="text/javascript" src="js/myscript/unit.js"></script>
   <script type="text/javascript" src="js/myscript/post-buy-lead.js"></script>
+  @if(in_array(session()->get('userSession')[0]->role_id,[5,6]))
+  <script type="text/javascript">
+    $( ".tab-content > .tab-pane" ).show();
+  </script>
+  @endif
   @include('layouts.user.mobile-menu')
 @endsection

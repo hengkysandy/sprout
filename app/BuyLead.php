@@ -70,5 +70,10 @@ class BuyLead extends Model
         return $this->hasMany(BuyLeadBusinessCategory::class,'buy_lead_id','id');
     }
 
+    public function Quotation()
+    {
+        return $this->hasMany(Quotation::class,'id_buy_lead','id');
+    }
+
     
 }

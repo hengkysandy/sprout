@@ -174,6 +174,25 @@ class MeetingScheduleController extends Controller
         }
     }
 
+    public function rejectMeeting(Request $request, $id)
+    {
+        $meeting_type = MeetingSchedule::find($id)->meeting_type;
+
+        if($meeting_type == 1) // External
+        {
+            $currentCompanyId = session()->get('companySession')[0]->id;
+            companymeetingschedule::where('id_meeting_schedule', $id)->where('id_company_assign', $currentCompanyId)->update([
+                'status' => 'rejected',
+            ]);
+        }elseif($meeting_type == 0)
+        {
+            $currentUserId = session()->get('userSession')[0]->id;
+            UserMeetingSchedule::where('id_meeting_schedule', $id)->where('id_user_assigned', $currentUserId)->update([
+                'status' => 'rejected',
+            ]);
+        }
+    }
+
     //meeting detail 
     public function meetingdetail(Request $request)
     {

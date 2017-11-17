@@ -70,6 +70,8 @@ Route::group(['middleware' => 'checkUser'], function () {
     Route::get('meeting-calendar', 'MeetingScheduleController@meetingcalendar');
     Route::get('doInsertMeeting', 'MeetingScheduleController@doInsertMeeting');
     Route::get('acceptMeeting/{id}','MeetingScheduleController@acceptMeeting');
+    Route::get('rejectMeeting/{id}','MeetingScheduleController@rejectMeeting');
+
 
 });
 

@@ -104,7 +104,7 @@
                       <a href="meeting-detail?{{'id='.$value->id}}" class="detail-meeting btn btn-sm btn-default">Detail</a>
                       @if($value->status == 'created')
                       <button id="{{$value->id}}" class="btn btn-sm btn-primary btn-acc-meeting" data-toggle="modal" data-target="#acceptMeeting">Accept</button>
-                      <a id="{{$value->id}}" href="#rejectMeeting btn-reject-meeting" data-toggle="modal" class="btn btn-sm btn-danger">Reject</a>
+                      <button id="{{$value->id}}" class="btn btn-sm btn-danger btn-rej-meeting" data-toggle="modal" data-target="#rejectMeeting" >Reject</button>
                       @endif
                     </td>
                   </tr>
@@ -293,7 +293,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Reject</button>
+        <button id="rej-confirm" type="button" class="btn btn-danger rej-meeting" data-dismiss="modal">Reject</button>
       </div>
     </div>
   </div>
@@ -410,7 +410,25 @@
       $(this).find('#acc-confirm').attr('url','acceptMeeting/'+id);
     });
 
+    $('#rejectMeeting').on('show.bs.modal', function (e) {
+      var id = e.relatedTarget.id;
+      $(this).find('#rej-confirm').attr('url','rejectMeeting/'+id);
+    });
+
     $('#acc-confirm').on('click', function(){
+      var url = $(this).attr('url');
+      $.ajax({
+        type:"GET",
+        url:url,
+        success:function(response){
+          setTimeout(function(){// wait for 5 secs(2)
+            location.reload(); // then reload the page.(3)
+          }, 5000); 
+        }
+      });
+    })
+
+    $('#rej-confirm').on('click', function(){
       var url = $(this).attr('url');
       $.ajax({
         type:"GET",
@@ -473,11 +491,13 @@
           $('.append-send-to-user').hide();
           $('.btn-add-send-to-user').hide();
           $('.btn-add-send-to-company').show();
+          $('#recipient-div').show();
       }else if(type==1){
           $('.append-send-to-company').hide();
           $('.append-send-to-user').show();
           $('.btn-add-send-to-user').show();
           $('.btn-add-send-to-company').hide();
+          $('#recipient-div').hide();
       }else{
           $('.append-send-to-company').hide();
           $('.append-send-to-user').hide();

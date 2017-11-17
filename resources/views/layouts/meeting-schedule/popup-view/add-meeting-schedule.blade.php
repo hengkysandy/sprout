@@ -28,7 +28,7 @@
                 </div>
               </div>
               @if($roleid == 3 || $roleid == 5)
-              <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="col-md-6 col-sm-12 col-xs-12" id="recipient-div">
                 <div class="form-group">
                   <label>Receipent Role</label>
                   <select class="form-control" style="display:block !important" name="recipient" data-live-search="true">

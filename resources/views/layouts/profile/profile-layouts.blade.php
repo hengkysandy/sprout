@@ -26,19 +26,15 @@
 					<div class="container-fluid padding">
 						<div class="">
 							<div class="container-fluid">
-								<form class="form-horizontal margin-top">
+								<form method="post" action="{{url('doEditUser')}}" class="form-horizontal margin-top">
+									{{csrf_field()}}
+									<input type="hidden" value="{{$thisUser->id}}" name="userId">
 									<div class="row">
 										<div class="form-group">
 											<label class="col-md-2 col-sm-12 col-xs-12 control-label">User Type <small class="text-danger"><strong>(required)</strong></small></label>
 											<div class="col-md-4 col-sm-12 col-xs-12">
-												<select class="form-control">
-													<option value="">Choose user type</option>
-													<option value="master_procurement_manager">Master Procurement Manager</option>
-													<option value="master_sales_manager">Master Sales Manager</option>
-													<option value="procurement_manager" selected="">Procurement Manager</option>
-													<option value="procurement_staff">Procurement Staff</option>
-													<option value="sales_manager">Sales Manager</option>
-													<option value="sales_staff">Sales Staff</option>
+												<select class="form-control" disabled="">
+													<option value="{{$thisUser->UserRole->Role->name}}">{{$thisUser->UserRole->Role->name}}</option>
 												</select>
 											</div>
 										</div>
@@ -46,35 +42,35 @@
 										<div class="form-group">
 											<label class="col-md-2 col-sm-12 col-xs-12 control-label">Email <small class="text-danger"><strong>(required)</strong></small></label>
 											<div class="col-md-6 col-sm-12 col-xs-12">
-												<input type="text" class="form-control" placeholder="Email" value="{{$thisUser->email}}">
+												<input name="email" type="text" class="form-control" placeholder="Email" value="{{$thisUser->email}}">
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label class="col-md-2 col-sm-12 col-xs-12 control-label">First Name <small class="text-danger"><strong>(required)</strong></small></label>
 											<div class="col-md-6 col-sm-12 col-xs-12">
-												<input type="text" class="form-control" placeholder="First Name" value="{{$thisUser->first_name}}">
+												<input name="firstName" type="text" class="form-control" placeholder="First Name" value="{{$thisUser->first_name}}">
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label class="col-md-2 col-sm-12 col-xs-12 control-label">Last Name <small class="text-danger"><strong>(required)</strong></small></label>
 											<div class="col-md-6 col-sm-12 col-xs-12">
-												<input type="text" class="form-control" placeholder="Last Name" value="{{$thisUser->last_name}}">
+												<input name="lastName" type="text" class="form-control" placeholder="Last Name" value="{{$thisUser->last_name}}">
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label class="col-md-2 col-sm-12 col-xs-12 control-label">Username <small class="text-danger"><strong>(required)</strong></small></label>
 											<div class="col-md-6 col-sm-12 col-xs-12">
-												<input type="text" class="form-control" placeholder="Username" value="{{$thisUser->username}}">
+												<input name="username" type="text" class="form-control" placeholder="Username" value="{{$thisUser->username}}">
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label class="col-md-2 col-sm-12 col-xs-12 control-label">Job Title <small class="text-danger"><strong>(required)</strong></small></label>
 											<div class="col-md-6 col-sm-12 col-xs-12">
-												<input type="text" class="form-control" placeholder="Job Title" value="{{$thisUser->job_title}}">
+												<input name="jobTitle" type="text" class="form-control" placeholder="Job Title" value="{{$thisUser->job_title}}">
 											</div>
 										</div>
 
@@ -82,7 +78,7 @@
 											<label class="col-md-2 col-sm-12 col-xs-12 control-label">Upload Photo <small class="text-muted"><strong>(optional)</strong></small></label>
 											<div class="col-md-6 col-sm-12 col-xs-12">
 												<img src="{{$thisUser->photo_image}}" alt="Avatar" width="150" height="150">
-												<input type="file">
+												<input type="file" name="photoImage">
 												<p class="help-block">Insert your photo as profile picture</p>
 											</div>
 										</div>
@@ -90,27 +86,27 @@
 										<div class="form-group">
 											<label class="col-md-2 col-sm-12 col-xs-12 control-label">Old Password <small class="text-danger"><strong>(required)</strong></small></label>
 											<div class="col-md-6">
-												<input type="password" class="form-control" placeholder="Old Password">
+												<input name="password" type="password" class="form-control" placeholder="Old Password">
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label class="col-md-2 col-sm-12 col-xs-12 control-label">New Password <small class="text-danger"><strong>(required)</strong></small></label>
 											<div class="col-md-6 col-sm-12 col-xs-12">
-												<input type="password" class="form-control" placeholder="New Password">
+												<input name="newPass" type="password" class="form-control" placeholder="New Password">
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label class="col-md-2 col-sm-12 col-xs-12 control-label">Re-Password <small class="text-danger"><strong>(required)</strong></small></label>
 											<div class="col-md-6 col-sm-12 col-xs-12">
-												<input type="password" class="form-control" placeholder="Re-Password">
+												<input name="confPass" type="password" class="form-control" placeholder="Re-Password">
 											</div>
 										</div>
 
 										<div class="form-group">
 											<div class="col-md-6 col-md-offset-2">
-												<a href="#" class="btn btn-primary">Save</a>
+												<button type="submit" class="btn btn-primary">Save</button>
 											</div>
 										</div>
 									</div>
@@ -186,5 +182,4 @@
 </div>
 
 @yield('modal');
-@include('layouts.dashboard.menu-mobile')
 @endsection

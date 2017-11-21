@@ -435,9 +435,6 @@ class CompanyController extends Controller
 
     public function doEditUser(Request $request)
     {
-        $response = Cloudder::upload($request->photoImage->path())->getResult();
-        $url = $response['url'];
-
         $currData = UserPreDefine::find($request->userId);
         $currData->first_name = $request->firstName;
         $currData->last_name = $request->lastName;
@@ -445,7 +442,11 @@ class CompanyController extends Controller
         $currData->username = $request->username;
         $currData->job_title = $request->jobTitle;
         $currData->old_password = $request->password;
-        $currData->photo_image = $url;
+        if($request->has('photoImage')){
+            $response = Cloudder::upload($request->photoImage->path())->getResult();
+            $url = $response['url'];
+            $currData->photo_image = $url;    
+        }
         $currData->save();
 
         return back();

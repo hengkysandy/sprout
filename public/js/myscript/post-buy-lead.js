@@ -87,9 +87,9 @@ $(function() {
     });
 
 	$(document).on('change','#sectionOption1',function(){
-		var divisionId = $(this).val();
+		var sectionId = $(this).val();
 		$.ajax({
-        url : "loadDivisionDataAjax/"+divisionId,
+        url : "loadDivisionDataAjax/"+sectionId,
         dataType: "json",
         success :function(result){
         	$('#divisionOption1').empty().append('<option selected="selected">-</option>');
@@ -125,9 +125,9 @@ $(function() {
 	});
 
 	$(document).on('change','#sectionOption2',function(){
-		var divisionId = $(this).val();
+		var sectionId = $(this).val();
 		$.ajax({
-        url : "loadDivisionDataAjax/"+divisionId,
+        url : "loadDivisionDataAjax/"+sectionId,
         dataType: "json",
         success :function(result){
         	$('#divisionOption2').empty().append('<option selected="selected">-</option>');
@@ -182,5 +182,26 @@ $(function() {
 
 	    dataHandler.html(cell2+cell1);
 	});
+
+    //buy lead list
+    $(document).on('change','#section-bl-list',function(){
+        var sectionId = $(this).val();
+        $.ajax({
+        url : "loadDivisionDataAjax/"+sectionId,
+        dataType: "json",
+        success :function(result){
+            $('#divison-bl-list').empty().append('<option selected="selected">-</option>');
+            $("#divison-bl-list").selectpicker("refresh");
+            $.each(result,function(key,val){
+                $('#divison-bl-list').append($('<option>', { 
+                    value: val.id,
+                    text : val.name 
+                }));
+                $("#divison-bl-list").selectpicker("refresh");
+            });
+        } 
+        });
+
+    });
 
 });

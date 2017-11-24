@@ -67,54 +67,8 @@
           <div class="col-md-12 col-sm-12 col-xs-12">
             <a href="history-rfq.html" class="btn btn-primary margin-bottom">Buy Lead History</a>
           </div>
-
+          <div class="col-md-9 col-sm-12 col-xs-12">
           @include('post-buy-lead.popup-view.view-buy-lead-list')
-            <div class="row">
-              <div class="col-md-8 col-sm-8 col-xs-12">
-                <div class="row">
-                  <div class="col-md-6 col-sm-12 col-xs-12">
-                    <div class="form-group">
-                      <label>Filter Section</label>
-                      <select class="form-control selectpicker" data-live-search="true">
-                        <option value="">Africulture, foresty, and fishing</option>
-                        <option value="1" selected="">Mining and quarrying</option>
-                        <option value="2">Manufacturing</option>
-                        <option value="3">Electricity, gas, steam, and air conditioner supply</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-sm-12 col-xs-12">
-                    <div class="form-group">
-                      <label>Filter Division</label>
-                      <select class="form-control selectpicker" data-live-search="true">
-                        <option value="">Crop and animal production, hunting and related service activities</option>
-                        <option value="1" selected="">Manufacture of food products</option>
-                        <option value="2">Forestry and logging</option>
-                        <option value="3">Fishing and aquaculture</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="form-group">
-                      <label>Filter Status</label>
-                      <select class="form-control selectpicker" multiple>
-                        <option value="0">Pending</option>
-                        <option value="1" selected="">Rejecteda</option>
-                        <option value="2">Delayed</option>
-                        <option value="3">Assigned</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox"> Filter company by frequent buyer
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
         @endif

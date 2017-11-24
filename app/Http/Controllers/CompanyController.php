@@ -13,6 +13,7 @@ use App\CompanyPackage;
 use App\CompanyProductCatalogue;
 use App\CompanyRequiredDocument;
 use App\Package;
+use App\Province;
 use App\Role;
 use App\UserPreDefine;
 use App\UserRole;
@@ -30,8 +31,29 @@ class CompanyController extends Controller
         // $request->session()->flush();
         $packageData = Package::all();
         $indo = new Indonesia();
-        $provinceData = $indo->allProvinces();
+        // $provinceData = $indo->allProvinces();
+        // return $provinceData;
+
+        $provinceData =  $indo->allProvinces()
+        ->map(function ($val) {
+           $search = array('Dki', 'Di');
+           $replace = array('DKI', 'DI');
+           $val->map_name = str_replace($search, $replace, $val->name);
+
+            return $val;
+        });
+
         
+
+    //     return Article::where('active', 1)
+    // ->orderBy('create_date', 'desc')
+    // ->get()
+    // ->map(function ($article) {
+    //     $article->article_desc = str_replace('ReplaceWord', '', $article->article_desc);
+
+    //     return $article;
+    // });
+
         return view('cust-auth.register-company.register-1', 
             compact('packageData', 'provinceData','cityData'));
     }

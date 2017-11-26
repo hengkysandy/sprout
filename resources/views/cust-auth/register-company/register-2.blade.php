@@ -23,7 +23,7 @@
 
             <div class="form-group">
               <div class="row">
-                <label class="col-md-3 col-sm-3 col-xs-12 control-label">Mobile Number <small>(optional)</small></label>
+                <label class="col-md-3 col-sm-3 col-xs-12 control-label">Mobile Number <small>(required)</small></label>
                 <div class="col-md-2 col-sm-2 col-xs-4">
                   <input type="text" id="numericWithPlusChar" name="mobileCode" class="form-control" placeholder="+62" required="">
                 </div>
@@ -123,7 +123,7 @@
               <div id="removeCertificate" class="form-group">
                 <div class="row">
 
-                  <label class="col-md-3 col-sm-3 col-xs-12 control-label">Certificate <small class="text-danger">(required)</small></label>
+                  <label class="col-md-3 col-sm-3 col-xs-12 control-label">Certificate <small class="text-danger">(optional)</small></label>
                   <div class="col-md-5 col-sm-4 col-xs-12">
                     <input type="text" name="certificate" class="form-control" placeholder="Certificate" readonly="">
                   </div>

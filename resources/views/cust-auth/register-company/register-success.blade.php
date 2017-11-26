@@ -1,7 +1,7 @@
 @extends('layouts.user.app')
 
 @section('content')
-  @include('layouts.user.navbar')
+  @include('layouts.user.navbar-used')
 
   <div class="container-fluid">
     <br><br><br>

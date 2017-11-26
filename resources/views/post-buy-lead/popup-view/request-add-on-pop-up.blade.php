@@ -34,13 +34,8 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label>Duration</label>
-                <select id="addon-duration" class="form-control selectpicker" name="duration" data-live-search="true">
-                  <option value="0">Select Duration</option>
-                  <option value="1" selected>1 Year</option>
-                  <option value="2">2 Year</option>
-                  <option value="3">3 Year</option>
-                </select>
+                <label>Expired Date</label>
+                <input id="addon-expired" type="text" class="form-control" name="expired" disabled value="{{date('d F Y', strtotime($thisCompany->CompanyPackage()->where('status','confirmed')->latest('created_at')->first()->expired_date)) }}">
               </div>
             </div>
             <div class="col-md-6">

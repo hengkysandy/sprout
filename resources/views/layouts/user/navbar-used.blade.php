@@ -14,14 +14,13 @@
         width: 180px
         height: 120px;
         -->
-        <img src="{{ asset('images/amazon-2.png') }}" alt="Client Logo">
-        <div class="client-identity">
-          <span class="client-company">PT. Citra Tubindo Tbk</span> <br>
+         <div class="client-identity">
+          <span class="client-company"></span> <br>
           <!-- Note: Untuk Nama Person
           Dibagian ini yang mau di tampilkan nama depan dan nama belakang. Untuk nama belakang person nya diambil huruf pertama saja.-->
-          <span class="client-person">Jason S - Position</span>
+          <span class="client-person"></span>
         </div>
-        <p class="client-tagline">Company Tagline Company Tagline Company Tagline</p>
+        <p class="client-tagline"></p>
       </div>
     </div>
   </div>

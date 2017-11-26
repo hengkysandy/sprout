@@ -63,19 +63,19 @@
             </div>
             <div class="col-md-6 col-sm-6 col-xs-6">
               <div class="wrapper-btn-bc">
-                <a href="#requestAddon" class="btn btn-primary" data-toggle="modal">Request Add-On</a>
+                
               </div>
             </div>
           </div>
           <div class="col-md-8 col-sm-12 col-xs-12 no-padding-left">
             <div class="form-group">
-              <label>Add-On Duration</label>
-              <input type="text" class="form-control"  value="10 November 2018" disabled>
+              <label>Add-On Package</label>
+              <input type="text" class="form-control"  value="Manager: {{$manager_quota}} || Staff: {{$staff_quota}}" disabled>
             </div>
           </div>
           <div class="col-md-4 col-sm-12 col-xs-12">
             <div class="wrapper-btn-bc">
-              <a href="#reactivateAddon" class="btn btn-primary" data-toggle="modal">Re-Activate Add-On</a>
+              <a href="#requestAddon" class="btn btn-primary" data-toggle="modal">Request Add-On</a>
             </div>
           </div>
           @endif

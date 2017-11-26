@@ -105,6 +105,15 @@ class CompanyController extends Controller
         $regis1 = json_decode($request->session()->get('companyData'));
         $interestProgram = $regis1->interestProgram;
 
+        if(empty($regis1->yearDuration)){
+            $duration = 6;
+            $year = 0.5;
+        }else{
+            $duration = $regis1->yearDuration * 12;
+            $year = $regis1->yearDuration;
+        }
+
+
         // contactName: "contact name", [company] ok
         // mobileCode: "123", [company] ok
         // mobileNumber: "123123123", [company] ok
@@ -158,8 +167,9 @@ class CompanyController extends Controller
             'id_company' => $getLatestCompanyId,
             'id_package' => $regis1->package,
             'status' => 'confirmed',
-            'year_duration' => $regis1->yearDuration,
-            'expired_date' => Carbon::now()->addYear($regis1->yearDuration),
+            'year_duration' => $year,
+            // 'expired_date' => Carbon::now()->addYear($regis1->yearDuration),
+            'expired_date' => Carbon::now()->addMonth($duration),
             'insert_from_profile' => 'false',
         ]);
 

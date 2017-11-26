@@ -99,7 +99,7 @@
                   <select class="form-control selectpicker margin-top-register" data-live-search="true" id="groupProvince" name="province">
                     <option value="0">Choose Province</option>
                     @foreach($provinceData as $provData)
-                      <option value="{{$provData->id}}">{{$provData->name}}</option>
+                      <option value="{{$provData->id}}">{{$provData->map_name}}</option>
                     @endforeach
                   </select>
                 </div>
@@ -187,7 +187,7 @@
                   </select>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-12">
-                  <select class="form-control" name="yearDuration">
+                  <select class="form-control" id="yearDuration" name="yearDuration">
                    <option value="0" selected="">Select Duration</option>
                    <option value="1">1 Year</option>
                    <option value="2">2 Year</option>
@@ -268,4 +268,15 @@
     </div>
   </div>
   </form>
+  <script type="text/javascript">
+    $(function() {
+      $(document).on('change','#package',function(){
+        if( $(this).val() == 1 ){
+          $('#yearDuration').attr('disabled','disabled');
+        }else{
+          $('#yearDuration').removeAttr('disabled');
+        }
+      });
+    });
+  </script>
 @endsection

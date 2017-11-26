@@ -15,6 +15,7 @@
         height: 120px;
         -->
         <!-- Untuk Keperluan demo Image nya diganti dummy dulu-->
+        
         <img style="font-size: 26px; line-height: 100px; margin:10px" src="{{session()->get('companySession')[0]->logo_image}}" alt="Company Logo">
         <div class="client-identity">
           <span class="client-company">{{session()->get('companySession')[0]->name}}</span> <br>

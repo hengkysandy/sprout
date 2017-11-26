@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 16, 2017 at 08:21 AM
+-- Generation Time: Nov 26, 2017 at 07:23 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -119,7 +119,9 @@ INSERT INTO `business_category` (`id`, `id_section`, `id_group_division`, `statu
 (1, 13, 1, 'active', '2017-11-15 07:25:49', '2017-11-15 07:25:49', NULL),
 (2, 14, 7, 'active', '2017-11-15 07:25:49', '2017-11-15 07:25:49', NULL),
 (3, 13, 1, 'active', '2017-11-16 07:11:10', '2017-11-16 07:11:10', NULL),
-(4, 13, 4, 'active', '2017-11-16 07:11:11', '2017-11-16 07:11:11', NULL);
+(4, 13, 4, 'active', '2017-11-16 07:11:11', '2017-11-16 07:11:11', NULL),
+(5, 13, 1, 'active', '2017-11-16 14:58:38', '2017-11-16 14:58:38', NULL),
+(6, 14, 5, 'active', '2017-11-16 14:58:38', '2017-11-16 14:58:38', NULL);
 
 -- --------------------------------------------------------
 
@@ -159,7 +161,8 @@ CREATE TABLE `buy_lead` (
 
 INSERT INTO `buy_lead` (`id`, `buy_lead_code`, `admin_id`, `id_user`, `id_city`, `id_province`, `id_unit`, `id_shipping_item`, `id_area`, `item`, `amount`, `short_description`, `total_price`, `payment_term`, `closed_date`, `delivery_day`, `document`, `po_document`, `approved_vendor_only`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (2, '11115172', NULL, 3, 1707, 17, 2, 2, 1, 'Plate Material', 11, 'Ini harganya harus bisa murah dan kualitas bagus', 50000000, 'Down Payment 50%, Installment 6 Months', '2017-11-14 17:00:00', 2, 'http://res.cloudinary.com/stts/image/upload/v1510730747/wktqs24ocunbqfqh28jl.png', NULL, 'yes', 'pending', '2017-11-15 07:25:48', '2017-11-15 07:25:48', NULL),
-(3, '11116172', NULL, 3, 1806, 18, 2, 1, 1, 'Plate Material', 11, 'Ini harganya harus bisa murah dan kualitas bagus', 50000000, 'Down Payment 50%, Installment 6 Months', '2017-11-16 17:00:00', 4, 'http://res.cloudinary.com/stts/image/upload/v1510816269/rnuhys2witainmofbvau.png', NULL, 'yes', 'pending', '2017-11-16 07:11:10', '2017-11-16 07:11:10', NULL);
+(3, '11116172', NULL, 3, 1806, 18, 2, 1, 1, 'Plate Material', 11, 'Ini harganya harus bisa murah dan kualitas bagus', 50000000, 'Down Payment 50%, Installment 6 Months', '2017-11-16 17:00:00', 4, 'http://res.cloudinary.com/stts/image/upload/v1510816269/rnuhys2witainmofbvau.png', NULL, 'yes', 'pending', '2017-11-16 07:11:10', '2017-11-16 07:11:10', NULL),
+(4, '21116173', NULL, 2, 1304, 13, 2, 1, 3, 'Plate Material', 11, 'Ini harganya harus bisa murah dan kualitas bagus', 50000000, 'Down Payment 50%, Installment 6 Months', '2017-11-15 17:00:00', 4, 'http://res.cloudinary.com/stts/image/upload/v1510844349/awz7k3nneixfbgw2ldx0.png', NULL, 'yes', 'pending', '2017-11-16 14:58:38', '2017-11-16 14:58:38', NULL);
 
 -- --------------------------------------------------------
 
@@ -185,7 +188,9 @@ INSERT INTO `buy_lead_business_category` (`id`, `buy_lead_id`, `business_categor
 (1, 2, 1, 'active', '2017-11-15 07:25:49', '2017-11-15 07:25:49', NULL),
 (2, 2, 2, 'active', '2017-11-15 07:25:49', '2017-11-15 07:25:49', NULL),
 (3, 3, 3, 'active', '2017-11-16 07:11:11', '2017-11-16 07:11:11', NULL),
-(4, 3, 4, 'active', '2017-11-16 07:11:11', '2017-11-16 07:11:11', NULL);
+(4, 3, 4, 'active', '2017-11-16 07:11:11', '2017-11-16 07:11:11', NULL),
+(5, 4, 5, 'active', '2017-11-16 14:58:38', '2017-11-16 14:58:38', NULL),
+(6, 4, 6, 'active', '2017-11-16 14:58:38', '2017-11-16 14:58:38', NULL);
 
 -- --------------------------------------------------------
 
@@ -209,7 +214,8 @@ CREATE TABLE `buy_lead_company` (
 
 INSERT INTO `buy_lead_company` (`id`, `id_buy_lead`, `id_company`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 2, 1, 'active', '2017-11-15 07:25:50', '2017-11-15 07:25:50', NULL),
-(2, 3, 1, 'active', '2017-11-16 07:11:11', '2017-11-16 07:11:11', NULL);
+(2, 3, 1, 'active', '2017-11-16 07:11:11', '2017-11-16 07:11:11', NULL),
+(3, 4, 2, 'active', '2017-11-16 14:58:38', '2017-11-16 14:58:38', NULL);
 
 -- --------------------------------------------------------
 
@@ -249,7 +255,8 @@ CREATE TABLE `buy_lead_status` (
 
 INSERT INTO `buy_lead_status` (`id`, `id_buy_lead`, `id_status`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (2, 2, 2, 'active', '2017-11-15 07:25:50', '2017-11-15 07:26:33', NULL),
-(3, 3, 2, 'active', '2017-11-16 07:11:11', '2017-11-16 07:16:29', NULL);
+(3, 3, 2, 'active', '2017-11-16 07:11:11', '2017-11-16 07:16:29', NULL),
+(4, 4, 2, 'active', '2017-11-16 14:58:39', '2017-11-16 15:07:52', NULL);
 
 -- --------------------------------------------------------
 
@@ -324,7 +331,12 @@ INSERT INTO `cloudinary_mapping` (`id`, `url`, `original_filename`, `created_at`
 (10, 'http://res.cloudinary.com/stts/image/upload/v1510632534/b7khbglnxo2pmk0q4mmm.png', 'Sparepart V1.2.pdf', '2017-11-14 04:08:55', '2017-11-14 04:08:55', NULL),
 (11, 'http://res.cloudinary.com/stts/image/upload/v1510730747/wktqs24ocunbqfqh28jl.png', 'Complete-Sprout-Database-16-October-2017.xlsx', '2017-11-15 07:25:48', '2017-11-15 07:25:48', NULL),
 (12, 'http://res.cloudinary.com/stts/image/upload/v1510816061/p89x260q4kcwbkrw7itb.png', 'Complete-Sprout-Database-16-October-2017.xlsx', '2017-11-16 07:07:43', '2017-11-16 07:07:43', NULL),
-(13, 'http://res.cloudinary.com/stts/image/upload/v1510816269/rnuhys2witainmofbvau.png', 'Complete-Sprout-Database-16-October-2017.xlsx', '2017-11-16 07:11:10', '2017-11-16 07:11:10', NULL);
+(13, 'http://res.cloudinary.com/stts/image/upload/v1510816269/rnuhys2witainmofbvau.png', 'Complete-Sprout-Database-16-October-2017.xlsx', '2017-11-16 07:11:10', '2017-11-16 07:11:10', NULL),
+(14, 'http://res.cloudinary.com/stts/image/upload/v1510844349/awz7k3nneixfbgw2ldx0.png', 'Bug Sprout (23 October 2017) (R2).docx', '2017-11-16 14:58:38', '2017-11-16 14:58:38', NULL),
+(15, 'http://res.cloudinary.com/stts/image/upload/v1511631345/ctve0utqr0ayq8wkaa9c.png', 'Bug Sprout (23 October 2017) (R2).docx', '2017-11-25 17:35:02', '2017-11-25 17:35:02', NULL),
+(16, 'http://res.cloudinary.com/stts/image/upload/v1511631347/fwgoypqe249swnikxwvc.png', 'Bug Sprout (23 October 2017) (R2).docx', '2017-11-25 17:35:04', '2017-11-25 17:35:04', NULL),
+(17, 'http://res.cloudinary.com/stts/image/upload/v1511631350/qwhewq4vrc3i5lurxglc.png', 'Bug Sprout (23 October 2017) (R2).docx', '2017-11-25 17:35:06', '2017-11-25 17:35:06', NULL),
+(18, 'http://res.cloudinary.com/stts/image/upload/v1511631352/l8exsezizn35hqmk3ahv.png', 'Bug Sprout (23 October 2017) (R2).docx', '2017-11-25 17:35:08', '2017-11-25 17:35:08', NULL);
 
 -- --------------------------------------------------------
 
@@ -479,7 +491,7 @@ CREATE TABLE `company_package` (
   `id` int(11) NOT NULL,
   `id_company` int(11) NOT NULL,
   `id_package` int(11) NOT NULL,
-  `year_duration` int(11) DEFAULT NULL,
+  `year_duration` float DEFAULT NULL,
   `status` varchar(200) NOT NULL,
   `expired_date` date DEFAULT NULL,
   `insert_from_profile` varchar(200) DEFAULT NULL,
@@ -566,7 +578,8 @@ CREATE TABLE `company_status` (
 --
 
 INSERT INTO `company_status` (`id`, `id_company_by`, `id_company_for`, `id_status`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 2, 1, 16, 'active', '2017-11-14 04:07:09', '2017-11-14 04:07:09', NULL);
+(1, 2, 1, 16, 'active', '2017-11-14 04:07:09', '2017-11-14 04:07:09', NULL),
+(2, 1, 2, 16, 'active', '2017-11-16 14:59:28', '2017-11-16 14:59:28', NULL);
 
 -- --------------------------------------------------------
 
@@ -90862,10 +90875,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `id_company`, `created_by`, `email`, `first_name`, `last_name`, `username`, `job_title`, `photo_image`, `old_password`, `new_password`, `is_head`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, NULL, 'master@kfc.com', 'Olpi', 'Olpi', 'masterkfc', 'CEO', 'http://res.cloudinary.com/stts/image/upload/v1510630855/njdxhi6lo4zb3lpkkq9l.png', '123123', NULL, 0, 'Active', '2017-11-14 03:40:56', '2017-11-14 03:40:56', NULL),
+(1, 1, NULL, 'master@kfc.com1', 'Olpi1', 'Olpi1', 'masterkfc', 'CEO2', 'http://res.cloudinary.com/stts/image/upload/v1510630855/njdxhi6lo4zb3lpkkq9l.png', '123123', NULL, 0, 'Active', '2017-11-14 03:40:56', '2017-11-21 18:22:05', NULL),
 (2, 2, NULL, 'master@mcd.com', 'Peter', 'Peter', 'mastermcd', 'CEO', 'http://res.cloudinary.com/stts/image/upload/v1510631301/v3djxdvjyn3talcl1l5k.png', '123123', NULL, 0, 'Active', '2017-11-14 03:48:22', '2017-11-14 03:48:22', NULL),
 (3, 1, NULL, 'procman1@kfc.com', 'Yuke', 'Yuke', 'procman1kfc', 'Procurement Manager', 'http://res.cloudinary.com/stts/image/upload/v1510631452/opohsag1mddeqco3v0jl.png', '123123', NULL, 0, 'Active', '2017-11-14 03:50:53', '2017-11-14 03:50:53', NULL),
-(4, 1, NULL, 'salman1@kfc.com', 'Niki', 'Niki', 'salman1kfc', 'Sales Manager', 'http://res.cloudinary.com/stts/image/upload/v1510631490/gsluh8ytuelmqyeajono.png', '123123', NULL, 0, 'Active', '2017-11-14 03:51:31', '2017-11-14 03:51:31', NULL),
+(4, 1, NULL, 'salman1@kfc.com1', 'Niki1', 'Niki1', 'salman1kfc', 'Sales Manager1', 'http://res.cloudinary.com/stts/image/upload/v1510846850/myhyaklebamalin1dula.png', '123123', NULL, 0, 'Active', '2017-11-14 03:51:31', '2017-11-16 15:40:19', NULL),
 (5, 2, NULL, 'procman1@mcd.com', 'Hilo', 'Hilo', 'procman1mcd', 'Procurement Manager', 'http://res.cloudinary.com/stts/image/upload/v1510631628/njcw2mzjzl1snqjkymli.png', '123123', NULL, 0, 'Active', '2017-11-14 03:53:49', '2017-11-14 03:53:49', NULL),
 (6, 2, NULL, 'salman1@mcd.com', 'Guil', 'Guil', 'salman1mcd', 'Sales Manager', 'http://res.cloudinary.com/stts/image/upload/v1510631665/kte0nm9ioj5k7tzicotm.png', '123123', NULL, 0, 'Active', '2017-11-14 03:54:26', '2017-11-14 03:54:26', NULL),
 (7, 2, NULL, 'procstaff1@mcd.com', 'Toni', 'Toni', 'procstaff1mcd', 'Procurement Staff', 'http://res.cloudinary.com/stts/image/upload/v1510631712/cnqu7hfbsoibml0ipu44.png', '123123', NULL, 0, 'Active', '2017-11-14 03:55:13', '2017-11-14 03:55:13', NULL),
@@ -91290,22 +91303,22 @@ ALTER TABLE `area`
 -- AUTO_INCREMENT for table `business_category`
 --
 ALTER TABLE `business_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `buy_lead`
 --
 ALTER TABLE `buy_lead`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `buy_lead_business_category`
 --
 ALTER TABLE `buy_lead_business_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `buy_lead_company`
 --
 ALTER TABLE `buy_lead_company`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `buy_lead_discussion`
 --
@@ -91315,7 +91328,7 @@ ALTER TABLE `buy_lead_discussion`
 -- AUTO_INCREMENT for table `buy_lead_status`
 --
 ALTER TABLE `buy_lead_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `buy_lead_user`
 --
@@ -91330,7 +91343,7 @@ ALTER TABLE `certificate`
 -- AUTO_INCREMENT for table `cloudinary_mapping`
 --
 ALTER TABLE `cloudinary_mapping`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `company`
 --
@@ -91380,7 +91393,7 @@ ALTER TABLE `company_required_document`
 -- AUTO_INCREMENT for table `company_status`
 --
 ALTER TABLE `company_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `discussion`
 --
@@ -91709,7 +91722,7 @@ ALTER TABLE `revise`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `user_to_company` FOREIGN KEY (`id_company`) REFERENCES `company` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `user_to_user` FOREIGN KEY (`created_by`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `user_to_user` FOREIGN KEY (`created_by`) REFERENCES `user` (`id`);
 
 --
 -- Constraints for table `user_role`

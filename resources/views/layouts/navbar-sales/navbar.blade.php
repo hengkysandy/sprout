@@ -5,7 +5,7 @@
     </a>
   </li>
   <li>
-    <a href="{{url('/buy-lead-list')}}" class="btn btn-orange btn-lg padding-transition no-border-radius">
+    <a href="{{url('/post-buy-lead')}}" class="btn btn-orange btn-lg padding-transition no-border-radius">
       <i class="pull-left fa fa-pencil-square padding-top-2px padding-right-8px"></i> <span>Buy Lead List</span>
     </a>
   </li>

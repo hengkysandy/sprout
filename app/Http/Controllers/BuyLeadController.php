@@ -37,7 +37,15 @@ class BuyLeadController extends Controller
         $data['areaData'] = Area::all();
         $data['userCompany'] = UserPreDefine::where('id_company',session()->get('companySession')[0]->id)->get();
         $indo = new Indonesia();
-        $data['provinceData'] = $indo->allProvinces();
+        $data['provinceData'] =  $indo->allProvinces()
+        ->map(function ($val) {
+           $search = array('Dki', 'Di');
+           $replace = array('DKI', 'DI');
+           $val->map_name = str_replace($search, $replace, $val->name);
+
+            return $val;
+        });
+
         $data['shippingData'] = ShippingTerm::all();
         // $data['buyLeadData'] = BuyLead::latest('created_at')->get();
         // return $data['buyLeadData'][1]->User()->first()->Company()->first()->CompanyStatusBy()->where('id_status',16)->where('id_company_for',session()->get('companySession')[0]->id)->get();
@@ -68,6 +76,7 @@ class BuyLeadController extends Controller
         // }
         // return $data['buyLeadData'];
         //==============
+
         $data['postBuyLead'] = BuyLead::whereHas('User', function($user) {
             $user->where('id_company', session()->get('companySession')[0]->id);
         })->get();
@@ -80,7 +89,24 @@ class BuyLeadController extends Controller
                 });
             })->whereHas('BuyLeadStatus',function($buyLeadStatus){
                 $buyLeadStatus->where('id_status',2);
-            })->get();
+            });
+
+        if( session()->get('userSession')[0]->role_id == 6 ){ //sales staff
+            if( BuyLeadUser::where('id_user', session()->get('userSession')[0]->id)->where('status','active')->first() ){
+                $data['buyLeadList'] = $data['buyLeadList']->doesntHave('quotation')->orWhereHas('BuyLeadUser',function($buyLeadUser){
+
+                });
+            }else if( BuyLeadUser::where('id_user', session()->get('userSession')[0]->id)->where('status','inactive')->first() ){
+                $data['buyLeadList'] = $data['buyLeadList']->doesntHave('quotation');
+            }else{
+                $data['buyLeadList'] = $data['buyLeadList']->doesntHave('quotation')->doesntHave('BuyLeadUser');
+            }
+            
+        }
+
+
+        $data['buyLeadList'] =  $data['buyLeadList']->get();
+
 
         // $data['buyLeadList'] = BuyLead::whereHas('User', function($user) {
         //         $user->whereHas('Company', function($company){

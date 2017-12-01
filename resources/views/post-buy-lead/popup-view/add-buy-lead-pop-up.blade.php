@@ -159,7 +159,7 @@
                     <select id="groupProvince" name="province" class="form-control selectpicker" data-live-search="true">
                       <option value="">Choose Province</option>
                       @foreach($provinceData as $pData)
-                        <option value="{{$pData->id}}">{{$pData->name}}</option>
+                        <option value="{{$pData->id}}">{{$pData->map_name}}</option>
                       @endforeach
                     </select>
                   </div>

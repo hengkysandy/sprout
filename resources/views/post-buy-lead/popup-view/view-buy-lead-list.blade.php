@@ -22,10 +22,45 @@
             <td>{{$blData->ShippingTerm->name}}</td>
             <td>Rp {{$blData->total_price}}</td>
             <td>
-              <span class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Approved">
-                <i class="fa fa-check"></i>
+              <?php 
+                $btnClass = "btn-default"; $title = "Available"; $icon = "fa-question";
+                if( $blData->Quotation()->first() ){
+                  $btnClass = "btn-success"; $title = "Approved"; $icon = "fa-check";
+                }else if( $blData->BuyLeadUser()->first() ){
+
+                  if( $blData->BuyLeadUser->first()->status == "inactive" ){
+
+                    if( $blData->BuyLeadUser->first()->linked_for == "0" ){//assign job by manager
+
+                      if( session()->get('userSession')[0]->role_id == 5 ){
+                        $btnClass = "btn-warning"; $title = "Assigned Job"; $icon = "fa-clock-o";
+                      }else if( session()->get('userSession')[0]->role_id == 6  && $blData->BuyLeadUser->first()->id_user == session()->get('userSession')[0]->id ){
+                        $btnClass = "btn-primary"; $title = "Job Assigned"; $icon = "fa-handshake-o";
+                      }
+
+                    }else if( $blData->BuyLeadUser->first()->linked_for == "1" ){//req job by sales
+
+                      if( session()->get('userSession')[0]->role_id == 5 ){
+                        $btnClass = "btn-primary"; $title = "Request Job"; $icon = "fa-handshake-o";
+                      }else if( session()->get('userSession')[0]->role_id == 6  && $blData->BuyLeadUser->first()->id_user == session()->get('userSession')[0]->id ){
+                        $btnClass = "btn-warning"; $title = "Pending"; $icon = "fa-clock-o";
+                      }
+
+                    }
+
+                    
+
+                  }else if( $blData->BuyLeadUser->first()->status == "active" && ( $blData->BuyLeadUser->first()->id_user == session()->get('userSession')[0]->id || session()->get('userSession')[0]->role_id == 5 ) ){
+                      $linkedType = $blData->BuyLeadUser->first()->linked_for == "1" ? "Request" : "Assign";
+                      $btnClass = "btn-info"; $title = $linkedType." Accepted"; $icon = "fa-exclamation-circle";
+                  }
+
+                }
+               ?>
+              <span class="btn btn-sm {{$btnClass}}" data-toggle="tooltip" data-placement="top" title="{{$title}}">
+                <i class="fa {{$icon}}"></i>
               </span>
-              <span style="display: none;">Approved</span>
+              <span style="display: none;">Available</span>
             </td>
             <td>
               <a href="{{url('item/'.$blData->id)}}" class="btn btn-sm btn-default">Detail</a>
@@ -35,6 +70,8 @@
       </tbody>
     </table>
   </div>
+
+
 
   <div class="row">
     <div class="col-md-8 col-sm-8 col-xs-12">

@@ -75,5 +75,10 @@ class BuyLead extends Model
         return $this->hasMany(Quotation::class,'id_buy_lead','id');
     }
 
+    public function BuyLeadUser()
+    {
+        return $this->hasMany(BuyLeadUser::class,'id_buy_lead','id');
+    }
+
     
 }

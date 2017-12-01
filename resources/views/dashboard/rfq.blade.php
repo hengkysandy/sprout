@@ -5,6 +5,10 @@
 
   <div class="container-fluid">
     <h1 class="main-title no-margin-top">RFQ / Buy Lead List</h1>
+        <div class="form-group">
+          <a href="#addUw" data-toggle="modal" class="btn btn-primary btn-responsive">Add Unit</a>
+        </div>
+      
     <div class="row">
       <div class="col-md-2 col-sm-12 col-xs-12">
         <div class="form-group">
@@ -63,8 +67,63 @@
           </table>
         </div>
       </div>
+      <div class="col-md-9 col-sm-12 col-xs-12">
+        @include('post-buy-lead.popup-view.view-unit')
+      </div>
     </div>
   </div>
+
+  <!-- Edit Unit Wegith -->
+    <div class="modal fade" id="editUw" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Edit Unit</h4>
+          </div>
+          <form id="inputForm" method="post">
+            {{csrf_field()}}
+          <div class="modal-body">
+              <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <label>Unit</label>
+                    <input type="text" id="unit-name" name="name" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <label>Description</label>
+                    <textarea rows="6" id="unit-description" name="description" class="form-control"></textarea>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary edit-uw">Save</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Unit -->
+    <div class="modal fade" id="deleteUw" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Are you sure want to delete this?</h4>
+          </div>
+          <div class="modal-footer">
+            <div id="btn-confirmation"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  @include('post-buy-lead.popup-view.add-unit-pop-up')
 
   <div id="editRfq" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -150,7 +209,8 @@
       </div>
     </div>
   </div>
-  <script type="text/javascript" src="js/myscript/rfq.js"></script>
+  <script type="text/javascript" src="{{asset('js/myscript/rfq.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/myscript/unit.js')}}"></script>
 
   @include('layouts.dashboard.menu-mobile')
 @endsection

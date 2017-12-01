@@ -60,7 +60,7 @@
     </div>
   </div>
 
-  <script src="js/myscript/new-member-request.js"></script>
+  <script src="{{asset('js/myscript/new-member-request.js')}}"></script>
 
   @include('layouts.dashboard.menu-mobile')
 @endsection

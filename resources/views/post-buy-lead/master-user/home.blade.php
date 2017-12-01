@@ -35,7 +35,7 @@
                       </div>
                       <div class="product-info">
                         <div class="col-md-6 col-xs-12 no-padding">
-                          <a href="{{url('home?id='.$data->id)}}" class="product-title">{{$data->username}}</a>
+                          <a href="{{url('home?id='.$data->id)}}" class="product-title">{{$data->first_name}} {{$data->last_name}}</a>
                           <span class="product-description">
                           {{$data->UserRole()->first()->Role()->first()->name}}
                           </span>
@@ -93,7 +93,7 @@
                       </div>
                       <div class="product-info">
                         <div class="col-md-6 col-xs-12 no-padding">
-                          <a href="{{url('home?id='.$data->id)}}" class="product-title">{{$data->username}}</a>
+                          <a href="{{url('home?id='.$data->id)}}" class="product-title">{{$data->first_name}} {{$data->last_name}}</a>
                           <span class="product-description">
                           {{$data->UserRole()->first()->Role()->first()->name}}
                           </span>

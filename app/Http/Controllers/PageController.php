@@ -162,7 +162,7 @@ class PageController extends Controller
     public function rfq() {
         // $currBuyLead = BuyLead::find(5);
         // return $currBuyLead->BuyLeadBusinessCategory()->get();
-
+        $data['unitData'] = Unit::latest('created_at')->get();
         $data['buyLead'] = BuyLead::all();
         $data['section'] = Section::all();
         // return $data['buyLead'][2]->BuyLeadBusinessCategory()->first()->Section()->first();

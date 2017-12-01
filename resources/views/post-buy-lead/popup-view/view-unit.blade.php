@@ -17,8 +17,8 @@
                       <td>{{$uData->name}}</td>
                       <td>{{$uData->description}}</td>
                       <td>
-                        <button value="{{$uData->id}}" data-target="#editUw"  data-toggle="modal" class="btn btn-primary btn-sm chooseEdit">Edit</button>
-                        <button value="{{$uData->id}}" data-target="#deleteUw"  data-toggle="modal" class="btn btn-danger btn-sm chooseDelete">Delete</button>
+                        <button value="{{$uData->id}}" data-target="#editUw"  data-toggle="modal" class="btn btn-primary btn-sm chooseEditUnit">Edit</button>
+                        <button value="{{$uData->id}}" data-target="#deleteUw"  data-toggle="modal" class="btn btn-danger btn-sm chooseDeleteUnit">Delete</button>
                       </td>
                     </tr>
                     @endforeach

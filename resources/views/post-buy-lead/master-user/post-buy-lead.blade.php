@@ -22,7 +22,6 @@
           </div>
           <div class="col-md-4 col-sm-12 col-xs-12 margin-bottom">
             <a href="#addPbl" data-toggle="modal" class="btn btn-primary btn-responsive">Post Buy Lead</a>
-            <a href="#addUw" data-toggle="modal" class="btn btn-primary btn-responsive">Add Unit</a>
             <a href="{{url('history-rfq')}}" class="btn btn-primary btn-responsive">Buy Lead History</a>
           </div>
           <div class="col-md-12 col-sm-12 col-xs-12">
@@ -54,7 +53,6 @@
           </div>
           <div class="col-md-9 col-sm-12 col-xs-12">
             @include('post-buy-lead.popup-view.view-post-buy-lead')
-            @include('post-buy-lead.popup-view.view-unit')
           </div>
         </div>
         @endif
@@ -458,7 +456,7 @@
 
   @include('post-buy-lead.popup-view.confirmation-pop-up')
 
-  @include('post-buy-lead.popup-view.add-unit-pop-up')
+  
 
   <!-- Edit Unit Wegith -->
   <div class="modal fade" id="editUw" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -776,8 +774,7 @@
     </a>
   </div>
   <script src="{{ asset('js/jquery.min.js') }}"></script>
-  <script type="text/javascript" src="js/myscript/unit.js"></script>
-  <script type="text/javascript" src="js/myscript/post-buy-lead.js"></script>
+  <script type="text/javascript" src="{{asset('js/myscript/post-buy-lead.js')}}"></script>
   @if(in_array(session()->get('userSession')[0]->role_id,[5,6]))
   <script type="text/javascript">
     $( ".tab-content > .tab-pane" ).show();

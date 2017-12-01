@@ -1,6 +1,5 @@
 $(function() {
-	
-	$(document).on('click','.chooseEdit',function(){
+	$(document).on('click','.chooseEditUnit',function(){
 		$('#inputForm').attr('action', 'doUpdateUnit/'+$(this).val());
 		$.ajax({
         url : "getUnitDataAjax/"+$(this).val(),
@@ -12,7 +11,7 @@ $(function() {
     	});
 	});
 
-	$(document).on('click','.chooseDelete',function(){
+	$(document).on('click','.chooseDeleteUnit',function(){
 
 		var dataHandler = $("#btn-confirmation");
     	var cell1,cell2,url = "";

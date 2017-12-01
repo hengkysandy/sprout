@@ -54,10 +54,7 @@ Route::group(['middleware' => 'checkUser'], function () {
     Route::post('doRequestCompanyAddOn','CompanyController@doRequestCompanyAddOn');
     Route::get('getAddOnPriceAjax/{id}', 'CompanyController@getAddOnPriceAjax');
 
-    Route::post('doAddUnit', 'UnitController@create');
-    Route::post('doUpdateUnit/{id}', 'UnitController@update');
-    Route::get('doDeleteUnit', 'UnitController@delete');
-    Route::get('getUnitDataAjax/{id}', 'UnitController@ajax');
+    
     
     Route::get('post-buy-lead', 'BuyLeadController@postBuyLead');
     Route::post('doInsertBuyLead', 'BuyLeadController@doInsertBuyLead');
@@ -153,6 +150,11 @@ Route::group(['middleware' => 'checkAdmin'], function () {
     Route::get('rfq', 'PageController@rfq');
     Route::get('getBuyLeadDataAjax/{id}', 'PageController@getBuyLeadDataAjax');
     Route::post('doEditBuyLeadBusinessCategoryAdmin', 'PageController@doEditBuyLeadBusinessCategoryAdmin');
+
+    Route::post('doAddUnit', 'UnitController@create');
+    Route::post('doUpdateUnit/{id}', 'UnitController@update');
+    Route::get('doDeleteUnit', 'UnitController@delete');
+    Route::get('getUnitDataAjax/{id}', 'UnitController@ajax');
     
 
 

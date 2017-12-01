@@ -175,7 +175,7 @@
     </div>
   </div>
 
-  <script src="js/myscript/area.js"></script>
+  <script src="{{asset('js/myscript/area.js')}}"></script>
 
   @include('layouts.dashboard.menu-mobile')
 @endsection

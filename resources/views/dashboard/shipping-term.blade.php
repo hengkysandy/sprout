@@ -119,6 +119,6 @@
     </div>
   </div>
 
-  <script type="text/javascript" src="js/myscript/shipping-term.js"></script>
+  <script type="text/javascript" src="{{asset('js/myscript/shipping-term.js')}}"></script>
   @include('layouts.dashboard.menu-mobile')
 @endsection

@@ -862,7 +862,7 @@
       </div>
     </div>
     
-    <script src="js/myscript/business-category.js"></script>
+    <script src="{{asset('js/myscript/business-category.js')}}"></script>
     <script type="text/javascript">
       $(document).ready(function(){
         $.ajax({

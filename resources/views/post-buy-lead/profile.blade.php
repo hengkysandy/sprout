@@ -446,7 +446,7 @@
     </div>
   </div>
 </div>
-  <script type="text/javascript" src="js/myscript/manage-employee.js"></script>
+  <script type="text/javascript" src="{{asset('js/myscript/manage-employee.js')}}"></script>
   @if(session()->get('userSession')[0]->role_id != 2)
     <script type="text/javascript">
       $("#company-profile-form :input").attr("disabled", true);

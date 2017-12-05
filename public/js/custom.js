@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
   // Slick banner for main login page
   $('.banner-slick').slick({
     dots: false,
@@ -95,6 +96,33 @@ $(document).ready(function(){
   $('#findCompanyName').on('keyup', function(){
     companyMembershipTable.column(1).search(this.value).draw();
   });
+
+  //table buy lead list - hengky
+  // bll = $('#bll').dataTable( {
+         
+  //         searching: true,
+  //         "dom": '<"top"l>rt<"bottom"ip><"clear">'
+  //    });
+
+  bll = $('#bll').DataTable({
+    "aoColumnDefs": [
+             { "bSearchable": true, "bVisible": false, "aTargets": [ 0 ] }
+         ],
+    searching: true,
+    "dom": '<"top"l>rt<"bottom"ip><"clear">'
+  });
+
+  
+  $('#section-bl-list').on('change', function(){
+    bll.column(0).search(this.value).draw();
+  });
+
+  $('#status-bl-list').on('change', function(){
+    bll.column(7).search(this.value).draw();
+  });
+
+  
+
   // Table New Member Request
   newMemberRequest = $('#newMemberRequest').DataTable({
     searching: true,

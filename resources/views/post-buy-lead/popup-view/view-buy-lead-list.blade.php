@@ -2,6 +2,7 @@
     <table id="bll" class="table table-middle table-bordered table-hover">
       <thead class="bg-white">
         <tr>
+          <th>Section Name</th>
           <th>Buy Lead ID</th>
           <th>Buyer Name</th>
           <th>Item</th>
@@ -13,8 +14,9 @@
         </tr>
       </thead>
       <tbody>
-        @foreach($buyLeadList as $blData)
+        @foreach($buyLeadList as $blKey => $blData)
           <tr>
+            <td>{{$blData->BuyLeadBusinessCategory()->first()->BusinessCategory()->first()->Section->name}}</td>
             <td>{{$blData->buy_lead_code}}</td>
             <td>{{$blData->User->Company->name}}</td>
             <td>{{$blData->item}}</td>
@@ -56,11 +58,14 @@
                   }
 
                 }
+                
+                if ($blKey == 0) $arrStatus[] = $title;
+                else if (!in_array($title, $arrStatus)) $arrStatus[] = $title;
                ?>
               <span class="btn btn-sm {{$btnClass}}" data-toggle="tooltip" data-placement="top" title="{{$title}}">
                 <i class="fa {{$icon}}"></i>
               </span>
-              <span style="display: none;">Available</span>
+              <span style="display: none;">{{$title}}</span>
             </td>
             <td>
               <a href="{{url('item/'.$blData->id)}}" class="btn btn-sm btn-default">Detail</a>
@@ -80,8 +85,9 @@
           <div class="form-group">
             <label>Filter Section</label>
             <select id="section-bl-list" class="form-control selectpicker" data-live-search="true">
+              <option value="">-</option>
               @foreach($sectionData as $sData)
-                <option value="{{$sData->id}}">{{$sData->name}}</option>
+                <option value="{{$sData->name}}">{{$sData->name}}</option>
               @endforeach
             </select>
           </div>
@@ -98,8 +104,19 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="form-group">
             <label>Filter Status</label>
-            <select id="status-bl-list" class="form-control selectpicker" multiple>
-              <option value="">Choose Status</option>
+            <select id="status-bl-list" class="form-control selectpicker" data-live-search="true">
+              <option value="">-</option>
+              @foreach($arrStatus as $arr)
+                <option value="{{$arr}}">{{$arr}}</option>
+
+              @endforeach
+              <!-- <option value="Approved">Approved</option>
+              <option value="Pending">Pending</option>
+              <option value="Available">Available</option>
+              <option value="Assigned Accepted">Assigned Accepted</option>
+              <option value="Request Accepted">Request Accepted</option>
+              <option value="Request Job">Request Job</option>
+              <option value="Assigned Job">Assigned Job</option> -->
             </select>
           </div>
         </div>

@@ -10,12 +10,18 @@ class BusinessCategory extends Model
 
     protected $fillable = [
     	'id_section',
-		'id_group_division',
+        'id_division',
+		'id_group',
 		'status'
     ];
 
     public function Section()
     {
         return $this->belongsTo(Section::class,'id_section','id');
+    }
+
+    public function Division()
+    {
+        return $this->belongsTo(Division::class,'id_division','id');
     }
 }

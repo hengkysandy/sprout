@@ -106,7 +106,7 @@ $(document).ready(function(){
 
   bll = $('#bll').DataTable({
     "aoColumnDefs": [
-             { "bSearchable": true, "bVisible": false, "aTargets": [ 0 ] }
+             { "bSearchable": true, "bVisible": false, "aTargets": [ 0,1 ] }
          ],
     searching: true,
     "dom": '<"top"l>rt<"bottom"ip><"clear">'
@@ -117,8 +117,12 @@ $(document).ready(function(){
     bll.column(0).search(this.value).draw();
   });
 
+  $('#divison-bl-list').on('change', function(){
+    bll.column(1).search(this.value).draw();
+  });
+
   $('#status-bl-list').on('change', function(){
-    bll.column(7).search(this.value).draw();
+    bll.column(8).search(this.value).draw();
   });
 
   

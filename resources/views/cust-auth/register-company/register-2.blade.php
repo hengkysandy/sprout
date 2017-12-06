@@ -123,7 +123,7 @@
               <div id="removeCertificate" class="form-group">
                 <div class="row">
 
-                  <label class="col-md-3 col-sm-3 col-xs-12 control-label">Certificate <small class="text-danger">(optional)</small></label>
+                  <label class="col-md-3 col-sm-3 col-xs-12 control-label">Certificate <small>(optional)</small></label>
                   <div class="col-md-5 col-sm-4 col-xs-12">
                     <input type="text" name="certificate" class="form-control" placeholder="Certificate" readonly="">
                   </div>

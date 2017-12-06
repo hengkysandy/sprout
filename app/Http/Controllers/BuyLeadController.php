@@ -282,7 +282,8 @@ class BuyLeadController extends Controller
 
             $currBC = BusinessCategory::create([
                 'id_section' => $request->section[$i],
-                'id_group_division' => $request->group[$i],
+                'id_division' => $request->section[$i],
+                'id_group' => $request->group[$i],
                 'status' => 'active'
             ]);
 

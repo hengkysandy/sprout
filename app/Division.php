@@ -19,4 +19,9 @@ class Division extends Model
     {
     	return $this->hasMany(Group::class,'division_id','id');
     }
+
+    public function Section()
+    {
+        return $this->belongsTo(Section::class,'section_id','id');
+    }
 }

@@ -164,6 +164,7 @@ Route::group(['middleware' => 'checkAdmin'], function () {
 });
 
 Route::get('loadDivisionDataAjax/{sectionId}', 'DivisionController@loadDivisionDataAjax');
+Route::get('loadDivisionDataAjaxbyName', 'DivisionController@loadDivisionDataAjaxbyName');
 Route::get('loadGroupDataAjax/{divisionId}', 'GroupController@loadGroupDataAjax');
 
 

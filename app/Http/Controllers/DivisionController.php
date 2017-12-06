@@ -51,4 +51,14 @@ class DivisionController extends Controller
         $data = Division::where('section_id',$sectionId)->get();
         return $data;
     }
+
+    public function loadDivisionDataAjaxbyName(Request $request)
+    {
+        $data = Division::whereHas('Section',function($s) use ($request){
+            $s->where('name',$request->name);
+        })->get();
+        return $data;
+    }
+
+    
 }

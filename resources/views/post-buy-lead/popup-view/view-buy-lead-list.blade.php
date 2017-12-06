@@ -3,6 +3,7 @@
       <thead class="bg-white">
         <tr>
           <th>Section Name</th>
+          <th>Division description</th>
           <th>Buy Lead ID</th>
           <th>Buyer Name</th>
           <th>Item</th>
@@ -14,9 +15,11 @@
         </tr>
       </thead>
       <tbody>
+        <?php $arrStatus = []; ?>
         @foreach($buyLeadList as $blKey => $blData)
           <tr>
             <td>{{$blData->BuyLeadBusinessCategory()->first()->BusinessCategory()->first()->Section->name}}</td>
+            <td>{{$blData->BuyLeadBusinessCategory()->first()->BusinessCategory()->first()->Division->description}}</td>
             <td>{{$blData->buy_lead_code}}</td>
             <td>{{$blData->User->Company->name}}</td>
             <td>{{$blData->item}}</td>
@@ -59,8 +62,7 @@
 
                 }
                 
-                if ($blKey == 0) $arrStatus[] = $title;
-                else if (!in_array($title, $arrStatus)) $arrStatus[] = $title;
+                if (!in_array($title, $arrStatus)) $arrStatus[] = $title;
                ?>
               <span class="btn btn-sm {{$btnClass}}" data-toggle="tooltip" data-placement="top" title="{{$title}}">
                 <i class="fa {{$icon}}"></i>

@@ -1,5 +1,5 @@
 $(function() {
-
+    
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -185,17 +185,17 @@ $(function() {
 
     //buy lead list
     $(document).on('change','#section-bl-list',function(){
-        var sectionId = $(this).val();
+        var sectionName = $(this).val();
         $.ajax({
-        url : "loadDivisionDataAjax/"+sectionId,
+        url : "loadDivisionDataAjaxbyName?name="+sectionName,
         dataType: "json",
         success :function(result){
-            $('#divison-bl-list').empty().append('<option selected="selected">-</option>');
+            $('#divison-bl-list').empty().append('<option selected="selected" value="">-</option>');
             $("#divison-bl-list").selectpicker("refresh");
             $.each(result,function(key,val){
                 $('#divison-bl-list').append($('<option>', { 
-                    value: val.id,
-                    text : val.name 
+                    value: val.description,
+                    text : val.description 
                 }));
                 $("#divison-bl-list").selectpicker("refresh");
             });

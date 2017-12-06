@@ -24,7 +24,7 @@ use Laravolt\Indonesia\Indonesia;
 
 class CompanyController extends Controller
 {
-    public function register_1()
+    public function register_1(Request $request)
     {
         // $request->session()->put('key', 'value');
         // $value = $request->session()->get('key');
@@ -71,9 +71,12 @@ class CompanyController extends Controller
     {
         $request->session()->put('companyData', json_encode($request->all()));
         
-        $response = Cloudder::upload($request->companyLogoImg->path())->getResult();
-        $url = $response['url'];
-        $request->session()->put('logoUrl', $url);
+        if($request->has('companyLogoImg')){
+            $response = Cloudder::upload($request->companyLogoImg->path())->getResult();
+            $url = $response['url'];
+            $request->session()->put('logoUrl', $url);    
+        }
+        
 
         return view('cust-auth.register-company.register-2');
 
@@ -113,6 +116,8 @@ class CompanyController extends Controller
             $year = $regis1->yearDuration;
         }
 
+        $cekTagline = !empty($regis1->companyTagline) ? $regis1->companyTagline : '';
+        $cekLogo = $request->session()->get('logoUrl') == NULL ? '' : $request->session()->get('logoUrl');
 
         // contactName: "contact name", [company] ok
         // mobileCode: "123", [company] ok
@@ -128,8 +133,8 @@ class CompanyController extends Controller
             'city_id' => $regis1->city,
             'province_id' => $regis1->province,
             'name' => $regis1->companyName,
-            'tagline' => $regis1->companyTagline,
-            'logo_image' => $request->session()->get('logoUrl'),
+            'tagline' => $cekTagline,
+            'logo_image' => $cekLogo,
             'email' => $regis1->email,
             'password' => $regis1->confPass,
             'address' => $regis1->address,
@@ -146,12 +151,14 @@ class CompanyController extends Controller
 
         $request->session()->put('companyIdSession', $getLatestCompanyId);
 
-        $maskedFileProductCatalogueUrl = $this->cloudinaryMaskingFile($request->productImage);
+        if(!empty($regis1->productImage)){
+            $maskedFileProductCatalogueUrl = $this->cloudinaryMaskingFile($request->productImage);
 
-        CompanyProductCatalogue::create([
-            'id_company' => $getLatestCompanyId,
-            'product_catalogue_image' => $maskedFileProductCatalogueUrl,
-        ]);
+            CompanyProductCatalogue::create([
+                'id_company' => $getLatestCompanyId,
+                'product_catalogue_image' => $maskedFileProductCatalogueUrl,
+            ]);
+        }
 
         for ($i=0; $i < count($interestProgram); $i++) {
 
@@ -179,7 +186,6 @@ class CompanyController extends Controller
             'main_product_name' => $regis1->mainProduct,
             'status' => 'active'
         ]);
-
 
 
         $maskingFile = file_get_contents('images/masking.png');
@@ -212,26 +218,28 @@ class CompanyController extends Controller
         $cm->original_filename = $taxImageON;
         $cm->save();
 
-        $maskingFile = file_get_contents('images/masking.png');
-        $certificateImage = file_get_contents($request->certificateImage->path());
-        $certificateON = $request->file('certificateImage')->getClientOriginalName();        
-        $newPath = 'cache/'.strtotime(date('c')).'.'.$certificateON.'.png';
-        $newCertificateImage = $maskingFile."".$certificateImage;
-        file_put_contents($newPath, $newCertificateImage);
-        $response = Cloudder::upload(public_path()."/".$newPath)->getResult();
-        $certificateImageURL = $response['url'];
-        unlink($newPath);
+        if(!empty($regis1->certificateImage)){
+            $maskingFile = file_get_contents('images/masking.png');
+            $certificateImage = file_get_contents($request->certificateImage->path());
+            $certificateON = $request->file('certificateImage')->getClientOriginalName();        
+            $newPath = 'cache/'.strtotime(date('c')).'.'.$certificateON.'.png';
+            $newCertificateImage = $maskingFile."".$certificateImage;
+            file_put_contents($newPath, $newCertificateImage);
+            $response = Cloudder::upload(public_path()."/".$newPath)->getResult();
+            $certificateImageURL = $response['url'];
+            unlink($newPath);
 
-        $cm = new CloudinaryMapping();
-        $cm->url = $response['url'];
-        $cm->original_filename = $certificateON;
-        $cm->save();
+            $cm = new CloudinaryMapping();
+            $cm->url = $response['url'];
+            $cm->original_filename = $certificateON;
+            $cm->save();
 
-         Certificate::create([
-             'id_company' => $getLatestCompanyId,
-             'certificate_image' => $certificateImageURL,
-             'status' => 'active'
-         ]);
+             Certificate::create([
+                 'id_company' => $getLatestCompanyId,
+                 'certificate_image' => $certificateImageURL,
+                 'status' => 'active'
+             ]);
+         }
 
          CompanyRequiredDocument::create([
              'id_company' => $getLatestCompanyId,
@@ -248,8 +256,12 @@ class CompanyController extends Controller
 
     public function doRegis3(Request $request)
     {
-        $response = Cloudder::upload($request->photoImage->path())->getResult();
-        $url = $response['url'];
+        $url = '';
+        if(!empty($request->photoImage)){
+            $response = Cloudder::upload($request->photoImage->path())->getResult();
+            $url = $response['url'];
+        }
+        
 
         $masteruser = UserPreDefine::create([
             'id_company' => $request->session()->get('companyIdSession'),

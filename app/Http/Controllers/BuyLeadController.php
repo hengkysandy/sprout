@@ -237,7 +237,6 @@ class BuyLeadController extends Controller
         $dateNow = Carbon::now()->format('mdy');
         $buyLeadId = count(BuyLead::all())+1;
         $code = $company_id.$dateNow.$buyLeadId;
-        $vendor = $request->has('vendorCbx') == false ? 'no' : 'yes';
 
         // $maskingFile = file_get_contents('images/masking.png');
         // $images = file_get_contents($request->document->path());
@@ -274,7 +273,7 @@ class BuyLeadController extends Controller
             'closed_date' => $request->closedDate,
             'delivery_day' => $request->deliveryDays,
             'document' => $maskedFileUrl,
-            'approved_vendor_only' => $vendor,
+            // 'approved_vendor_only' => $vendor,
             'status' => 'pending',
         ]);
 

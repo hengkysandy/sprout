@@ -1,3 +1,4 @@
+  <input type="hidden" id="role_id" value="{{session()->get('userSession')[0]->role_id}}">
   <div class="table-responsive">
     <table id="bll" class="table table-middle table-bordered table-hover">
       <thead class="bg-white">
@@ -7,6 +8,7 @@
           <th>Buy Lead ID</th>
           <th>Buyer Name</th>
           <th>Item</th>
+          <th>Amount</th>
           <th>Delivery Time</th>
           <th>Shipping Term</th>
           <th>Total Price</th>
@@ -23,6 +25,7 @@
             <td>{{$blData->buy_lead_code}}</td>
             <td>{{$blData->User->Company->name}}</td>
             <td>{{$blData->item}}</td>
+            <td>{{$blData->amount}} {{$blData->Unit->name}}</td>
             <td>{{$blData->delivery_day}} Days</td>
             <td>{{$blData->ShippingTerm->name}}</td>
             <td>Rp {{$blData->total_price}}</td>

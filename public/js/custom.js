@@ -104,13 +104,27 @@ $(document).ready(function(){
   //         "dom": '<"top"l>rt<"bottom"ip><"clear">'
   //    });
 
-  bll = $('#bll').DataTable({
-    "aoColumnDefs": [
-             { "bSearchable": true, "bVisible": false, "aTargets": [ 0,1 ] }
-         ],
-    searching: true,
-    "dom": '<"top"l>rt<"bottom"ip><"clear">'
-  });
+
+  
+  if($('#role_id').length && ['5','6'].indexOf( $('#role_id').val() ) != -1 ){
+      bll = $('#bll').DataTable({
+      "aoColumnDefs": [
+               { "bSearchable": true, "bVisible": false, "aTargets": [ 0,1,2 ] }
+           ],
+      searching: true,
+      "dom": '<"top"l>rt<"bottom"ip><"clear">'
+    });
+    
+  }else{
+      bll = $('#bll').DataTable({
+      "aoColumnDefs": [
+               { "bSearchable": true, "bVisible": false, "aTargets": [ 0,1 ] }
+           ],
+      searching: true,
+      "dom": '<"top"l>rt<"bottom"ip><"clear">'
+    });
+
+  }
 
   
   $('#section-bl-list').on('change', function(){
@@ -122,7 +136,7 @@ $(document).ready(function(){
   });
 
   $('#status-bl-list').on('change', function(){
-    bll.column(8).search(this.value).draw();
+    bll.column(9).search(this.value).draw();
   });
 
   

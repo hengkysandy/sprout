@@ -32,9 +32,10 @@ $(document).ready(function(){
 		var imgExt = [".jpg", ".png", ".svg"];
 		var email_pattern = /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i;
 		
-		if( imgExt.indexOf($('input[name=companyLogoImg]').val().toLowerCase().slice(-4)) == -1 ){
-			toastr.error('image extension must be .jpg or .png or .svg');
-		}else if( !email_pattern.test($("input[name=email]").val()) ){
+		// if( imgExt.indexOf($('input[name=companyLogoImg]').val().toLowerCase().slice(-4)) == -1 ){
+		// 	toastr.error('image extension must be .jpg or .png or .svg');
+		// }else 
+		if( !email_pattern.test($("input[name=email]").val()) ){
 			toastr.error('email not valid');
 		}else if( $('#province').val() == 0 ){
 			toastr.error('province must be selected');

@@ -63,7 +63,7 @@
           </div>
 
           <div class="col-md-12 col-sm-12 col-xs-12">
-            <a href="history-rfq.html" class="btn btn-primary margin-bottom">Buy Lead History</a>
+            <a href="{{url('history-rfq')}}" class="btn btn-primary margin-bottom">Buy Lead History</a>
           </div>
           <div class="col-md-9 col-sm-12 col-xs-12">
           @include('post-buy-lead.popup-view.view-buy-lead-list')

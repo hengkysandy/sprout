@@ -26,7 +26,6 @@ class BuyLead extends Model
 		'delivery_day',
         'document',
 		'po_document',
-		'approved_vendor_only',
 		'status',
     ];
 

@@ -129,7 +129,7 @@
                   </div>
 
                   <div class="col-md-4 col-sm-4 col-xs-6 margin-top-med-and-down">
-                    <input type="file" name="certificateImage" required="">
+                    <input type="file" name="certificateImage">
                     <p class="help-block hide-on-med-and-down">(.docx, .pdf, or photo of document NPWP)</p>
                   </div>
 

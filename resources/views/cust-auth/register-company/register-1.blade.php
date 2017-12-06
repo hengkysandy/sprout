@@ -47,7 +47,7 @@
                 <label class="col-md-3 col-sm-3 control-label">Company Tagline <small>(optional)</small></label>
 
                 <div class="col-md-9 col-sm-9">
-                  <input type="text" class="form-control" placeholder="Company Tagline" name="companyTagline" required="">
+                  <input type="text" class="form-control" placeholder="Company Tagline" name="companyTagline">
                 </div>
 
               </div>
@@ -59,7 +59,7 @@
                 <label class="col-md-3 col-sm-3 control-label">Company Logo <small>(optional)</small></label>
 
                 <div class="col-md-9 col-sm-9">
-                  <input type="file" name="companyLogoImg" required="">
+                  <input type="file" name="companyLogoImg">
                   <p class="help-block hide-on-med-and-down">Insert your logo company (.png or .svg, size)</p>
                 </div>
 

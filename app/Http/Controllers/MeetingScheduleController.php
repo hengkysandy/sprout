@@ -253,21 +253,58 @@ class MeetingScheduleController extends Controller
             ->pluck('userid')
             ->toArray();
 
-        $tempData = MeetingSchedule::whereIn('id_user', $companyUser)->select('subject', 'date', 'time', 'id')->get();
-        $tempRequest = MeetingSchedule::join('company_meeting_schedule as cms', 'meeting_schedule.id', '=', 'cms.id_meeting_schedule')->Where('id_company_assign', $currentCompanyId)->get();
+        $tempData = MeetingSchedule::whereIn('id_user', [$currentUserId])
+                    ->select('subject', 'date', 'time', 'id' , 'meeting_type')
+                    ->get();
+
+        $ExternalRequest = MeetingSchedule::join('company_meeting_schedule as cms', 'meeting_schedule.id', '=', 'cms.id_meeting_schedule')
+                        ->Where('id_company_assign', $currentCompanyId)
+                        ->select('meeting_schedule.id','subject','date','time', 'cms.status')
+                        ->where('cms.status','<>','rejected');
+                        
+        $InternalRequest = MeetingSchedule::join('user_meeting_schedule as ums', 'meeting_schedule.id', '=', 'ums.id_meeting_schedule')
+                        ->Where('id_user_assigned', $currentUserId)
+                        ->where('ums.status','<>','rejected')
+                        ->select('meeting_schedule.id','subject','date','time','ums.status');
+
+        $tempRequest = $ExternalRequest->union($InternalRequest)->get();
+        
         $meetingData = collect();
         $meetingarray = [];
         foreach ($tempData as $row => $value) {
             $meetingarray['title'] = $value->subject;
             $meetingarray['start'] = $value->date . 'T' . $value->time;
-            $meetingarray['color'] = '#e59400';
+            
+            //check apakah di reject atau approve atau undecided
+            $meetingtype = $value->meeting_type;
+            if($meetingtype == 1){
+                $count = CompanyMeetingSchedule::where('id_meeting_schedule', $value->id)->count();
+                $countapp = CompanyMeetingSchedule::where('id_meeting_schedule', $value->id)->where('status','approved')->count();
+                $countrej = CompanyMeetingSchedule::where('id_meeting_schedule', $value->id)->where('status','rejected')->count();
+            }else{
+                $count = UserMeetingSchedule::where('id_meeting_schedule', $value->id)->count();
+                $countapp = UserMeetingSchedule::where('id_meeting_schedule', $value->id)->where('status','approved')->count();
+                $countrej = UserMeetingSchedule::where('id_meeting_schedule', $value->id)->where('status','rejected')->count();
+            }
+            if ($countapp > 0) {
+                $meetingarray['color'] = '#e59400';
+            }else if ($countrej == $count){
+                $meetingarray['color'] = '#F52F57';
+            }else{
+                $meetingarray['color'] = '#666370';
+            }
             $meetingarray['url'] = "meeting-detail?id=" . $value->id;
             $meetingData->push($meetingarray);
         }
         foreach ($tempRequest as $row => $value) {
             $meetingarray['title'] = $value->subject;
             $meetingarray['start'] = $value->date . 'T' . $value->time;
-            $meetingarray['color'] = '#044389';
+            if($value->status != 'approved'){
+                $meetingarray['color'] = '#666370';
+            }
+            else{
+                $meetingarray['color'] = '#e59400';
+            }
             $meetingarray['url'] = "meeting-detail?id=" . $value->id;
             $meetingData->push($meetingarray);
         }

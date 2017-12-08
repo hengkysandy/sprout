@@ -591,8 +591,8 @@ class BuyLeadController extends Controller
             $response[] = $r;
         }
         // return $response;
-
-        return view('post-buy-lead.company-database')->with('response',$response);
+        return view('post-buy-lead.master-user.company-database')->with('response',$response);
+        // return view('post-buy-lead.company-database')->with('response',$response); 
         // return view('post-buy-lead.company-database')->with('response',json_decode(json_encode($response)));
     }
 

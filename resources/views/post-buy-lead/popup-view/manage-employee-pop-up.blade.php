@@ -8,7 +8,16 @@
       <div class="modal-body">
         <a href="#addEmployee" data-toggle="modal" class="btn btn-primary">Add Employee</a>
         <br><br>
-        <h4><label class="label label-success">Manager Quota Left: {{$manager_quota}}</label> - <label class="label label-warning">Staff Quota Left: {{$staff_quota}}</label></h4>
+        <h4>
+          @if( in_array(session()->get('userSession')[0]->role_id, [2]) )
+            <label class="label label-success">Manager Quota Left: {{$manager_quota}}</label>
+            - 
+          @endif
+
+          @if( in_array(session()->get('userSession')[0]->role_id, [2,3,5]) )
+            <label class="label label-warning">Staff Quota Left: {{$staff_quota}}</label>
+          @endif
+        </h4>
         <div class="table-responsive margin-top">
           <table class="table table-hover table-middle">
             <thead>

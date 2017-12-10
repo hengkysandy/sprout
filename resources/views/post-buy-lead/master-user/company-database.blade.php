@@ -18,18 +18,19 @@
       </div>
       @endif
       <div class="tab-content">
+        @if(in_array(session()->get('userSession')[0]->role_id,[2,3,4]))
         <div role="tabpanel" class="tab-pane active" id="purchasing_company_database">
           <div class="col-md-9 col-sm-12 col-xs-12">
             <div class="row">
               <div class="col-md-3 col-sm-4 col-xs-12">
                 <div class="form-group">
                   <label>Search</label>
-                  <input type="text" id="findCmpDb" class="form-control">
+                  <input type="text" id="findCmpDbPurchase" class="form-control">
                 </div>
               </div>
             </div>
             <div class="table-responsive">
-              <table id="cmpDb" class="table table-bordered table-hover table-middle">
+              <table id="cmpDbPurchase" class="table table-bordered table-hover table-middle">
                 <thead class="bg-white">
                   <tr>
                     <th>Company Name</th>
@@ -41,117 +42,39 @@
                   </tr>
                 </thead>
                 <tbody>
+
+                  @foreach($response as $key => $data)
                   <tr>
-                    <td>Argomas Internusa</td>
-                    <td>Agriculture, forestry and fishing</td>
-                    <td>Jakarta</td>
+                    <td>{{$data['company']->name}}</td>
+                    <td>{{$data['section']->name}}</td>
+                    <td>{{$data['company_city']}}</td>
+
                     <td>
-                      <span class="text-success"><strong>Approved</strong></span>
+                      @if(count($data['company_status']) == 0 || in_array(5, $data['company_status_arr']))
+                        <span class="text-muted no-text-decoration"><strong>Undecided</strong></span>
+                      @elseif(in_array(6, $data['company_status_arr']))
+                        <span class="text-success"><strong>Approved</strong></span>
+                      @elseif(in_array(7, $data['company_status_arr']))
+                        <span class="text-danger"><strong>Blacklisted</strong></span>
+                      @endif
                     </td>
-                    <td><a href="#cancelApproval" data-toggle="modal" class="btn btn-sm btn-default" disabled="">Cancel Approval</a></td>
+
                     <td>
-                      <a href="../../storage/sample.pdf" disabled="" class="btn btn-sm btn-primary">Open Document</a>
+                      @if(count($data['company_status']) == 0 || in_array(5, $data['company_status_arr']))
+                        <a href="{{url('doChangeCompanyStatus?id='.$data['company']->id.'&status=6&type=procurement')}}" data-toggle="modal" class="btn btn-sm btn-success"><strong>Approve</strong></a>
+                        <a href="{{url('doChangeCompanyStatus?id='.$data['company']->id.'&status=7&type=procurement')}}" data-toggle="modal" class="btn btn-sm btn-danger"><strong>Blacklist</strong></a>
+                      @elseif(in_array(6, $data['company_status_arr']))
+                        <a href="{{url('doChangeCompanyStatus?id='.$data['company']->id.'&status=5&type=procurement')}}" data-toggle="modal" class="btn btn-sm btn-default">Cancel Approval</a>
+                      @elseif(in_array(7, $data['company_status_arr']))
+                        <a href="{{url('doChangeCompanyStatus?id='.$data['company']->id.'&status=5&type=procurement')}}" data-toggle="modal" class="btn btn-sm btn-default">Cancel Blacklist</a>
+                      @endif
+                    </td>
+
+                    <td>
+                      <a href="{{url('download/file?url=http://res.cloudinary.com/stts/image/upload/v1506604787/z2nuvqflbflfxdd9q2q8.jpg')}}" class="btn btn-sm btn-primary">Download Document</a>
                     </td>
                   </tr>
-                  <tr>
-                    <td>Fresh Fish Indonesia</td>
-                    <td>Agriculture, forestry and fishing</td>
-                    <td>Banten</td>
-                    <td>
-                      <span class="text-muted no-text-decoration"><strong>Undecided</strong></span>
-                    </td>
-                    <td>
-                      <a href="#approveVendor" data-toggle="modal" class="btn btn-sm btn-success"  disabled=""><strong>Add</strong></a>
-                      <a href="#blacklistVendor" data-toggle="modal" class="btn btn-sm btn-danger"  disabled=""><strong>Blacklist</strong></a>
-                    </td>
-                    <td>
-                      <a href="../../storage/sample.pdf" class="btn btn-sm btn-primary" disabled="">Open Document</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Malindo Sentosa</td>
-                    <td>Agriculture, forestry and fishing</td>
-                    <td>Jawa Tengah</td>
-                    <td>
-                      <span class="text-success"><strong>Approved</strong></span>
-                    </td>
-                    <td><a href="#cancelApproval" data-toggle="modal" class="btn btn-sm btn-default" disabled="">Cancel Approval</a></td>
-                    <td>
-                      <a href="../../storage/sample.pdf" class="btn btn-sm btn-primary" disabled="">Open Document</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Peronda Jaya</td>
-                    <td>Agriculture, forestry and fishing</td>
-                    <td>Sumatra Utara</td>
-                    <td>
-                      <span class="text-danger"><strong>Blacklisted</strong></span>
-                    </td>
-                    <td><a href="#cancelBlacklist" data-toggle="modal" class="btn btn-sm btn-default" disabled="">Cancel Blacklist</a></td>
-                    <td>
-                      <a href="../../storage/sample.pdf" class="btn btn-sm btn-primary" disabled="">Open Document</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Peronda Jaya</td>
-                    <td>Agriculture, forestry and fishing</td>
-                    <td>Sumatra Utara</td>
-                    <td>
-                      <span class="text-danger"><strong>Blacklisted</strong></span>
-                    </td>
-                    <td><a href="#cancelBlacklist" data-toggle="modal" class="btn btn-sm btn-default" disabled="">Cancel Blacklist</a></td>
-                    <td>
-                      <a href="../../storage/sample.pdf" class="btn btn-sm btn-primary" disabled="">Open Document</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Peronda Jaya</td>
-                    <td>Agriculture, forestry and fishing</td>
-                    <td>Sumatra Utara</td>
-                    <td>
-                      <span class="text-danger"><strong>Blacklisted</strong></span>
-                    </td>
-                    <td><a href="#cancelBlacklist" data-toggle="modal" class="btn btn-sm btn-default" disabled="">Cancel Blacklist</a></td>
-                    <td>
-                      <a href="../../storage/sample.pdf" class="btn btn-sm btn-primary" disabled="">Open Document</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Peronda Jaya</td>
-                    <td>Agriculture, forestry and fishing</td>
-                    <td>Sumatra Utara</td>
-                    <td>
-                      <span class="text-danger"><strong>Blacklisted</strong></span>
-                    </td>
-                    <td><a href="#cancelBlacklist" data-toggle="modal" class="btn btn-sm btn-default" disabled="">Cancel Blacklist</a></td>
-                    <td>
-                      <a href="../../storage/sample.pdf" class="btn btn-sm btn-primary" disabled="">Open Document</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Peronda Jaya</td>
-                    <td>Agriculture, forestry and fishing</td>
-                    <td>Sumatra Utara</td>
-                    <td>
-                      <span class="text-danger"><strong>Blacklisted</strong></span>
-                    </td>
-                    <td><a href="#cancelBlacklist" data-toggle="modal" class="btn btn-sm btn-default" disabled="">Cancel Blacklist</a></td>
-                    <td>
-                      <a href="../../storage/sample.pdf" class="btn btn-sm btn-primary" disabled="">Open Document</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Peronda Jaya</td>
-                    <td>Agriculture, forestry and fishing</td>
-                    <td>Sumatra Utara</td>
-                    <td>
-                      <span class="text-danger"><strong>Blacklisted</strong></span>
-                    </td>
-                    <td><a href="#cancelBlacklist" data-toggle="modal" class="btn btn-sm btn-default" disabled="">Cancel Blacklist</a></td>
-                    <td>
-                      <a href="../../storage/sample.pdf" class="btn btn-sm btn-primary" disabled="">Open Document</a>
-                    </td>
-                  </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>
@@ -161,36 +84,33 @@
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
                       <label>Filter By Section</label>
-                      <select class="form-control selectpicker" data-live-search="true">
-                        <option value="">Choose section</option>
-                        <option value="1" selected="">Mining and quarrying</option>
-                        <option value="2">Manufacturing</option>
-                        <option value="3">Electricity, gas, steam, and air conditioner supply</option>
+                      <select id="section-purchase-cd" class="form-control selectpicker" data-live-search="true">
+                        <option value="">-</option>
+                        @foreach($sectionData as $sData)
+                          <option value="{{$sData->name}}">{{$sData->name}}</option>
+                        @endforeach
                       </select>
                     </div>
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
                       <label>Filter By Division</label>
-                      <select class="form-control selectpicker" data-live-search="true">
-                        <option value="">Choose divison</option>
-                        <option value="1" selected="">Manufacture of food products</option>
-                        <option value="2">Forestry and logging</option>
-                        <option value="3">Fishing and aquaculture</option>
+                      <select id="div-purchase-cd" class="form-control selectpicker" data-live-search="true">
+                        <option value="">-</option>
                       </select>
                     </div>
                   </div>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="checkbox">
                       <label>
-                        <input type="checkbox"> Filter company only for approved vendor
+                        <input type="checkbox" value="Approved" id="approve-cbx"> Filter company only for approved vendor
                       </label>
                     </div>
                   </div>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="checkbox">
                       <label>
-                        <input type="checkbox"> Filter company only for blacklist vendor
+                        <input type="checkbox" value="Blacklisted" id="blacklist-cbx"> Filter company only for blacklist vendor
                       </label>
                     </div>
                   </div>
@@ -199,18 +119,20 @@
             </div>
           </div>
         </div>
+        @endif
+        @if(in_array(session()->get('userSession')[0]->role_id,[2,5,6]))
         <div role="tabpanel" class="tab-pane" id="sales_company_database">
           <div class="col-md-9 col-sm-12 col-xs-12">
             <div class="row">
               <div class="col-md-3 col-sm-4 col-xs-12">
                 <div class="form-group">
                   <label>Search</label>
-                  <input type="text" id="findCmpDb" class="form-control">
+                  <input type="text" id="findCmpDbSales" class="form-control">
                 </div>
               </div>
             </div>
             <div class="table-responsive">
-              <table id="cmpDb" class="table table-bordered table-hover table-middle">
+              <table id="cmpDbSales" class="table table-bordered table-hover table-middle">
                 <thead class="bg-white">
                   <tr>
                     <th>Buyer Name</th>
@@ -220,60 +142,29 @@
                   </tr>
                 </thead>
                 <tbody>
+                  @foreach($response as $key => $data)
                   <tr>
-                    <td>Argomas Internusa</td>
-                    <td>Agriculture, forestry and fishing</td>
-                    <td>Jakarta</td>
-                    <td><span class="favourite favourite-true"><i class="fa fa-star yellow-icon"></i></span></td>
+                    <td>{{$data['company']->name}}</td>
+                    <td>{{$data['section']->name}}</td>
+                    <td>{{$data['company_city']}}</td>
+                    <td>
+                    @if(count($data['company_status']) == 0 || in_array(15, $data['company_status_arr']))
+                      <a href="{{url('doChangeCompanyStatus?id='.$data['company']->id.'&status=4&type=sales')}}">
+                        <span class="favourite favourite-false" title="not favourite"><i class="fa fa-star-o"></i></span>
+                      </a>
+                    @elseif(in_array(4, $data['company_status_arr']))
+                      <a href="{{url('doChangeCompanyStatus?id='.$data['company']->id.'&status=15&type=sales')}}">
+                        <span class="favourite favourite-true" title="favourite"><i class="fa fa-star yellow-icon"></i></span>
+                      </a>
+                    @elseif(count($data['company_status']) != 0 || !in_array(15, $data['company_status_arr']))
+                      <a href="{{url('doChangeCompanyStatus?id='.$data['company']->id.'&status=4&type=sales')}}">
+                        <span class="favourite favourite-false" title="not favourite"><i class="fa fa-star-o"></i></span>
+                      </a>
+                    @endif
+                    </td>
+
                   </tr>
-                  <tr>
-                    <td>Fresh Fish Indonesia</td>
-                    <td>Agriculture, forestry and fishing</td>
-                    <td>Banten</td>
-                    <td><span class="favourite favourite-true"><i class="fa fa-star yellow-icon"></i></span></td>
-                  </tr>
-                  <tr>
-                    <td>Malindo Sentosa</td>
-                    <td>Agriculture, forestry and fishing</td>
-                    <td>Jawa Tengah</td>
-                    <td><span class="favourite favourite-false"><i class="fa fa-star-o"></i></span></td>
-                  </tr>
-                  <tr>
-                    <td>Peronda Jaya</td>
-                    <td>Agriculture, forestry and fishing</td>
-                    <td>Sumatra Utara</td>
-                    <td><span class="favourite favourite-false"><i class="fa fa-star-o"></i></span></td>
-                  </tr>
-                  <tr>
-                    <td>Peronda Jaya</td>
-                    <td>Agriculture, forestry and fishing</td>
-                    <td>Sumatra Utara</td>
-                    <td><span class="favourite favourite-false"><i class="fa fa-star-o"></i></span></td>
-                  </tr>
-                  <tr>
-                    <td>Peronda Jaya</td>
-                    <td>Agriculture, forestry and fishing</td>
-                    <td>Sumatra Utara</td>
-                    <td><span class="favourite favourite-false"><i class="fa fa-star-o"></i></span></td>
-                  </tr>
-                  <tr>
-                    <td>Peronda Jaya</td>
-                    <td>Agriculture, forestry and fishing</td>
-                    <td>Sumatra Utara</td>
-                    <td><span class="favourite favourite-false"><i class="fa fa-star-o"></i></span></td>
-                  </tr>
-                  <tr>
-                    <td>Peronda Jaya</td>
-                    <td>Agriculture, forestry and fishing</td>
-                    <td>Sumatra Utara</td>
-                    <td><span class="favourite favourite-false"><i class="fa fa-star-o"></i></span></td>
-                  </tr>
-                  <tr>
-                    <td>Peronda Jaya</td>
-                    <td>Agriculture, forestry and fishing</td>
-                    <td>Sumatra Utara</td>
-                    <td><span class="favourite favourite-false"><i class="fa fa-star-o"></i></span></td>
-                  </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>
@@ -283,29 +174,26 @@
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
                       <label>Filter By Section</label>
-                      <select class="form-control selectpicker" data-live-search="true">
-                        <option value="">Africulture, foresty, and fishing</option>
-                        <option value="1" selected="">Mining and quarrying</option>
-                        <option value="2">Manufacturing</option>
-                        <option value="3">Electricity, gas, steam, and air conditioner supply</option>
+                      <select id="section-sales-cd" class="form-control selectpicker" data-live-search="true">
+                        <option value="">-</option>
+                        @foreach($sectionData as $sData)
+                          <option value="{{$sData->name}}">{{$sData->name}}</option>
+                        @endforeach
                       </select>
                     </div>
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
                       <label>Filter By Division</label>
-                      <select class="form-control selectpicker" data-live-search="true">
-                        <option value="">Crop and animal production, hunting and related service activities</option>
-                        <option value="1" selected="">Manufacture of food products</option>
-                        <option value="2">Forestry and logging</option>
-                        <option value="3">Fishing and aquaculture</option>
+                      <select id="div-sales-cd" class="form-control selectpicker" data-live-search="true">
+                        <option value="">-</option>
                       </select>
                     </div>
                   </div>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="checkbox">
                       <label>
-                        <input type="checkbox"> Filter company by frequent buyer
+                        <input type="checkbox" value="favourite" id="favourite-cbx"> Filter company by frequent buyer
                       </label>
                     </div>
                   </div>
@@ -314,6 +202,7 @@
             </div>
           </div>
         </div>
+        @endif
       </div>
       @include('layouts.user.side-nav')
     </div>
@@ -411,5 +300,12 @@
     </div>
   </div>
 
+  <script type="text/javascript" src="{{asset('js/myscript/company-database.js')}}"></script>
   @include('layouts.user.mobile-menu')
+  @if(in_array(session()->get('userSession')[0]->role_id,[5,6]))
+  <script type="text/javascript">
+    $( ".tab-content > #sales_company_database" ).show();
+
+  </script>
+  @endif
 @endsection

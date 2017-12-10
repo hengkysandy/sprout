@@ -376,7 +376,16 @@ class CompanyController extends Controller
             // return $user = UserPreDefine::leftjoin('user_role','user.id' ,'=','user_role.user_id')->leftjoin('role','role.id','=','user_role.role_id')->where('id_company',session()->get('companySession')[0]->id)->where('created_by','=',$userid)->select('user.*','role.name as role_name')->get();
 
             $data['user'] = UserPreDefine::where('id_company',session()->get('companySession')[0]->id)->join('user_role','user_role.user_id','=','user.id')->where('role_id','!=',2)->join('role','role.id','=','user_role.role_id')->select('user.*','role.name as role_name')->get();
-            $data['role']= Role::whereIn('id',[3,5])->get();
+
+            $companyUser = UserPreDefine::where('id_company',session()->get('companySession')[0]->id)->whereHas('UserRole',function($ur){
+                $ur->whereIn('role_id',[3,5]);
+            })->get();
+
+            foreach ($companyUser as $key => $value) {
+                $roleArr[] =  $value->UserRole->role_id;
+            }
+
+            $data['role']= Role::whereNotIn('id',$roleArr)->whereIn('id',[3,5])->get();
             
         }else if (session()->get('userSession')[0]->role_id == 3 ) {
             // $data['user'] = UserPreDefine::leftjoin('user_role','user.id' ,'=','user_role.user_id')->leftjoin('role','role.id','=','user_role.role_id')->where('id_company',session()->get('companySession')[0]->id)->where('created_by','=',$userid)->select('user.*','role.name as role_name')->get();

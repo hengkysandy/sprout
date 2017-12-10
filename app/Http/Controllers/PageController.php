@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AddOn;
 use App\Admin;
 use App\Area;
+use App\BusinessCategory;
 use App\BuyLead;
 use App\BuyLeadBusinessCategory;
 use App\Certificate;
@@ -278,9 +279,16 @@ class PageController extends Controller
 
     public function doAddCompanyBC(Request $request)
     {
+        $newBC = BusinessCategory::create([
+            'id_section' => $request->sectionOption,
+            'id_division' => NULL,
+            'id_group' => NULL,
+            'status' => 'company category'
+        ]);
+
         CompanyBusinessCategory::create([
             'id_company' => $request->id_company,
-            'id_business_category' => $request->sectionOption,
+            'id_business_category' => $newBC->id,
             'status' => 'active'
         ]);
 

@@ -233,28 +233,31 @@ class BuyLeadController extends Controller
 
     public function doInsertBuyLead(Request $request)
     {
+        // item: "Plate Material",
+        // amount: "11",
+        // shortDescription: "Ini harganya harus bisa murah dan kualitas bagus",
+        // unit: "2",
+        // totalPrice: "50000000",
+        // paymentTerm: "Down Payment 50%, Installment 6 Months",
+        // shippingTerm: "1",
+        // province: "12",
+        // city: "1203",
+        // closedDate: "2017-12-07",
+        // deliveryDays: "2",
+        // area: "2",
+        // section: [
+        // "13",
+        // null
+        // ],
+        // division: [
+        // "-"
+        // ]
         $company_id = Company::find(session()->get('userSession')[0]->id_company)->id;
         $dateNow = Carbon::now()->format('mdy');
         $buyLeadId = count(BuyLead::all())+1;
         $code = $company_id.$dateNow.$buyLeadId;
 
-        // $maskingFile = file_get_contents('images/masking.png');
-        // $images = file_get_contents($request->document->path());
-        // $originalName = $request->document->getClientOriginalName();   
-
-        // $newPath = 'cache/'.strtotime(date('c')).'.'.$originalName.'.png';
-        // $newBLI = $maskingFile."".$images;
-        // file_put_contents($newPath, $newBLI);
-        // $response = Cloudder::upload(public_path()."/".$newPath)->getResult();
-        // $imageURL = $response['url'];
-        // unlink($newPath);
-
-        // $cm = new CloudinaryMapping();
-        // $cm->url = $response['url'];
-        // $cm->original_filename = $originalName;
-        // $cm->save();
-
-        $maskedFileUrl = $this->cloudinaryMaskingFile($request->document);
+        $maskedFileUrl = $request->has('document') ? $this->cloudinaryMaskingFile($request->document) : "";
 
         $currBuyLead = BuyLead::create([
             'buy_lead_code' => $code,
@@ -278,19 +281,34 @@ class BuyLeadController extends Controller
         ]);
 
         for ($i=0; $i < count($request->section); $i++) {
+ 
+            if( $request->section[$i] != NULL){
 
-            $currBC = BusinessCategory::create([
-                'id_section' => $request->section[$i],
-                'id_division' => $request->section[$i],
-                'id_group' => $request->group[$i],
-                'status' => 'active'
-            ]);
+                $divId = (
+                ( empty($request->division[$i]) ) ? NULL :
+                 ( ( $request->division[$i] == "-" ) ? NULL :  $request->division )
+                );
 
-            BuyLeadBusinessCategory::create([
-                'buy_lead_id' => $currBuyLead->id,
-                'business_category_id' => $currBC->id,
-                'status' => 'active',
-            ]);
+                $groupId = (
+                ( empty($request->group[$i]) ) ? NULL :
+                 ( ( $request->group[$i] == "-" ) ? NULL :  $request->group )
+                );
+
+                $currBC = BusinessCategory::create([
+                    'id_section' => $request->section[$i],
+                    'id_division' => $divId,
+                    'id_group' =>$groupId,
+                    'status' => 'active'
+                ]);
+
+                BuyLeadBusinessCategory::create([
+                    'buy_lead_id' => $currBuyLead->id,
+                    'business_category_id' => $currBC->id,
+                    'status' => 'active',
+                ]);
+            }
+
+            
 
         }
 
@@ -555,10 +573,12 @@ class BuyLeadController extends Controller
 
     public function companyDatabase()
     {
-        $procurementRoleArr = [2,3,4];
+        $procurementRoleArr = [3,4];
         $salesRoleArr = [5,6];
         $procurementStatusArr = [5,6,7];
         $salesStatusArr = [4,15];
+
+        if( session()->get('userSession')[0]->role_id == 2 ) $usedArr = [5,6,7,4,15];
         
         if(in_array(session()->get('userSession')[0]->role_id, $procurementRoleArr)){
             $usedArr = $procurementStatusArr;
@@ -566,14 +586,17 @@ class BuyLeadController extends Controller
             $usedArr = $salesStatusArr;
         }
         $currCompanyCategoryEloquent = CompanyBusinessCategory::where('id_company', session()->get('userSession')[0]->id_company)->get();
-        $listOfCompanyCategory = [];
-        foreach ($currCompanyCategoryEloquent as $val) {
-            $listOfCompanyCategory[] = $val->id_business_category;
+        $listOfSectionId = [];
+        foreach ($currCompanyCategoryEloquent as $companyBC) {
+            $listOfSectionId[] = $companyBC->BusinessCategory->Section->id;
         }
 
-         $r['companyBC'] = CompanyBusinessCategory::whereIn('id_business_category', $listOfCompanyCategory)
-            ->where('id_company','!=',session()->get('userSession')[0]->id_company)
-            ->get();
+        $r['companyBC'] = CompanyBusinessCategory::whereHas('BusinessCategory',function($bc) use ($listOfSectionId){
+            $bc->whereIn('id_section',$listOfSectionId)
+                ->where('status','company category');
+        })
+        ->where('id_company','!=',session()->get('userSession')[0]->id_company)
+        ->get();
 
         $response = [];
         foreach ($r['companyBC'] as $val) {
@@ -581,33 +604,39 @@ class BuyLeadController extends Controller
 
             $r['company_city'] = $r['company']->City()->first()->name;
 
-            $r['section'] = Section::find($r['companyBC'][0]->id_business_category);
+            $r['section'] = Section::find($r['companyBC'][0]->BusinessCategory->id_section);
 
             $r['company_status'] = CompanyStatus::where('id_company_for',$r['company']->id)
                                     ->where('id_company_by', session()->get('userSession')[0]->id_company)
                                     ->whereIn('id_status',$usedArr)
-                                    ->first();
+                                    ->get();
+            foreach ($r['company_status'] as $key => $value) {
+                $r['company_status_arr'][] = $value->id_status;
+            }
+            
 
             $response[] = $r;
         }
         // return $response;
-        return view('post-buy-lead.master-user.company-database')->with('response',$response);
+        $sectionData = Section::all();
+
+        return view('post-buy-lead.master-user.company-database',compact('response','sectionData')); 
         // return view('post-buy-lead.company-database')->with('response',$response); 
         // return view('post-buy-lead.company-database')->with('response',json_decode(json_encode($response)));
     }
 
     public function doChangeCompanyStatus(Request $request)
     {
-        $procurementRoleArr = [2,3,4];
+        $procurementRoleArr = [3,4];
         $salesRoleArr = [5,6];
         $procurementStatusArr = [5,6,7];
         $salesStatusArr = [4,15];
-        if(in_array(session()->get('userSession')[0]->role_id, $procurementRoleArr)){
+
+        if(in_array(session()->get('userSession')[0]->role_id, $procurementRoleArr) || $request->type == "procurement"){
             $usedArr = $procurementStatusArr;
-        }else if(in_array(session()->get('userSession')[0]->role_id, $salesRoleArr)){
+        }else if(in_array(session()->get('userSession')[0]->role_id, $salesRoleArr) || $request->type == "sales"){
             $usedArr = $salesStatusArr;
         }
-
         $checkData = CompanyStatus::where('id_company_for',$request->id)
                                     ->where('id_company_by', session()->get('userSession')[0]->id_company)
                                     ->whereIn('id_status', $usedArr)

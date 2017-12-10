@@ -111,7 +111,11 @@
                 <td><a href="{{url('member/'.$acData->id)}}">{{$acData->name}}</a></td>
                 <td>
                 @if($acData->CompanyBusinessCategory()->first())
-                  <a href="#bCategory" data-toggle="modal">{{$acData->CompanyBusinessCategory()->first()->Section()->first()->name}}</a>
+                  
+                  @foreach($acData->CompanyBusinessCategory()->get() as $companyBC)
+                    <a href="#bCategory" data-toggle="modal">{{$companyBC->BusinessCategory->Section->name}}</a> <span>,</span>
+                  @endforeach
+
                 @else
                   There's no business category yet
                 @endif

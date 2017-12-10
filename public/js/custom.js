@@ -139,6 +139,47 @@ $(document).ready(function(){
     bll.column(9).search(this.value).draw();
   });
 
+  // table purhcasing company database
+  cmpDbPurchase = $('#cmpDbPurchase').DataTable({
+    searching: true,
+    "dom": '<"top"l>rt<"bottom"ip><"clear">'
+  });
+
+  $('#findCmpDbPurchase').on('keyup', function(){
+    cmpDbPurchase.search( this.value ).draw();
+  });
+
+  $('#section-purchase-cd').on('change', function(){
+    cmpDbPurchase.column(1).search(this.value).draw();
+  });
+
+  $('#approve-cbx').change(function() {
+      var cbxValue = $(this).is(":checked") ? this.value : '';
+      cmpDbPurchase.column(3).search(cbxValue).draw();
+  });
+
+  $('#blacklist-cbx').change(function() {
+      var cbxValue = $(this).is(":checked") ? this.value : '';
+      cmpDbPurchase.column(3).search(cbxValue).draw();
+  });
+
+  cmpDbSales = $('#cmpDbSales').DataTable({
+    searching: true,
+    "dom": '<"top"l>rt<"bottom"ip><"clear">'
+  });
+  $('#findCmpDbSales').on('keyup', function(){
+    cmpDbSales.search( this.value ).draw();
+  });
+
+  $('#section-sales-cd').on('change', function(){
+    cmpDbSales.column(1).search(this.value).draw();
+  });
+
+  $('#favourite-cbx').change(function() {
+      var cbxValue = $(this).is(":checked") ? this.value : '';
+      cmpDbSales.column(3).search(cbxValue).draw();
+  });
+
   
 
   // Table New Member Request
@@ -203,14 +244,7 @@ $(document).ready(function(){
   $('#findBuyBc').on('keyup', function(){
     rfqTable.column(4).search(this.value).draw();
   });
-  // Table Company Database
-  cmpDb = $('#cmpDb').DataTable({
-    searching: true,
-    "dom": '<"top"l>rt<"bottom"ip><"clear">'
-  });
-  $('#findCmpDb').on('keyup', function(){
-    cmpDb.search( this.value ).draw();
-  });
+  
   // Table History RFQ
   historyRfq = $('#historyRfq').DataTable({
     searching: true,

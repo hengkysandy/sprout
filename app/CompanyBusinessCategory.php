@@ -14,10 +14,10 @@ class CompanyBusinessCategory extends Model
 		'status'
     ];
     //ini ada 2 fungsi yang aneh, terutama section ini, cari tahu dimana dia error, lalu di hapus fungsi ini
-    public function Section()
-    {
-    	return $this->belongsTo(Section::class,'id_business_category','id');
-    }
+    // public function Section()
+    // {
+    // 	return $this->belongsTo(Section::class,'id_business_category','id');
+    // }
 
     public function BusinessCategory()
     {

@@ -45,10 +45,10 @@
                       <tbody>
                         @foreach($companyBC as $bcData)
                           <tr>
-                            <td>{{$bcData->Section()->first()->section}}</td>
-                            <td>{{$bcData->Section()->first()->name}}</td>
+                            <td>{{$bcData->BusinessCategory->Section->section}}</td>
+                            <td>{{$bcData->BusinessCategory->Section->name}}</td>
                             <td>
-                              @foreach($bcData->Section()->first()->Division()->get() as $dData)
+                              @foreach($bcData->BusinessCategory->Section->Division()->get() as $dData)
                                 {{$dData->name}},
                               @endforeach
                             </td>

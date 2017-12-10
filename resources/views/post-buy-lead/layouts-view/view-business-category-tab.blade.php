@@ -14,10 +14,10 @@
           <tbody>
             @foreach($thisCompany->CompanyBusinessCategory()->get() as $sVal)
             <tr>
-              <td>{{$sVal->Section()->first()->section}}</td>
-              <td>{{$sVal->Section()->first()->name}}</td>
+              <td>{{$sVal->BusinessCategory->Section->section}}</td>
+              <td>{{$sVal->BusinessCategory->Section->name}}</td>
               <td>
-              @foreach($sVal->Section()->first()->Division()->get() as $dVal)
+              @foreach($sVal->BusinessCategory->Section->Division()->get() as $dVal)
                 {{$dVal->name}},
               @endforeach
               </td>

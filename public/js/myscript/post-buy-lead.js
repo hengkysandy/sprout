@@ -86,8 +86,13 @@ $(function() {
 
     });
 
+    $('#broadcast-btn').addClass('disabled');
+
 	$(document).on('change','#sectionOption1',function(){
 		var sectionId = $(this).val();
+        if(sectionId != "") $('#broadcast-btn').removeClass('disabled');
+        else $('#broadcast-btn').addClass('disabled');
+
 		$.ajax({
         url : "loadDivisionDataAjax/"+sectionId,
         dataType: "json",
@@ -182,6 +187,8 @@ $(function() {
 
 	    dataHandler.html(cell2+cell1);
 	});
+
+    
 
     //buy lead list
     $(document).on('change','#section-bl-list',function(){

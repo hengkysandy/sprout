@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2017 at 07:24 PM
+-- Generation Time: Dec 10, 2017 at 03:20 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -103,10 +103,10 @@ INSERT INTO `area` (`id`, `name`, `status`, `created_at`, `updated_at`, `deleted
 
 CREATE TABLE `business_category` (
   `id` int(11) NOT NULL,
-  `id_section` int(11) NOT NULL,
+  `id_section` int(11) DEFAULT NULL,
   `id_division` int(11) DEFAULT NULL,
-  `id_group` int(11) NOT NULL,
-  `status` varchar(200) NOT NULL,
+  `id_group` int(11) DEFAULT NULL,
+  `status` varchar(200) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -124,7 +124,11 @@ INSERT INTO `business_category` (`id`, `id_section`, `id_division`, `id_group`, 
 (5, 13, 14, 1, 'active', '2017-11-16 14:58:38', '2017-11-16 14:58:38', NULL),
 (6, 14, 15, 5, 'active', '2017-11-16 14:58:38', '2017-11-16 14:58:38', NULL),
 (7, 13, 13, 3, 'active', '2017-12-06 11:26:10', '2017-12-06 11:26:10', NULL),
-(8, 13, 13, 3, 'active', '2017-12-06 11:26:10', '2017-12-06 11:26:10', NULL);
+(8, 13, 13, 3, 'active', '2017-12-06 11:26:10', '2017-12-06 11:26:10', NULL),
+(10, 14, NULL, NULL, 'company category', '2017-12-09 18:06:10', '2017-12-09 18:06:10', NULL),
+(11, 13, NULL, NULL, 'company category', '2017-12-09 18:11:53', '2017-12-09 18:11:53', NULL),
+(12, 13, NULL, NULL, 'company category', '2017-12-09 18:16:23', '2017-12-09 18:16:23', NULL),
+(14, 13, NULL, NULL, 'active', '2017-12-10 13:28:26', '2017-12-10 13:28:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -165,7 +169,8 @@ INSERT INTO `buy_lead` (`id`, `buy_lead_code`, `admin_id`, `id_user`, `id_city`,
 (2, '11115172', NULL, 3, 1707, 17, 2, 2, 1, 'Plate Material', 11, 'Ini harganya harus bisa murah dan kualitas bagus', 50000000, 'Down Payment 50%, Installment 6 Months', '2017-11-14 17:00:00', 2, 'http://res.cloudinary.com/stts/image/upload/v1510730747/wktqs24ocunbqfqh28jl.png', NULL, 'pending', '2017-11-15 07:25:48', '2017-11-15 07:25:48', NULL),
 (3, '11116172', NULL, 3, 1806, 18, 2, 1, 1, 'Plate Material', 11, 'Ini harganya harus bisa murah dan kualitas bagus', 50000000, 'Down Payment 50%, Installment 6 Months', '2017-11-16 17:00:00', 4, 'http://res.cloudinary.com/stts/image/upload/v1510816269/rnuhys2witainmofbvau.png', NULL, 'pending', '2017-11-16 07:11:10', '2017-11-16 07:11:10', NULL),
 (4, '21116173', NULL, 2, 1304, 13, 2, 1, 3, 'Plate Material', 11, 'Ini harganya harus bisa murah dan kualitas bagus', 50000000, 'Down Payment 50%, Installment 6 Months', '2017-11-15 17:00:00', 4, 'http://res.cloudinary.com/stts/image/upload/v1510844349/awz7k3nneixfbgw2ldx0.png', NULL, 'pending', '2017-11-16 14:58:38', '2017-11-16 14:58:38', NULL),
-(5, '11206174', NULL, 1, 3171, 31, 2, 1, 2, 'Plate Material', 11, 'Ini harganya harus bisa murah dan kualitas bagus', 50000000, 'Down Payment 50%, Installment 6 Months', '2017-12-05 17:00:00', 5, 'http://res.cloudinary.com/stts/image/upload/v1512559570/otdvheh9bhwp7zjgulxg.png', NULL, 'pending', '2017-12-06 11:26:10', '2017-12-06 11:26:10', NULL);
+(5, '11206174', NULL, 1, 3171, 31, 2, 1, 2, 'Plate Material', 11, 'Ini harganya harus bisa murah dan kualitas bagus', 50000000, 'Down Payment 50%, Installment 6 Months', '2017-12-05 17:00:00', 5, 'http://res.cloudinary.com/stts/image/upload/v1512559570/otdvheh9bhwp7zjgulxg.png', NULL, 'pending', '2017-12-06 11:26:10', '2017-12-06 11:26:10', NULL),
+(7, '21210175', NULL, 2, 1203, 12, 2, 1, 2, 'Plate Material', 11, 'Ini harganya harus bisa murah dan kualitas bagus', 50000000, 'Down Payment 50%, Installment 6 Months', '2017-12-06 17:00:00', 2, '', NULL, 'pending', '2017-12-10 13:28:26', '2017-12-10 13:28:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -195,7 +200,8 @@ INSERT INTO `buy_lead_business_category` (`id`, `buy_lead_id`, `business_categor
 (5, 4, 5, 'active', '2017-11-16 14:58:38', '2017-11-16 14:58:38', NULL),
 (6, 4, 6, 'active', '2017-11-16 14:58:38', '2017-11-16 14:58:38', NULL),
 (7, 5, 7, 'active', '2017-12-06 11:26:10', '2017-12-06 11:26:10', NULL),
-(8, 5, 8, 'active', '2017-12-06 11:26:10', '2017-12-06 11:26:10', NULL);
+(8, 5, 8, 'active', '2017-12-06 11:26:10', '2017-12-06 11:26:10', NULL),
+(9, 7, 14, 'active', '2017-12-10 13:28:26', '2017-12-10 13:28:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -221,7 +227,8 @@ INSERT INTO `buy_lead_company` (`id`, `id_buy_lead`, `id_company`, `status`, `cr
 (1, 2, 1, 'active', '2017-11-15 07:25:50', '2017-11-15 07:25:50', NULL),
 (2, 3, 1, 'active', '2017-11-16 07:11:11', '2017-11-16 07:11:11', NULL),
 (3, 4, 2, 'active', '2017-11-16 14:58:38', '2017-11-16 14:58:38', NULL),
-(4, 5, 1, 'active', '2017-12-06 11:26:10', '2017-12-06 11:26:10', NULL);
+(4, 5, 1, 'active', '2017-12-06 11:26:10', '2017-12-06 11:26:10', NULL),
+(5, 7, 2, 'active', '2017-12-10 13:28:26', '2017-12-10 13:28:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -263,7 +270,8 @@ INSERT INTO `buy_lead_status` (`id`, `id_buy_lead`, `id_status`, `status`, `crea
 (2, 2, 2, 'active', '2017-11-15 07:25:50', '2017-11-15 07:26:33', NULL),
 (3, 3, 2, 'active', '2017-11-16 07:11:11', '2017-11-16 07:16:29', NULL),
 (4, 4, 2, 'active', '2017-11-16 14:58:39', '2017-11-16 15:07:52', NULL),
-(5, 5, 2, 'active', '2017-12-06 11:26:10', '2017-12-06 11:27:14', NULL);
+(5, 5, 2, 'active', '2017-12-06 11:26:10', '2017-12-06 11:27:14', NULL),
+(6, 7, 10, 'active', '2017-12-10 13:28:26', '2017-12-10 13:28:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -434,6 +442,15 @@ CREATE TABLE `company_business_category` (
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `company_business_category`
+--
+
+INSERT INTO `company_business_category` (`id`, `id_company`, `id_business_category`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(4, 1, 10, 'active', '2017-12-09 18:06:10', '2017-12-09 18:06:10', NULL),
+(5, 1, 11, 'active', '2017-12-09 18:11:53', '2017-12-09 18:11:53', NULL),
+(6, 2, 12, 'active', '2017-12-09 18:16:23', '2017-12-09 18:16:23', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -601,7 +618,9 @@ CREATE TABLE `company_status` (
 
 INSERT INTO `company_status` (`id`, `id_company_by`, `id_company_for`, `id_status`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 2, 1, 16, 'active', '2017-11-14 04:07:09', '2017-11-14 04:07:09', NULL),
-(2, 1, 2, 16, 'active', '2017-11-16 14:59:28', '2017-11-16 14:59:28', NULL);
+(2, 1, 2, 16, 'active', '2017-11-16 14:59:28', '2017-11-16 14:59:28', NULL),
+(9, 2, 1, 6, 'active', '2017-12-09 19:02:09', '2017-12-10 06:48:32', NULL),
+(10, 2, 1, 15, 'active', '2017-12-09 19:03:45', '2017-12-10 07:00:32', NULL);
 
 -- --------------------------------------------------------
 
@@ -91328,22 +91347,22 @@ ALTER TABLE `area`
 -- AUTO_INCREMENT for table `business_category`
 --
 ALTER TABLE `business_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `buy_lead`
 --
 ALTER TABLE `buy_lead`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `buy_lead_business_category`
 --
 ALTER TABLE `buy_lead_business_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `buy_lead_company`
 --
 ALTER TABLE `buy_lead_company`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `buy_lead_discussion`
 --
@@ -91353,7 +91372,7 @@ ALTER TABLE `buy_lead_discussion`
 -- AUTO_INCREMENT for table `buy_lead_status`
 --
 ALTER TABLE `buy_lead_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `buy_lead_user`
 --
@@ -91383,7 +91402,7 @@ ALTER TABLE `company_add_on`
 -- AUTO_INCREMENT for table `company_business_category`
 --
 ALTER TABLE `company_business_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `company_interested_program`
 --
@@ -91418,7 +91437,7 @@ ALTER TABLE `company_required_document`
 -- AUTO_INCREMENT for table `company_status`
 --
 ALTER TABLE `company_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `discussion`
 --

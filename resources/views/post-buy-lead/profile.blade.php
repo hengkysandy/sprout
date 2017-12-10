@@ -23,8 +23,8 @@
       <div class="modal-body">
         @foreach($thisCompany->CompanyBusinessCategory()->get() as $sVal)
 
-        <h4><strong>{{$sVal->Section()->first()->section}}</strong></h4>
-        <h5>{{$sVal->Section()->first()->name}}</h5>
+        <h4><strong>{{$sVal->BusinessCategory->Section->section}}</strong></h4>
+        <h5>{{$sVal->BusinessCategory->Section->name}}</h5>
 
         <div class="row">
           <div class="col-md-12 col-sm-12 col-xs-12">

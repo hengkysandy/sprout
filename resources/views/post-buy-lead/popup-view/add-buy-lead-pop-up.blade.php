@@ -22,102 +22,18 @@
                     <input type="text" name="amount" class="form-control" value="11">
                   </div>
                 </div>
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label>Broadcast To Company</label>
-                    <br>
-                    <a href="#broadcast" data-toggle="modal" class="btn btn-primary btn-sm">Broadcast</a>
-                  </div>
-                  <table class="table table-bordered table-hover">
-                    <thead>
-                      <tr>
-                        <th>No</th>
-                        <th>ID</th>
-                        <th>Company Name</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody id="assigned-tbody">
-                      @foreach($anotherCompany as $acKey => $acData)
-                        @if( !empty($acData->CompanyStatusFor()->get()) )
 
-                        @if($acData->CompanyStatusFor()->where('id_status',16)->first() && $acData->CompanyStatusFor()->where('id_company_by',session()->get('companySession')[0]->id)->first())
-                          <tr>
-                            <td>{{++$acKey}}</td>
-                            <td>{{$acData->id}}</td>
-                            <td>{{$acData->name}}</td>
-                            <td><a href="{{url('doRemoveAssignedCompany?id='.$acData->id)}}" data-value="{{$acData->id}}" class="btn btn-sm btn-danger remove-assign"><i class="fa fa-trash"></i></a></td>
-                          </tr>
-                        @endif
-
-                        @endif
-                      @endforeach
-                    </tbody>
-                  </table>
-                </div>
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <div class="form-group">
                     <label>Short Description</label>
                     <textarea rows="5" name="shortDescription" class="form-control no-resize">Ini harganya harus bisa murah dan kualitas bagus</textarea>
                   </div>
                 </div>
-                <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                  <label>Business Category</label>
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label>Section 1</label>
-                    <select id="sectionOption1" name="section[]" class="form-control selectpicker" data-live-search="true">
-                      <option value="">Choose Section</option>
-                      @foreach($sectionData as $sData)
-                        <option value="{{$sData->id}}">{{$sData->name}}</option>
-                      @endforeach
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label>Section 2</label>
-                    <select id="sectionOption2" name="section[]" class="form-control selectpicker" data-live-search="true">
-                      <option value="">Choose Section</option>
-                      @foreach($sectionData as $sData)
-                        <option value="{{$sData->id}}">{{$sData->name}}</option>
-                      @endforeach
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label>Division 1</label>
-                    <select id="divisionOption1" name="division[]" class="form-control selectpicker" data-live-search="true">
-                      
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label>Division 2</label>
-                    <select id="divisionOption2" name="division[]" class="form-control selectpicker" data-live-search="true">
-                      
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label>Group 1</label>
-                    <select id="groupOption1" name="group[]" class="form-control selectpicker" data-live-search="true">
-                      
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label>Group 2</label>
-                    <select id="groupOption2" name="group[]" class="form-control selectpicker" data-live-search="true">
-                      
-                    </select>
-                  </div>
-                </div>
+                
+                
+
+
+
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
                     <label>Unit</label>
@@ -196,23 +112,108 @@
                     </select>
                   </div>
                 </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                  <label>Business Category</label>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <label>Section 1 <small class="text-danger">(required)</small></label>
+                    <select id="sectionOption1" name="section[]" class="form-control selectpicker" data-live-search="true">
+                      <option value="">Choose Section</option>
+                      @foreach($sectionData as $sData)
+                        <option value="{{$sData->id}}">{{$sData->name}}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <label>Section 2 <small>(optional)</small></label>
+                    <select id="sectionOption2" name="section[]" class="form-control selectpicker" data-live-search="true">
+                      <option value="">Choose Section</option>
+                      @foreach($sectionData as $sData)
+                        <option value="{{$sData->id}}">{{$sData->name}}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <label>Division 1 <small>(optional)</small></label>
+                    <select id="divisionOption1" name="division[]" class="form-control selectpicker" data-live-search="true">
+                      
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <label>Division 2 <small>(optional)</small></label>
+                    <select id="divisionOption2" name="division[]" class="form-control selectpicker" data-live-search="true">
+                      
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <label>Group 1 <small>(optional)</small></label>
+                    <select id="groupOption1" name="group[]" class="form-control selectpicker" data-live-search="true">
+                      
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <label>Group 2 <small>(optional)</small></label>
+                    <select id="groupOption2" name="group[]" class="form-control selectpicker" data-live-search="true">
+                      
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <label>Broadcast To Company</label>
+                    <br>
+                    <a id="broadcast-btn" href="#broadcast" data-toggle="modal" class="btn btn-primary btn-sm">Broadcast</a>
+                  </div>
+                  <table class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>ID</th>
+                        <th>Company Name</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="assigned-tbody">
+                      @foreach($anotherCompany as $acKey => $acData)
+                        @if( !empty($acData->CompanyStatusFor()->get()) )
+
+                        @if($acData->CompanyStatusFor()->where('id_status',16)->first() && $acData->CompanyStatusFor()->where('id_company_by',session()->get('companySession')[0]->id)->first())
+                          <tr>
+                            <td>{{++$acKey}}</td>
+                            <td>{{$acData->id}}</td>
+                            <td>{{$acData->name}}</td>
+                            <td><a href="{{url('doRemoveAssignedCompany?id='.$acData->id)}}" data-value="{{$acData->id}}" class="btn btn-sm btn-danger remove-assign"><i class="fa fa-trash"></i></a></td>
+                          </tr>
+                        @endif
+
+                        @endif
+                      @endforeach
+                    </tbody>
+                  </table>
+                </div>
+
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <div class="form-group">
                     <label class="btn btn-primary btn-file">
                       Upload Buy Lead <input name="document" type="file" class="hidden">
                     </label>
-                    <p class="help-block">Format document .docs, .xls, and .pdf</p>
+
+                    <p class="help-block">Format document .docs, .xls, and .pdf <small>(optional)</small></p>
                   </div>
                 </div>
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox" name="vendorCbx"> Approved Vendor Only
-                      </label>
-                    </div>
-                  </div>
-                </div>
+                
               </div>
           </div>
           <div class="modal-footer">

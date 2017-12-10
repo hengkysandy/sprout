@@ -777,7 +777,7 @@
   <script type="text/javascript" src="{{asset('js/myscript/post-buy-lead.js')}}"></script>
   @if(in_array(session()->get('userSession')[0]->role_id,[5,6]))
   <script type="text/javascript">
-    $( ".tab-content > .tab-pane" ).show();
+    $( ".tab-content > #buy_lead_list" ).show();
   </script>
   @endif
   @include('layouts.user.mobile-menu')

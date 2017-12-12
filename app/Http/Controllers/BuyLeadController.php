@@ -134,7 +134,6 @@ class BuyLeadController extends Controller
         // }
 
 
-
         $data['anotherCompany'] = Company::where('company.id','!=',session()->get('companySession')[0]->id)
             ->get();
 
@@ -373,6 +372,7 @@ class BuyLeadController extends Controller
 
     public function showItem(Request $request, $id)
     {
+        $data['sectionData'] = Section::all();
         $buylead = BuyLead::leftjoin('shipping_term','buy_lead.id_shipping_item','=','shipping_term.id')
             ->leftjoin('user','buy_lead.id_user','=','user.id')
             ->leftjoin('company','user.id_company','=','company.id')
@@ -397,7 +397,7 @@ class BuyLeadController extends Controller
             ->select('buy_lead.id','buy_lead_user.*','user.first_name','user.last_name');
         $area = Area::all();
         $shippingterm = ShippingTerm::all();
-        if(session()->get('userSession')[0]->role_id == 5)
+        if( in_array(session()->get('userSession')[0]->role_id, [2,5]) )
         {
             $userid = session()->get('userSession')[0]->id;
             $user = UserPreDefine::where('created_by', $userid)->get();

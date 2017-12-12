@@ -52,5 +52,6 @@
   <script src="{{ asset('bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
   <script src="{{ asset('js/app.js') }}"></script>
   <script type="text/javascript" src="{{ asset('js/custom.js') }}"></script>
+  <meta name="fullpath" content="{{ URL::to('') }}">
 </body>
 </html>

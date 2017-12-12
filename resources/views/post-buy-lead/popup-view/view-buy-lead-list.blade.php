@@ -5,6 +5,7 @@
         <tr>
           <th>Section Name</th>
           <th>Division description</th>
+          <th>Frequent Buyer</th>
           <th>Buy Lead ID</th>
           <th>Buyer Name</th>
           <th>Item</th>
@@ -22,6 +23,17 @@
           <tr>
             <td>{{$blData->BuyLeadBusinessCategory()->first()->BusinessCategory()->first()->Section->name}}</td>
             <td>{{$blData->BuyLeadBusinessCategory()->first()->BusinessCategory()->first()->Division->description}}</td>
+            <td>
+              @if( $blData->User->Company->CompanyStatusFor()->where('id_company_by',session()->get('companySession')[0]->id)->whereIn('id_status',[4,15])->first() || $blData->User->Company->CompanyStatusFor()->where('id_company_by',session()->get('companySession')[0]->id)->whereIn('id_status',[4,15])->first() == 15 )
+
+                Yes
+
+              @elseif( $blData->User->Company->CompanyStatusFor()->where('id_company_by',session()->get('companySession')[0]->id)->whereIn('id_status',[4,15])->first() == 4 )
+
+                No
+
+              @endif
+            </td>
             <td>{{$blData->buy_lead_code}}</td>
             <td>{{$blData->User->Company->name}}</td>
             <td>{{$blData->item}}</td>
@@ -128,7 +140,7 @@
         <div class="col-md-6 col-sm-6 col-xs-12">
           <div class="checkbox">
             <label>
-              <input id="frequent-bl-list" type="checkbox"> Filter company by frequent buyer
+              <input id="frequent-bl-list" type="checkbox" value="Yes"> Filter company by frequent buyer
             </label>
           </div>
         </div>

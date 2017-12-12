@@ -381,10 +381,12 @@ class CompanyController extends Controller
                 $ur->whereIn('role_id',[3,5]);
             })->get();
 
-            foreach ($companyUser as $key => $value) {
-                $roleArr[] =  $value->UserRole->role_id;
+            $roleArr = [];
+            if(!empty($companyUser)){
+                foreach ($companyUser as $key => $value) {
+                    $roleArr[] =  $value->UserRole->role_id;
+                }
             }
-
             $data['role']= Role::whereNotIn('id',$roleArr)->whereIn('id',[3,5])->get();
             
         }else if (session()->get('userSession')[0]->role_id == 3 ) {

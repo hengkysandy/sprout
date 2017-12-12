@@ -109,7 +109,7 @@ $(document).ready(function(){
   if($('#role_id').length && ['5','6'].indexOf( $('#role_id').val() ) != -1 ){
       bll = $('#bll').DataTable({
       "aoColumnDefs": [
-               { "bSearchable": true, "bVisible": false, "aTargets": [ 0,1,2 ] }
+               { "bSearchable": true, "bVisible": false, "aTargets": [ 0,1,2,3 ] }
            ],
       searching: true,
       "dom": '<"top"l>rt<"bottom"ip><"clear">'
@@ -118,7 +118,7 @@ $(document).ready(function(){
   }else{
       bll = $('#bll').DataTable({
       "aoColumnDefs": [
-               { "bSearchable": true, "bVisible": false, "aTargets": [ 0,1 ] }
+               { "bSearchable": true, "bVisible": false, "aTargets": [ 0,1,2 ] }
            ],
       searching: true,
       "dom": '<"top"l>rt<"bottom"ip><"clear">'
@@ -137,6 +137,11 @@ $(document).ready(function(){
 
   $('#status-bl-list').on('change', function(){
     bll.column(9).search(this.value).draw();
+  });
+
+  $('#frequent-bl-list').change(function() {
+      var cbxValue = $(this).is(":checked") ? this.value : '';
+      bll.column(2).search(cbxValue).draw();
   });
 
   // table purhcasing company database

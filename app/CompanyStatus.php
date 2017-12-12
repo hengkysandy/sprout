@@ -15,5 +15,10 @@ class CompanyStatus extends Model
 		'status',
     ];
 
+    public function Status()
+    {
+        return $this->belongsTo(Status::class,'id_status','id');
+    }
+
     
 }

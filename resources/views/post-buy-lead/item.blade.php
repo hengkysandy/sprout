@@ -25,6 +25,8 @@
               <thead class="bg-white">
                 <tr>
                   <th>Quotation ID</th>
+                  <th>Business Category</th>
+                  <th>Company Status</th>
                   <th>Company Name</th>
                   <th>Delivery Time</th>
                   <th>Shipping Term</th>
@@ -36,7 +38,9 @@
                 @foreach($quotation as $qData)
                 <tr>
                   <td>{{$qData->BuyLead()->first()->buy_lead_code}}</td>
-                  <td>PT Sindang Mulia</td>
+                  <td>{{$qData->User->Company->CompanyBusinessCategory->first()->BusinessCategory->Section->name}}</td>
+                  <td>{{$qData->User->Company->CompanyStatusFor->where('id_company_by',session()->get('companySession')[0]->id)->first()->Status->name}}</td>
+                  <td>{{$qData->User->Company->name}}</td>
                   <td>{{$qData->delivery_day}} Days</td>
                   <td>{{$qData->ShippingTerm()->first()->name}}</td>
                   <td>Rp {{number_format($qData->total_price)}}</td>
@@ -48,48 +52,7 @@
               </tbody>
             </table>
           </div>
-          <div class="row">
-            <div class="col-md-8 col-sm-8 col-xs-12">
-              <div class="row">
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label>Filter By Section</label>
-                    <select class="form-control selectpicker" data-live-search="true">
-                      <option value="">Choose section</option>
-                      <option value="1" selected="">Mining and quarrying</option>
-                      <option value="2">Manufacturing</option>
-                      <option value="3">Electricity, gas, steam, and air conditioner supply</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label>Filter By Division</label>
-                    <select class="form-control selectpicker" data-live-search="true">
-                      <option value="">Choose divison</option>
-                      <option value="1" selected="">Manufacture of food products</option>
-                      <option value="2">Forestry and logging</option>
-                      <option value="3">Fishing and aquaculture</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> Filter company only for approved vendor only
-                    </label>
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> Filter company all vendor except blacklist
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          @include('post-buy-lead.layouts-view.view-filter-sec-div-fav-blacklist')
         </div>
         @include('layouts.user.side-nav')
 

@@ -38,8 +38,23 @@
                 @foreach($quotation as $qData)
                 <tr>
                   <td>{{$qData->BuyLead()->first()->buy_lead_code}}</td>
-                  <td>{{$qData->User->Company->CompanyBusinessCategory->first()->BusinessCategory->Section->name}}</td>
-                  <td>{{$qData->User->Company->CompanyStatusFor->where('id_company_by',session()->get('companySession')[0]->id)->first()->Status->name}}</td>
+
+                  <td>
+                    @if( $qData->User->Company->CompanyBusinessCategory->first() )
+                      {{$qData->User->Company->CompanyBusinessCategory->first()->BusinessCategory->Section->name}}
+                    @else
+                      No Category
+                    @endif
+                  </td>
+
+                  <td>
+                    @if( $qData->User->Company->CompanyStatusFor->where('id_company_by',session()->get('companySession')[0]->id)->whereIn('id_status',[6,7])->first() )
+                      {{$qData->User->Company->CompanyStatusFor->where('id_company_by',session()->get('companySession')[0]->id)->whereIn('id_status',[6,7])->first()->Status->name}}
+                    @else
+                      undecided
+                    @endif
+                  </td>
+
                   <td>{{$qData->User->Company->name}}</td>
                   <td>{{$qData->delivery_day}} Days</td>
                   <td>{{$qData->ShippingTerm()->first()->name}}</td>

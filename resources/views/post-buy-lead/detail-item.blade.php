@@ -128,7 +128,7 @@
                     <a href="#" class="btn btn-sm btn-default active">First Quotation</a>
                     <a href="#" class="btn btn-sm btn-default">Latest Quotation</a>
                     <!-- Need ask -->
-                    <a href="profile.html" class="btn btn-sm btn-default">Open Company Profile</a>
+                    <a href="{{url('member/'.$quotation->User->Company->id)}}" class="btn btn-sm btn-default">Open Company Profile</a>
                   </div>
                 </div>
               </div>

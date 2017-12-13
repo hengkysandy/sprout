@@ -123,17 +123,15 @@
             <label>Filter Status</label>
             <select id="status-bl-list" class="form-control selectpicker" data-live-search="true">
               <option value="">-</option>
-              @foreach($arrStatus as $arr)
-                <option value="{{$arr}}">{{$arr}}</option>
-
-              @endforeach
-              <!-- <option value="Approved">Approved</option>
-              <option value="Pending">Pending</option>
-              <option value="Available">Available</option>
-              <option value="Assigned Accepted">Assigned Accepted</option>
-              <option value="Request Accepted">Request Accepted</option>
-              <option value="Request Job">Request Job</option>
-              <option value="Assigned Job">Assigned Job</option> -->
+                <option value="Approved">Approved</option>
+                <option value="Pending">Pending</option>
+                <option value="Available">Available</option>
+                <option value="Assigned Accepted">Assigned Accepted</option>
+                <option value="Request Accepted">Request Accepted</option>
+                <option value="Request Job">Request Job</option>
+                <option value="Assigned Job">Assigned Job</option>
+                
+              
             </select>
           </div>
         </div>

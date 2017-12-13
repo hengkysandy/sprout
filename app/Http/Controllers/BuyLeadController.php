@@ -142,7 +142,10 @@ class BuyLeadController extends Controller
 
     public function historyRfq()
     {
-        $data['buyLeadDataDone'] = BuyLead::join('buy_lead_status','buy_lead_status.id_buy_lead','=','buy_lead.id')->where('id_status',2)->select('buy_lead.*','buy_lead_status.id_status')->get(); //2 = release
+        $data['buyLeadDataDone'] = BuyLead::join('buy_lead_status','buy_lead_status.id_buy_lead','=','buy_lead.id')->where('id_status',2)->select('buy_lead.*','buy_lead_status.id_status')
+            ->whereHas('User',function($u){
+                $u->where('id_company', session()->get('userSession')[0]->id_company );
+            })->get(); //2 = release
         return view('post-buy-lead.history-rfq', $data); 
     }
 

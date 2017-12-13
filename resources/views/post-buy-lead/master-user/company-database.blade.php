@@ -50,11 +50,11 @@
 
                     <td>
                       @if(count($data['company_status']) == 0 || in_array(5, $data['company_status_arr']))
-                        <span class="text-muted no-text-decoration"><strong>Undecided</strong></span>
+                        <span class="text-muted no-text-decoration"><strong>undecided</strong></span>
                       @elseif(in_array(6, $data['company_status_arr']))
-                        <span class="text-success"><strong>Approved</strong></span>
+                        <span class="text-success"><strong>approved</strong></span>
                       @elseif(in_array(7, $data['company_status_arr']))
-                        <span class="text-danger"><strong>Blacklisted</strong></span>
+                        <span class="text-danger"><strong>blacklisted</strong></span>
                       @endif
                     </td>
 
@@ -161,6 +161,7 @@
                 </div>
               </div>
             </div>
+            <script type="text/javascript" src="{{asset('js/myscript/filter-section-division-sales.js')}}"></script>
           </div>
         </div>
         @endif
@@ -266,6 +267,8 @@
   @if(in_array(session()->get('userSession')[0]->role_id,[5,6]))
   <script type="text/javascript">
     $( ".tab-content > #sales_company_database" ).show();
+
+
   </script>
   @endif
 @endsection

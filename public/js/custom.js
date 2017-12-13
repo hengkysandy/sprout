@@ -125,7 +125,6 @@ $(document).ready(function(){
     });
 
   }
-
   
   $('#section-bl-list').on('change', function(){
     bll.column(0).search(this.value).draw();
@@ -183,6 +182,30 @@ $(document).ready(function(){
   $('#favourite-cbx').change(function() {
       var cbxValue = $(this).is(":checked") ? this.value : '';
       cmpDbSales.column(3).search(cbxValue).draw();
+  });
+
+
+  //tableItemQuotation on item procurement manager
+  tableItemQuotation = $('#tableItemQuotation').DataTable({
+      "aoColumnDefs": [
+               { "bSearchable": true, "bVisible": false, "aTargets": [ 1,2 ] }
+           ],
+      searching: true,
+      "dom": '<"top"l>rt<"bottom"ip><"clear">'
+    });
+
+  $('#section-purchase-cd').on('change', function(){
+    tableItemQuotation.column(1).search(this.value).draw();
+  });
+
+  $('#approve-cbx').change(function() {
+      var cbxValue = $(this).is(":checked") ? this.value : '';
+      tableItemQuotation.column(2).search(cbxValue).draw();
+  });
+
+  $('#blacklist-cbx').change(function() {
+      var cbxValue = $(this).is(":checked") ? this.value : '';
+      tableItemQuotation.column(2).search(cbxValue).draw();
   });
 
   
@@ -297,10 +320,7 @@ $(document).ready(function(){
   // Table Unit Post Buy Lead
   unitPbl = $('#unitPbl').DataTable();
   // Table Item Quotation
-  tableItemQuotation = $('#tableItemQuotation').DataTable({
-    searching: true,
-    //"dom": '<"top">rt<"bottom"ip><"clear">'
-  });
+  
   // Table Detail Item Quotation
   detailItem = $('#detailItem').DataTable({
     searching: true,

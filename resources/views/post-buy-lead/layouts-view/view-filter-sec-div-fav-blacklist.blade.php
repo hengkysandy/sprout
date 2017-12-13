@@ -23,14 +23,14 @@
       <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="checkbox">
           <label>
-            <input type="checkbox" value="Approved" id="approve-cbx"> Filter company only for approved vendor
+            <input type="checkbox" value="approved" id="approve-cbx"> Filter company only for approved vendor
           </label>
         </div>
       </div>
       <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="checkbox">
           <label>
-            <input type="checkbox" value="Blacklisted" id="blacklist-cbx"> Filter company only for blacklist vendor
+            <input type="checkbox" value="blacklisted" id="blacklist-cbx"> Filter company only for blacklist vendor
           </label>
         </div>
       </div>

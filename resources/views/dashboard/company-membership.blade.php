@@ -34,11 +34,14 @@
                 <th>Business Category</th>
                 <th>Package</th>
                 <th>Duration</th>
-                <th>Price</th>
+                <th>Total Price</th>
                 <th>Re-Activate Action</th>
               </tr>
             </thead>
             <tbody>
+              <?php 
+                  $now = Carbon\Carbon::now();               
+               ?>
               @foreach($requestAddOn as $data)
               <tr>
                 <td>{{$data->company_id}}</td>
@@ -49,8 +52,11 @@
                   @endforeach
                 </td>
                 <td>{{$data->AddOn()->first()->name}} * {{$data->quantity}} pcs</td>
-                <td>{{$data->expired_date}}</td>
-                <td>{{$data->AddOn()->first()->price}}</td>
+                <td>{{ $data->expired_date->diffInDays($now)}} days</td>
+                <?php 
+                  $day = $data->expired_date->diffInDays($now) == 0 ? 1 : $data->expired_date->diffInDays($now);
+                 ?>
+                <td>Rp.  {{number_format( ($data->AddOn()->first()->price * $data->quantity)*($day) )}}</td>
                 <td>
                   <a href="{{url('doChangeStatusCompanyAddOn?id='.$data->id.'&status=confirmed')}}" class="btn btn-sm btn-primary btn-approve">Approve</a>
                 </td>
@@ -105,6 +111,7 @@
               </tr>
             </thead>
             <tbody>
+              <?php $flag = 0; ?>
               @foreach($approvedCompany as $acData)
                 <tr>
                 <td>{{$acData->id}}</td>
@@ -112,12 +119,12 @@
                 <td>
                 @if($acData->CompanyBusinessCategory()->first())
                   
-                  @foreach($acData->CompanyBusinessCategory()->get() as $companyBC)
+                  @foreach($acData->CompanyBusinessCategory()->whereHas('BusinessCategory',function($bc){$bc->where('status','company category');})->get() as $companyBC)
                     <a href="#bCategory" data-toggle="modal">{{$companyBC->BusinessCategory->Section->name}}</a> <span>,</span>
                   @endforeach
 
                 @else
-                  There's no business category yet
+                  
                 @endif
                 </td>
               </tr>

@@ -5,7 +5,7 @@ $(function() {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
     });
-    alert();
+    
 	
     $(document).on('change','#section-sales-cd',function(){
         var sectionName = $(this).val();

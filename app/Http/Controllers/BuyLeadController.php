@@ -288,12 +288,12 @@ class BuyLeadController extends Controller
 
                 $divId = (
                 ( empty($request->division[$i]) ) ? NULL :
-                 ( ( $request->division[$i] == "-" ) ? NULL :  $request->division )
+                 ( ( $request->division[$i] == "-" ) ? NULL :  $request->division[$i] )
                 );
 
                 $groupId = (
                 ( empty($request->group[$i]) ) ? NULL :
-                 ( ( $request->group[$i] == "-" ) ? NULL :  $request->group )
+                 ( ( $request->group[$i] == "-" ) ? NULL :  $request->group[$i] )
                 );
 
                 $currBC = BusinessCategory::create([
@@ -588,11 +588,13 @@ class BuyLeadController extends Controller
         }else if(in_array(session()->get('userSession')[0]->role_id, $salesRoleArr)){
             $usedArr = $salesStatusArr;
         }
+
         $currCompanyCategoryEloquent = CompanyBusinessCategory::where('id_company', session()->get('userSession')[0]->id_company)->get();
         $listOfSectionId = [];
         foreach ($currCompanyCategoryEloquent as $companyBC) {
-            $listOfSectionId[] = $companyBC->BusinessCategory->Section->id;
+            $listOfSectionId[] = $companyBC->BusinessCategory->where('status','company category')->first()->id_section;
         }
+        $listOfSectionId;
 
         $r['companyBC'] = CompanyBusinessCategory::whereHas('BusinessCategory',function($bc) use ($listOfSectionId){
             $bc->whereIn('id_section',$listOfSectionId)

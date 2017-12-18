@@ -36,7 +36,7 @@
                 <tr>
                   <td>{{++$blKey}}</td>
                   <td>{{$blData->item}}</td>
-                  <td>{{$blData->amount}}</td>
+                  <td>{{$blData->amount}} {{$blData->Unit->name}}</td>
                   <td>Rp {{number_format($blData->total_price)}}</td>
                   <td>{{$blData->ShippingTerm()->first()->name}}</td>
                   <td>

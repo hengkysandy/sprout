@@ -8,6 +8,8 @@ class CompanyAddOn extends Model
 {
 	protected $table = 'company_add_on';
 
+    protected $dates = ['expired_date'];
+
     protected $fillable = [
 		'company_id',
 		'add_on_id',

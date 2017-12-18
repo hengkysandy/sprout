@@ -44,20 +44,22 @@
                       </thead>
                       <tbody>
                         @foreach($companyBC as $bcData)
-                          <tr>
-                            <td>{{$bcData->BusinessCategory->Section->section}}</td>
-                            <td>{{$bcData->BusinessCategory->Section->name}}</td>
-                            <td>
-                              @foreach($bcData->BusinessCategory->Section->Division()->get() as $dData)
-                                {{$dData->name}},
-                              @endforeach
-                            </td>
-                            <td>
-                              <a href="#detailBc" data-toggle="modal" class="btn btn-orange btn-sm">Detail</a>
-                              <a href="#editBc" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
-                              <a href="#deleteBc" data-toggle="modal" class="btn btn-danger btn-sm">Delete</a>
-                            </td>
-                          </tr>
+                          @if( $bcData->BusinessCategory->status == "company category" )
+                            <tr>
+                              <td>{{$bcData->BusinessCategory->Section->section}}</td>
+                              <td>{{$bcData->BusinessCategory->Section->name}}</td>
+                              <td>
+                                @foreach($bcData->BusinessCategory->Section->Division()->get() as $dData)
+                                  {{$dData->name}},
+                                @endforeach
+                              </td>
+                              <td>
+                                <a href="#detailBc" data-toggle="modal" class="btn btn-orange btn-sm">Detail</a>
+                                <a href="#editBc" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="#deleteBc" data-toggle="modal" class="btn btn-danger btn-sm">Delete</a>
+                              </td>
+                            </tr>
+                          @endif
                         @endforeach
                       </tbody>
                     </table>
@@ -70,7 +72,7 @@
                   <div class="col-md-8 col-sm-8 col-xs-8">
                     <div class="form-group">
                       <label>Package</label>
-                      <input type="text" class="form-control" disabled="" value="Regular +">
+                      <input type="text" class="form-control" disabled="" value="{{$thisCompany->CompanyPackage()->latest('created_at')->first()->Package()->first()->name}}">
                     </div>
                   </div>
 
@@ -85,7 +87,7 @@
                   <div class="col-md-8 col-sm-8 col-xs-8">
                     <div class="form-group">
                       <label>Account Duration</label>
-                      <input type="text" class="form-control" disabled="" value="10 November 2018">
+                      <input type="text" class="form-control" disabled="" value="{{date('d F Y', strtotime($thisCompany->CompanyPackage()->where('status','confirmed')->latest('created_at')->first()->expired_date)) }}">
                     </div>
                   </div>
 
@@ -426,10 +428,10 @@
               <tbody>
                 @foreach($section as $sData)
                   <tr>
-                    <td>{{$sData->section}}</td>
+                    <td>{{$sData->name}}</td>
                     <td>
                       @foreach($sData->Division()->get() as $dData)
-                        {{$dData->name}},
+                        {{$dData->description}},
                       @endforeach
                     </td>
                     <td>

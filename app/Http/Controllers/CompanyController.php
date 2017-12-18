@@ -340,7 +340,7 @@ class CompanyController extends Controller
     }
 
     public function profile() {
-        $companyAddOn = CompanyAddOn::whereDate('expired_date','>=',Carbon::now())
+        $companyAddOn = CompanyAddOn::where('expired_date','<=',Carbon::now())
                 ->where('status','confirmed')
                 ->latest('created_at')
                 ->first();

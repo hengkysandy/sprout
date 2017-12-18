@@ -6,7 +6,7 @@
         width: 180px
         height: 120px;
         -->
-        <img src="images/logo.png" alt="Sprout">
+        <img src="{{url('images/logo.png')}}" alt="Sprout">
         <p>Connect &amp; Grow</p>
       </div>
     </div>

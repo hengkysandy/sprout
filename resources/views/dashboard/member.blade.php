@@ -39,6 +39,7 @@
                           <th>Section</th>
                           <th>Section Name</th>
                           <th>Division</th>
+                          <th>Group</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -48,15 +49,10 @@
                             <tr>
                               <td>{{$bcData->BusinessCategory->Section->section}}</td>
                               <td>{{$bcData->BusinessCategory->Section->name}}</td>
+                              <td>{{$bcData->BusinessCategory->Division->description}}</td>
+                              <td>{{$bcData->BusinessCategory->Group->description}}</td>
                               <td>
-                                @foreach($bcData->BusinessCategory->Section->Division()->get() as $dData)
-                                  {{$dData->name}},
-                                @endforeach
-                              </td>
-                              <td>
-                                <a href="#detailBc" data-toggle="modal" class="btn btn-orange btn-sm">Detail</a>
-                                <a href="#editBc" data-toggle="modal" class="btn btn-primary btn-sm">Edit</a>
-                                <a href="#deleteBc" data-toggle="modal" class="btn btn-danger btn-sm">Delete</a>
+                                <a href="{{url('doDeleteCompanyBC?idBC='.$bcData->id_business_category)}}" data-toggle="modal" class="btn btn-danger btn-sm">Delete</a>
                               </td>
                             </tr>
                           @endif
@@ -186,9 +182,9 @@
           <h4 class="modal-title">Add Business Category</h4>
         </div>
         <div class="modal-body">
-          <div class="margin-bottom">
+          <!-- <div class="margin-bottom">
             <a href="#chooseBc" data-toggle="modal" class="btn btn-orange">Choose From Existing Category</a>
-          </div>
+          </div> -->
           <form>
             <div class="row">
 
@@ -196,7 +192,7 @@
                 <div class="form-group">
                   <label>Choose Section</label>
                   <div class="input-group">
-                    <input type="text" class="form-control" value="Section A : Agriculture, forestry and fishing">
+                    <input type="text" class="form-control" id="section-box">
                     <span class="input-group-btn">
                       <button class="btn btn-default" data-toggle="modal" data-target="#chooseSect" type="button"><i class="fa fa-folder-open"></i></button>
                     </span>
@@ -207,9 +203,20 @@
                 <div class="form-group">
                   <label>Choose Division</label>
                   <div class="input-group">
-                    <input type="text" class="form-control" value="Division 1, Division 2">
+                    <input type="text" class="form-control" id="division-box">
                     <span class="input-group-btn">
                       <button class="btn btn-default" data-toggle="modal" data-target="#chooseDiv" type="button"><i class="fa fa-folder-open"></i></button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label>Choose Group</label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" id="group-box">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" data-toggle="modal" data-target="#chooseGroup" type="button"><i class="fa fa-folder-open"></i></button>
                     </span>
                   </div>
                 </div>
@@ -218,8 +225,15 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary add-bc" data-dismiss="modal">Add</button>
+          
+          <form action="{{url('doAddCompanyBC')}}" method="post">
+            {{csrf_field()}}
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary add-bc">Add</button>
+            <input type="hidden" name="groupId">
+            <input type="hidden" name="id_company" value="{{$thisCompany->id}}">
+          </form>
+          
         </div>
       </div>
     </div>
@@ -244,46 +258,26 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Section A</td>
-                  <td>Agriculture, forestry and fishing</td>
-                  <td>
-                    <div class="radio">
-                      <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-                      </label>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Section B</td>
-                  <td>Mining and quarrying</td>
-                  <td>
-                    <div class="radio">
-                      <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                      </label>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Section C</td>
-                  <td>Manufacturing</td>
-                  <td>
-                    <div class="radio">
-                      <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
-                      </label>
-                    </div>
-                  </td>
-                </tr>
+                @foreach($section as $key => $data)
+                  <tr>
+                    <td>{{$data->section}}</td>
+                    <td>{{$data->name}}</td>
+                    <td>
+                      <div class="radio">
+                        <label>
+                          <input type="radio" name="optionsRadios" class="sectionRadios" value="{{$data->id}}">
+                        </label>
+                      </div>
+                    </td>
+                  </tr>
+                @endforeach
               </tbody>
             </table>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Add</button>
+          <button type="button" class="btn btn-primary add-section" data-dismiss="modal">Add</button>
         </div>
       </div>
     </div>
@@ -291,6 +285,70 @@
 
   <!-- Choose Division -->
   <div class="modal fade" id="chooseDiv" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Choose Division</h4>
+        </div>
+        <div class="modal-body">
+          <div class="table-responsive">
+            <table class="table table-middle table-condensed">
+              <thead>
+                <tr>
+                  <th>Division</th>
+                  <th>Description</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="division-tbody">
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary add-division" data-dismiss="modal">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Choose Group -->
+  <div class="modal fade" id="chooseGroup" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Choose Group</h4>
+        </div>
+        <div class="modal-body">
+          <div class="table-responsive">
+            <table class="table table-middle table-condensed">
+              <thead>
+                <tr>
+                  <th>Group</th>
+                  <th>Group Name</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="group-tbody">
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary add-group" data-dismiss="modal">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Choose Division-temp -->
+  <div class="modal fade" id="chooseDivtemp" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">

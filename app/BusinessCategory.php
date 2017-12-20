@@ -24,4 +24,9 @@ class BusinessCategory extends Model
     {
         return $this->belongsTo(Division::class,'id_division','id');
     }
+
+    public function Group()
+    {
+        return $this->belongsTo(Group::class,'id_group','id');
+    }
 }

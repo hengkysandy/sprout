@@ -55,6 +55,8 @@
                         <span class="text-success"><strong>approved</strong></span>
                       @elseif(in_array(7, $data['company_status_arr']))
                         <span class="text-danger"><strong>blacklisted</strong></span>
+                      @else
+                        <span class="text-muted no-text-decoration"><strong>undecided</strong></span>
                       @endif
                     </td>
 
@@ -66,6 +68,9 @@
                         <a href="{{url('doChangeCompanyStatus?id='.$data['company']->id.'&status=5&type=procurement')}}" data-toggle="modal" class="btn btn-sm btn-default">Cancel Approval</a>
                       @elseif(in_array(7, $data['company_status_arr']))
                         <a href="{{url('doChangeCompanyStatus?id='.$data['company']->id.'&status=5&type=procurement')}}" data-toggle="modal" class="btn btn-sm btn-default">Cancel Blacklist</a>
+                      @else
+                        <a href="{{url('doChangeCompanyStatus?id='.$data['company']->id.'&status=6&type=procurement')}}" data-toggle="modal" class="btn btn-sm btn-success"><strong>Approve</strong></a>
+                        <a href="{{url('doChangeCompanyStatus?id='.$data['company']->id.'&status=7&type=procurement')}}" data-toggle="modal" class="btn btn-sm btn-danger"><strong>Blacklist</strong></a>
                       @endif
                     </td>
 
@@ -116,10 +121,12 @@
                     @elseif(in_array(4, $data['company_status_arr']))
                       <a href="{{url('doChangeCompanyStatus?id='.$data['company']->id.'&status=15&type=sales')}}">
                         <span class="favourite favourite-true" title="favourite"><i class="fa fa-star yellow-icon"></i></span>
+                        <span style="display: none;">favourite</span>
                       </a>
                     @elseif(count($data['company_status']) != 0 || !in_array(15, $data['company_status_arr']))
                       <a href="{{url('doChangeCompanyStatus?id='.$data['company']->id.'&status=4&type=sales')}}">
                         <span class="favourite favourite-false" title="not favourite"><i class="fa fa-star-o"></i></span>
+                        <span style="display: none;">not favourite</span>
                       </a>
                     @endif
                     </td>

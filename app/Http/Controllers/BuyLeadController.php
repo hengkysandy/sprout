@@ -11,10 +11,13 @@ use App\BuyLeadStatus;
 use App\BuyLeadUser;
 use App\CloudinaryMapping;
 use App\Company;
-use App\CompanyStatus;
 use App\CompanyBusinessCategory;
+use App\CompanyStatus;
+use App\Discussion;
+use App\DiscussionDetail;
 use App\Division;
 use App\Group;
+use App\MeetingSummary;
 use App\Quotation;
 use App\QuotationStatus;
 use App\Revise;
@@ -428,6 +431,10 @@ class BuyLeadController extends Controller
         $data['buyLead'] = BuyLead::find($data['quotation']->id_buy_lead);
         $data['revise'] = Revise::where('id_quotation',$data['quotation']->id)->orderBy('created_at','ASC')->get();
         $data['shippingTerm'] = ShippingTerm::all();
+        $data['broadcastCompany'] = Company::where('company.id','!=',session()->get('companySession')[0]->id)
+            ->get();
+
+        $data['discussion'] = Discussion::where('id_buy_lead',$data['buyLead']->id)->get();
 
         $indo = new Indonesia();
         $data['city'] = $indo->allCities();
@@ -663,6 +670,66 @@ class BuyLeadController extends Controller
 
         return back();
 
+    }
+
+    public function meetingSummary(Request $request)
+    {
+        $data['id_quotation'] = $request->idQuo;
+        $data['meeting'] = MeetingSummary::where('id_quotation',$request->idQuo)->get();
+        return view('post-buy-lead.meeting-summary', $data);
+    }
+
+    public function createMeetingSummary(Request $request)
+    {
+        $carbon = new Carbon($request->date);
+        
+        MeetingSummary::create([
+            'id_quotation' => $request->idQuo,
+            'created_by' => session()->get('userSession')[0]->id,
+            'title' => $request->title,
+            'subject' => $request->subject,
+            'date' => $carbon->format('Y:m:d'),
+            'time' => $request->time,
+            'minute_of_meeting' => $request->minuteDescription,
+            'status' => 'active',
+        ]);
+
+        return back();
+    }
+
+    public function deleteMeetingSummary(Request $request)
+    {
+        MeetingSummary::find($request->id)->delete();
+        return back();
+    }
+
+    public function meetingId(Request $request)
+    {
+        $data['meeting'] = MeetingSummary::find($request->id);
+        return view('post-buy-lead.meeting-id', $data);
+    }
+
+    public function createDiscussion(Request $request)
+    {
+        Discussion::create([
+            'id_buy_lead' => $request->idBuyLead,
+            'id_user' => session()->get('userSession')[0]->id,
+            'message' => $request->discussion,
+            'status' => 'active',
+        ]);
+
+        return back();
+    }
+
+    public function createDiscussionDetail(Request $request)
+    {
+        DiscussionDetail::create([
+            'user_id' => session()->get('userSession')[0]->id,
+            'discussion_id' => $request->currDiscussionId,
+            'message' => $request->discussion,
+        ]);
+
+        return back();
     }
 
 }

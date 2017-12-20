@@ -135,7 +135,7 @@ $(document).ready(function(){
   });
 
   $('#status-bl-list').on('change', function(){
-    bll.column(9).search(this.value).draw();
+    bll.column(10).search(this.value).draw();
   });
 
   $('#frequent-bl-list').change(function() {

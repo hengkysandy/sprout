@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 18, 2017 at 12:59 PM
+-- Generation Time: Dec 20, 2017 at 12:37 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -127,9 +127,9 @@ INSERT INTO `business_category` (`id`, `id_section`, `id_division`, `id_group`, 
 (8, 13, 13, 3, 'active', '2017-12-06 11:26:10', '2017-12-06 11:26:10', NULL),
 (9, 13, 13, 1, 'active', '2017-12-15 06:58:19', '2017-12-15 06:58:19', NULL),
 (10, 13, 14, 4, 'active', '2017-12-15 06:58:19', '2017-12-15 06:58:19', NULL),
-(11, 13, NULL, NULL, 'company category', '2017-12-18 09:21:18', '2017-12-18 09:21:18', NULL),
-(13, 14, NULL, NULL, 'company category', '2017-12-18 09:58:37', '2017-12-18 09:58:37', NULL),
-(14, 13, NULL, NULL, 'company category', '2017-12-18 10:00:59', '2017-12-18 10:00:59', NULL);
+(11, 13, 14, 4, 'company category', '2017-12-18 09:21:18', '2017-12-18 09:21:18', NULL),
+(13, 14, 15, 5, 'company category', '2017-12-18 09:58:37', '2017-12-18 09:58:37', NULL),
+(17, 14, 16, 7, 'company category', '2017-12-19 11:08:24', '2017-12-19 11:08:24', NULL);
 
 -- --------------------------------------------------------
 
@@ -451,7 +451,7 @@ INSERT INTO `company_business_category` (`id`, `id_company`, `id_business_catego
 (1, 1, 8, 'active', '2017-12-13 10:32:09', NULL, NULL),
 (2, 2, 11, 'active', '2017-12-18 09:21:18', '2017-12-18 09:21:18', NULL),
 (4, 1, 13, 'active', '2017-12-18 09:58:37', '2017-12-18 09:58:37', NULL),
-(5, 3, 14, 'active', '2017-12-18 10:00:59', '2017-12-18 10:00:59', NULL);
+(7, 3, 17, 'active', '2017-12-19 11:08:24', '2017-12-19 11:08:24', NULL);
 
 -- --------------------------------------------------------
 
@@ -621,7 +621,9 @@ CREATE TABLE `company_status` (
 INSERT INTO `company_status` (`id`, `id_company_by`, `id_company_for`, `id_status`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 2, 1, 16, 'active', '2017-11-14 04:07:09', '2017-11-14 04:07:09', NULL),
 (2, 1, 2, 16, 'active', '2017-11-16 14:59:28', '2017-11-16 14:59:28', NULL),
-(4, 2, 1, 6, '', '2017-12-13 10:39:42', NULL, NULL);
+(4, 2, 1, 6, '', '2017-12-13 10:39:42', NULL, NULL),
+(5, 2, 3, 4, 'active', '2017-12-19 10:30:57', '2017-12-19 10:50:03', NULL),
+(6, 2, 3, 5, 'active', '2017-12-19 10:38:13', '2017-12-19 10:50:15', NULL);
 
 -- --------------------------------------------------------
 
@@ -631,6 +633,7 @@ INSERT INTO `company_status` (`id`, `id_company_by`, `id_company_for`, `id_statu
 
 CREATE TABLE `discussion` (
   `id` int(11) NOT NULL,
+  `id_buy_lead` int(11) DEFAULT NULL,
   `id_user` int(11) NOT NULL,
   `message` varchar(255) DEFAULT NULL,
   `status` varchar(200) NOT NULL,
@@ -639,6 +642,14 @@ CREATE TABLE `discussion` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   `type` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `discussion`
+--
+
+INSERT INTO `discussion` (`id`, `id_buy_lead`, `id_user`, `message`, `status`, `created_at`, `updated_at`, `deleted_at`, `type`) VALUES
+(2, 2, 2, 'asdfsadfdsa', 'active', '2017-12-20 11:06:52', '2017-12-20 11:06:52', NULL, NULL),
+(3, 2, 2, 'xzcvcxvxzvczxcv', 'active', '2017-12-20 11:32:38', '2017-12-20 11:32:38', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -655,6 +666,15 @@ CREATE TABLE `discussion_detail` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `discussion_detail`
+--
+
+INSERT INTO `discussion_detail` (`id`, `user_id`, `discussion_id`, `message`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 2, 2, 'rqwerewqrwqer', '2017-12-20 11:27:25', '2017-12-20 11:27:25', NULL),
+(2, 2, 2, 'xzcvzvcxvzxvczxcvxzcv', '2017-12-20 11:32:33', '2017-12-20 11:32:33', NULL),
+(3, 2, 3, 'cxvbcvbx', '2017-12-20 11:34:21', '2017-12-20 11:34:21', NULL);
 
 -- --------------------------------------------------------
 
@@ -90605,6 +90625,7 @@ CREATE TABLE `meeting_status` (
 CREATE TABLE `meeting_summary` (
   `id` int(11) NOT NULL,
   `id_quotation` int(11) NOT NULL,
+  `created_by` int(11) DEFAULT NULL,
   `title` varchar(200) NOT NULL,
   `subject` varchar(200) NOT NULL,
   `date` date NOT NULL,
@@ -90615,6 +90636,13 @@ CREATE TABLE `meeting_summary` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `meeting_summary`
+--
+
+INSERT INTO `meeting_summary` (`id`, `id_quotation`, `created_by`, `title`, `subject`, `date`, `time`, `minute_of_meeting`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 2, 2, 'title', 'subje', '1970-01-13', '04:53:00', 'qwerqwe rwqrwq ewqer qwerqw qwerqw', 'active', '2017-12-20 09:53:12', '2017-12-20 09:53:12', NULL);
 
 -- --------------------------------------------------------
 
@@ -91167,7 +91195,8 @@ ALTER TABLE `company_status`
 --
 ALTER TABLE `discussion`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `discu_to_user` (`id_user`);
+  ADD KEY `discu_to_user` (`id_user`),
+  ADD KEY `discu_to_bl` (`id_buy_lead`);
 
 --
 -- Indexes for table `discussion_detail`
@@ -91366,7 +91395,7 @@ ALTER TABLE `area`
 -- AUTO_INCREMENT for table `business_category`
 --
 ALTER TABLE `business_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `buy_lead`
 --
@@ -91421,7 +91450,7 @@ ALTER TABLE `company_add_on`
 -- AUTO_INCREMENT for table `company_business_category`
 --
 ALTER TABLE `company_business_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `company_interested_program`
 --
@@ -91456,17 +91485,17 @@ ALTER TABLE `company_required_document`
 -- AUTO_INCREMENT for table `company_status`
 --
 ALTER TABLE `company_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `discussion`
 --
 ALTER TABLE `discussion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `discussion_detail`
 --
 ALTER TABLE `discussion_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `division`
 --
@@ -91496,7 +91525,7 @@ ALTER TABLE `meeting_status`
 -- AUTO_INCREMENT for table `meeting_summary`
 --
 ALTER TABLE `meeting_summary`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `migrations`
 --
@@ -91694,6 +91723,7 @@ ALTER TABLE `company_status`
 -- Constraints for table `discussion`
 --
 ALTER TABLE `discussion`
+  ADD CONSTRAINT `discu_to_bl` FOREIGN KEY (`id_buy_lead`) REFERENCES `buy_lead` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `discu_to_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --

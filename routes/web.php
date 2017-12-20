@@ -83,9 +83,6 @@ Route::group(['middleware' => 'checkUser','checkSales'],function(){
     Route::post('assignUser/{id}','BuyLeadController@assignUser');
     Route::post('doAssignCompanyBuyLead','BuyLeadController@doAssignCompanyBuyLead');
     Route::get('doRemoveAssignedCompany','BuyLeadController@doRemoveAssignedCompany');
-    
-    
-
 
     Route::post('doCreateRevise','BuyLeadController@doCreateRevise');
     Route::get('getQuotationDataAjax/{id}','BuyLeadController@getQuotationDataAjax');
@@ -93,6 +90,17 @@ Route::group(['middleware' => 'checkUser','checkSales'],function(){
 
     Route::get('company-database','BuyLeadController@companyDatabase');
     Route::get('doChangeCompanyStatus','BuyLeadController@doChangeCompanyStatus');
+
+    
+    Route::get('meeting-summary','BuyLeadController@meetingSummary');
+    Route::post('createMeetingSummary','BuyLeadController@createMeetingSummary');
+    Route::get('deleteMeetingSummary','BuyLeadController@deleteMeetingSummary');
+    Route::get('meeting-id','BuyLeadController@meetingId');
+
+    Route::post('createDiscussion','BuyLeadController@createDiscussion');
+    Route::post('createDiscussionDetail','BuyLeadController@createDiscussionDetail');
+
+
 
 }); 
 
@@ -161,6 +169,8 @@ Route::group(['middleware' => 'checkAdmin'], function () {
 
 
     Route::post('doAddCompanyBC', 'PageController@doAddCompanyBC');
+    Route::get('doDeleteCompanyBC', 'PageController@doDeleteCompanyBC');
+
     
 
 });

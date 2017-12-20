@@ -62,4 +62,9 @@ $(function() {
 	    dataHandler.html(cell2+cell1);
 	});
 
+	$("a#replyDiscussion").click(function(){
+	    var id =$(this).data("value");
+	    $('input[name=currDiscussionId]').val(id);
+	});
+
 });

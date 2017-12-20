@@ -13,7 +13,7 @@
     <section class="content">
       <div class="row">
         <div class="col-md-2 col-sm-12 col-xs-12">
-          <a href="detail-item.html" class="btn btn-primary btn-block margin-bottom">Back</a>
+          <a href="{{url('meeting-summary?idQuo='.$meeting->id_quotation)}}" class="btn btn-primary btn-block margin-bottom">Back</a>
 
           <div class="box box-solid">
             <!--<div class="box-header with-border">
@@ -48,9 +48,9 @@
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <div class="mailbox-read-info">
-                <h3>Delivery Time and Price Negotiation</h3>
-                <h5>Added by: Subroto Dinata
-                  <span class="mailbox-read-time pull-right">Thursday, May 4th 2017, 10:00 AM</span></h5>
+                <h3>{{$meeting->subject}}</h3>
+                <h5>Added by: {{$meeting->User->first_name . ' ' . $meeting->User->last_name}}
+                  <span class="mailbox-read-time pull-right">{{date("l, M dS Y", strtotime($meeting->date))}}, {{date("H:i A", strtotime($meeting->time))}}</span></h5>
               </div>
               <!-- /.mailbox-read-info
               <div class="mailbox-controls with-border text-center">
@@ -64,14 +64,7 @@
               </div> -->
               <!-- /.mailbox-controls -->
               <div class="mailbox-read-message">
-                <p>Dear Pak Arifan,</p>
-
-                <p>We would like to revise our quotation. For further information, please do not hesitate to contact us.</p>
-
-                <p>
-                  Regards,<br>
-                  Purnomo
-                </p>
+                <p>{{$meeting->minute_of_meeting}}</p>
               </div>
               <!-- /.mailbox-read-message -->
             </div>

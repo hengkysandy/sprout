@@ -14,4 +14,9 @@ class Group extends Model
 		'description',
 		'status'
     ];
+
+    public function Division()
+    {
+        return $this->belongsTo(Division::class,'division_id','id');
+    }
 }

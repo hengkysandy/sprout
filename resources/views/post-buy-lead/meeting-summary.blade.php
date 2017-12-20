@@ -25,33 +25,17 @@
                 </tr>
               </thead>
               <tbody>
+                @foreach($meeting as $data)
                 <tr>
                   <td>
-                    <a href="meeting-id.html">Delivery Time and Price Negotiation</a>
+                    <a href="{{url('meeting-id?id='.$data->id)}}">{{$data->subject}}</a>
                   </td>
-                  <td>Subroto Dinata</td>
+                  <td>{{$data->User->first_name . ' ' . $data->User->last_name}}</td>
                   <td>
-                    <a href="#deleteMS" data-toggle="modal" class="btn btn-danger btn-sm">Delete</a>
+                    <a href="{{url('deleteMeetingSummary?id='.$data->id)}}" data-toggle="modal" class="btn btn-danger btn-sm">Delete</a>
                   </td>
                 </tr>
-                <tr>
-                  <td>
-                    <a href="meeting-id.html">Vendor Qualification</a>
-                  </td>
-                  <td>Subroto Dinata</td>
-                  <td>
-                    <a href="#deleteMS" data-toggle="modal" class="btn btn-danger btn-sm">Delete</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <a href="meeting-id.html">Delivery Time and Price Negotiation</a>
-                  </td>
-                  <td>Subroto Dinata</td>
-                  <td>
-                    <a href="#deleteMS" data-toggle="modal" class="btn btn-danger btn-sm">Delete</a>
-                  </td>
-                </tr>
+                @endforeach
               </tbody>
             </table>
           </div>
@@ -123,46 +107,48 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title" id="myModalLabel">Add Meeting Summary</h4>
           </div>
+          <form action="{{url('createMeetingSummary')}}" method="post">
+            {{csrf_field()}}
+            <input type="hidden" name="idQuo" value="{{$id_quotation}}" >
           <div class="modal-body">
-            <form>
               <div class="row">
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
                     <label>Title</label>
-                    <input type="text" class="form-control">
+                    <input type="text" name="title" class="form-control">
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
                     <label>Subject</label>
-                    <input type="text" class="form-control">
+                    <input type="text" name="subject" class="form-control">
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
                     <label>Date</label>
-                    <input type="text" id="ac" class="form-control">
+                    <input type="text" name="date" id="ac" class="form-control">
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
                     <label>Time</label>
-                    <input type="text" id="tc" class="form-control">
+                    <input type="text" name="time" id="tc" class="form-control">
                   </div>
                 </div>
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <div class="form-group">
                     <label>Minute of Meeting</label>
-                    <textarea rows="7" class="form-control"></textarea>
+                    <textarea rows="7" name="minuteDescription" class="form-control"></textarea>
                   </div>
                 </div>
               </div>
-            </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary add-ms" data-dismiss="modal">Submit</button>
+            <button type="submit" class="btn btn-primary add-ms">Submit</button>
           </div>
+          </form>
         </div>
       </div>
     </div>

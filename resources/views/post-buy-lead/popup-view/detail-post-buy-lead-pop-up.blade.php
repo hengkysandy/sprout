@@ -30,16 +30,15 @@
                 <td>:</td>
                 <td>{{$buyLead->short_description}}</td>
               </tr>
-              <tr>
-                <th>Business Category 1</th>
-                <td>:</td>
-                <td><a href="#bc1" data-toggle="modal" class="btn btn-primary btn-xs">View List</a></td>
-              </tr>
-              <tr>
-                <th>Business Category 2</th>
-                <td>:</td>
-                <td><a href="#bc2" data-toggle="modal" class="btn btn-primary btn-xs">View List</a></td>
-              </tr>
+              @foreach($buyLead->BuyLeadBusinessCategory()->get() as $key => $blBC)
+              <?php $idx = ++$key; ?>
+                <tr>
+                  <th>Business Category {{$idx}}</th>
+                  <td>:</td>
+                  <td><a href="#bc{{$idx}}" data-toggle="modal" class="btn btn-primary btn-xs">View List</a></td>
+                </tr>
+              @endforeach
+              
               <tr>
                 <th>Unit</th>
                 <td>:</td>
@@ -93,7 +92,7 @@
               <tr>
                 <th>Document</th>
                 <td>:</td>
-                <td><a href="../../storage/sample.pdf" class="btn btn-primary btn-xs">Download Document</a></td>
+                <td><a target="_blank" href="{{url('download/file?url='.$buyLead->document)}}" class="btn btn-primary btn-xs">Download Document</a></td>
               </tr>
             </table>
           </div>

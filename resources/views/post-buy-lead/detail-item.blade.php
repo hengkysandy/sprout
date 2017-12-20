@@ -152,7 +152,7 @@
 
                     @endif
                     
-                    <a href="meeting-summary.html" class="btn btn-sm btn-default">Meeting Summary</a>
+                    <a href="{{url('meeting-summary?idQuo='.$quotation->id)}}" class="btn btn-sm btn-default">Meeting Summary</a>
                   </div>
                 </div>
               </div>
@@ -160,78 +160,72 @@
           </div>
 
           <div class="margin-top">
+
+
             <div class="panel panel-white post">
+
+              @foreach($discussion as $data)
+              <?php 
+                  $userType = $data->User->id_company == $buyLead->User->id_company ? "(Seller)" : "(Buyer)";
+               ?>
               <div class="post-heading col-md-12 col-sm-12 col-xs-12">
                 <div class="col-md-1 col-sm-2 col-xs-3 no-padding image">
-                  <img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image">
+                  <img src="{{$data->User->photo_image}}" class="img-circle avatar" alt="user profile image">
                 </div>
                 <div class="col-md-8 col-sm-8 col-xs-8 meta no-padding">
                   <div class="title h5">
-                    <b>PT Agung Aja</b> - John Legend (Seller)
+                    <b>{{$data->User->Company->name}}</b> - {{$data->User->first_name . ' ' . $data->User->last_name}} {{$userType}}
                   </div>
-                  <h6 class="text-muted time">30 minute ago</h6>
+                  <h6 class="text-muted time">{{$data->created_at->diffForHumans(CarBon\Carbon::now(), true)}}</h6>
                 </div>
               </div>
               <div class="post-description">
                 <p>Kualitas dari barang kami dijamin pak dengan harga yang sesuai</p>
               </div>
-              <a href="#replyMessage" class="no-text-decoration" data-toggle="modal">
+              <a data-value="{{$data->id}}" id="replyDiscussion" href="#replyMessage" class="no-text-decoration" data-toggle="modal">
                 <div class="reply">
                   <i class="fa fa-reply"></i><span class="padding-btn-rl">reply</span>
                 </div>
               </a>
 
               <div class="reply-box col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+
                 <ul class="reply-list">
+                  @foreach($data->DiscussionDetail()->get() as $dt)
+                  <?php 
+                      $userTypeDt = $dt->User->id_company == $buyLead->User->id_company ? "(Seller)" : "(Buyer)";
+                   ?>
                   <li>
                     <div class="reply-heading">
                       <div class="no-padding image col-md-1 col-sm-2 col-xs-3">
-                        <img src="http://bootdey.com/img/Content/user_3.jpg" class="img-circle avatar" alt="user profile image">
+                        <img src="{{$dt->User->photo_image}}" class="img-circle avatar" alt="user profile image">
                       </div>
                       <div>
                         <div class="title h5">
-                          <b>PT Citra Tubindo Tbk</b> - Jason Statham (Buyer)
+                          <b>{{$dt->User->Company->name}}</b> - {{$dt->User->first_name . ' ' . $dt->User->last_name}} {{$userTypeDt}}
                         </div>
-                        <h6 class="text-muted time">10 minute ago</h6>
+                        <h6 class="text-muted time">{{$dt->created_at->diffForHumans(CarBon\Carbon::now(), true)}}</h6>
                       </div>
                     </div>
                     <div class="post-description">
-                      <p>Menggunakan bahan-bahan dasar yang bagaimana pak?</p>
+                      <p>{{$dt->message}}</p>
                     </div>
-                    <a href="" class="no-text-decoration">
-                      <div class="reply">
-                        <i class="fa fa-reply"></i><span class="padding-btn-rl">reply</span>
-                      </div>
-                    </a>
                     <hr>
                   </li>
-                  <li>
-                    <div class="reply-heading">
-                      <div class="no-padding image col-md-1 col-sm-2 col-xs-3">
-                         <img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image">
-                      </div>
-                      <div>
-                        <div class="title h5 ">
-                          <b>PT Agung Aja</b> - John Legend (Seller)
-                        </div>
-                        <h6 class="text-muted time">5 minute ago</h6>
-                      </div>
-                    </div>
-                    <div class="post-description">
-                      <p> @Jason Satham Menggunakan bahan-bahan dasar antimainstream pak!</p>
-                    </div>
-                    <a href="" class="no-text-decoration">
-                      <div class="reply">
-                        <i class="fa fa-reply"></i><span class="padding-btn-rl">reply</span>
-                      </div>
-                    </a>
-                    <hr>
-                  </li>
+                  @endforeach
+
                 </ul>
               </div>
+              @endforeach
+
             </div>
 
-            <form class="margin-top">
+
+
+
+            <form class="margin-top" action="{{url('createDiscussion')}}" method="post">
+              {{csrf_field()}}
+              <input type="hidden" name="idBuyLead" value="{{$buyLead->id}}">
               <h4>Add Discussion :</h4>
               <div class="row">
                 <div class="col-md-8 col-sm-12 col-xs-12">
@@ -239,12 +233,12 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                       <div class="form-group">
                         <label></label>
-                        <textarea rows="6" class="form-control no-resize" placeholder="Your discussion..."></textarea>
+                        <textarea name="discussion" rows="6" class="form-control no-resize" placeholder="Your discussion..."></textarea>
                       </div>
                     </div>
                     <div class="col-md-12 col-sm-12 col-xs-12">
                       <div class="form-group">
-                        <a href="#" class="btn btn-primary">Send</a>
+                        <button type="submit" class="btn btn-primary">Send</button>
                       </div>
                     </div>
                   </div>
@@ -524,17 +518,19 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title" id="MyModalLabel">Reply Messages</h4>
           </div>
+          <form method="post" action="{{url('createDiscussionDetail')}}">
+            {{csrf_field()}}
+            <input type="hidden" name="currDiscussionId">
           <div class="modal-body">
-            <form>
               <div class="form">
-                <textarea rows="6" class="form-control no-resize"></textarea>
+                <textarea name="discussion" rows="6" class="form-control no-resize"></textarea>
               </div>
-            </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary submit-reply" data-dismiss="modal">Submit</button>
+            <button type="submit" class="btn btn-primary submit-reply">Submit</button>
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
           </div>
+          </form>
         </div>
       </div>
     </div>
@@ -617,27 +613,25 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>JKT-02</td>
-                    <td>Arjuna Sanjaya</td>
-                    <td>Agriculture, forestry and fishing</td>
-                    <td><span class="text-success"><strong>Approved</strong></span></td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>JKT-01</td>
-                    <td>Adijaya Abadi</td>
-                    <td>Agriculture, forestry and fishing</td>
-                    <td><span class="text-success"><strong>Approved</strong></span></td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>JKT-05</td>
-                    <td>Malik Sentosa Selalu</td>
-                    <td>Agriculture, forestry and fishing</td>
-                    <td><span class="text-success"><strong>Approved</strong></span></td>
-                  </tr>
+                  @foreach($broadcastCompany as $key => $data)
+                    @if( !empty($data->CompanyStatusFor()->get()) )
+
+                    @if($data->CompanyStatusFor()->where('id_status',16)->first() && $data->CompanyStatusFor()->where('id_company_by',session()->get('companySession')[0]->id)->first())
+                      <tr>
+                        <td>{{++$key}}</td>
+                        <td>{{$data->id}}</td>
+                        <td>{{$data->name}}</td>
+                        <td>
+                          @foreach($data->CompanyBusinessCategory()->get() as $bcData)
+                            {{$bcData->BusinessCategory->Section->name}},
+                          @endforeach
+                        </td>
+                        <td><span class="text-success"><strong>Approved</strong></span></td>
+                      </tr>
+                    @endif
+
+                    @endif
+                  @endforeach
                 </tbody>
               </table>
             </div>
@@ -650,104 +644,67 @@
     </div>
 
     <!-- Detail Business Category 1 -->
-    <div class="modal fade" id="bc1" tabindex="-1" role="dialog">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Detail Business Category</h4>
-          </div>
-          <div class="modal-body">
-            <h4><strong>Section A</strong></h4>
-            <h5>Agriculture, forestry and fishing</h5>
+    <?php $idx2 = 1; ?>
+    @foreach($buyLead->BuyLeadBusinessCategory()->get() as $key => $blBC)
+    <?php $idx = ++$key; ?>
+      <div class="modal fade" id="bc{{$idx}}" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Detail Business Category</h4>
+            </div>
+            <div class="modal-body">
+              <h4><strong>{{$blBC->BusinessCategory->Section->section}}</strong></h4>
+              <h5>{{$blBC->BusinessCategory->Section->name}}</h5>
 
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">
-                      <a href="#division1" class="no-text-decoration" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="division1">Division 1 - Crop and animal production, hunting, and related service activities</a>
-                    </h3>
-                  </div>
-                  <div id="division1" class="panel-body collapse">
-                    <div class="table-responsive">
-                      <table class="table table-condensed">
-                        <thead>
-                          <tr>
-                            <th>Group</th>
-                            <th>Description</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>011</td>
-                            <td>Growing of non prennial crops</td>
-                          </tr>
-                          <tr>
-                            <td>013</td>
-                            <td>Plant porpagation</td>
-                          </tr>
-                          <tr>
-                            <td>014</td>
-                            <td>Animal production</td>
-                          </tr>
-                          <tr>
-                            <td>015</td>
-                            <td>Mixed farming</td>
-                          </tr>
-                          <tr>
-                            <td>016</td>
-                            <td>Support activities to agriculture and post harvest crop activities</td>
-                          </tr>
-                        </tbody>
-                      </table>
+              <div class="row">
+                @foreach($blBC->BusinessCategory->Section->Division()->get() as $dKey => $divData)
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">
+                        <a href="#division{{$idx2}}" class="no-text-decoration" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="division{{$idx2}}">{{$divData->name}} - {{$divData->description}}</a>
+                      </h3>
+                    </div>
+                    <div id="division{{$idx2}}" class="panel-body collapse">
+                      <div class="table-responsive">
+                        <table class="table table-condensed">
+                          <thead>
+                            <tr>
+                              <th>Group</th>
+                              <th>Description</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            @foreach($divData->Group()->get() as $gKey => $gData)
+                            <tr>
+                              <td>{{$gData->name}}</td>
+                              <td>{{$gData->description}}</td>
+                            </tr>
+                            @endforeach
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+                 <?php $idx2 += 1; ?>
+                @endforeach
 
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">
-                      <a href="#division2" class="no-text-decoration" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="division2">Division 2 - Forestry and logging</a>
-                    </h3>
-                  </div>
-                  <div id="division2" class="panel-body collapse">
-                    <div class="table-responsive">
-                      <table class="table table-condensed">
-                        <thead>
-                          <tr>
-                            <th>Group</th>
-                            <th>Description</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>021</td>
-                            <td>Silviculture and other forestry activities</td>
-                          </tr>
-                          <tr>
-                            <td>022</td>
-                            <td>Logging</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    @endforeach
+    
 
     <!-- Detail Business Category 2 -->
-    <div class="modal fade" id="bc2" tabindex="-1" role="dialog">
+    <div class="modal fade" id="bc2temp" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">

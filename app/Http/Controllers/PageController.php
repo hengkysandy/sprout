@@ -113,7 +113,10 @@ class PageController extends Controller
         $data['packageData'] = Package::all();
         $data['businessEntity'] = ['PT','CV','PD'];
         $data['thisCompany'] = Company::find($id);
-        $data['companyBC'] = CompanyBusinessCategory::where('id_company', $data['thisCompany']->id)->get();
+        $data['companyBC'] = CompanyBusinessCategory::whereHas('BusinessCategory',function($bc){
+            $bc->where('status','company category');
+        })->where('id_company', $data['thisCompany']->id)
+        ->get();
         $data['section'] = Section::all();
         $data['addOnData'] = AddOn::all();
     	return view('dashboard.member', $data);
@@ -279,19 +282,32 @@ class PageController extends Controller
 
     public function doAddCompanyBC(Request $request)
     {
-        $newBC = BusinessCategory::create([
-            'id_section' => $request->sectionOption,
-            'id_division' => NULL,
-            'id_group' => NULL,
-            'status' => 'company category'
-        ]);
+        
+        $group = Group::find($request->groupId);
+        $cekData = BusinessCategory::where('status','company category')
+                            ->where('id_group',$group->id)->first();
+        if(!$cekData){
 
-        CompanyBusinessCategory::create([
-            'id_company' => $request->id_company,
-            'id_business_category' => $newBC->id,
-            'status' => 'active'
-        ]);
+            $newBC = BusinessCategory::create([
+                'id_section' => $group->Division->section_id,
+                'id_division' => $group->division_id,
+                'id_group' => $group->id,
+                'status' => 'company category'
+            ]);
 
+            CompanyBusinessCategory::create([
+                'id_company' => $request->id_company,
+                'id_business_category' => $newBC->id,
+                'status' => 'active'
+            ]);
+
+        }
+        return back();
+    }
+
+    public function doDeleteCompanyBC(Request $request)
+    {
+        BusinessCategory::find($request->idBC)->delete();
         return back();
     }
 

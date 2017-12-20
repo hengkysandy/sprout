@@ -85,9 +85,6 @@ class Company extends Model
     {
         return $this->hasMany(UserPreDefine::class,'id_company','id');
     }
-
-    
-
     
 
     

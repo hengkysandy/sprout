@@ -35,7 +35,7 @@ use Laravolt\Indonesia\Indonesia;
 class BuyLeadController extends Controller
 {
     public function postBuyLead() {
-        $data['unitData'] = Unit::latest('created_at')->get();
+        $data['unitData'] = Unit::where('status','active')->latest('created_at')->get();
         $data['sectionData'] = Section::all();
         $data['areaData'] = Area::all();
         $data['userCompany'] = UserPreDefine::where('id_company',session()->get('companySession')[0]->id)->get();
@@ -238,25 +238,17 @@ class BuyLeadController extends Controller
 
     public function doInsertBuyLead(Request $request)
     {
-        // item: "Plate Material",
-        // amount: "11",
-        // shortDescription: "Ini harganya harus bisa murah dan kualitas bagus",
-        // unit: "2",
-        // totalPrice: "50000000",
-        // paymentTerm: "Down Payment 50%, Installment 6 Months",
-        // shippingTerm: "1",
-        // province: "12",
-        // city: "1203",
-        // closedDate: "2017-12-07",
-        // deliveryDays: "2",
-        // area: "2",
-        // section: [
-        // "13",
-        // null
-        // ],
-        // division: [
-        // "-"
-        // ]
+        $unitId = $request->unit;
+        if($request->otherUnit != null){
+            Unit::create([
+                'name' => $request->otherUnit,
+                'description' => 'other',
+                'status' => 'other'
+            ]);
+
+            $unitId = Unit::all()->last()->id;
+        }
+
         $company_id = Company::find(session()->get('userSession')[0]->id_company)->id;
         $dateNow = Carbon::now()->format('mdy');
         $buyLeadId = count(BuyLead::all())+1;
@@ -270,7 +262,7 @@ class BuyLeadController extends Controller
             'id_user' => session()->get('userSession')[0]->id,
             'id_city' => $request->city,
             'id_province' => $request->province,
-            'id_unit' => $request->unit,
+            'id_unit' => $unitId,
             'id_shipping_item' => $request->shippingTerm,
             'id_area' => $request->area,
             'item' => $request->item,

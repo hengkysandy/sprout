@@ -18,6 +18,12 @@ $(function() {
  //    	});
 	// });
 
+    $('#other_unit').hide();
+    $(document).on('change',$('select[name=unit]'),function(){
+        if( $('select[name=unit]').val() == "other" ) $('#other_unit').show();
+        else $('#other_unit').hide();
+    });
+
     function reloadBroadcastData(data){
         $("#assigned-tbody").empty();
         $("#notAssigned-tbody").empty();

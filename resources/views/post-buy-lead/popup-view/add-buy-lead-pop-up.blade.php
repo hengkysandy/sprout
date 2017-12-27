@@ -41,7 +41,14 @@
                       @foreach($unitData as $uData)
                         <option value="{{$uData->id}}">{{$uData->name}}</option>
                       @endforeach
+                      <option value="other">other</option>
                     </select>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12" id="other_unit">
+                  <div class="form-group">
+                    <label>Other Unit Name</label>
+                    <input type="text" class="form-control" name="otherUnit">
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">

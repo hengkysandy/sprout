@@ -128,7 +128,7 @@
                     <a href="#" class="btn btn-sm btn-default active">First Quotation</a>
                     <a href="#" class="btn btn-sm btn-default">Latest Quotation</a>
                     <!-- Need ask -->
-                    <a href="{{url('member/'.$quotation->User->Company->id)}}" class="btn btn-sm btn-default">Open Company Profile</a>
+                    <a href="{{url('companyProfile/'.$quotation->User->Company->id)}}" class="btn btn-sm btn-default">Open Company Profile</a>
                   </div>
                 </div>
               </div>
@@ -180,7 +180,7 @@
                 </div>
               </div>
               <div class="post-description">
-                <p>Kualitas dari barang kami dijamin pak dengan harga yang sesuai</p>
+                <p>{{$data->message}}</p>
               </div>
               <a data-value="{{$data->id}}" id="replyDiscussion" href="#replyMessage" class="no-text-decoration" data-toggle="modal">
                 <div class="reply">

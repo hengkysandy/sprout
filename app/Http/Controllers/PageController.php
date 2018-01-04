@@ -122,6 +122,19 @@ class PageController extends Controller
     	return view('dashboard.member', $data);
     }
 
+    public function companyProfile($id) {
+        $data['packageData'] = Package::all();
+        $data['businessEntity'] = ['PT','CV','PD'];
+        $data['thisCompany'] = Company::find($id);
+        $data['companyBC'] = CompanyBusinessCategory::whereHas('BusinessCategory',function($bc){
+            $bc->where('status','company category');
+        })->where('id_company', $data['thisCompany']->id)
+        ->get();
+        $data['section'] = Section::all();
+        $data['addOnData'] = AddOn::all();
+        return view('post-buy-lead.company-profile', $data);
+    }
+
     public function memberRequest() {
         // $companyPackageData = CompanyPackage::where('status','active')
         //                                 ->where('insert_from_profile','false')

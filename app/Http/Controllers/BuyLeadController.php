@@ -370,6 +370,7 @@ class BuyLeadController extends Controller
 
     public function showItem(Request $request, $id)
     {
+        $discussion = Discussion::where('id_buy_lead',$id)->where('status','before submit quotation')->get();
         $data['sectionData'] = Section::all();
         $buylead = BuyLead::leftjoin('shipping_term','buy_lead.id_shipping_item','=','shipping_term.id')
             ->leftjoin('user','buy_lead.id_user','=','user.id')
@@ -401,13 +402,13 @@ class BuyLeadController extends Controller
             $user = UserPreDefine::where('created_by', $userid)->get();
             $buyleaduserrequest = $buyleaduserrequest->get();
 /*            return $buyleaduserrequest;
-*/            return view('search-buy-lead.sales-manager.item', compact('buylead','area','shippingterm','user','buyleaduserassign','buyleaduserrequest'));
+*/            return view('search-buy-lead.sales-manager.item', compact('buylead','area','shippingterm','user','buyleaduserassign','buyleaduserrequest','discussion'));
         }
         else if(session()->get('userSession')[0]->role_id == 6){
             $userid = session()->get('userSession')[0]->id;
             $buyleaduserrequest = $buyleaduserrequest->where('buy_lead_user.id_user', $userid)->first();
             /*return $buyleaduserrequest;*/
-            return view('search-buy-lead.sales-staff.item', compact('buylead','area','shippingterm','buyleaduserassign','buyleaduserrequest'));
+            return view('search-buy-lead.sales-staff.item', compact('buylead','area','shippingterm','buyleaduserassign','buyleaduserrequest','discussion'));
         }else if(session()->get('userSession')[0]->role_id == 3){ //procurement manager
             $data['quotation'] = Quotation::where('id_buy_lead',$id)->get();
             $data['buyLead'] = BuyLead::find($id);
@@ -426,7 +427,7 @@ class BuyLeadController extends Controller
         $data['broadcastCompany'] = Company::where('company.id','!=',session()->get('companySession')[0]->id)
             ->get();
 
-        $data['discussion'] = Discussion::where('id_buy_lead',$data['buyLead']->id)->get();
+        $data['discussion'] = Discussion::where('id_buy_lead',$data['buyLead']->id)->where('status','active')->get();
 
         $indo = new Indonesia();
         $data['city'] = $indo->allCities();
@@ -719,6 +720,18 @@ class BuyLeadController extends Controller
             'user_id' => session()->get('userSession')[0]->id,
             'discussion_id' => $request->currDiscussionId,
             'message' => $request->discussion,
+        ]);
+
+        return back();
+    }
+
+    public function createDiscussionItem(Request $request)
+    {
+        Discussion::create([
+            'id_buy_lead' => $request->idBuyLead,
+            'id_user' => session()->get('userSession')[0]->id,
+            'message' => $request->discussion,
+            'status' => 'before submit quotation',
         ]);
 
         return back();

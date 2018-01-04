@@ -76,6 +76,7 @@ Route::group(['middleware' => 'checkUser','checkSales'],function(){
     Route::get('buy-lead-list','BuyLeadController@listBuyLead');
     Route::get('item/{id}','BuyLeadController@showItem');
     Route::get('detailItem/{id}','BuyLeadController@detailItem');
+    Route::get('companyProfile/{id}','PageController@companyProfile');
     Route::get('acceptRequest/{buylead}/{user}','BuyLeadController@acceptRequest');
     Route::get('acceptBuyLead/{id}','BuyLeadController@acceptBuyLead');
     Route::get('requestBuyLead/{id}','BuyLeadController@requestBuyLead');
@@ -99,6 +100,8 @@ Route::group(['middleware' => 'checkUser','checkSales'],function(){
 
     Route::post('createDiscussion','BuyLeadController@createDiscussion');
     Route::post('createDiscussionDetail','BuyLeadController@createDiscussionDetail');
+    Route::post('createDiscussionItem','BuyLeadController@createDiscussionItem');
+
 
 
 

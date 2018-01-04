@@ -1,5 +1,5 @@
 $(function() {
-
+	
       // console.log(quotation);
       // console.log(buyLead);
       var q = quotation;

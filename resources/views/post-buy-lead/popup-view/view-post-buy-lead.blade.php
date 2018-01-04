@@ -58,7 +58,7 @@
               <span style="display: none;">Done</span>
             </td>
             <td>
-              <a href="{{url('item/'.$blData->id)}}" class="btn btn-default btn-sm">Detail</a>
+              <a href="{{url('detailItem/'.$blData->id)}}" class="btn btn-default btn-sm">Detail</a>
               <a href="#" class="btn btn-default btn-sm" disabled="disabled">Approved</a>
             </td>
           @endif

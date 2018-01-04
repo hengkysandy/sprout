@@ -5,14 +5,15 @@
 <div id="main" class="container-fluid">
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12 ">
-      <h1 class="main-title no-margin-top"><strong>Buy Lead - Plate Material</strong></h1>
+      <h1 class="main-title no-margin-top"><strong>Buy Lead - {{$buylead[0]->item}}</strong></h1>
     </div>
     <div class="col-md-9 col-sm-12 col-xs-12">
       @yield('item-content')
+      @include('post-buy-lead.layouts-view.view-discussion-item')
     </div>
 
     <div class="col-md-3 col-sm-12 col-xs-12 hide-on-med-and-down">
-      @include('layouts.navbar-sales.navbar');
+      @include('layouts.navbar-sales.navbar')
     </div>
   </div>
 </div>
@@ -26,17 +27,19 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="MyModalLabel">Reply Messages</h4>
       </div>
+      <form method="post" action="{{url('createDiscussionDetail')}}">
+        {{csrf_field()}}
+        <input type="hidden" name="currDiscussionId">
       <div class="modal-body">
-        <form>
           <div class="form">
-            <textarea rows="6" class="form-control no-resize"></textarea>
+            <textarea name="discussion" rows="6" class="form-control no-resize"></textarea>
           </div>
-        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary submit-reply" data-dismiss="modal">Submit</button>
+        <button type="submit" class="btn btn-primary submit-reply">Submit</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
       </div>
+      </form>
     </div>
   </div>
 </div>

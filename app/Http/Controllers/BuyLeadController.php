@@ -327,6 +327,13 @@ class BuyLeadController extends Controller
 
     public function doChangeStatusBuyLead(Request $request)
     {
+        if($request->idStatus == 8){
+            BuyLead::find($request->idBuyLead)->Quotation()->whereHas('QuotationStatus',function($qs){
+                        $qs->where('id_status',6);
+                    })->first()->QuotationStatus->update([
+                        'id_status' => '8',
+                        ]);
+        }
         $data = BuyLeadStatus::where('id_buy_lead',$request->idBuyLead)->first();
         $data->id_status = $request->idStatus;
         $data->save();
@@ -382,6 +389,11 @@ class BuyLeadController extends Controller
             ->select('buy_lead.*', 'shipping_term.name as st_name','company.name as c_name','indonesia_cities.name as city_name', 'unit.name as unit' ,'indonesia_provinces.name as province_name','area.name as a_name')
             ->where('buy_lead.id',$id)
             ->get();
+
+        $hasQuotation = $buylead[0]->Quotation()->whereHas('User',function($u){
+                $u->where('id_company',session()->get('userSession')[0]->id_company);
+            })->first();
+
         $buyleaduserassign = BuyLead::leftjoin('buy_lead_user','buy_lead_user.id_buy_lead','=','buy_lead.id')
             ->leftjoin('user','user.id','=','buy_lead_user.id_user')
             ->where('buy_lead.id',$id)
@@ -401,6 +413,8 @@ class BuyLeadController extends Controller
             $userid = session()->get('userSession')[0]->id;
             $user = UserPreDefine::where('created_by', $userid)->get();
             $buyleaduserrequest = $buyleaduserrequest->get();
+            if($hasQuotation) return redirect('detailItem/'.$hasQuotation->id);
+            // if( $buylead->Quotation->where() ){}
 /*            return $buyleaduserrequest;
 */            return view('search-buy-lead.sales-manager.item', compact('buylead','area','shippingterm','user','buyleaduserassign','buyleaduserrequest','discussion'));
         }
@@ -408,8 +422,9 @@ class BuyLeadController extends Controller
             $userid = session()->get('userSession')[0]->id;
             $buyleaduserrequest = $buyleaduserrequest->where('buy_lead_user.id_user', $userid)->first();
             /*return $buyleaduserrequest;*/
+            if($hasQuotation) return redirect('detailItem/'.$hasQuotation->id);
             return view('search-buy-lead.sales-staff.item', compact('buylead','area','shippingterm','buyleaduserassign','buyleaduserrequest','discussion'));
-        }else if(session()->get('userSession')[0]->role_id == 3){ //procurement manager
+        }else if( in_array(session()->get('userSession')[0]->role_id, [3,4]) ){ //procurement manager staff
             $data['quotation'] = Quotation::where('id_buy_lead',$id)->get();
             $data['buyLead'] = BuyLead::find($id);
             // $data['quotation'][0]->BuyLead()->first();

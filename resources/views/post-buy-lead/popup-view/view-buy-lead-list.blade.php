@@ -85,11 +85,7 @@
               <span style="display: none;">{{$title}}</span>
             </td>
             <td>
-              @if( $title == "Approved" )
-                <a href="{{url('detailItem/'.$blData->id)}}" class="btn btn-sm btn-default">Detail</a>
-              @else
-                <a href="{{url('item/'.$blData->id)}}" class="btn btn-sm btn-default">Detail</a>
-              @endif
+              <a href="{{url('item/'.$blData->id)}}" class="btn btn-sm btn-default">Detail</a>
             </td>
           </tr>
         @endforeach

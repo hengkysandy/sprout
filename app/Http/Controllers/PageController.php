@@ -243,6 +243,9 @@ class PageController extends Controller
             
         $data['companyUser'] = UserPreDefine::where('id_company',session()->get('companySession')[0]->id)->get();
 
+        if( $data['currUser']->UserRole->role_id == 4 ) $data['buyLeadUser'] = BuyLead::where('id_user', $data['currUser']->id )->get();
+            
+
 
         return view('post-buy-lead.master-user.home',$data);
 

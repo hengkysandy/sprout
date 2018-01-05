@@ -58,8 +58,17 @@
               <span style="display: none;">Done</span>
             </td>
             <td>
-              <a href="{{url('detailItem/'.$blData->id)}}" class="btn btn-default btn-sm">Detail</a>
+              <a href="{{url('item/'.$blData->id)}}" class="btn btn-default btn-sm">Detail</a>
               <a href="#" class="btn btn-default btn-sm" disabled="disabled">Approved</a>
+              <?php 
+                  $approvedQuotation = $blData->Quotation()->whereHas('QuotationStatus',function($qs){
+                                        $qs->where('id_status',6);
+                                    })->first();
+               ?>
+              @if( $approvedQuotation )
+              <br><br>
+              <a href="{{url('doChangeStatusBuyLead?idBuyLead='.$blData->id.'&idStatus=8')}}" class="btn btn-success btn-sm">Approved</a>
+              @endif
             </td>
           @endif
         </tr>

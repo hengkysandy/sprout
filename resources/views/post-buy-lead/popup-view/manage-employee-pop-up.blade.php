@@ -34,6 +34,7 @@
             </thead>
             <tbody>
               @foreach($user as $key => $value)
+              @if($value->created_by == session()->get('userSession')[0]->id  || $value->id == session()->get('userSession')[0]->id )
               <tr>
                 <td>{{$value->id}}</td>
                 <td>{{$value->role_name}}</td>
@@ -63,6 +64,7 @@
                   <a href="{{url('doDeleteUser?id='.$value->id)}}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this?');">Delete</a>
                 </td>
               </tr>
+              @endif
               @endforeach
             </tbody>
           </table>

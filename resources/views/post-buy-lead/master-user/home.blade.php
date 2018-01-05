@@ -23,56 +23,109 @@
               <div class="box-header with-border">
                 <h3 class="box-title">Recently Added Buy Lead</h3>
               </div>
+
               <!-- /.box-header -->
-              <div class="box-body">
-                <ul class="products-list product-list-in-box">
-                  @foreach($companyUser as $data)
-                  @if( ($currUser->UserRole()->first()->role_id == 2 && $data->UserRole()->where('role_id',3)->first()) || ($currUser->UserRole()->first()->role_id == 3 && $data->created_by == $currUser->id) || ($currUser->UserRole()->first()->role_id == 4 && $data->id == $currUser->id) )
-                  <li class="item">
-                    <div class="col-md-6 col-sm-6 col-xs-12 no-padding">
-                      <div class="product-img">
-                        <img src="{{$data->photo_image}}" alt="gambar">
-                      </div>
-                      <div class="product-info">
-                        <div class="col-md-6 col-xs-12 no-padding">
-                          <a href="{{url('home?id='.$data->id)}}" class="product-title">{{$data->first_name}} {{$data->last_name}}</a>
-                          <span class="product-description">
-                          {{$data->UserRole()->first()->Role()->first()->name}}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-12 no-padding margin-top-med-and-down">
-                      <a href="meeting-schedule.html" class="product-title">
-                        <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                          <div class="col-md-12 col-xs-12 btn-danger btn no-padding btn-sm">
-                            <span class="initial">M</span>
-                            <span class="label-sm">0 Meeting Schedule belum bisa</span>
+              @if($currUser->UserRole()->first()->role_id == 4)
+                  <div class="box-body">
+                    <ul class="products-list product-list-in-box">
+                      @foreach($buyLeadUser as $data)
+                      <li class="item">
+                        <div class="col-md-6 col-sm-6 col-xs-12 no-padding">
+                          <div class="product-img">
+                            <img src="{{$data->photo_image}}" alt="gambar">
+                          </div>
+                          <div class="product-info">
+                            <div class="col-md-6 col-xs-12 no-padding">
+                              <a href="#" class="product-title">{{$data->item}}</a>
+                              <span class="product-description">
+                              {{$data->item}}
+                              </span>
+                            </div>
                           </div>
                         </div>
-                      </a>
-                      <a href="staff-procurement.html" class="product-title">
-                        <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                          <div class="col-md-12 col-xs-12 btn-success btn no-padding btn-sm">
-                            <span class="initial">A</span>
-                            <span class="label-sm">0 Active Buy Lead belum bisa</span>
+                        <div class="col-md-6 col-sm-6 col-xs-12 no-padding margin-top-med-and-down">
+                          <a href="meeting-schedule.html" class="product-title">
+                            <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
+                              <div class="col-md-12 col-xs-12 btn-danger btn no-padding btn-sm">
+                                <span class="initial">M</span>
+                                <span class="label-sm">0 Meeting Schedule belum bisa</span>
+                              </div>
+                            </div>
+                          </a>
+                          <a href="staff-procurement.html" class="product-title">
+                            <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
+                              <div class="col-md-12 col-xs-12 btn-success btn no-padding btn-sm">
+                                <span class="initial">A</span>
+                                <span class="label-sm">0 Active Buy Lead belum bisa</span>
+                              </div>
+                            </div>
+                          </a>
+                          <a href="history-rfq.html" class="product-title">
+                            <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
+                              <div class="col-md-12 col-xs-12 btn-primary btn no-padding btn-sm">
+                                <span class="initial">C</span>
+                                <span class="label-sm">0/0 Closed belum bisa</span>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </li>
+                      @endforeach
+                    </ul>
+                  </div>
+              @else
+                  <div class="box-body">
+                    <ul class="products-list product-list-in-box">
+                      @foreach($companyUser as $data)
+                      @if( ($currUser->UserRole()->first()->role_id == 2 && $data->UserRole()->where('role_id',3)->first()) || ($currUser->UserRole()->first()->role_id == 3 && $data->created_by == $currUser->id) )
+                      <li class="item">
+                        <div class="col-md-6 col-sm-6 col-xs-12 no-padding">
+                          <div class="product-img">
+                            <img src="{{$data->photo_image}}" alt="gambar">
+                          </div>
+                          <div class="product-info">
+                            <div class="col-md-6 col-xs-12 no-padding">
+                              <a href="{{url('home?id='.$data->id)}}" class="product-title">{{$data->first_name}} {{$data->last_name}}</a>
+                              <span class="product-description">
+                              {{$data->UserRole()->first()->Role()->first()->name}}
+                              </span>
+                            </div>
                           </div>
                         </div>
-                      </a>
-                      <a href="history-rfq.html" class="product-title">
-                        <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
-                          <div class="col-md-12 col-xs-12 btn-primary btn no-padding btn-sm">
-                            <span class="initial">C</span>
-                            <span class="label-sm">0/0 Closed belum bisa</span>
-                          </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 no-padding margin-top-med-and-down">
+                          <a href="meeting-schedule.html" class="product-title">
+                            <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
+                              <div class="col-md-12 col-xs-12 btn-danger btn no-padding btn-sm">
+                                <span class="initial">M</span>
+                                <span class="label-sm">0 Meeting Schedule belum bisa</span>
+                              </div>
+                            </div>
+                          </a>
+                          <a href="staff-procurement.html" class="product-title">
+                            <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
+                              <div class="col-md-12 col-xs-12 btn-success btn no-padding btn-sm">
+                                <span class="initial">A</span>
+                                <span class="label-sm">0 Active Buy Lead belum bisa</span>
+                              </div>
+                            </div>
+                          </a>
+                          <a href="history-rfq.html" class="product-title">
+                            <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
+                              <div class="col-md-12 col-xs-12 btn-primary btn no-padding btn-sm">
+                                <span class="initial">C</span>
+                                <span class="label-sm">0/0 Closed belum bisa</span>
+                              </div>
+                            </div>
+                          </a>
                         </div>
-                      </a>
-                    </div>
-                  </li>
-                  @endif
-                  @endforeach
-                </ul>
-              </div>
+                      </li>
+                      @endif
+                      @endforeach
+                    </ul>
+                  </div>
+              @endif
+              
+
             </div>
           </div>
           @endif

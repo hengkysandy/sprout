@@ -5,7 +5,7 @@
     <div id="main" class="container-fluid">
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12 ">
-          <h1 class="main-title no-margin-top"><strong>Buy Lead - Plate Material</strong></h1>
+          <h1 class="main-title no-margin-top"><strong>Buy Lead - {{$buyLead->item}}</strong></h1>
           <h4>Buy Lead:</h4>
         </div>
         <div class="col-md-9 col-sm-12 col-xs-12">

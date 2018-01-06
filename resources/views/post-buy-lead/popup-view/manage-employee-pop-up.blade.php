@@ -34,7 +34,7 @@
             </thead>
             <tbody>
               @foreach($user as $key => $value)
-              @if($value->created_by == session()->get('userSession')[0]->id  || $value->id == session()->get('userSession')[0]->id )
+              @if($value->created_by == session()->get('userSession')[0]->id)
               <tr>
                 <td>{{$value->id}}</td>
                 <td>{{$value->role_name}}</td>

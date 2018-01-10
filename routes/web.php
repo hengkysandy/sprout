@@ -53,9 +53,6 @@ Route::group(['middleware' => 'checkUser'], function () {
     // Route::get('profile', 'CompanyController@profile');
     Route::post('doRequestCompanyAddOn','CompanyController@doRequestCompanyAddOn');
     
-
-    
-    
     Route::get('post-buy-lead', 'BuyLeadController@postBuyLead');
     Route::post('doInsertBuyLead', 'BuyLeadController@doInsertBuyLead');
     Route::get('doChangeStatusBuyLead', 'BuyLeadController@doChangeStatusBuyLead');
@@ -77,7 +74,11 @@ Route::get('getAddOnPriceAjax/{id}', 'CompanyController@getAddOnPriceAjax');
 Route::group(['middleware' => 'checkUser','checkSales'],function(){
     Route::get('buy-lead-list','BuyLeadController@listBuyLead');
     Route::get('item/{id}','BuyLeadController@showItem');
+
     Route::get('detailItem/{id}','BuyLeadController@detailItem');
+    Route::post('insertMeetingSchedule','BuyLeadController@insertMeetingSchedule');
+    
+
     Route::get('companyProfile/{id}','PageController@companyProfile');
     Route::get('acceptRequest/{buylead}/{user}','BuyLeadController@acceptRequest');
     Route::get('acceptBuyLead/{id}','BuyLeadController@acceptBuyLead');

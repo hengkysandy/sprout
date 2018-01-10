@@ -68,6 +68,7 @@ $(function() {
                 url: my_url,
                 data: { id:companyId }, 
                 success: function( data ) {
+                    console.log(data);
                     reloadBroadcastData(data);
                 }
             });
@@ -85,6 +86,7 @@ $(function() {
                 url: my_url,
                 data: { listOfCompanyId:arrCompanyId }, 
                 success: function( data ) {
+                    console.log(data);
                     reloadBroadcastData(data);
                 }
             });

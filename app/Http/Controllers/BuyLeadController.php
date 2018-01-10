@@ -12,11 +12,13 @@ use App\BuyLeadUser;
 use App\CloudinaryMapping;
 use App\Company;
 use App\CompanyBusinessCategory;
+use App\CompanyMeetingSchedule;
 use App\CompanyStatus;
 use App\Discussion;
 use App\DiscussionDetail;
 use App\Division;
 use App\Group;
+use App\MeetingSchedule;
 use App\MeetingSummary;
 use App\Quotation;
 use App\QuotationStatus;
@@ -171,10 +173,7 @@ class BuyLeadController extends Controller
             ->get();
 
         foreach ($data['anotherCompany'] as $acKey => $acData) {
-            if(empty($acData->CompanyStatusFor()->first())){
-                $r['notAssigned'] = $acData;
-                $notAssignedComp[] = $r['notAssigned'];
-            }else if($acData->CompanyStatusFor()->where('id_status','!=',16)->first() ){
+            if(empty($acData->CompanyStatusFor()->where('id_company_by',session()->get('userSession')[0]->id_company)->first()) || !$acData->CompanyStatusFor()->where('id_company_by',session()->get('userSession')[0]->id_company)->where('id_status',16)->first()){
                 $r['notAssigned'] = $acData;
                 $notAssignedComp[] = $r['notAssigned'];
             }
@@ -212,10 +211,7 @@ class BuyLeadController extends Controller
             ->get();
 
         foreach ($data['anotherCompany'] as $acKey => $acData) {
-            if(empty($acData->CompanyStatusFor()->first())){
-                $r['notAssigned'] = $acData;
-                $notAssignedComp[] = $r['notAssigned'];
-            }else if($acData->CompanyStatusFor()->where('id_status','!=',16)->first() ){
+            if(empty($acData->CompanyStatusFor()->where('id_company_by',session()->get('userSession')[0]->id_company)->first()) || !$acData->CompanyStatusFor()->where('id_company_by',session()->get('userSession')[0]->id_company)->where('id_status',16)->first()){
                 $r['notAssigned'] = $acData;
                 $notAssignedComp[] = $r['notAssigned'];
             }
@@ -698,6 +694,7 @@ class BuyLeadController extends Controller
             'subject' => $request->subject,
             'date' => $carbon->format('Y:m:d'),
             'time' => $request->time,
+            'place' => $request->place,
             'minute_of_meeting' => $request->minuteDescription,
             'status' => 'active',
         ]);
@@ -750,6 +747,51 @@ class BuyLeadController extends Controller
         ]);
 
         return back();
+    }
+
+    public function insertMeetingSchedule(Request $request)
+    {
+        return $request->all();
+
+        /*
+            meeting type ? 0 untuk internal : 1 untuk external
+            recipient role ? 0 untuk procurement : 1 untuk sales
+            kalau role pembuat meeting itu proc, maka recipient role nya adalah 1
+        */
+
+            // idQuotation: "2",
+            // idCompanyAssign: "2",
+            // sendTo: "3",
+            // subject: "11115172 -",
+            // date: "Tuesday, January 9th 2018",
+            // time: "4:55 PM",
+            // place: "asfasf",
+            // description: "asdfasfasdf"
+        
+        $carbon = new Carbon($request->date);
+
+        $newData = MeetingSchedule::create([
+            'id_quotation' => $request->idQuotation,
+            'id_user' => session()->get('userSession')[0]->id,
+            'send_to' => $request->sendTo,
+            'meeting_type' => 1,
+            'recipient_role' => 0,
+            'subject' => $request->subject,
+            'description' => $request->description,
+            'date' => $carbon->format('Y:m:d'),
+            'time' => $request->time,
+            'place' => $request->place,
+            'status' => 'active',
+        ]);
+
+        CompanyMeetingSchedule::create([
+            'id_company_assign' => $request->idCompanyAssign,
+            'id_meeting_schedule' => $newData->id,
+            'status' => 'active',
+        ]);
+
+        return back();
+        
     }
 
 }

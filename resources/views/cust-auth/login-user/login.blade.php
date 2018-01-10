@@ -9,7 +9,7 @@
     <div class="text-center">
       <h2 class="main-title">
         <strong>
-          <span class="text-uppercase text-danger">Welcome</span> PT. Citra Tubindo Tbk
+          <span class="text-uppercase text-danger">Welcome</span> {{session()->get('companySession')[0]->name}}
         </strong>
       </h2>
     </div>

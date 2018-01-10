@@ -38,7 +38,7 @@
                             <div class="col-md-6 col-xs-12 no-padding">
                               <a href="#" class="product-title">{{$data->item}}</a>
                               <span class="product-description">
-                              {{$data->item}}
+                              {{$data->description}}
                               </span>
                             </div>
                           </div>

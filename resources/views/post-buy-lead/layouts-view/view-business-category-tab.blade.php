@@ -70,7 +70,7 @@
           <div class="col-md-8 col-sm-12 col-xs-12 no-padding-left">
             <div class="form-group">
               <label>Add-On Package</label>
-              <input type="text" class="form-control"  value="Manager: {{$manager_quota}} || Staff: {{$staff_quota}}" disabled>
+              <input type="text" class="form-control"  value="Manager: {{$addOnManagerQuota}} || Staff: {{$addOnStaffQuota}}" disabled>
             </div>
           </div>
           <div class="col-md-4 col-sm-12 col-xs-12">

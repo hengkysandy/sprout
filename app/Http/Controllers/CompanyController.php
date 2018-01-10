@@ -290,6 +290,12 @@ class CompanyController extends Controller
         $response = Cloudder::upload($request->photoImage->path())->getResult();
         $url = $response['url'];
 
+        $isHead = 0;
+        $cekRole = UserPreDefine::whereHas('UserRole',function($ur){
+            $ur->whereIn('role_id',[3,5])->where('role_id',$request->role);
+        })->get();
+        if(empty($cekRole)) $isHead = 1;
+
         $user = UserPreDefine::create([
             'id_company' => session()->get('userSession')[0]->id_company,
             'email' => $request->email,
@@ -301,6 +307,7 @@ class CompanyController extends Controller
             'old_password' => $request->password,
             'new_password' => NULL,
             'status' => 'Active',
+            'is_head' => $isHead,
             'created_by' => session()->get('userSession')[0]->id,
         ]);
 
@@ -345,14 +352,14 @@ class CompanyController extends Controller
                 ->latest('created_at')
                 ->first();
 
-        $addOnManagerQuota = 0;
-        $addOnStaffQuota = 0;
+        $data['addOnManagerQuota'] = 0;
+        $data['addOnStaffQuota'] = 0;
         
         if($companyAddOn){
             if($companyAddOn->add_on_id == 1){
-                $addOnManagerQuota = $companyAddOn->quantity * $companyAddOn->AddOn->quantity;
+                $data['addOnManagerQuota'] = $companyAddOn->quantity * $companyAddOn->AddOn->quantity;
             }else if($companyAddOn->add_on_id == 2){
-                $addOnStaffQuota = $companyAddOn->quantity * $companyAddOn->AddOn->quantity;
+                $data['addOnStaffQuota'] = $companyAddOn->quantity * $companyAddOn->AddOn->quantity;
             }
         }
         
@@ -362,10 +369,10 @@ class CompanyController extends Controller
         $data['thisCompany'] = Company::find(session()->get('companySession')[0]->id);
 
         $user_manager = UserPreDefine::join('user_role','user_role.user_id','=','user.id')->where('id_company',session()->get('companySession')[0]->id)->whereIn('role_id',[3,5])->get();
-        $data['manager_quota'] = $data['thisCompany']->CompanyPackage()->latest('created_at')->first()->Package()->first()->manager_account + $addOnManagerQuota - count($user_manager);
+        $data['manager_quota'] = $data['thisCompany']->CompanyPackage()->latest('created_at')->first()->Package()->first()->manager_account +  $data['addOnManagerQuota'] - count($user_manager);
 
         $user_staff = UserPreDefine::join('user_role','user_role.user_id','=','user.id')->where('id_company',session()->get('companySession')[0]->id)->whereIn('role_id',[4,6])->get();
-        $data['staff_quota'] = $data['thisCompany']->CompanyPackage()->latest('created_at')->first()->Package()->first()->staff_account + $addOnStaffQuota - count($user_staff);
+        $data['staff_quota'] = $data['thisCompany']->CompanyPackage()->latest('created_at')->first()->Package()->first()->staff_account +  $data['addOnStaffQuota'] - count($user_staff);
 
         // return $data['thisCompany']->CompanyPackage()->where('status','approve')->latest('created_at')->first();
         $data['thisUser'] = UserPreDefine::find(session()->get('userSession')[0]->id);

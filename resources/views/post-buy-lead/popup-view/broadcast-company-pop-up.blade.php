@@ -28,9 +28,7 @@
               <tbody id="notAssigned-tbody">
                 @foreach($anotherCompany as $acKey => $acData)
                   @if(
-                  empty($acData->CompanyStatusFor()->first()) 
-                  || 
-                  $acData->CompanyStatusFor()->where('id_status','!=',16)->first()
+                  empty( $acData->CompanyStatusFor()->where('id_company_by',session()->get('userSession')[0]->id_company)->where('id_status',16)->first() )
                   )
                     <tr>
                       <td>{{++$acKey}}</td>
@@ -48,11 +46,7 @@
                 @endforeach
               </tbody>
             </table>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox"> Approved Vendor Only
-              </label>
-            </div>
+            
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

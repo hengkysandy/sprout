@@ -119,6 +119,7 @@ class MeetingScheduleController extends Controller
         $date = $request->date;
         $time = $request->time;
         $place = $request->place;
+        $description = $request->description;
         $sendto = $request->sendto;
         $sendtouser = $request->sendtouser;
         $recipient = $request->recipient;
@@ -133,6 +134,7 @@ class MeetingScheduleController extends Controller
         $meetingschedule->date = $date;
         $meetingschedule->time = $time;
         $meetingschedule->place = $place;
+        $meetingschedule->description = $description;
         $meetingschedule->status = "active";
         $meetingschedule->save();
 

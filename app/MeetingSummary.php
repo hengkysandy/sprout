@@ -14,7 +14,8 @@ class MeetingSummary extends Model
     	'title',
     	'subject',
     	'date',
-    	'time',
+        'time',
+    	'place',
     	'minute_of_meeting',
     	'status',
     ];

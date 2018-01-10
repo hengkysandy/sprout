@@ -19,7 +19,7 @@ class UserPreDefine extends Model
 		'old_password',
 		'new_password',
         'status',
-		'as_head',
+		'is_head',
         'created_by',
     ];
 

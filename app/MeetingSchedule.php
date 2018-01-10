@@ -11,9 +11,11 @@ class MeetingSchedule extends Model
     protected $fillable = [
         'id_quotation',
         'id_user',
+        'send_to',
         'meeting_type',
         'recipient_role',
         'subject',
+        'description',
         'date',
         'time',
         'place',

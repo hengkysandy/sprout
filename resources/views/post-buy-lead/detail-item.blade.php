@@ -128,7 +128,7 @@
                     <a href="#" class="btn btn-sm btn-default active">First Quotation</a>
                     <a href="#" class="btn btn-sm btn-default">Latest Quotation</a>
                     <!-- Need ask -->
-                    <a href="{{url('companyProfile/'.$quotation->User->Company->id)}}" class="btn btn-sm btn-default">Open Company Profile</a>
+                    <a href="{{url('companyProfile/'.$buyLead->User->Company->id)}}" class="btn btn-sm btn-default">Open Company Profile</a>
                   </div>
                 </div>
               </div>
@@ -548,46 +548,56 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title" id="myModalLabel">Add Meeting Schedule</h4>
           </div>
+          <form method="post" action="{{url('insertMeetingSchedule')}}">
+          {{csrf_field()}}
+          <input type="hidden" name="idQuotation" value="{{$quotation->id}}">
+          <input type="hidden" name="idCompanyAssign" value="{{session()->get('userSession')[0]->id_company == $buyLead->User->id_company ? $buyLead->User->id_company : $quotation->User->id_company}}">
           <div class="modal-body">
-            <form>
               <div class="row">
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
                     <label>Send To</label>
-                    <input type="text" class="form-control" disabled>
+                    <input type="text" name="sendTo" class="form-control" value="{{session()->get('userSession')[0]->id_company == $buyLead->User->id_company ? $quotation->User->first_name.' '.$quotation->User->last_name : $buyLead->User->first_name.' '.$buyLead->User->last_name}}" disabled>
+                    <input type="hidden" name="sendTo" value="{{session()->get('userSession')[0]->id_company == $buyLead->User->id_company ? $quotation->id_user : $buyLead->id_user}}">
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
                     <label>Subject</label>
-                    <input type="text" class="form-control">
+                    <input type="text" name="subject" class="form-control" value="{{$buyLead->buy_lead_code}} - ">
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
                     <label>Date</label>
-                    <input type="text" id="ac" class="form-control">
+                    <input type="text" name="date" id="ac" class="form-control">
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
                     <label>Time</label>
-                    <input type="text" id="tc" class="form-control">
+                    <input type="text" name="time" id="tc" class="form-control">
                   </div>
                 </div>
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <div class="form-group">
                     <label>Place</label>
-                    <textarea rows="7" class="form-control"></textarea>
+                    <input type="text" name="place" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <label>Description</label>
+                    <textarea rows="7" name="description" class="form-control"></textarea>
                   </div>
                 </div>
               </div>
-            </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary add-ms" data-dismiss="modal">Send</button>
+            <button type="submit" class="btn btn-primary add-ms">Send</button>
           </div>
+          </form>
         </div>
       </div>
     </div>
@@ -659,7 +669,7 @@
               <h5>{{$blBC->BusinessCategory->Section->name}}</h5>
 
               <div class="row">
-                @foreach($blBC->BusinessCategory->Section->Division()->get() as $dKey => $divData)
+                @foreach($blBC->BusinessCategory->Division()->get() as $dKey => $divData)
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <div class="panel panel-default">
                     <div class="panel-heading">
@@ -677,7 +687,7 @@
                             </tr>
                           </thead>
                           <tbody>
-                            @foreach($divData->Group()->get() as $gKey => $gData)
+                            @foreach($blBC->BusinessCategory->Group()->get() as $gKey => $gData)
                             <tr>
                               <td>{{$gData->name}}</td>
                               <td>{{$gData->description}}</td>

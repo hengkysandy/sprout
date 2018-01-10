@@ -1,8 +1,10 @@
 @extends('layouts.profile.profile-layouts')
 @section('manage-account')
-<div class="col-md-12 col-sm-12 col-xs-12">
-  <a href="#manageEmployee" data-toggle="modal" class="btn btn-primary">Manage Employee</a>
-</div>
+  @if( !in_array(session()->get('userSession')[0]->role_id,[4,6]))
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <a href="#manageEmployee" data-toggle="modal" class="btn btn-primary">Manage Employee</a>
+  </div>
+  @endif
 @endsection
 @section('company-profile-tab')
   @include('post-buy-lead.layouts-view.view-company-profile-tab')

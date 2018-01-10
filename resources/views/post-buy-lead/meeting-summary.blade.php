@@ -138,6 +138,12 @@
                 </div>
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <div class="form-group">
+                    <label>Place</label>
+                    <input type="text" name="place" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="form-group">
                     <label>Minute of Meeting</label>
                     <textarea rows="7" name="minuteDescription" class="form-control"></textarea>
                   </div>

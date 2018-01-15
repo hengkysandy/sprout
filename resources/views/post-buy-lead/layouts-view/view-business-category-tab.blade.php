@@ -51,7 +51,7 @@
           <div class="col-md-8 col-sm-12 col-xs-12 no-padding-left">
             <div class="form-group">
               <label>Account Duration</label>
-              <input type="text" class="form-control"  value="{{date('d F Y', strtotime($thisCompany->CompanyPackage()->where('status','confirmed')->latest('created_at')->first()->expired_date)) }}" disabled>
+              <input type="text" class="form-control account-duration"  value="{{date('d F Y', strtotime($thisCompany->CompanyPackage()->where('status','confirmed')->latest('created_at')->first()->expired_date)) }}" disabled>
             </div>
           </div>
           @if(session()->get('userSession')[0]->role_id == 2)

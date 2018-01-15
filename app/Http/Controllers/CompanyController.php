@@ -349,6 +349,11 @@ class CompanyController extends Controller
                 ->latest('created_at')
                 ->first();
 
+        $data['currCompanyAddOn'] = CompanyAddOn::where('expired_date','<=',Carbon::now())
+                ->where('status','confirmed')
+                ->latest('created_at')
+                ->get();
+
         $data['addOnManagerQuota'] = 0;
         $data['addOnStaffQuota'] = 0;
         
@@ -423,14 +428,19 @@ class CompanyController extends Controller
     {
         $latestExpiredDate = CompanyPackage::where('id_company',session()->get('companySession')[0]->id)->where('status','confirmed')->latest('created_at')->first()->expired_date;
 
-        CompanyPackage::create([
+        $cp = CompanyPackage::create([
             'id_company' => session()->get('companySession')[0]->id,
             'id_package' => $request->package,
-            'status' => 'pending',
+            // 'status' => 'pending',
+            'status' => 'confirmed',
             'year_duration' => $request->yearDuration,
             'expired_date' => Carbon::createFromFormat('Y-m-d', $latestExpiredDate)->addYear($request->yearDuration),
             'insert_from_profile' => 'true',
         ]);
+
+        CompanyAddOn::whereIn('id',$request->listOfCompAddOnId)->update([
+            'expired_date' => $cp->expired_date,
+            ]);
 
         return back();
     }

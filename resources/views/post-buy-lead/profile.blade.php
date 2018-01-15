@@ -120,7 +120,7 @@
           <div class="col-md-6">
            <div class="form-group">
              <label>Duration</label>
-             <select class="form-control" name="yearDuration">
+             <select class="form-control" name="yearDuration" id="yearDuration">
               <option value="0">Select Duration</option>
               <option value="1" selected="">1 Year</option>
               <option value="2">2 Year</option>
@@ -129,9 +129,29 @@
           </div>
         </div>
         <div class="col-md-12">
+           <div class="form-group">
+             <label>Extend Company Add on</label>
+          </div>
+        </div>
+        <div class="col-md-8">
+          @foreach($currCompanyAddOn as $data)
+           <div class="form-group">
+             <div class="col-md-4">
+                <label>{{$data->AddOn->name}}({{$data->quantity}})</label>
+             </div>
+             <div class="col-md-4">
+                <input type="checkbox" class="addon" name="listOfCompAddOnId[]" value="{{$data->id}}">
+             </div>
+           </div>
+           <br>
+         @endforeach
+         
+       </div>
+        <div class="col-md-12">
          <div class="form-group">
            <label>Price</label>
-           <input type="text" class="form-control" name="price" value="0" readonly>
+           <input type="text" class="form-control" id="reactivePrice" value="0" readonly>
+           <input type="hidden" class="form-control" name="reactivePrice">
          </div>
        </div>
      </div>
@@ -448,6 +468,10 @@
     </div>
   </div>
 </div>
+  <script type="text/javascript">
+    $package = <?php echo $packageData?>;
+    $currCompanyAddOn = <?php echo $currCompanyAddOn?>;
+  </script>
   <script type="text/javascript" src="{{asset('js/myscript/manage-employee.js')}}"></script>
   @if(session()->get('userSession')[0]->role_id != 2)
     <script type="text/javascript">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 10, 2018 at 01:39 PM
+-- Generation Time: Jan 15, 2018 at 09:12 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -90605,6 +90605,13 @@ CREATE TABLE `meeting_schedule` (
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `meeting_schedule`
+--
+
+INSERT INTO `meeting_schedule` (`id`, `id_quotation`, `id_user`, `send_to`, `meeting_type`, `recipient_role`, `subject`, `description`, `date`, `time`, `place`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, NULL, 2, NULL, 0, NULL, 'subje', 'descccc', '2018-01-12', '03:02:00', 'place', 'active', '2018-01-12 08:02:06', '2018-01-12 08:02:06', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -90993,6 +91000,13 @@ CREATE TABLE `user_meeting_schedule` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_meeting_schedule`
+--
+
+INSERT INTO `user_meeting_schedule` (`id`, `id_user_assigned`, `id_meeting_schedule`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 0, 1, 'created', '2018-01-12 08:02:07', '2018-01-12 08:02:07', NULL);
 
 -- --------------------------------------------------------
 
@@ -91522,7 +91536,7 @@ ALTER TABLE `interested_program`
 -- AUTO_INCREMENT for table `meeting_schedule`
 --
 ALTER TABLE `meeting_schedule`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `meeting_status`
 --
@@ -91597,7 +91611,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user_meeting_schedule`
 --
 ALTER TABLE `user_meeting_schedule`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `user_role`
 --

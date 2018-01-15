@@ -70,15 +70,13 @@ class CompanyController extends Controller
     public function register_2(Request $request)
     {
         $request->session()->put('companyData', json_encode($request->all()));
-        
-        if($request->has('companyLogoImg')){
+        if(!empty($request->companyLogoImg)){
             $response = Cloudder::upload($request->companyLogoImg->path())->getResult();
             $url = $response['url'];
             $request->session()->put('logoUrl', $url);    
         }
-        
 
-        return view('cust-auth.register-company.register-2');
+        // return view('cust-auth.register-company.register-2');
 
         // companyName: "company name", [company] ok
         // businessEntity: "entity", [company] ok
@@ -261,7 +259,6 @@ class CompanyController extends Controller
             $response = Cloudder::upload($request->photoImage->path())->getResult();
             $url = $response['url'];
         }
-        
 
         $masteruser = UserPreDefine::create([
             'id_company' => $request->session()->get('companyIdSession'),
@@ -291,10 +288,10 @@ class CompanyController extends Controller
         $url = $response['url'];
 
         $isHead = 0;
-        $cekRole = UserPreDefine::whereHas('UserRole',function($ur){
+        $cekRole = UserPreDefine::whereHas('UserRole',function($ur) use ($request){
             $ur->whereIn('role_id',[3,5])->where('role_id',$request->role);
         })->get();
-        if(empty($cekRole)) $isHead = 1;
+        if(empty($cekRole[0])) $isHead = 1;
 
         $user = UserPreDefine::create([
             'id_company' => session()->get('userSession')[0]->id_company,

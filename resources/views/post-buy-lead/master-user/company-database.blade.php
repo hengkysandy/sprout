@@ -173,7 +173,7 @@
         </div>
         @endif
       </div>
-      @include('layouts.user.side-nav')
+      @include('post-buy-lead.popup-view.side-nav-buy-lead')
     </div>
   </div>
 

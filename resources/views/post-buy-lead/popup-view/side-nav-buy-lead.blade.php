@@ -7,7 +7,7 @@
             </li>
             <li>
               <a href="post-buy-lead" class="btn btn-orange active-orange btn-lg padding-transition no-border-radius">
-                <i class="pull-left fa fa-pencil-square padding-top-2px padding-right-8px"></i> <span>Post Buy Lead</span>
+                <i class="pull-left fa fa-pencil-square padding-top-2px padding-right-8px"></i> <span>Buy Lead / Quotation</span>
               </a>
             </li>
             <li>

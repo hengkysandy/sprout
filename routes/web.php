@@ -112,6 +112,12 @@ Route::group(['middleware' => 'checkUser','checkSales'],function(){
 
 Route::get('member/{id}', 'PageController@member');
 
+Route::get('doDeleteProductCatalogue', 'PageController@doDeleteProductCatalogue');
+Route::get('doDeleteRequiredDocument', 'PageController@doDeleteRequiredDocument');
+Route::get('doDeleteCertificate', 'PageController@doDeleteCertificate');
+Route::post('doUpdateCompanyData', 'PageController@doUpdateCompanyData');
+Route::post('doDeleteCompanyLogo', 'PageController@doDeleteCompanyLogo');
+
 Route::group(['middleware' => 'checkAdmin'], function () {
     Route::get('dash_home', 'PageController@dashHome');
     Route::get('logoutAdmin', 'PageController@logoutAdmin');
@@ -150,11 +156,7 @@ Route::group(['middleware' => 'checkAdmin'], function () {
 
     Route::get('company_membership', 'PageController@companyMembership');
     // Route::get('member/{id}', 'PageController@member');
-    Route::get('doDeleteProductCatalogue', 'PageController@doDeleteProductCatalogue');
-    Route::get('doDeleteRequiredDocument', 'PageController@doDeleteRequiredDocument');
-    Route::get('doDeleteCertificate', 'PageController@doDeleteCertificate');
-    Route::post('doUpdateCompanyData', 'PageController@doUpdateCompanyData');
-    Route::post('doDeleteCompanyLogo', 'PageController@doDeleteCompanyLogo');
+    
 
 
 

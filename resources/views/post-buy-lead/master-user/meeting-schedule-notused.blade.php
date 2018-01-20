@@ -1,4 +1,4 @@
-@extends('layouts.user.app')
+pp@extends('layouts.user.app')
 
 @section('content')
   @include('layouts.user.navbar')

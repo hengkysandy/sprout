@@ -168,9 +168,10 @@ class PageController extends Controller
 
     public function doChangeStatusCompanyAddOn(Request $request)
     {
-
+        //expired date ke ganti saat update
         $currData = CompanyAddOn::find($request->id);
         $currData->status = $request->status;
+        $currData->expired_date = $exp;
         $currData->save();
 
         return back();
@@ -364,30 +365,30 @@ class PageController extends Controller
     {
         // return $request->all();
 
-
         $currCompany = Company::find($request->id_company);
         $currCompany->business_entity = $request->businessEntity;
         $currCompany->province_id = $request->id_province; //
         $currCompany->city_id = $request->id_city; //
         $currCompany->name = $request->companyName;
         $currCompany->tagline = $request->companyTagline;
-        $currCompany->name = $request->companyName;
         $currCompany->address = $request->address;
         $currCompany->contact_name = $request->contactName;
         $currCompany->tax_type = $request->optionsRadios;
         $currCompany->zip_code = $request->zipcode;
         $currCompany->phone = $request->phoneCode.$request->phoneNumber;
         $currCompany->mobile_number = $request->mobileNumber;
-        $currCompany->logo_image = $this->cloudinaryMaskingFile($request->logoImage);
+        if(!empty($request->logoImage)){
+            $currCompany->logo_image = $this->cloudinaryMaskingFile($request->logoImage);
+        }
         $currCompany->save();
 
 
-
-        CompanyProductCatalogue::create([
-            'id_company' => $request->id_company,
-            'product_catalogue_image' => $this->cloudinaryMaskingFile($request->productImage),
-        ]);
-
+        if(!empty($request->productImage)){
+            CompanyProductCatalogue::create([
+                'id_company' => $request->id_company,
+                'product_catalogue_image' => $this->cloudinaryMaskingFile($request->productImage),
+            ]);
+        }
 
         $currInterestedProgram = CompanyInterestedProgram::where('id_company',$request->id_company)->get();
 

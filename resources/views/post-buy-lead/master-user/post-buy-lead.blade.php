@@ -742,7 +742,7 @@
     </div>
   </div>
 
-  <div id="mySidenav" class="sidenav hide-on-large-only">
+  <!-- <div id="mySidenav" class="sidenav hide-on-large-only">
     <div class="menu-content">
       <a href="../home-login.html">
         <i class="fa fa-power-off"></i> Logout
@@ -772,7 +772,7 @@
         </div>
       </div>
     </a>
-  </div>
+  </div> -->
   <script src="{{ asset('js/jquery.min.js') }}"></script>
   <script type="text/javascript" src="{{asset('js/myscript/post-buy-lead.js')}}"></script>
   @if(in_array(session()->get('userSession')[0]->role_id,[5,6]))
@@ -780,5 +780,5 @@
     $( ".tab-content > #buy_lead_list" ).show();
   </script>
   @endif
-  @include('layouts.user.mobile-menu')
+  <!-- ada include layouts.user.mobile-menu  di hapus-->
 @endsection

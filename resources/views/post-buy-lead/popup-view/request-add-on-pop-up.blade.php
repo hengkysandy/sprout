@@ -36,6 +36,7 @@
               <div class="form-group">
                 <label>Expired Date</label>
                 <input id="addon-expired" type="text" class="form-control" name="expired" disabled value="{{date('d F Y', strtotime($thisCompany->CompanyPackage()->where('status','confirmed')->latest('created_at')->first()->expired_date)) }}">
+                <input type="hidden" name="expired" value="{{$thisCompany->CompanyPackage()->where('status','confirmed')->latest('created_at')->first()->expired_date}}">
               </div>
             </div>
             <div class="col-md-6">

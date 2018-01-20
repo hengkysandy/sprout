@@ -76,7 +76,7 @@ class CompanyController extends Controller
             $request->session()->put('logoUrl', $url);    
         }
 
-        // return view('cust-auth.register-company.register-2');
+        return view('cust-auth.register-company.register-2');
 
         // companyName: "company name", [company] ok
         // businessEntity: "entity", [company] ok
@@ -344,24 +344,26 @@ class CompanyController extends Controller
     }
 
     public function profile() {
-        $companyAddOn = CompanyAddOn::where('expired_date','<=',Carbon::now())
+        $companyAddOn = CompanyAddOn::where('expired_date','>=',Carbon::now())
                 ->where('status','confirmed')
+                ->where('company_id',session('companySession')[0]->id)
                 ->latest('created_at')
-                ->first();
+                ->get();
 
-        $data['currCompanyAddOn'] = CompanyAddOn::where('expired_date','<=',Carbon::now())
+        $data['currCompanyAddOn'] = CompanyAddOn::where('expired_date','>=',Carbon::now())
                 ->where('status','confirmed')
+                ->where('company_id',session('companySession')[0]->id)
                 ->latest('created_at')
                 ->get();
 
         $data['addOnManagerQuota'] = 0;
         $data['addOnStaffQuota'] = 0;
         
-        if($companyAddOn){
-            if($companyAddOn->add_on_id == 1){
-                $data['addOnManagerQuota'] = $companyAddOn->quantity * $companyAddOn->AddOn->quantity;
-            }else if($companyAddOn->add_on_id == 2){
-                $data['addOnStaffQuota'] = $companyAddOn->quantity * $companyAddOn->AddOn->quantity;
+        foreach ($companyAddOn as $key => $dt) {
+            if($dt->add_on_id == 1){
+                $data['addOnManagerQuota'] = $dt->quantity * $dt->AddOn->quantity;
+            }else if($dt->add_on_id == 2){
+                $data['addOnStaffQuota'] = $dt->quantity * $dt->AddOn->quantity;
             }
         }
         
@@ -385,6 +387,8 @@ class CompanyController extends Controller
 
             $data['user'] = UserPreDefine::where('id_company',session()->get('companySession')[0]->id)->join('user_role','user_role.user_id','=','user.id')->where('role_id','!=',2)->join('role','role.id','=','user_role.role_id')->select('user.*','role.name as role_name')->get();
 
+
+
             $companyUser = UserPreDefine::where('id_company',session()->get('companySession')[0]->id)->whereHas('UserRole',function($ur){
                 $ur->whereIn('role_id',[3,5]);
             })->get();
@@ -395,7 +399,14 @@ class CompanyController extends Controller
                     $roleArr[] =  $value->UserRole->role_id;
                 }
             }
-            $data['role']= Role::whereNotIn('id',$roleArr)->whereIn('id',[3,5])->get();
+
+            $managerAddOnQty = CompanyAddOn::where('company_id',session()->get('companySession')[0]->id)->where('add_on_id',1)->where('status','confirmed')->where('expired_date','>=', Carbon::now() ) ->sum('quantity');
+
+            if($managerAddOnQty != 0){
+                $data['role']= Role::whereIn('id',[3,5])->get();
+            }else{
+                $data['role']= Role::whereNotIn('id',$roleArr)->whereIn('id',[3,5])->get();
+            }
             
         }else if (session()->get('userSession')[0]->role_id == 3 ) {
             // $data['user'] = UserPreDefine::leftjoin('user_role','user.id' ,'=','user_role.user_id')->leftjoin('role','role.id','=','user_role.role_id')->where('id_company',session()->get('companySession')[0]->id)->where('created_by','=',$userid)->select('user.*','role.name as role_name')->get();
@@ -451,7 +462,8 @@ class CompanyController extends Controller
             'company_id' => $request->id_company,
             'add_on_id' => $request->addonId,
             'request_from' => 'request addon',
-            'expired_date' => Carbon::now()->addYear($request->duration),
+            // 'expired_date' => Carbon::now()->addYear($request->duration),
+            'expired_date' => $request->expired,
             'quantity' => $request->quantity,
             'status' => 'pending',
         ]);

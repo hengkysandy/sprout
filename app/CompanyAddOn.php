@@ -10,6 +10,8 @@ class CompanyAddOn extends Model
 
     protected $dates = ['expired_date'];
 
+    // public $timestamps = false;
+
     protected $fillable = [
 		'company_id',
 		'add_on_id',

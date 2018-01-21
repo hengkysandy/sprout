@@ -168,11 +168,9 @@ class PageController extends Controller
 
     public function doChangeStatusCompanyAddOn(Request $request)
     {
-        //expired date ke ganti saat update
-        $currData = CompanyAddOn::find($request->id);
-        $currData->status = $request->status;
-        $currData->expired_date = $exp;
-        $currData->save();
+        CompanyAddOn::find($request->id)->update([
+            'status' => $request->status
+            ]);
 
         return back();
     }

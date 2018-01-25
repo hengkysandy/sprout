@@ -13,26 +13,22 @@
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
                     <label>Item</label>
-                    <input type="text" name="item" class="form-control" value="Plate Material">
+                    <input type="text" name="item" class="form-control">
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
                     <label>Amount</label>
-                    <input type="text" name="amount" class="form-control" value="11">
+                    <input type="text" name="amount" class="form-control">
                   </div>
                 </div>
 
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <div class="form-group">
                     <label>Short Description</label>
-                    <textarea rows="5" name="shortDescription" class="form-control no-resize">Ini harganya harus bisa murah dan kualitas bagus</textarea>
+                    <textarea rows="5" name="shortDescription" class="form-control no-resize"></textarea>
                   </div>
                 </div>
-                
-                
-
-
 
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
@@ -53,22 +49,22 @@
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
-                    <label>Total Price</label>
+                    <label>Estimated Budget</label>
                     <div class="input-group">
                       <span class="input-group-addon">Rp</span>
-                      <input type="number" name="totalPrice" class="form-control" min="0" value="50000000">
+                      <input type="number" name="totalPrice" class="form-control" min="0">
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
-                    <label>Payment Term</label>
-                    <input type="text" name="paymentTerm" class="form-control" value="Down Payment 50%, Installment 6 Months">
+                    <label>Payment Term <small>(optional)</small></label>
+                    <input type="text" name="paymentTerm" class="form-control" placeholder="Down Payment 50%, Installment 6 Months" >
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
-                    <label>Shipping Term</label>
+                    <label>Shipping Term <small>(optional)</small></label>
                     <select name="shippingTerm" class="form-control selectpicker" data-live-search="true">
                       @foreach($shippingData as $sData)
                         <option value="{{$sData->id}}">{{$sData->name}}</option>
@@ -104,14 +100,14 @@
                   <div class="form-group">
                     <label>Delivery Time</label>
                     <div class="input-group">
-                      <input name="deliveryDays" type="number" class="form-control">
+                      <input name="deliveryDays" type="number" class="form-control" min="1">
                       <span class="input-group-addon">Days</span>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <div class="form-group">
-                    <label>Area (Airport, Seaport, &amp; Terminal)</label>
+                    <label>Area (Airport, Seaport, &amp; Terminal)  <small>(optional)</small></label>
                     <select name="area" class="form-control selectpicker" data-live-search="true">
                       @foreach($areaData as $aData)
                         <option value="{{$aData->id}}">{{$aData->name}}</option>

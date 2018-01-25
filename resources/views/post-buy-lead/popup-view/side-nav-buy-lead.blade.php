@@ -7,7 +7,14 @@
             </li>
             <li>
               <a href="post-buy-lead" class="btn btn-orange active-orange btn-lg padding-transition no-border-radius">
-                <i class="pull-left fa fa-pencil-square padding-top-2px padding-right-8px"></i> <span>Buy Lead / Quotation</span>
+                <i class="pull-left fa fa-pencil-square padding-top-2px padding-right-8px"></i> 
+                @if( session()->get('userSession')[0]->role_id == 2 )
+                  <span>Buy Lead / Quotation</span>
+                @elseif( in_array(session()->get('userSession')[0]->role_id, [3,4]) )
+                  <span>Post Buy Lead</span>
+                @elseif( in_array(session()->get('userSession')[0]->role_id, [5,6]) )
+                  <span>Buy Lead List</span>
+                @endif
               </a>
             </li>
             <li>

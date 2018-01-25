@@ -26,7 +26,7 @@
                 <tr>
                   <th>No</th>
                   <th>Item</th>
-                  <th>Total Price</th>
+                  <th>Estimated Budget</th>
                   <th>Shipping Term</th>
                   <th>Status</th>
                   <th>Action</th>
@@ -240,7 +240,7 @@
                   <td>10 Ton</td>
                 </tr>
                 <tr>
-                  <th>Total Price</th>
+                  <th>Estimated Budget</th>
                   <td>:</td>
                   <td>Rp50.000.000</td>
                 </tr>
@@ -330,7 +330,7 @@
                 <td>Ton</td>
               </tr>
               <tr>
-                <th>Total Price</th>
+                <th>Estimated Budget</th>
                 <td>:</td>
                 <td>Rp50.000.000</td>
               </tr>

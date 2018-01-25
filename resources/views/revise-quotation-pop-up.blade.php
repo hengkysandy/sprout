@@ -34,7 +34,7 @@
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
-                    <label>Total Price</label>
+                    <label>Estimated Budget</label>
                     <div class="input-group">
                       <span class="input-group-addon">Rp</span>
                       <input id="totalPriceQuo" name="totalPrice" type="text" class="form-control">
@@ -53,7 +53,7 @@
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
-                    <label>Shipping Term</label>
+                    <label>Shipping Term <small>(optional)</small></label>
                     <select id="shippingTermQuo" name="shippingTerm" class="form-control selectpicker" data-live-search="true">
                       @foreach($shippingTerm as $sData)
                       <option value="{{$sData->id}}">{{$sData->name}}</option>
@@ -65,14 +65,14 @@
                   <div class="form-group">
                     <label>Delivery Time</label>
                     <div class="input-group">
-                      <input id="delivery_dayQuo" name="delivery_day" type="number" class="form-control">
+                      <input id="delivery_dayQuo" name="delivery_day" type="number" class="form-control" min="1">
                       <span class="input-group-addon">Days</span>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
-                    <label>Area (Airport, Seaport, &amp; Terminal)</label>
+                    <label>Area (Airport, Seaport, &amp; Terminal) <small>(optional)</small></label>
                     <select id="areaQuo" name="area" class="form-control selectpicker" data-live-search="true">
                       @foreach($area as $aData)
                       <option value="{{$aData->id}}">{{$aData->name}}</option>
@@ -82,7 +82,7 @@
                 </div>
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <div class="form-group">
-                    <label>Payment Term</label>
+                    <label>Payment Term <small>(optional)</small></label>
                     <input id="paymentTermQuo" name="paymentTerm" type="text" class="form-control">
                   </div>
                 </div>

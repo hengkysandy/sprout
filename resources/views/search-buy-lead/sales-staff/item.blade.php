@@ -10,7 +10,7 @@
         <th>Delivery Time</th>
         <th>Shipping Term</th>
         <th>City</th>
-        <th>Total Price</th>
+        <th>Estimated Budget</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -105,7 +105,7 @@
             </div>
             <div class="col-md-6 col-sm-12 col-xs-12">
               <div class="form-group">
-                <label>Total Price</label>
+                <label>Estimated Budget</label>
                 <div class="input-group">
                   <span class="input-group-addon">Rp</span>
                   <input type="number" name="totalPrice" class="form-control" min="0" value="{{$buylead[0]->total_price}}">
@@ -247,7 +247,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Detail Quotation</h4>
+        <h4 class="modal-title" id="myModalLabel">Detail Buy Lead</h4>
       </div>
       <div class="modal-body">
       <table class="table table-condensed no-border-table table-middle">
@@ -262,7 +262,7 @@
             <td>10 Ton</td>
           </tr>
           <tr>
-            <th>Total Price</th>
+            <th>Estimated Budget</th>
             <td>:</td>
             <td>Rp50.000.000</td>
           </tr>

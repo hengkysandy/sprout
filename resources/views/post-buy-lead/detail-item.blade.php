@@ -17,7 +17,7 @@
                   <th>Delivery Time</th>
                   <th>Shipping Term</th>
                   <th>City</th>
-                  <th>Total Price</th>
+                  <th>Estimated Budget</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -45,11 +45,11 @@
             <table class="table responsive dt-responsive table-bordered table-middle" cellspacing="0">
               <thead class="bg-white">
                 <tr>
-                  <th>Buyer Name</th>
+                  <th>Seller Name</th>
                   <th>Delivery Time</th>
                   <th>Shipping Term</th>
                   <th>City</th>
-                  <th>Total Price</th>
+                  <th>Estimated Budget</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -62,7 +62,7 @@
                   <td>Rp {{number_format($quotation->total_price)}}</td>
                   <td>
                     <a href="#detailQuotation" data-toggle="modal" class="btn btn-default btn-sm">Detail</a>
-                    @if($quotation->QuotationStatus()->first()->id_status == 14)
+                    @if($quotation->QuotationStatus()->first()->id_status == 14 && in_array(session()->get('userSession')[0]->role_id, [3,4]) )
                       <button value="{{$quotation->id}}" data-target="#confirmApprove" data-toggle="modal" class="btn btn-success btn-sm chooseApproveQuotation">Approve</button>
                     @endif
                     <a href="#addMs" data-toggle="modal" class="btn btn-primary btn-sm">Meeting Request</a>
@@ -97,7 +97,7 @@
                             <th>Delivery Time</th>
                             <th>Shipping Term</th>
                             <th>City</th>
-                            <th>Total Price</th>
+                            <th>Estimated Budget</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -142,7 +142,7 @@
                     @if(session()->get('userSession')[0]->role_id == 3 || session()->get('userSession')[0]->role_id == 4)
 
                     <a href="#uploadPO" data-toggle="modal" class="btn btn-sm btn-default">Upload Purchase Order</a>
-                    <a href="#editPbl" data-toggle="modal" class="btn btn-sm btn-default">Revise Buy Lead</a>
+                    <a href="#addPbl" data-toggle="modal" class="btn btn-sm btn-default">Revise Buy Lead</a>
 
                     @elseif(session()->get('userSession')[0]->role_id == 5 || session()->get('userSession')[0]->role_id == 6)
 
@@ -166,7 +166,7 @@
 
               @foreach($discussion as $data)
               <?php 
-                  $userType = $data->User->id_company == $buyLead->User->id_company ? "(Seller)" : "(Buyer)";
+                  $userType = $data->User->id_company == $buyLead->User->id_company ? "(Buyer)" : "(Seller)";
                ?>
               <div class="post-heading col-md-12 col-sm-12 col-xs-12">
                 <div class="col-md-1 col-sm-2 col-xs-3 no-padding image">
@@ -257,258 +257,7 @@
     </div>
 
     <!-- Revise Buy Lead -->
-    <div class="modal fade" id="editPbl" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Revise Buy Lead</h4>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="row">
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label>Item</label>
-                    <input type="text" class="form-control" value="Plate Material">
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label>Amount</label>
-                    <input type="text" class="form-control" value="10">
-                  </div>
-                </div>
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label>Broadcast To Company</label>
-                    <br>
-                    <a href="#broadcast" data-toggle="modal" class="btn btn-primary btn-sm">Broadcast</a>
-                  </div>
-                  <table class="table table-bordered">
-                    <thead>
-                      <tr>
-                        <th>No</th>
-                        <th>ID</th>
-                        <th>Buyer Name</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>JKT-02</td>
-                        <td>Jaya Abadi</td>
-                        <td><a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>JKT-01</td>
-                        <td>Abadi Isidah</td>
-                        <td><a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>JKT-04</td>
-                        <td>Maju Terus</td>
-                        <td><a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label>Short Description</label>
-                    <textarea rows="5" class="form-control no-resize">Ini harganya harus bisa murah dan kualitas bagus</textarea>
-                  </div>
-                </div>
-                <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                  <label>Business Category</label>
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label>Section 1</label>
-                    <select class="form-control selectpicker" data-live-search="true">
-                      <option value="">Africulture, foresty, and fishing</option>
-                      <option value="1" selected="">Mining and quarrying</option>
-                      <option value="2">Manufacturing</option>
-                      <option value="3">Electricity, gas, steam, and air conditioner supply</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label>Section 2</label>
-                    <select class="form-control selectpicker" data-live-search="true">
-                      <option value="">Africulture, foresty, and fishing</option>
-                      <option value="1" selected="">Mining and quarrying</option>
-                      <option value="2">Manufacturing</option>
-                      <option value="3">Electricity, gas, steam, and air conditioner supply</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label>Division 1</label>
-                    <select class="form-control selectpicker" data-live-search="true">
-                      <option value="">Crop and animal production, hunting and related service activities</option>
-                      <option value="1" selected="">Manufacture of food products</option>
-                      <option value="2">Forestry and logging</option>
-                      <option value="3">Fishing and aquaculture</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label>Division 2</label>
-                    <select class="form-control selectpicker" data-live-search="true">
-                      <option value="">Crop and animal production, hunting and related service activities</option>
-                      <option value="1" selected="">Manufacture of food products</option>
-                      <option value="2">Forestry and logging</option>
-                      <option value="3">Fishing and aquaculture</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label>Group 1</label>
-                    <select class="form-control selectpicker" data-live-search="true">
-                      <option value="">Select a group</option>
-                      <option value="1" selected>Manufacture of food products</option>
-                      <option value="2">Forestry and logging</option>
-                      <option value="3">Fishing and aquaculture</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label>Group 2</label>
-                    <select class="form-control selectpicker" data-live-search="true">
-                      <option value="">Select a group</option>
-                      <option value="1" selected>Manufacture of food products</option>
-                      <option value="2">Forestry and logging</option>
-                      <option value="3">Fishing and aquaculture</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label>Unit</label>
-                    <select class="form-control selectpicker">
-                      <option value="">Select Unit</option>
-                      <option value="kg">Kg</option>
-                      <option value="ton" selected="">Ton</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label>Total Price</label>
-                    <div class="input-group">
-                      <span class="input-group-addon">Rp</span>
-                      <input type="number" class="form-control" min="0" value="50000000">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label>Payment Term</label>
-                    <input type="text" class="form-control" value="Down Payment 50%, Installment 6 Months">
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label>City</label>
-                    <select class="form-control selectpicker" data-live-search="true">
-                      <option value="">Select City</option>
-                      <option value="1">Tangerang</option>
-                      <option value="2" selected="">Jakarta</option>
-                      <option value="3">Tangerang Selatan</option>
-                      <option value="4">Serang</option>
-                      <option value="5">Pangkal Pinang</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label>Province</label>
-                    <select class="form-control selectpicker" data-live-search="true">
-                      <option value="">Select Province</option>
-                      <option value="aceh">Aceh</option>
-                      <option value="bali" selected="">Bali</option>
-                      <option value="banten">Banten</option>
-                      <option value="bengkulu">Bengkulu</option>
-                      <option value="yogyakarta">DI Yogyakarta</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label>Shipping Term</label>
-                    <select class="form-control selectpicker" data-live-search="true">
-                      <option value="">Select Shipping Term</option>
-                      <option value="exw" selected="">EXW – Ex Works</option>
-                      <option value="fca">FCA – Free Carrier</option>
-                      <option value="cpt">CPT – Carriage Paid To</option>
-                      <option value="cip">CIP – Carriage and Insurance Paid to</option>
-                      <option value="dat">DAT – Delivered At Terminal</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label>Area (Airport, Seaport, &amp; Terminal)</label>
-                    <select class="form-control selectpicker" data-live-search="true">
-                      <option value="">Select Area (Airport, Seaport, &amp; Terminal)</option>
-                      <option value="seota" selected="">Soekarno Hatta Airport (CGK)</option>
-                      <option value="ngurahrarai">Ngurah Rai Airport (DPS)</option>
-                      <option value="cirebon_port">Cirebon Port</option>
-                      <option value="tpk_palaran_samarinda">TPK Palaran Samarinda Port</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label>Closed Date</label>
-                    <input type="text" id="Editcd" class="form-control" value="Tuesday, April 11th 2017">
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label>Delivery Time</label>
-                    <div class="input-group">
-                      <input type="number" class="form-control">
-                      <span class="input-group-addon">Days</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label class="btn btn-primary btn-file">
-                      Upload Quotation <input type="file" class="hidden">
-                    </label>
-                    <p class="help-block">Format document .docs, .xls, and .pdf</p>
-                  </div>
-                </div>
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox" checked=""> Approved Vendor Only
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary edit-pbl" data-dismiss="modal">Save</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    @include('post-buy-lead.popup-view.add-buy-lead-pop-up')
 
     <!-- Reply Message -->
     <div class="modal fade" id="replyMessage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

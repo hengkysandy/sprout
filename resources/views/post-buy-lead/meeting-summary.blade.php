@@ -207,7 +207,7 @@
                 <td>Ton</td>
               </tr>
               <tr>
-                <th>Total Price</th>
+                <th>Estimated Budget</th>
                 <td>:</td>
                 <td>Rp50.000.000</td>
               </tr>

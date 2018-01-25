@@ -12,7 +12,7 @@
           <th>Amount</th>
           <th>Delivery Time</th>
           <th>Shipping Term</th>
-          <th>Total Price</th>
+          <th>Estimated Budget</th>
           <th>Status</th>
           <th>Action</th>
         </tr>

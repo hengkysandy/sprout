@@ -47,15 +47,15 @@
                           <a href="meeting-schedule.html" class="product-title">
                             <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
                               <div class="col-md-12 col-xs-12 btn-danger btn no-padding btn-sm">
-                                <span class="initial">M</span>
-                                <span class="label-sm">0 Meeting Schedule</span>
+                                <span class="initial">D</span>
+                                <span class="label-sm">0 Discussion</span>
                               </div>
                             </div>
                           </a>
                           <a href="staff-procurement.html" class="product-title">
                             <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
                               <div class="col-md-12 col-xs-12 btn-success btn no-padding btn-sm">
-                                <span class="initial">A</span>
+                                <span class="initial">Q</span>
                                 <span class="label-sm">0 Quotation</span>
                               </div>
                             </div>
@@ -63,7 +63,7 @@
                           <a href="history-rfq.html" class="product-title">
                             <div class="col-md-4 col-sm-4 col-xs-4 padding-btn-rl">
                               <div class="col-md-12 col-xs-12 btn-primary btn no-padding btn-sm">
-                                <span class="initial">C</span>
+                                <span class="initial">M</span>
                                 <span class="label-sm">0 Meeting Schedule</span>
                               </div>
                             </div>
@@ -205,7 +205,14 @@
           </li>
           <li>
             <a href="{{url('post-buy-lead')}}" class="btn btn-orange btn-lg padding-transition no-border-radius">
-              <i class="pull-left fa fa-pencil-square padding-top-2px padding-right-8px"></i> <span>Buy Lead / Quotation</span>
+              <i class="pull-left fa fa-pencil-square padding-top-2px padding-right-8px"></i> 
+              @if( session()->get('userSession')[0]->role_id == 2 )
+                <span>Buy Lead / Quotation</span>
+              @elseif( in_array(session()->get('userSession')[0]->role_id, [3,4]) )
+                <span>Post Buy Lead</span>
+              @elseif( in_array(session()->get('userSession')[0]->role_id, [5,6]) )
+                <span>Buy Lead List</span>
+              @endif
             </a>
           </li>
           <li>

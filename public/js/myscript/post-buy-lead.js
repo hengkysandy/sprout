@@ -110,7 +110,7 @@ $(function() {
         	$.each(result,function(key,val){
                 $('#divisionOption1').append($('<option>', { 
                     value: val.id,
-                    text : val.name 
+                    text : val.description 
                 }));
         		$("#divisionOption1").selectpicker("refresh");
             });
@@ -129,7 +129,7 @@ $(function() {
         	$.each(result,function(key,val){
                 $('#groupOption1').append($('<option>', { 
                     value: val.id,
-                    text : val.name 
+                    text : val.description 
                 }));
         		$("#groupOption1").selectpicker("refresh");
             });
@@ -148,7 +148,7 @@ $(function() {
         	$.each(result,function(key,val){
                 $('#divisionOption2').append($('<option>', { 
                     value: val.id,
-                    text : val.name 
+                    text : val.description 
                 }));
         		$("#divisionOption2").selectpicker("refresh");
             });
@@ -167,7 +167,7 @@ $(function() {
         	$.each(result,function(key,val){
                 $('#groupOption2').append($('<option>', { 
                     value: val.id,
-                    text : val.name 
+                    text : val.description 
                 }));
         		$("#groupOption2").selectpicker("refresh");
             });

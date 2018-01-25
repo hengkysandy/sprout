@@ -270,6 +270,7 @@ body {
       .navbar-white .logo .client-logo .client-tagline {
         font-size: 16px;
         font-weight: 400;
+        text-align: center;
         letter-spacing: 1px; }
   .navbar-white .register {
     float: right !important;

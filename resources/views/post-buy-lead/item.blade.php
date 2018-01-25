@@ -69,7 +69,7 @@
           </div>
           @include('post-buy-lead.layouts-view.view-filter-sec-div-fav-blacklist')
         </div>
-        @include('layouts.user.side-nav')
+        @include('post-buy-lead.popup-view.side-nav-buy-lead')
 
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -126,7 +126,7 @@
                 <td>Ton</td>
               </tr>
               <tr>
-                <th>Total Price</th>
+                <th>Estimated Budget</th>
                 <td>:</td>
                 <td>Rp50.000.000</td>
               </tr>

@@ -34,7 +34,7 @@
                 <th>Business Category</th>
                 <th>Package</th>
                 <th>Duration</th>
-                <th>Total Price</th>
+                <th>Estimated Budget</th>
                 <th>Re-Activate Action</th>
               </tr>
             </thead>

@@ -6,7 +6,7 @@
           <th>Item</th>
           <th>User</th>
           <th>Amount</th>
-          <th>Total Price</th>
+          <th>Estimated Budget</th>
           <th>Shipping Term</th>
           <th>Status</th>
           <th>Action</th>

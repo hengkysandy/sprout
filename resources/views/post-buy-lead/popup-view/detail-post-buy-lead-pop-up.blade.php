@@ -45,7 +45,7 @@
                 <td>{{$buyLead->Unit()->first()->name}}</td>
               </tr>
               <tr>
-                <th>Total Price</th>
+                <th>Estimated Budget</th>
                 <td>:</td>
                 <td>Rp {{number_format($buyLead->total_price)}}</td>
               </tr>

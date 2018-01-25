@@ -250,6 +250,10 @@ class BuyLeadController extends Controller
         $buyLeadId = count(BuyLead::all())+1;
         $code = $company_id.$dateNow.$buyLeadId;
 
+        $area = !empty($request->area) ? $request->area : NULL;
+        $shippingTerm = !empty($request->shippingTerm) ? $request->shippingTerm : NULL;
+        $paymentTerm = !empty($request->paymentTerm) ? $request->paymentTerm : NULL;
+
         $maskedFileUrl = $request->has('document') ? $this->cloudinaryMaskingFile($request->document) : "";
 
         $currBuyLead = BuyLead::create([
@@ -259,13 +263,13 @@ class BuyLeadController extends Controller
             'id_city' => $request->city,
             'id_province' => $request->province,
             'id_unit' => $unitId,
-            'id_shipping_item' => $request->shippingTerm,
-            'id_area' => $request->area,
+            'id_shipping_item' => $shippingTerm,
+            'id_area' => $area,
             'item' => $request->item,
             'amount' => $request->amount,
             'short_description' => $request->shortDescription,
             'total_price' => $request->totalPrice,
-            'payment_term' => $request->paymentTerm,
+            'payment_term' => $paymentTerm,
             'closed_date' => $request->closedDate,
             'delivery_day' => $request->deliveryDays,
             'document' => $maskedFileUrl,
@@ -445,6 +449,21 @@ class BuyLeadController extends Controller
 
         $data['area'] = Area::all();
 
+        $data['areaData'] = Area::all();
+        $data['unitData'] = Unit::all();
+        $data['sectionData'] = Section::all();
+        $data['shippingData'] = ShippingTerm::all();
+        $data['provinceData'] =  $indo->allProvinces()
+        ->map(function ($val) {
+           $search = array('Dki', 'Di');
+           $replace = array('DKI', 'DI');
+           $val->map_name = str_replace($search, $replace, $val->name);
+
+            return $val;
+        });
+        $data['anotherCompany'] = Company::where('company.id','!=',session()->get('companySession')[0]->id)
+            ->get();
+
 
         return view('post-buy-lead.detail-item', $data);
     }
@@ -460,10 +479,12 @@ class BuyLeadController extends Controller
         // area: "2", 
         // paymentTerm: "Down Payment 50%, Installment 6 Months",
         // quotationDocument: { }1
-
+        
         $maskedFileUrl = $this->cloudinaryMaskingFile($request->quotationDocument);
 
         $currQuotation = Quotation::find($request->quotation_id);
+
+
 
         Revise::create([
             'id_quotation' => $currQuotation->id,
@@ -484,13 +505,14 @@ class BuyLeadController extends Controller
         $currQuotation->total_price = $request->totalPrice;
         $currQuotation->city = $request->city;
         $currQuotation->amount = $request->amount;
-        $currQuotation->id_shipping_term = $request->shippingTerm;
         $currQuotation->delivery_day = $request->delivery_day;
         $currQuotation->document = $maskedFileUrl;
         $currQuotation->id_user = session()->get('userSession')[0]->id;
-        $currQuotation->id_area = $request->area;
-        // $currQuotation->id_province = $request->amount; //gak ada province di form
-        $currQuotation->payment_term = $request->paymentTerm;
+
+        if( !empty($request->shippingTerm) ) $currQuotation->id_shipping_term = $request->shippingTerm;
+        if( !empty($request->area) ) $currQuotation->id_area = $request->area;
+        if( !empty($request->paymentTerm) ) $currQuotation->payment_term = $request->paymentTerm;
+
         $currQuotation->save();
 
         return back();

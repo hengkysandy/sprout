@@ -207,7 +207,7 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group">
-                  <label>Total Price</label>
+                  <label>Estimated Budget</label>
                   <div class="input-group">
                     <span class="input-group-addon">Rp</span>
                     <input type="text" class="form-control" value="50.000.000">
@@ -331,7 +331,7 @@
               <td>Ton</td>
             </tr>
             <tr>
-              <th>Total Price</th>
+              <th>Estimated Budget</th>
               <td>:</td>
               <td>Rp50.000.000</td>
             </tr>

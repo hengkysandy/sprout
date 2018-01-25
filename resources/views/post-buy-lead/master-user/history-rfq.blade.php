@@ -27,7 +27,7 @@
                 <th>Item</th>
                 <th>Nama</th>
                 <th>Position</th>
-                <th>Total Price</th>
+                <th>Estimated Budget</th>
                 <th>Shpment Term</th>
                 <th>Status</th>
                 <th>Action</th>
@@ -288,7 +288,7 @@
               <td>Ton</td>
             </tr>
             <tr>
-              <th>Total Price</th>
+              <th>Estimated Budget</th>
               <td>:</td>
               <td>Rp50.000.000</td>
             </tr>

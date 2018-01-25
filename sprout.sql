@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 15, 2018 at 09:12 AM
+-- Generation Time: Jan 25, 2018 at 11:10 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -123,15 +123,16 @@ INSERT INTO `business_category` (`id`, `id_section`, `id_division`, `id_group`, 
 (2, 14, 15, 7, 'active', '2017-11-15 07:25:49', '2017-11-15 07:25:49', NULL),
 (3, 13, 14, 1, 'active', '2017-11-16 07:11:10', '2017-11-16 07:11:10', NULL),
 (4, 13, 14, 4, 'active', '2017-11-16 07:11:11', '2017-11-16 07:11:11', NULL),
-(5, 13, 14, 1, 'active', '2017-11-16 14:58:38', '2017-11-16 14:58:38', NULL),
-(6, 14, 15, 5, 'active', '2017-11-16 14:58:38', '2017-11-16 14:58:38', NULL),
+(5, 14, 15, NULL, 'active', '2017-11-16 14:58:38', '2018-01-23 10:52:17', NULL),
+(6, 13, 13, 1, 'active', '2017-11-16 14:58:38', '2018-01-23 10:52:17', NULL),
 (7, 13, 13, 3, 'active', '2017-12-06 11:26:10', '2017-12-06 11:26:10', NULL),
 (8, 13, 13, 3, 'active', '2017-12-06 11:26:10', '2017-12-06 11:26:10', NULL),
 (9, 13, 13, 1, 'active', '2017-12-15 06:58:19', '2017-12-15 06:58:19', NULL),
 (10, 13, 14, 4, 'active', '2017-12-15 06:58:19', '2017-12-15 06:58:19', NULL),
 (11, 13, 14, 4, 'company category', '2017-12-18 09:21:18', '2017-12-18 09:21:18', NULL),
 (13, 14, 15, 5, 'company category', '2017-12-18 09:58:37', '2017-12-18 09:58:37', NULL),
-(17, 14, 16, 7, 'company category', '2017-12-19 11:08:24', '2017-12-19 11:08:24', NULL);
+(18, 13, 13, 2, 'company category', '2018-01-15 09:08:43', '2018-01-15 09:08:43', NULL),
+(19, 14, 16, 7, 'company category', '2018-01-15 09:08:58', '2018-01-15 09:08:58', NULL);
 
 -- --------------------------------------------------------
 
@@ -147,13 +148,13 @@ CREATE TABLE `buy_lead` (
   `id_city` int(11) NOT NULL,
   `id_province` int(11) DEFAULT NULL,
   `id_unit` int(11) NOT NULL,
-  `id_shipping_item` int(11) NOT NULL,
-  `id_area` int(11) NOT NULL,
+  `id_shipping_item` int(11) DEFAULT NULL,
+  `id_area` int(11) DEFAULT NULL,
   `item` varchar(200) NOT NULL,
   `amount` int(11) NOT NULL,
-  `short_description` varchar(200) NOT NULL,
+  `short_description` varchar(200) DEFAULT NULL,
   `total_price` float NOT NULL,
-  `payment_term` varchar(200) NOT NULL,
+  `payment_term` varchar(200) DEFAULT NULL,
   `closed_date` timestamp NULL DEFAULT NULL,
   `delivery_day` int(11) DEFAULT NULL,
   `document` varchar(200) NOT NULL,
@@ -363,7 +364,11 @@ INSERT INTO `cloudinary_mapping` (`id`, `url`, `original_filename`, `created_at`
 (20, 'http://res.cloudinary.com/stts/image/upload/v1513160735/ma5rhhtg5fxzw6xnoeil.png', 'dummy document.docx', '2017-12-13 10:25:36', '2017-12-13 10:25:36', NULL),
 (21, 'http://res.cloudinary.com/stts/image/upload/v1513163717/tzdo1oqajy3zzepp4l6r.png', 'dummy document.docx', '2017-12-13 11:15:18', '2017-12-13 11:15:18', NULL),
 (22, 'http://res.cloudinary.com/stts/image/upload/v1513163719/naonth4tvdmzvas0vylz.png', 'dummy document.docx', '2017-12-13 11:15:19', '2017-12-13 11:15:19', NULL),
-(23, 'http://res.cloudinary.com/stts/image/upload/v1513164722/p5465bwvyx0qpekqnzim.png', 'dummy image.jpg', '2017-12-13 11:32:03', '2017-12-13 11:32:03', NULL);
+(23, 'http://res.cloudinary.com/stts/image/upload/v1513164722/p5465bwvyx0qpekqnzim.png', 'dummy image.jpg', '2017-12-13 11:32:03', '2017-12-13 11:32:03', NULL),
+(24, 'http://res.cloudinary.com/stts/image/upload/v1516004119/bowj3jwula3whglbbmav.png', 'dummy.png', '2018-01-15 08:15:20', '2018-01-15 08:15:20', NULL),
+(25, 'http://res.cloudinary.com/stts/image/upload/v1516004122/l7bise9zltbq3sjjieeh.png', 'dummy image.jpg', '2018-01-15 08:15:24', '2018-01-15 08:15:24', NULL),
+(26, 'http://res.cloudinary.com/stts/image/upload/v1516004880/l1r0kapq8utrnikcli3o.png', 'dummy image.jpg', '2018-01-15 08:28:02', '2018-01-15 08:28:02', NULL),
+(27, 'http://res.cloudinary.com/stts/image/upload/v1516004885/oxkxchwjgizu2rtidffo.png', 'dummy image.jpg', '2018-01-15 08:28:08', '2018-01-15 08:28:08', NULL);
 
 -- --------------------------------------------------------
 
@@ -399,7 +404,7 @@ CREATE TABLE `company` (
 --
 
 INSERT INTO `company` (`id`, `city_id`, `province_id`, `name`, `tagline`, `logo_image`, `email`, `password`, `address`, `phone`, `contact_name`, `mobile_number`, `tax_type`, `business_entity`, `status`, `created_at`, `updated_at`, `deleted_at`, `remember_token`, `zip_code`) VALUES
-(1, 3175, 31, 'KFC', 'It\'s finger lickin\' good', 'http://res.cloudinary.com/stts/image/upload/v1510630378/rkxymhjnpkitjqf8sk9y.png', 'company@kfc.com', '123123', 'Jakarta', '+628123456789', 'Yuka', '+62812345678', 'PKP', 'PT', 'active', '2017-11-14 03:33:54', '2017-11-14 03:48:54', NULL, NULL, '123456'),
+(1, 3175, 31, 'KFC', 'It\'s finger lickin\' good1', 'http://res.cloudinary.com/stts/image/upload/v1510630378/rkxymhjnpkitjqf8sk9y.png', 'company@kfc.com', '123123', 'Jakarta1', '+618123456781', 'Yuka1', '+62812345671', 'PKP', 'PT', 'active', '2017-11-14 03:33:54', '2018-01-20 07:37:48', NULL, NULL, '123451'),
 (2, 3175, 31, 'McDonalds', 'i\'m lovin\' it', 'http://res.cloudinary.com/stts/image/upload/v1510631023/yiaixnojjh9i8esfpzvs.png', 'company@mcd.com', '123123', 'Jakarta', '+628123456789', 'Howi', '+62812345678', 'PKP', 'PT', 'active', '2017-11-14 03:44:20', '2017-11-14 03:48:57', NULL, NULL, '123456'),
 (3, 1708, 17, 'company3', '', '', 'com3@ss.ss', '123123', 'asdfad', '+12123123123', 'cont name', '+12123123123', 'PKP', 'PD', 'active', '2017-12-13 11:15:15', '2017-12-13 11:16:23', NULL, NULL, '12345');
 
@@ -414,7 +419,7 @@ CREATE TABLE `company_add_on` (
   `company_id` int(11) DEFAULT NULL,
   `add_on_id` int(11) DEFAULT NULL,
   `request_from` varchar(255) DEFAULT NULL,
-  `expired_date` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `expired_date` timestamp NULL DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -427,7 +432,12 @@ CREATE TABLE `company_add_on` (
 
 INSERT INTO `company_add_on` (`id`, `company_id`, `add_on_id`, `request_from`, `expired_date`, `status`, `created_at`, `updated_at`, `quantity`) VALUES
 (1, 2, 1, 'request addon', '2019-11-15 07:47:29', 'pending', '2017-11-15 07:47:29', '2017-11-15 07:47:29', 2),
-(2, 2, 2, 'request addon', '2017-12-18 10:53:53', 'confirmed', '2017-12-18 10:39:39', '2017-12-18 10:53:53', 2);
+(2, 2, 2, 'request addon', '2017-12-18 10:53:53', 'confirmed', '2017-12-18 10:39:39', '2017-12-18 10:53:53', 2),
+(3, 1, 1, 'request addon', '2019-01-19 06:52:11', 'confirmed', '2018-01-19 06:51:30', '2018-01-19 06:52:11', 2),
+(4, 1, 1, 'request addon', '2018-11-13 17:00:00', 'pending', '2018-01-19 07:10:35', '2018-01-19 07:10:35', 2),
+(8, 1, 2, 'request addon', '2018-01-20 08:16:49', 'confirmed', '2018-01-20 08:14:01', '2018-01-20 08:16:49', 2),
+(16, 1, 2, 'request addon', '2018-11-13 17:00:00', 'confirmed', '2018-01-25 02:38:51', '2018-01-25 02:39:03', 2),
+(17, 1, 1, 'request addon', '2018-11-13 17:00:00', 'confirmed', '2018-01-25 02:39:17', '2018-01-25 02:39:21', 1);
 
 -- --------------------------------------------------------
 
@@ -453,7 +463,8 @@ INSERT INTO `company_business_category` (`id`, `id_company`, `id_business_catego
 (1, 1, 8, 'active', '2017-12-13 10:32:09', NULL, NULL),
 (2, 2, 11, 'active', '2017-12-18 09:21:18', '2017-12-18 09:21:18', NULL),
 (4, 1, 13, 'active', '2017-12-18 09:58:37', '2017-12-18 09:58:37', NULL),
-(7, 3, 17, 'active', '2017-12-19 11:08:24', '2017-12-19 11:08:24', NULL);
+(8, 3, 18, 'active', '2018-01-15 09:08:43', '2018-01-15 09:08:43', NULL),
+(9, 3, 19, 'active', '2018-01-15 09:08:58', '2018-01-15 09:08:58', NULL);
 
 -- --------------------------------------------------------
 
@@ -476,10 +487,10 @@ CREATE TABLE `company_interested_program` (
 --
 
 INSERT INTO `company_interested_program` (`id`, `id_company`, `id_interested_program`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 1, 'active', '2017-11-14 03:33:57', '2017-11-14 03:33:57', NULL),
 (2, 2, 1, 'active', '2017-11-14 03:44:22', '2017-11-14 03:44:22', NULL),
 (3, 2, 2, 'active', '2017-11-14 03:44:22', '2017-11-14 03:44:22', NULL),
-(4, 3, 2, 'active', '2017-12-13 11:15:15', '2017-12-13 11:15:15', NULL);
+(4, 3, 2, 'active', '2017-12-13 11:15:15', '2017-12-13 11:15:15', NULL),
+(5, 1, 1, 'active', '2018-01-20 07:37:49', '2018-01-20 07:37:49', NULL);
 
 -- --------------------------------------------------------
 
@@ -502,9 +513,9 @@ CREATE TABLE `company_main_product` (
 --
 
 INSERT INTO `company_main_product` (`id`, `id_company`, `main_product_name`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 'Soup', 'active', '2017-11-14 03:33:57', '2017-11-14 03:33:57', NULL),
 (2, 2, 'Cola', 'active', '2017-11-14 03:44:22', '2017-11-14 03:44:22', NULL),
-(3, 3, 'main pro', 'active', '2017-12-13 11:15:15', '2017-12-13 11:15:15', NULL);
+(3, 3, 'main pro', 'active', '2017-12-13 11:15:15', '2017-12-13 11:15:15', NULL),
+(4, 1, 'Soup1', 'active', '2018-01-20 07:37:49', '2018-01-20 07:37:49', NULL);
 
 -- --------------------------------------------------------
 
@@ -625,8 +636,8 @@ INSERT INTO `company_status` (`id`, `id_company_by`, `id_company_for`, `id_statu
 (4, 2, 1, 6, '', '2017-12-13 10:39:42', NULL, NULL),
 (5, 2, 3, 4, 'active', '2017-12-19 10:30:57', '2017-12-19 10:50:03', NULL),
 (6, 2, 3, 5, 'active', '2017-12-19 10:38:13', '2017-12-19 10:50:15', NULL),
-(26, 2, 1, 16, 'active', '2018-01-10 12:38:07', '2018-01-10 12:38:07', NULL),
-(27, 2, 3, 16, 'active', '2018-01-10 12:38:10', '2018-01-10 12:38:10', NULL);
+(32, 2, 1, 16, 'active', '2018-01-15 09:23:49', '2018-01-15 09:23:49', NULL),
+(34, 2, 3, 16, 'active', '2018-01-15 09:23:53', '2018-01-15 09:23:53', NULL);
 
 -- --------------------------------------------------------
 
@@ -91416,7 +91427,7 @@ ALTER TABLE `area`
 -- AUTO_INCREMENT for table `business_category`
 --
 ALTER TABLE `business_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `buy_lead`
 --
@@ -91456,7 +91467,7 @@ ALTER TABLE `certificate`
 -- AUTO_INCREMENT for table `cloudinary_mapping`
 --
 ALTER TABLE `cloudinary_mapping`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `company`
 --
@@ -91466,22 +91477,22 @@ ALTER TABLE `company`
 -- AUTO_INCREMENT for table `company_add_on`
 --
 ALTER TABLE `company_add_on`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `company_business_category`
 --
 ALTER TABLE `company_business_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `company_interested_program`
 --
 ALTER TABLE `company_interested_program`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `company_main_product`
 --
 ALTER TABLE `company_main_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `company_meeting_schedule`
 --
@@ -91506,7 +91517,7 @@ ALTER TABLE `company_required_document`
 -- AUTO_INCREMENT for table `company_status`
 --
 ALTER TABLE `company_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT for table `discussion`
 --

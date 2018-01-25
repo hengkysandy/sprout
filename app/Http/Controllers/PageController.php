@@ -28,6 +28,7 @@ use App\Unit;
 use App\UserPreDefine;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use JD\Cloudder\Facades\Cloudder;
 use Laravolt\Indonesia\Indonesia;
@@ -192,17 +193,42 @@ class PageController extends Controller
         $response['buyLead'] = $currBuyLead;
         $response['user'] = $currBuyLead->User()->first();
         $response['unit'] = $currBuyLead->Unit()->first();
+        $response['bc'] = BusinessCategory::whereIn('id', array_pluck($currBuyLead->BuyLeadBusinessCategory, 'business_category_id') )->get();
+
+        foreach ($response['bc'] as $key => $value) {
+            $value->Section;
+            $value->Division;
+            $value->Group;
+        }
 
         return response()->json($response);
     }
 
     public function doEditBuyLeadBusinessCategoryAdmin(Request $request)
     {
-        BuyLeadBusinessCategory::create([
-            'buy_lead_id' => $request->id_buylead,
-            'business_category_id' => $request->id_section, //ada salah ini
-            'status' => 'active',
-        ]);
+        for ($i=0; $i < count($request->section); $i++) {
+        
+            if( $request->section[$i] != NULL){
+
+                $divId = (
+                ( empty($request->division[$i]) ) ? NULL :
+                 ( ( $request->division[$i] == "-" ) ? NULL :  $request->division[$i] )
+                );
+
+                $groupId = (
+                ( empty($request->group[$i]) ) ? NULL :
+                 ( ( $request->group[$i] == "-" ) ? NULL :  $request->group[$i] )
+                );
+
+                BusinessCategory::find($request->bc[$i])->update([
+                    'id_section' => $request->section[$i],
+                    'id_division' => $divId,
+                    'id_group' => $groupId,
+                ]);
+
+            }
+
+        }
 
         return back();
     }

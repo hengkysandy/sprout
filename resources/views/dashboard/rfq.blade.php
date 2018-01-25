@@ -164,26 +164,67 @@
                   </div>
                 </div>
               </div>
+
+              <!-- business category 1 -->
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group">
                   <label>Business Category 1</label>
-                  <select name="id_section" class="form-control">
+                  <input type="hidden" name="bc[]" id="bc1">
+                  <select name="section[]" id="sectionOption1" class="form-control selectpicker">
                     @foreach($section as $sData)
                     <option value="{{$sData->id}}">{{$sData->section}}</option>
                     @endforeach
                   </select>
                 </div>
               </div>
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group">
+                  <label>Division 1 <small>(optional)</small></label>
+                  <select id="divisionOption1" name="division[]" class="form-control selectpicker" data-live-search="true">
+                    
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group">
+                  <label>Group 1 <small>(optional)</small></label>
+                  <select id="groupOption1" name="group[]" class="form-control selectpicker" data-live-search="true">
+                    
+                  </select>
+                </div>
+              </div>
+              <!-- end of business category 1 -->
+
+              <!-- business category 2 -->
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group">
                   <label>Business Category 2</label>
-                  <select name="id_section" class="form-control">
+                  <input type="hidden" name="bc[]" id="bc2">
+                  <select id="sectionOption2" name="section[]" class="form-control selectpicker">
                     @foreach($section as $sData)
                     <option value="{{$sData->id}}">{{$sData->section}}</option>
                     @endforeach
                   </select>
                 </div>
               </div>
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group">
+                  <label>Division 2 <small>(optional)</small></label>
+                  <select id="divisionOption2" name="division[]" class="form-control selectpicker" data-live-search="true">
+                    
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group">
+                  <label>Group 2 <small>(optional)</small></label>
+                  <select id="groupOption2" name="group[]" class="form-control selectpicker" data-live-search="true">
+                    
+                  </select>
+                </div>
+              </div>
+              <!-- end of business category 2 -->
+
             </div>
         </div>
         <div class="modal-footer">

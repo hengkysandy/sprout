@@ -344,11 +344,16 @@ class CompanyController extends Controller
     }
 
     public function profile() {
-        $companyAddOn = CompanyAddOn::where('expired_date','>=',Carbon::now())
+        $data['addOnManagerQuota'] = CompanyAddOn::where('expired_date','>=',Carbon::now())
                 ->where('status','confirmed')
                 ->where('company_id',session('companySession')[0]->id)
-                ->latest('created_at')
-                ->get();
+                ->where('add_on_id',1)->sum('quantity');
+
+        $data['addOnStaffQuota'] = CompanyAddOn::where('expired_date','>=',Carbon::now())
+                ->where('status','confirmed')
+                ->where('company_id',session('companySession')[0]->id)
+                ->where('add_on_id',2)->sum('quantity');
+                
 
         $data['currCompanyAddOn'] = CompanyAddOn::where('expired_date','>=',Carbon::now())
                 ->where('status','confirmed')
@@ -356,17 +361,6 @@ class CompanyController extends Controller
                 ->latest('created_at')
                 ->get();
 
-        $data['addOnManagerQuota'] = 0;
-        $data['addOnStaffQuota'] = 0;
-        
-        foreach ($companyAddOn as $key => $dt) {
-            if($dt->add_on_id == 1){
-                $data['addOnManagerQuota'] = $dt->quantity * $dt->AddOn->quantity;
-            }else if($dt->add_on_id == 2){
-                $data['addOnStaffQuota'] = $dt->quantity * $dt->AddOn->quantity;
-            }
-        }
-        
         $data['packageData'] = Package::all();
         $data['addOnData'] = AddOn::all();
         $data['businessEntity'] = ['PT','CV','PD'];

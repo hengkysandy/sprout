@@ -48,7 +48,6 @@
             </td>
             <td>
               <a href="{{url('item/'.$blData->id)}}" class="btn btn-default btn-sm">Detail</a>
-              <a href="#" class="btn btn-default btn-sm" disabled="disabled">Approved</a>
             </td>
           @else
             <td>
@@ -59,15 +58,19 @@
             </td>
             <td>
               <a href="{{url('item/'.$blData->id)}}" class="btn btn-default btn-sm">Detail</a>
-              <a href="#" class="btn btn-default btn-sm" disabled="disabled">Approved</a>
               <?php 
                   $approvedQuotation = $blData->Quotation()->whereHas('QuotationStatus',function($qs){
                                         $qs->where('id_status',6);
                                     })->first();
+
+                  $approvedBuyLead = $blData->Quotation()->whereHas('QuotationStatus',function($qs){
+                                        $qs->where('id_status',8);
+                                    })->first();
                ?>
               @if( $approvedQuotation )
-              <br><br>
               <a href="{{url('doChangeStatusBuyLead?idBuyLead='.$blData->id.'&idStatus=8')}}" class="btn btn-success btn-sm">Approved</a>
+              @elseif( $approvedBuyLead )
+              <a href="#" class="btn btn-default btn-sm" disabled="disabled">Approved</a>
               @endif
             </td>
           @endif

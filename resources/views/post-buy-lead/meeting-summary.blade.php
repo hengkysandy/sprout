@@ -20,6 +20,7 @@
               <thead class="bg-white">
                 <tr>
                   <th>Meeting Subject</th>
+                  <th>Date Meeting</th>
                   <th>Added By</th>
                   <th>Action</th>
                 </tr>
@@ -30,6 +31,7 @@
                   <td>
                     <a href="{{url('meeting-id?id='.$data->id)}}">{{$data->subject}}</a>
                   </td>
+                  <td>{{date("l, M dS Y", strtotime($meeting->date))}}, {{date("H:i A", strtotime($meeting->time))}}</td>
                   <td>{{$data->User->first_name . ' ' . $data->User->last_name}}</td>
                   <td>
                     <a href="{{url('deleteMeetingSummary?id='.$data->id)}}" data-toggle="modal" class="btn btn-danger btn-sm">Delete</a>

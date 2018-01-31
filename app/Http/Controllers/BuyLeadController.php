@@ -773,8 +773,6 @@ class BuyLeadController extends Controller
 
     public function insertMeetingSchedule(Request $request)
     {
-        return $request->all();
-
         /*
             meeting type ? 0 untuk internal : 1 untuk external
             recipient role ? 0 untuk procurement : 1 untuk sales

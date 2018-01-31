@@ -66,6 +66,7 @@
                   <div class="form-group">
                     <label>Shipping Term <small>(optional)</small></label>
                     <select name="shippingTerm" class="form-control selectpicker" data-live-search="true">
+                      <option value="">Choose Shipping Term</option>
                       @foreach($shippingData as $sData)
                         <option value="{{$sData->id}}">{{$sData->name}}</option>
                       @endforeach
@@ -109,6 +110,7 @@
                   <div class="form-group">
                     <label>Area (Airport, Seaport, &amp; Terminal)  <small>(optional)</small></label>
                     <select name="area" class="form-control selectpicker" data-live-search="true">
+                      <option value="">Choose Area</option>
                       @foreach($areaData as $aData)
                         <option value="{{$aData->id}}">{{$aData->name}}</option>
                       @endforeach
